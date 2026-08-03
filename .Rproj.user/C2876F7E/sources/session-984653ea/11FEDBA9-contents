@@ -1,0 +1,98 @@
+---
+title:  "Homework 1"
+author: "Your Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Part I. Changing the author field and file name. (5 points)
+
+#### (a) Change the `author:` field on the Rmd document 
+
+#### (b) Rename this file to "HW1_YourFirstInitialYourLastName.Rmd", (e.g. HW1_YDing.Rmd).
+
+<br>
+
+
+### Part II. Course Related Questions (50 points)
+#### Question 1. What is the instructor's name? Please write about her office and office hours this semester.
+
+> Your Answer:
+
+#### Question 2. Please list the acts of academic dishonesty in the syllabus.
+
+> Your Answer:
+
+#### Question 3. What's the policy for late homework submission? When can you request an extension? How many exams will we have?
+
+> Your Answer:
+
+#### Question 4.  Will we have a final exam? What is the evaluation of the final project? What is the assessment of this class? What is the grade range of A?
+
+> Your Answer:
+
+#### Question 5. Is there a second chance to resubmit your assignment or exam after grading? Are there any extra assignments or work to improve your grade?
+
+> Your Answer:
+
+#### I fully understand the rules in the syllabus and will follow them.
+
+> Your Name Here As Signature:
+
+<br>
+
+### Part III. Basic R Syntax (45 points)
+
+#### Question 1.  Hello World! (10 points)
+
+Here's an R code chunk that prints the text 'Hello world!'.
+
+```{r}
+print("Hello world!")
+```
+
+#### Modify the code chunk below to print your name and your hobbies
+
+```{r}
+# Edit me
+```
+
+<br>
+
+#### Question 2. Play with Dataset (35 points)
+
+The following is a small data to store health information, where the unit for height is centimeters and weight is kilogram.
+
+```{r}
+BMI <- 	data.frame(
+   gender = c("Male", "Male","Female"), 
+   height = c(152, 171.5, 165), 
+   weight = c(81,93,78),
+   Age = c(42,38,26)
+)
+print(BMI)
+```
+
+#### a) Please calculate BMI for each person and add that information to the dataframe and display the new dataframe. (15 points)
+
+**BMI Formula: Weight (kg)/Square of Height(meters)**
+
+```{r}
+# Edit me
+```
+
+#### b) Please display `gender` and `age` for the people with BMI great than 30. (10 points)
+
+```{r}
+# Edit me
+```
+
+#### c) Please display `gender` for the people with BMI great than 25 and age less than 30. (10 points)
+
+```{r}
+# Edit me
+```

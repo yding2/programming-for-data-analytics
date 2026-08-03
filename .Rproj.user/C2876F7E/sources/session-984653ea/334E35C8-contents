@@ -1,0 +1,305 @@
+---
+title: "Week 3: Normal Distributions"
+output: html_document
+---
+
+
+## Objectives:
+
+- Understand **normal distribution**, e.g. expectation, variance, critical value
+
+- Know how to generate the normal random numbers 
+
+- know how to use `qqplot` to investigate if a variable follows the normal distribution
+
+- Know how to use `qnorm` function to find the quantiles of the normal distribution and `pnorm` to find the area under the curve
+
+## Required Packages
+```{r, message = FALSE}
+library(car)
+library(MASS)
+```
+
+
+### Tossing Coin Experiment Revisit
+
+Suppose we have a fair coin and the probability of getting a head (success) is $p$. Use $X$ to denote the random variable to get a head(1) or a tail(0). Thus
+
+**PMF of $X$**:
+
+$$
+\begin{array}{c|cc}
+x & 0 & 1 \\
+\hline
+P(X = x) & 1-p & p  \\
+\end{array}
+$$
+
+**Expectation and Variance**
+
+$$E(X) = (0)(1-p)+(1)p = p,\qquad var(X) = (0)^2(1-p)+(1)^2p -p^2 = p(1-p)$$
+
+Suppose we can generate a sample with sample size 40. Let’s generate samples the replication times 10, 100, and 10000 and investigate the distribution of the sample mean of each sample.
+
+``` {r distrib-of-head,echo=FALSE}
+n <- 40
+x <- c(0,1) 
+sampleMeanInRepeatedSampling10Reps<-replicate(10, mean(sample(x, size=n, replace=TRUE)))
+sampleMeanInRepeatedSampling100Reps<-replicate(100, mean(sample(x, size=n, replace=TRUE)))
+sampleMeanInRepeatedSampling10000Reps<-replicate(10000, mean(sample(x, size=n, replace=TRUE)))
+par(mfrow=c(1,3))
+hist(sampleMeanInRepeatedSampling10Reps,main = paste("Sample mean distribution - 10 reps"))
+hist(sampleMeanInRepeatedSampling100Reps,main = paste("Sample mean distribution - 100 reps"))
+hist(sampleMeanInRepeatedSampling10000Reps,main = paste("Sample mean distribution  - 10000 reps"))
+```
+
+Through the experiment, we can see the distribution of sample mean is approximately **normal** with mean equal to the expected value of $X$. In other words, the example above illustrates a known result--**the Central Limit Theorem**, one of the cornerstone results used in inference!
+
+## Normal Distribution
+
+The **normal distribution** (also be called *Gaussian distribution*) is a **symmetric** distribution that is centered around a **mean** and spreads out in both directions.
+
+
+Examples:
+Test scores for all ITMS 514 students.
+
+- Notation: $X\sim N(\mu, \sigma^2)$
+	+ $\mu$ is the mean of the distribution
+	+	$\sigma^2$ is the variance of the distribution
+
+- X can take any value on the real line.
+
+- Areas under the Normal Curve:
+
+\begin{align*}
+ F(x) &=P(X<x) = P(X \le x) \\
+ F(x_2) -F(x_1) =P(x_1<X<x_2)= &P(x_1\le X<x_2)= P(x_1<X\le x_2) = P(x_1 \le X \le x_2).
+ \end{align*}
+	
+Suppose $Z$ is the standard normal random variable, i.e., $Z \sim N(0, 1)$
+
+```{r, echo=FALSE}
+n <- 1e6 # number of sample size
+x <- rnorm(n, mean = 0, sd = 1) # generate the standard normal random numbers
+hist(x,probability=TRUE,col=gray(.9),main="standard normal random numbers") # histogram of the relative frequency
+curve(dnorm(x, mean = 0, sd =1),add=T,col = "red") #plot the probability density function of Z
+```
+
+
+### Different Normal Distributions 
+
+- Same Mean but Different Variances
+
+```{r cars, echo = FALSE}
+# R code to plot two normal curves for comparison
+# Parameters
+x <- seq(-10, 10, length = 1000)
+
+# Normal distributions
+y1 <- dnorm(x, mean = 0, sd = 1)   # Standard normal
+y2 <- dnorm(x, mean = 0, sd = 2)   # Normal with different mean & sd
+
+# Plot the first distribution
+plot(x, y1, type = "l", lwd = 2, col = "blue",
+     xlab = "x", ylab = "Density",
+     main = "Comparison of Two Normal Distributions with the Same Mean")
+
+# Add the second distribution
+lines(x, y2, lwd = 2, col = "red")
+
+# Add legend
+legend("topright", legend = c("N(0,1)", "N(0,2^2)"),
+       col = c("blue", "red"), lwd = 2)
+```
+
+-Different Means and Variances
+
+```{r,echo=FALSE}
+# Normal distributions
+y1 <- dnorm(x, mean = 0, sd = 1)   # Standard normal
+y2 <- dnorm(x, mean = -1, sd = 2)   # Normal with different mean & sd
+
+# Plot the first distribution
+plot(x, y1, type = "l", lwd = 2, col = "blue",
+     xlab = "x", ylab = "Density",
+     main = "Comparison of Two Normal Distributions with Differen Means and Variances")
+
+# Add the second distribution
+lines(x, y2, lwd = 2, col = "red")
+
+# Add legend
+legend("topright", legend = c("N(0,1)", "N(-1,2^2)"),
+       col = c("blue", "red"), lwd = 2)
+```
+
+### Calculate the probability for the Normal Distribution
+
+**Question**: What's the relationship between the general normal random variable $X \sim N(\mu, \sigma^2)$ and the standard normal random variable?
+
+$$Z= \frac{X-\mu}{\sigma} \sim N(0,1).$$
+
+To calculate the probability involving $X\sim N(\mu,\sigma^2)$,
+
+$$
+	P(a\leq X\leq b) = P\left(\frac{a-\mu}{\sigma}\leq \frac{X-\mu}{\sigma}\leq \frac{b-\mu}{\sigma}\right)
+	= P\left(\frac{a-\mu}{\sigma}\leq Z\leq \frac{b-\mu}{\sigma}\right),
+$$
+
+
+**Example 1**: The achievement scores from a college entrance examination are normally distributed with mean 75 and standard deviation 10. What fraction of the scores lies between 80 and 90?
+	
+**Answer**: The scores $X\sim N(75,10^2)$, then
+		$$P(80\leq X\leq 90) = P\left(\frac{80-75}{10}\leq Z\leq \frac{90-75}{10}\right) = P(0.5\leq Z\leq 1.5) .$$
+How to get the answer in `R`?
+
+```{r, echo=TRUE}
+p1<- pnorm(1.5, mean = 0, sd =1) -pnorm(0.5, mean =  0, sd = 1) # find the P(0.5 <=Z <=1.5) 
+p1 # display the answer
+p2<-pnorm(90, mean = 75, sd =10) -pnorm(80, mean = 75, sd =10) # find the P(80 <=X <=90)
+p2 # display the answer
+```
+
+#### In-class Exercise: *pnorm*
+
+The midterm exam scores in ITMD/ITMS/STAT 514 are normally distributed with mean 85 and standard deviation 8. Please use *pnorm* to find the following:
+
+a. What fraction of the scores lies between 80 and 90? 
+
+b. What fraction of the scores lies above 90?
+
+c. What fraction of the scores lies below 80?
+
+<br>
+
+### Plot Tools to check normal distribution
+
+- `qqPlot` in package `car`
+
+```{r,echo = TRUE, message=FALSE}
+# need "car" package
+library(car)
+x <- rnorm(100)
+qqPlot(x)
+# Try Petal.Length in iris data set
+qqPlot(iris$Petal.Length)
+```
+
+- `qqnorm` and `qqline` 
+
+```{r,echo = TRUE}
+qqnorm(x, pch = 1, frame = FALSE)
+qqline(x, col = "red")
+# For Petal.Length
+qqnorm(iris$Petal.Length, pch = 2)
+qqline(iris$Petal.Length, col = "green")
+```
+
+
+#### In-class Exercise: Play with QQ-plot
+
+Please use the above plot to investigate `medv` in the data set `Boston` built in `MASS` package.
+
+```{r, message=FALSE}
+# Please use the following code to access the data set Boston 
+# Need MASS package
+data(Boston)
+```
+
+### Critical Value
+
+**Critical value**: $z_{\alpha}$ of a *standard normal distribution* is the value on the measurement axis for which $\alpha$ of the area under the standard normal curve lies to the right of $z_{\alpha}$.
+
+```{r,echo=FALSE}
+# Parameters
+x <- seq(-4, 4, length = 1000)
+y <- dnorm(x)
+
+# Critical value for right-tailed test (alpha = 0.05)
+alpha <- 0.05
+crit_right <- qnorm(1 - alpha)
+
+# Plot standard normal curve
+plot(x, y, type = "l", lwd = 2, col = "blue",
+     xlab = "Z", ylab = "Density",
+     main = "Critical Value for α = 0.05 (Right-tailed Test)")
+
+# Shade rejection region
+polygon(c(crit_right, x[x>=crit_right], max(x)),
+        c(0, y[x>=crit_right], 0), col = "red", border = NA, density = 30)
+
+# Add reference line
+abline(v = crit_right, col = "red", lty = 2, lwd = 2)
+
+# Annotate critical value
+text(crit_right, 0.02, round(crit_right, 2), pos = 4, col = "red")
+```
+
+How to find $Z_{0.05}$ in R?
+
+```{r, echo=TRUE, comment = ''}
+z0<- -qnorm(0.05, mean = 0, sd =1)
+z0# display the answer
+#verify it
+pnorm(z0)
+```
+
+#### Two Tailed Critical Value
+
+**Example 2**. Find the value of $z_0$ such that $95\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .95$.
+
+**Answer**:	\[P(-z_0\le Z \le z_0) 
+ = 1- 2P(Z <-z_0) = 0.95 \Rightarrow P(Z<-z_0) = 0.025.\]
+
+How to find $z_0$ in `R`?
+
+```{r, echo=TRUE,out.width = "40%",out.height = "40%", comment = ''}
+z0<- -qnorm(0.025, mean = 0, sd =1)
+z0# display the answer
+z0<-qnorm(1-0.025, mean = 0, sd =1) 
+z0 # display the answer
+#verify it
+pnorm(z0)-pnorm(-z0)
+```
+
+
+```{r, echo=FALSE}
+# Parameters
+x <- seq(-4, 4, length = 1000)
+y <- dnorm(x)
+
+# Critical values for 95% confidence level
+alpha <- 0.05
+crit_left  <- qnorm(alpha/2)      # left critical value
+crit_right <- qnorm(1 - alpha/2)  # right critical value
+
+# Plot standard normal curve
+plot(x, y, type = "l", lwd = 2, col = "blue",
+     xlab = "Z", ylab = "Density",
+     main = "Critical Values for α = 0.05 (Two-tailed Test)")
+
+# Shade rejection regions
+polygon(c(min(x), x[x<=crit_left], crit_left),
+        c(0, y[x<=crit_left], 0), col = "red", border = NA, density = 30)
+polygon(c(crit_right, x[x>=crit_right], max(x)),
+        c(0, y[x>=crit_right], 0), col = "red", border = NA, density = 30)
+
+# Add reference lines
+abline(v = crit_left,  col = "red", lty = 2, lwd = 2)
+abline(v = crit_right, col = "red", lty = 2, lwd = 2)
+
+# Annotate critical values
+text(crit_left, 0.02, round(crit_left, 2), pos = 2, col = "red")
+text(crit_right, 0.02, round(crit_right, 2), pos = 4, col = "red")
+```
+
+
+	
+#### In-class Exercise: Critical Values
+
+1. Find the value of $z_0$ such that $99\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .99$.
+
+2. Find $z_\alpha$ when $\alpha = 0.01$.
+
+
+### Conclusion
+Normal distribution is the most important distribution. When we talk about the Central Limit Theorem, confidence interval, and hypothesis testing, we will come back to the normal distribution.

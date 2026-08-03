@@ -1,0 +1,408 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Programming for Data Analytics and Cyber Security",
+    "section": "",
+    "text": "STAT 514 • ITMD 514 • ITMS 514\nWelcome to the course website!\nThis website serves as the primary repository for course materials throughout the semester. Here you will find lecture notes, homework assignments, datasets, and additional resources.\n\n\n\n\n\nLecture notes are organized by topic and updated throughout the semester.\nTopics include:\n\nIntroduction to R and RStudio\nIntroduction to Statistics\nRandom Variables\nProbability Distributions\nExploratory Data Analysis\nStatistical Inference\nRegression\nProgramming for Data Analytics\n\n\n\n\n\nHomework assignments are posted here as R Markdown files.\nEach homework page includes\n\nAssignment description\nRequired files\nDownload links\nSubmission instructions\n\nPlease submit completed assignments through Canvas.\n\n\n\n\nDatasets used in lectures and homework will be available for download.\n\n\n\n\nUseful resources include\n\nR\nRStudio\nR Markdown / Quarto\nPython (selected topics)\nAdditional references\n\n\n\n\n\n\nThroughout the semester, students are expected to\n\nRead the lecture notes.\nDownload the homework files.\nComplete assignments using R Markdown.\nKnit the completed document to HTML.\nSubmit the required files through Canvas.\n\n\nWe hope this website provides a convenient and organized resource throughout the course."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html",
+    "href": "source/week01IntrotoR.html",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "Part of this note is sourced from materials created by Prof. Alexandra Chouldechova from CMU, also distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\nR Tutorials, https://www.tutorialspoint.com/r/r_data_types.htm\nNotes of ITMD/ITMS/STAT 514 Spring 2021 by Dr. Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#reference",
+    "href": "source/week01IntrotoR.html#reference",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "Part of this note is sourced from materials created by Prof. Alexandra Chouldechova from CMU, also distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\nR Tutorials, https://www.tutorialspoint.com/r/r_data_types.htm\nNotes of ITMD/ITMS/STAT 514 Spring 2021 by Dr. Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#objectives",
+    "href": "source/week01IntrotoR.html#objectives",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Objectives",
+    "text": "Objectives\n\nFamiliar with basic R syntax and structure;\nKnow how to run R code in RStudio from within a Markdown document."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#installing-and-loading-packages",
+    "href": "source/week01IntrotoR.html#installing-and-loading-packages",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Installing and loading packages",
+    "text": "Installing and loading packages\nJust like every other programming language you may be familiar with, R’s capabilities can be greatly extended by installing additional “packages” and “libraries”.\nTo install a package, use the install.packages() command. You’ll want to run the following commands to get the necessary packages for today’s lab:\ninstall.packages(\"rmdformats\")\ninstall.packages(\"ggplot2\")\ninstall.packages(\"knitr\")\nYou only need to install packages once. Once they’re installed, you may use them by loading the libraries using the library() command. For today’s lab, you’ll want to run the following code\n\nlibrary(knitr)   # contains kable() function"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#in-class-exercise-hello-world-lets-do-it-together",
+    "href": "source/week01IntrotoR.html#in-class-exercise-hello-world-lets-do-it-together",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: Hello world! (Let’s do it together)",
+    "text": "In-class exercise: Hello world! (Let’s do it together)\n\nOpen RStudio on your machine\nFile &gt; New File &gt; R Markdown …\nChange summary(cars) in the first code block to print(\"Hello world!\")\nSave your Rmd file as helloworld.Rmd\nClick Knit HTML to produce an HTML file."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#data-types-in-r",
+    "href": "source/week01IntrotoR.html#data-types-in-r",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Data Types in R",
+    "text": "Data Types in R\nYou’ll encounter different kinds of data types\n\nLogical/Boolean Direct binary values: TRUE or FALSE in R\n\n\nprint(class(TRUE))\n\n[1] \"logical\"\n\n\n\nNumeric: a number like \\(1.87, 999,1e10\\)\n\n\nprint(class(1.87))\n\n[1] \"numeric\"\n\nprint(class(999))\n\n[1] \"numeric\"\n\n\n\nIntegers: whole numbers (positive, negative or zero)\n\n\nprint(class(2L))\n\n[1] \"integer\"\n\n\n\nCharacters fixed-length blocks of bits, with special coding; In general, strings = sequences of characters; R only use Characters to denote both characters and strings.\n\n\nprint(class(\"TRUE\"))\n\n[1] \"character\"\n\n\n\nMissing or ill-defined values: NA, NaN, etc.\n\n\nis.na(7)\n\n[1] FALSE\n\nis.na(\"seven\")\n\n[1] FALSE\n\n\n\nSpecial Values: pi，exp()\n\n\npi\n\n[1] 3.141593\n\nexp(1)\n\n[1] 2.718282"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#assignment-operator",
+    "href": "source/week01IntrotoR.html#assignment-operator",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Assignment operator",
+    "text": "Assignment operator\nMost variables are created with the assignment operator, &lt;- or =\n\ntime_factor &lt;- 12\ntime_factor\n\n[1] 12\n\ntime_in_years = 2.5\ntime_in_years * time_factor\n\n[1] 30\n\n\nThe assignment operator also changes values:\n\ntime_in_months &lt;- time_in_years * time_factor\ntime_in_months\n\n[1] 30\n\ntime_in_months &lt;- 45\ntime_in_months\n\n[1] 45\n\n\n\nUsing names and variables makes code: easier to design, easier to debug, less prone to bugs, easier to improve, and easier for others to read\nAvoid “magic constants”; use named variables\nUse descriptive variable names\n\nGood: num_students &lt;- 35\nBad: ns &lt;- 35"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#arithmetic-operators",
+    "href": "source/week01IntrotoR.html#arithmetic-operators",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Arithmetic Operators",
+    "text": "Arithmetic Operators\n\n\n\nCommand\nDescription\n\n\n\n\n+,-,*,/\nadd, subtract, multiply, divide\n\n\n^\nraise to the power of\n\n\n%%\nremainder after division (ex: 8 %% 3 = 2)\n\n\n( )\nchange the order of operations\n\n\n\n\n7 + 5 # Addition\n\n[1] 12\n\n7 - 5 # Subtraction\n\n[1] 2\n\n7 * 5 # Multiplication\n\n[1] 35\n\n7 ^ 5 # Exponentiation\n\n[1] 16807"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#section",
+    "href": "source/week01IntrotoR.html#section",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "7 / 5 # Division\n\n[1] 1.4\n\n7 %% 5 # Modulus\n\n[1] 2\n\n7 %/% 5 # Integer division \n\n[1] 1"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#relational-operators",
+    "href": "source/week01IntrotoR.html#relational-operators",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Relational Operators",
+    "text": "Relational Operators\nEach element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value.\n\n7 &gt; 5\n\n[1] TRUE\n\n7 &lt; 5\n\n[1] FALSE\n\n7 &gt;= 7\n\n[1] TRUE\n\n7 &lt;= 5\n\n[1] FALSE\n\n\n\n7 == 5\n\n[1] FALSE\n\n7 != 5\n\n[1] TRUE"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#logical-operators",
+    "href": "source/week01IntrotoR.html#logical-operators",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Logical operators",
+    "text": "Logical operators\nEach element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value.\n\n&: Element-wise Logical AND operator.\n\n\n(5 &gt; 7) & (6*7 == 42)\n\n[1] FALSE\n\n\n\n｜: Element-wise Logical OR operator.\n\n\n(5 &gt; 7) | (6*7 == 42)\n\n[1] TRUE\n\n\n\n!: Logical NOT operator.\n\n\n!(5 &gt; 7) \n\n[1] TRUE\n\n\nQuestion: Can we use && or ||?"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#vectors",
+    "href": "source/week01IntrotoR.html#vectors",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Vectors",
+    "text": "Vectors\n\nA vector is one object holds elements of one data type as shown above\nc() function returns a vector containing all its arguments in order\n\n\nstudents_name &lt;- c(\"Jacob\", \"Isaac\", \"Sarah\", \"Noah\", \"Joseph\")\nmidterm &lt;- c(80, 90, 93, 82, 95)\n\n\nTyping the variable name at the prompt causes it to display\n\n\nstudents_name\n\n[1] \"Jacob\"  \"Isaac\"  \"Sarah\"  \"Noah\"   \"Joseph\"\n\n\n\nIndexing\n\nvec[1] is the first element, vec[4] is the 4th element of vec\n\n\nstudents_name[4]\n\n[1] \"Noah\"\n\n\n\nvec[-4] is a vector containing all but the fourth element\n\n\nstudents_name[-4]\n\n[1] \"Jacob\"  \"Isaac\"  \"Sarah\"  \"Joseph\"\n\n\n\nvector of indices:\n\n\nstudents_name[c(2,4)]\n\n[1] \"Isaac\" \"Noah\" \n\n\n\nvector of negative indices\n\n\nstudents_name[c(-1,-3)]\n\n[1] \"Isaac\"  \"Noah\"   \"Joseph\"\n\n\n\n\nVector arithmetic\nOperators apply to vectors “pairwise” or “elementwise”:\n\nfinal &lt;- c(78, 84, 95, 82, 91) # Final exam scores\nmidterm # Midterm exam scores\n\n[1] 80 90 93 82 95\n\nmidterm + final # Sum of midterm and final scores\n\n[1] 158 174 188 164 186\n\n(midterm + final)/2 # Average exam score\n\n[1] 79 87 94 82 93\n\ncourse_grades &lt;- 0.4*midterm + 0.6*final # Final course grade\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#in-class-exercise-indexing",
+    "href": "source/week01IntrotoR.html#in-class-exercise-indexing",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "In-Class Exercise: Indexing",
+    "text": "In-Class Exercise: Indexing\n\nHow to use indexing to get the midterm grade of Noah?\nHow to get the students name with midterm grade above 90?\nIf the weight changes to 30% for midterm and 70% for final, only the students whose grade greater than or equal to 90 will get an A. Who will get an A in this course?\n\n\nFunctions on vectors\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\nsum(vec)\nsums up all the elements of vec\n\n\nmean(vec)\nmean of vec\n\n\nmedian(vec)\nmedian of vec\n\n\nmin(vec), max(vec)\nthe largest or smallest element of vec\n\n\nsd(vec), var(vec)\nthe standard deviation and variance of vec\n\n\nlength(vec)\nthe number of elements in vec\n\n\npmax(vec1, vec2), pmin(vec1, vec2)\nexample: pmax(quiz1, quiz2) returns the higher of quiz 1 and quiz 2 for each student\n\n\nsort(vec)\nreturns the vec in sorted order\n\n\norder(vec)\nreturns the index that sorts the vector vec\n\n\nunique(vec)\nlists the unique elements of vec\n\n\nsummary(vec)\ngives a five-number summary\n\n\nany(vec), all(vec)\nuseful on Boolean vectors\n\n\n\n\nExample\n\n\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6\n\nmean(course_grades) # mean grade\n\n[1] 86.8\n\nmedian(course_grades)\n\n[1] 86.4\n\nsd(course_grades) # grade standard deviation\n\n[1] 6.625708\n\nsort(course_grades)\n\n[1] 78.8 82.0 86.4 92.6 94.2\n\nmax(course_grades) # highest course grade\n\n[1] 94.2\n\nmin(course_grades) # lowest course grade\n\n[1] 78.8\n\n\n\n\nPairwise comparisons\nIs the final score higher than the midterm score?\n\nmidterm \n\n[1] 80 90 93 82 95\n\nfinal\n\n[1] 78 84 95 82 91\n\nfinal &gt; midterm\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\n\nBoolean operators can be applied elementwise:\n\n(final &lt; midterm) & (midterm &gt; 80)\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nNote: The logical operator && and || considers only the first element of the vectors and give a vector of single element as output.\n\n\nMore referencing\nwhich() returns the TRUE indexes of a Boolean vector:\n\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6\n\na_threshold &lt;- 90 # A grade = 90% or higher\ncourse_grades &gt;= a_threshold # vector of booleans\n\n[1] FALSE FALSE  TRUE FALSE  TRUE\n\na_students &lt;- which(course_grades &gt;= a_threshold) # Applying which() \na_students\n\n[1] 3 5\n\nstudents_name[a_students] # Names of A students\n\n[1] \"Sarah\"  \"Joseph\"\n\n\nA different way to solve it\n\nstudents_name[course_grades &gt;= a_threshold]\n\n[1] \"Sarah\"  \"Joseph\""
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#in-class-exercise-more-indexing",
+    "href": "source/week01IntrotoR.html#in-class-exercise-more-indexing",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: More Indexing",
+    "text": "In-class exercise: More Indexing\nUsing the midterm, final, and course_grades\n\nFind the students whose course grade is above 85.\nFind the students whose midterm and final grades both are greater than 85."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#lists",
+    "href": "source/week01IntrotoR.html#lists",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Lists",
+    "text": "Lists\nA list is an R-object which can contain many different types of elements inside it like vectors, functions and even another list inside it. This is often used in your own function to return the values.\n\nlist1 &lt;- list(c(4,5,6),79.2,cos,exp)\nprint(list1)\n\n[[1]]\n[1] 4 5 6\n\n[[2]]\n[1] 79.2\n\n[[3]]\nfunction (x)  .Primitive(\"cos\")\n\n[[4]]\nfunction (x)  .Primitive(\"exp\")\n\n\nHow to extract information from the list?\n\nlength(list1) # get the number of elements inside\n\n[1] 4\n\nlist1[1] # access the first element\n\n[[1]]\n[1] 4 5 6"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#matrices",
+    "href": "source/week01IntrotoR.html#matrices",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Matrices",
+    "text": "Matrices\nA matrix is a two-dimensional rectangular data set. It can be created using a vector input to the matrix function.\n\n# Create a matrix.\nM = matrix( c('a','a','b','c','b','a'), nrow = 2, ncol = 3, byrow = TRUE)\nprint(M)\n\n     [,1] [,2] [,3]\n[1,] \"a\"  \"a\"  \"b\" \n[2,] \"c\"  \"b\"  \"a\" \n\n\nIs there any difference if we choose FALSE for byrow?\n\n# Create a different matrix.\nM = matrix( c('a','a','b','c','b','a'), nrow = 2, ncol = 3, byrow = FALSE)\nprint(M)\n\n     [,1] [,2] [,3]\n[1,] \"a\"  \"b\"  \"b\" \n[2,] \"a\"  \"c\"  \"a\" \n\n\nHow to access each element?\n\nM[1,2] # The first row and the second column\n\n[1] \"b\""
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#factors",
+    "href": "source/week01IntrotoR.html#factors",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Factors",
+    "text": "Factors\nFactors are the r-objects which are created using a vector. It stores the vector along with the distinct values of the elements in the vector as labels. The labels are always character irrespective of whether it is numeric or character or Boolean etc. in the input vector. They are useful in statistical modeling.\nFactors are created using the factor() function. The nlevels functions gives the count of levels.\n\n# Create a vector.\napple_colors &lt;- c('green','green','yellow','red','red','red','green')\n\n# Create a factor object.\nfactor_apple &lt;- factor(apple_colors)\n\n# Print the factor.\nprint(factor_apple)\n\n[1] green  green  yellow red    red    red    green \nLevels: green red yellow\n\nprint(nlevels(factor_apple))\n\n[1] 3\n\n\nWe can also use as.factor() to convert a numeric vector to a factor\n\nnumbers &lt;- c(1,1,2,3,2,1,2)\nprint(numbers)\n\n[1] 1 1 2 3 2 1 2\n\nprint(class(numbers))\n\n[1] \"numeric\"\n\nprint(as.factor(numbers))\n\n[1] 1 1 2 3 2 1 2\nLevels: 1 2 3\n\nprint(class(as.factor(numbers)))\n\n[1] \"factor\"\n\n\nNote: Some class labels are stored as numeric. However, if you want to do classification, you need to convert it to a factor."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#data-frames",
+    "href": "source/week01IntrotoR.html#data-frames",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Data Frames",
+    "text": "Data Frames\nData frames are tabular data objects. Unlike a matrix in data frame each column can contain different modes of data. The first column can be numeric while the second column can be character and third column can be logical. It is a list of vectors of equal length.\nData Frames are created using the data.frame() function.\n\nBMI &lt;-  data.frame(\n   gender = c(\"Male\", \"Male\",\"Female\"), \n   height = c(152, 171.5, 165), \n   weight = c(81,93, 78),\n   Age = c(42,38,26)\n)\nprint(BMI)\n\n  gender height weight Age\n1   Male  152.0     81  42\n2   Male  171.5     93  38\n3 Female  165.0     78  26\n\n\nHow to access each column/attribute? How to access each row/observation?\n\nBMI$height # to access height\n\n[1] 152.0 171.5 165.0\n\nBMI[,2] # a different way to access height\n\n[1] 152.0 171.5 165.0\n\nBMI[2,] # to access the second row\n\n  gender height weight Age\n2   Male  171.5     93  38"
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#in-class-exercise-more-indexing-ii",
+    "href": "source/week01IntrotoR.html#in-class-exercise-more-indexing-ii",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: More Indexing II",
+    "text": "In-class exercise: More Indexing II\n\nPlease create a data frame called ITMD514Grades with name,midterm, and final.\nAdd one column named final_grade to the data frame using the weight of 30% for midterm and 70% for final\nFind the students whose final grade is above 85.\nFind the students whose midterm and final grades both are greater than 85."
+  },
+  {
+    "objectID": "source/week01IntrotoR.html#full-info-page-on-markdown",
+    "href": "source/week01IntrotoR.html#full-info-page-on-markdown",
+    "title": "Interlude: Intro to R, RStudio, Markdown",
+    "section": "Full info page on Markdown",
+    "text": "Full info page on Markdown\nLink to extensive resource with many examples you can reference as needed."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html",
+    "href": "source/week01_intro_to_r.html",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "Part of this note is sourced from materials created by Prof. Alexandra Chouldechova from CMU, also distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\nR Tutorials, https://www.tutorialspoint.com/r/r_data_types.htm\nNotes of ITMD/ITMS/STAT 514 Spring 2021 by Dr. Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#reference",
+    "href": "source/week01_intro_to_r.html#reference",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "Part of this note is sourced from materials created by Prof. Alexandra Chouldechova from CMU, also distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\nR Tutorials, https://www.tutorialspoint.com/r/r_data_types.htm\nNotes of ITMD/ITMS/STAT 514 Spring 2021 by Dr. Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#objectives",
+    "href": "source/week01_intro_to_r.html#objectives",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Objectives",
+    "text": "Objectives\n\nFamiliar with basic R syntax and structure;\nKnow how to run R code in RStudio from within a Markdown document."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#installing-and-loading-packages",
+    "href": "source/week01_intro_to_r.html#installing-and-loading-packages",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Installing and loading packages",
+    "text": "Installing and loading packages\nJust like every other programming language you may be familiar with, R’s capabilities can be greatly extended by installing additional “packages” and “libraries”.\nTo install a package, use the install.packages() command. You’ll want to run the following commands to get the necessary packages for today’s lab:\ninstall.packages(\"rmdformats\")\ninstall.packages(\"ggplot2\")\ninstall.packages(\"knitr\")\nYou only need to install packages once. Once they’re installed, you may use them by loading the libraries using the library() command. For today’s lab, you’ll want to run the following code\n\nlibrary(knitr)   # contains kable() function"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#in-class-exercise-hello-world-lets-do-it-together",
+    "href": "source/week01_intro_to_r.html#in-class-exercise-hello-world-lets-do-it-together",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: Hello world! (Let’s do it together)",
+    "text": "In-class exercise: Hello world! (Let’s do it together)\n\nOpen RStudio on your machine\nFile &gt; New File &gt; R Markdown …\nChange summary(cars) in the first code block to print(\"Hello world!\")\nSave your Rmd file as helloworld.Rmd\nClick Knit HTML to produce an HTML file."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#data-types-in-r",
+    "href": "source/week01_intro_to_r.html#data-types-in-r",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Data Types in R",
+    "text": "Data Types in R\nYou’ll encounter different kinds of data types\n\nLogical/Boolean Direct binary values: TRUE or FALSE in R\n\n\nprint(class(TRUE))\n\n[1] \"logical\"\n\n\n\nNumeric: a number like \\(1.87, 999,1e10\\)\n\n\nprint(class(1.87))\n\n[1] \"numeric\"\n\nprint(class(999))\n\n[1] \"numeric\"\n\n\n\nIntegers: whole numbers (positive, negative or zero)\n\n\nprint(class(2L))\n\n[1] \"integer\"\n\n\n\nCharacters fixed-length blocks of bits, with special coding; In general, strings = sequences of characters; R only use Characters to denote both characters and strings.\n\n\nprint(class(\"TRUE\"))\n\n[1] \"character\"\n\n\n\nMissing or ill-defined values: NA, NaN, etc.\n\n\nis.na(7)\n\n[1] FALSE\n\nis.na(\"seven\")\n\n[1] FALSE\n\n\n\nSpecial Values: pi，exp()\n\n\npi\n\n[1] 3.141593\n\nexp(1)\n\n[1] 2.718282"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#assignment-operator",
+    "href": "source/week01_intro_to_r.html#assignment-operator",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Assignment operator",
+    "text": "Assignment operator\nMost variables are created with the assignment operator, &lt;- or =\n\ntime_factor &lt;- 12\ntime_factor\n\n[1] 12\n\ntime_in_years = 2.5\ntime_in_years * time_factor\n\n[1] 30\n\n\nThe assignment operator also changes values:\n\ntime_in_months &lt;- time_in_years * time_factor\ntime_in_months\n\n[1] 30\n\ntime_in_months &lt;- 45\ntime_in_months\n\n[1] 45\n\n\n\nUsing names and variables makes code: easier to design, easier to debug, less prone to bugs, easier to improve, and easier for others to read\nAvoid “magic constants”; use named variables\nUse descriptive variable names\n\nGood: num_students &lt;- 35\nBad: ns &lt;- 35"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#arithmetic-operators",
+    "href": "source/week01_intro_to_r.html#arithmetic-operators",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Arithmetic Operators",
+    "text": "Arithmetic Operators\n\n\n\nCommand\nDescription\n\n\n\n\n+,-,*,/\nadd, subtract, multiply, divide\n\n\n^\nraise to the power of\n\n\n%%\nremainder after division (ex: 8 %% 3 = 2)\n\n\n( )\nchange the order of operations\n\n\n\n\n7 + 5 # Addition\n\n[1] 12\n\n7 - 5 # Subtraction\n\n[1] 2\n\n7 * 5 # Multiplication\n\n[1] 35\n\n7 ^ 5 # Exponentiation\n\n[1] 16807"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#section",
+    "href": "source/week01_intro_to_r.html#section",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "",
+    "text": "7 / 5 # Division\n\n[1] 1.4\n\n7 %% 5 # Modulus\n\n[1] 2\n\n7 %/% 5 # Integer division \n\n[1] 1"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#relational-operators",
+    "href": "source/week01_intro_to_r.html#relational-operators",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Relational Operators",
+    "text": "Relational Operators\nEach element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value.\n\n7 &gt; 5\n\n[1] TRUE\n\n7 &lt; 5\n\n[1] FALSE\n\n7 &gt;= 7\n\n[1] TRUE\n\n7 &lt;= 5\n\n[1] FALSE\n\n\n\n7 == 5\n\n[1] FALSE\n\n7 != 5\n\n[1] TRUE"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#logical-operators",
+    "href": "source/week01_intro_to_r.html#logical-operators",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Logical operators",
+    "text": "Logical operators\nEach element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value.\n\n&: Element-wise Logical AND operator.\n\n\n(5 &gt; 7) & (6*7 == 42)\n\n[1] FALSE\n\n\n\n｜: Element-wise Logical OR operator.\n\n\n(5 &gt; 7) | (6*7 == 42)\n\n[1] TRUE\n\n\n\n!: Logical NOT operator.\n\n\n!(5 &gt; 7) \n\n[1] TRUE\n\n\nQuestion: Can we use && or ||?"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#vectors",
+    "href": "source/week01_intro_to_r.html#vectors",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Vectors",
+    "text": "Vectors\n\nA vector is one object holds elements of one data type as shown above\nc() function returns a vector containing all its arguments in order\n\n\nstudents_name &lt;- c(\"Jacob\", \"Isaac\", \"Sarah\", \"Noah\", \"Joseph\")\nmidterm &lt;- c(80, 90, 93, 82, 95)\n\n\nTyping the variable name at the prompt causes it to display\n\n\nstudents_name\n\n[1] \"Jacob\"  \"Isaac\"  \"Sarah\"  \"Noah\"   \"Joseph\"\n\n\n\nIndexing\n\nvec[1] is the first element, vec[4] is the 4th element of vec\n\n\nstudents_name[4]\n\n[1] \"Noah\"\n\n\n\nvec[-4] is a vector containing all but the fourth element\n\n\nstudents_name[-4]\n\n[1] \"Jacob\"  \"Isaac\"  \"Sarah\"  \"Joseph\"\n\n\n\nvector of indices:\n\n\nstudents_name[c(2,4)]\n\n[1] \"Isaac\" \"Noah\" \n\n\n\nvector of negative indices\n\n\nstudents_name[c(-1,-3)]\n\n[1] \"Isaac\"  \"Noah\"   \"Joseph\"\n\n\n\n\nVector arithmetic\nOperators apply to vectors “pairwise” or “elementwise”:\n\nfinal &lt;- c(78, 84, 95, 82, 91) # Final exam scores\nmidterm # Midterm exam scores\n\n[1] 80 90 93 82 95\n\nmidterm + final # Sum of midterm and final scores\n\n[1] 158 174 188 164 186\n\n(midterm + final)/2 # Average exam score\n\n[1] 79 87 94 82 93\n\ncourse_grades &lt;- 0.4*midterm + 0.6*final # Final course grade\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#in-class-exercise-indexing",
+    "href": "source/week01_intro_to_r.html#in-class-exercise-indexing",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "In-Class Exercise: Indexing",
+    "text": "In-Class Exercise: Indexing\n\nHow to use indexing to get the midterm grade of Noah?\nHow to get the students name with midterm grade above 90?\nIf the weight changes to 30% for midterm and 70% for final, only the students whose grade greater than or equal to 90 will get an A. Who will get an A in this course?\n\n\nFunctions on vectors\n\n\n\n\n\n\n\nCommand\nDescription\n\n\n\n\nsum(vec)\nsums up all the elements of vec\n\n\nmean(vec)\nmean of vec\n\n\nmedian(vec)\nmedian of vec\n\n\nmin(vec), max(vec)\nthe largest or smallest element of vec\n\n\nsd(vec), var(vec)\nthe standard deviation and variance of vec\n\n\nlength(vec)\nthe number of elements in vec\n\n\npmax(vec1, vec2), pmin(vec1, vec2)\nexample: pmax(quiz1, quiz2) returns the higher of quiz 1 and quiz 2 for each student\n\n\nsort(vec)\nreturns the vec in sorted order\n\n\norder(vec)\nreturns the index that sorts the vector vec\n\n\nunique(vec)\nlists the unique elements of vec\n\n\nsummary(vec)\ngives a five-number summary\n\n\nany(vec), all(vec)\nuseful on Boolean vectors\n\n\n\n\nExample\n\n\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6\n\nmean(course_grades) # mean grade\n\n[1] 86.8\n\nmedian(course_grades)\n\n[1] 86.4\n\nsd(course_grades) # grade standard deviation\n\n[1] 6.625708\n\nsort(course_grades)\n\n[1] 78.8 82.0 86.4 92.6 94.2\n\nmax(course_grades) # highest course grade\n\n[1] 94.2\n\nmin(course_grades) # lowest course grade\n\n[1] 78.8\n\n\n\n\nPairwise comparisons\nIs the final score higher than the midterm score?\n\nmidterm \n\n[1] 80 90 93 82 95\n\nfinal\n\n[1] 78 84 95 82 91\n\nfinal &gt; midterm\n\n[1] FALSE FALSE  TRUE FALSE FALSE\n\n\nBoolean operators can be applied elementwise:\n\n(final &lt; midterm) & (midterm &gt; 80)\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nNote: The logical operator && and || considers only the first element of the vectors and give a vector of single element as output.\n\n\nMore referencing\nwhich() returns the TRUE indexes of a Boolean vector:\n\ncourse_grades\n\n[1] 78.8 86.4 94.2 82.0 92.6\n\na_threshold &lt;- 90 # A grade = 90% or higher\ncourse_grades &gt;= a_threshold # vector of booleans\n\n[1] FALSE FALSE  TRUE FALSE  TRUE\n\na_students &lt;- which(course_grades &gt;= a_threshold) # Applying which() \na_students\n\n[1] 3 5\n\nstudents_name[a_students] # Names of A students\n\n[1] \"Sarah\"  \"Joseph\"\n\n\nA different way to solve it\n\nstudents_name[course_grades &gt;= a_threshold]\n\n[1] \"Sarah\"  \"Joseph\""
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#in-class-exercise-more-indexing",
+    "href": "source/week01_intro_to_r.html#in-class-exercise-more-indexing",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: More Indexing",
+    "text": "In-class exercise: More Indexing\nUsing the midterm, final, and course_grades\n\nFind the students whose course grade is above 85.\nFind the students whose midterm and final grades both are greater than 85."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#lists",
+    "href": "source/week01_intro_to_r.html#lists",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Lists",
+    "text": "Lists\nA list is an R-object which can contain many different types of elements inside it like vectors, functions and even another list inside it. This is often used in your own function to return the values.\n\nlist1 &lt;- list(c(4,5,6),79.2,cos,exp)\nprint(list1)\n\n[[1]]\n[1] 4 5 6\n\n[[2]]\n[1] 79.2\n\n[[3]]\nfunction (x)  .Primitive(\"cos\")\n\n[[4]]\nfunction (x)  .Primitive(\"exp\")\n\n\nHow to extract information from the list?\n\nlength(list1) # get the number of elements inside\n\n[1] 4\n\nlist1[1] # access the first element\n\n[[1]]\n[1] 4 5 6"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#matrices",
+    "href": "source/week01_intro_to_r.html#matrices",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Matrices",
+    "text": "Matrices\nA matrix is a two-dimensional rectangular data set. It can be created using a vector input to the matrix function.\n\n# Create a matrix.\nM = matrix( c('a','a','b','c','b','a'), nrow = 2, ncol = 3, byrow = TRUE)\nprint(M)\n\n     [,1] [,2] [,3]\n[1,] \"a\"  \"a\"  \"b\" \n[2,] \"c\"  \"b\"  \"a\" \n\n\nIs there any difference if we choose FALSE for byrow?\n\n# Create a different matrix.\nM = matrix( c('a','a','b','c','b','a'), nrow = 2, ncol = 3, byrow = FALSE)\nprint(M)\n\n     [,1] [,2] [,3]\n[1,] \"a\"  \"b\"  \"b\" \n[2,] \"a\"  \"c\"  \"a\" \n\n\nHow to access each element?\n\nM[1,2] # The first row and the second column\n\n[1] \"b\""
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#factors",
+    "href": "source/week01_intro_to_r.html#factors",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Factors",
+    "text": "Factors\nFactors are the r-objects which are created using a vector. It stores the vector along with the distinct values of the elements in the vector as labels. The labels are always character irrespective of whether it is numeric or character or Boolean etc. in the input vector. They are useful in statistical modeling.\nFactors are created using the factor() function. The nlevels functions gives the count of levels.\n\n# Create a vector.\napple_colors &lt;- c('green','green','yellow','red','red','red','green')\n\n# Create a factor object.\nfactor_apple &lt;- factor(apple_colors)\n\n# Print the factor.\nprint(factor_apple)\n\n[1] green  green  yellow red    red    red    green \nLevels: green red yellow\n\nprint(nlevels(factor_apple))\n\n[1] 3\n\n\nWe can also use as.factor() to convert a numeric vector to a factor\n\nnumbers &lt;- c(1,1,2,3,2,1,2)\nprint(numbers)\n\n[1] 1 1 2 3 2 1 2\n\nprint(class(numbers))\n\n[1] \"numeric\"\n\nprint(as.factor(numbers))\n\n[1] 1 1 2 3 2 1 2\nLevels: 1 2 3\n\nprint(class(as.factor(numbers)))\n\n[1] \"factor\"\n\n\nNote: Some class labels are stored as numeric. However, if you want to do classification, you need to convert it to a factor."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#data-frames",
+    "href": "source/week01_intro_to_r.html#data-frames",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Data Frames",
+    "text": "Data Frames\nData frames are tabular data objects. Unlike a matrix in data frame each column can contain different modes of data. The first column can be numeric while the second column can be character and third column can be logical. It is a list of vectors of equal length.\nData Frames are created using the data.frame() function.\n\nBMI &lt;-  data.frame(\n   gender = c(\"Male\", \"Male\",\"Female\"), \n   height = c(152, 171.5, 165), \n   weight = c(81,93, 78),\n   Age = c(42,38,26)\n)\nprint(BMI)\n\n  gender height weight Age\n1   Male  152.0     81  42\n2   Male  171.5     93  38\n3 Female  165.0     78  26\n\n\nHow to access each column/attribute? How to access each row/observation?\n\nBMI$height # to access height\n\n[1] 152.0 171.5 165.0\n\nBMI[,2] # a different way to access height\n\n[1] 152.0 171.5 165.0\n\nBMI[2,] # to access the second row\n\n  gender height weight Age\n2   Male  171.5     93  38"
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#in-class-exercise-more-indexing-ii",
+    "href": "source/week01_intro_to_r.html#in-class-exercise-more-indexing-ii",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "In-class exercise: More Indexing II",
+    "text": "In-class exercise: More Indexing II\n\nPlease create a data frame called ITMD514Grades with name,midterm, and final.\nAdd one column named final_grade to the data frame using the weight of 30% for midterm and 70% for final\nFind the students whose final grade is above 85.\nFind the students whose midterm and final grades both are greater than 85."
+  },
+  {
+    "objectID": "source/week01_intro_to_r.html#full-info-page-on-markdown",
+    "href": "source/week01_intro_to_r.html#full-info-page-on-markdown",
+    "title": "Week 1: Intro to R, RStudio, Markdown",
+    "section": "Full info page on Markdown",
+    "text": "Full info page on Markdown\nLink to extensive resource with many examples you can reference as needed."
+  },
+  {
+    "objectID": "source/week02_intro_to_stats.html",
+    "href": "source/week02_intro_to_stats.html",
+    "title": "Week 2:Introduction to Statistics and Descriptive Statistics",
+    "section": "",
+    "text": "Probability & Statistics for Engineers & Scientist, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall"
+  },
+  {
+    "objectID": "source/week02_intro_to_stats.html#objectives",
+    "href": "source/week02_intro_to_stats.html#objectives",
+    "title": "Week 2:Introduction to Statistics and Descriptive Statistics",
+    "section": "Objectives:",
+    "text": "Objectives:\n\nUnderstand the difference between Population and Sample\nKnow how to compute Sample Mean , Sample Median, and Sample Variance; How to interpret these measures\nKnow how to create a histogram and boxplot in R; Understand the interpretation of these two plots"
+  },
+  {
+    "objectID": "source/week02_intro_to_stats.html#introduction-to-statistics",
+    "href": "source/week02_intro_to_stats.html#introduction-to-statistics",
+    "title": "Week 2:Introduction to Statistics and Descriptive Statistics",
+    "section": "Introduction to Statistics",
+    "text": "Introduction to Statistics\n\nWhat is statistics?\nStatistics is the study of the collection, organization, analysis, and interpretation of data.\nBasics of statistics:\n\nPopulation: the entire group of individuals that we want information about.\nSample: a part of the population that we actually examine in order to gather information about the whole population.\n\n\nExample:\nPopulation: Illinois Tech students Sample: Students in our class\n\nTypes of statistics:\n\nDescriptive statistics: utilizes numerical and graphical methods to look for patterns in a data set, to summarize the information revealed in a data set, and to present the information in a convenient form.\nInferential statistics: use a fact about a sample to estimate the truth about the whole population.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDescriptive Statistics\nGeneral two types of data:\n\nQualitative data: observations that cannot be measured on a numerical scale. They can only be classified into one of a group of categories.\nExample: species of fish, eye color, marital status etc.\nQuantitative data: measurements that are recorded on a naturally occurring numerical scale.\nExample: height of person, score of test, etc.\n\n\nNumerical Methods\nConsider a quantitative dataset with \\(n\\) observations, denoted as \\(\\{x_1,\\cdots,x_n\\}\\).\n\nLocation Measures\n\nSample Mean: arithmetic average, denoted by \\(\\bar{x}\\)\n\\[\\bar{x} = \\frac{x_1+\\cdots+x_n}{n} = \\frac{1}{n}\\sum\\limits_{i=1}^n x_i=\\frac{1}{n}\\sum x_i\\]\n\nThe corresponding population parameter is population mean, denoted by \\(\\mu\\).\n\nSample median: middle number when the observations are arranged in ascending order, noted by \\(\\tilde{x}\\)\n\n\\[\\tilde{x} = \\begin{cases} x_{(n+1)/2}, & \\text{ if } n \\text{ is odd,} \\\\\n      \\frac{1}{2}(x_{n/2} + x_{n/2+1}), & \\text{ if } n \\text{ is even.} \\end{cases}\n      \\]\n\nNote: Median is less sensitive than mean to extremely large or small observations, which is good.\nFor example, a dataset \\(\\{-3,0,4\\}\\), the sample mean is \\(1/3\\) and the sample median is \\(0\\).\nIf the observation 4 is changed to 18, then the sample mean becomes \\(5\\), while the sample median stays unchanged as \\(0\\).\n\nVariability Measures\n\nSample range: measure of variability, \\(x_{\\max} -x_{\\min}\\)\nSample variance: measure of variability, spread out, denoted by \\(s^2\\)\n\n\n\\[ s^2 = \\frac{(x_1-\\bar{x})^2+\\cdots+(x_n-\\bar{x})^2}{n-1} = \\frac{\\sum\\limits_{i=1}^n (x_i-\\bar{x})^2}{n-1} \\]\nThe corresponding population parameter is population variance, denoted as $\\sigma^2$.\n\nSample standard deviation: \\(s = \\sqrt{s^2}\\), common way for measuring how far observations are away from the mean.\nThe corresponding population parameter is the population standard deviation, denoted as \\(\\sigma\\).\n\nExample 1. Consider a tiny data set with three observations 5, 0, and 1. Find the sample mean, sample median, sample variance, and sample standard deviation.\n\\(\\bar{x} = (0+1+5)/3 = 2\\), \\(\\tilde{x} = 1\\),\n\\[s^2 = \\frac{1}{3-1}\\left[(0-2)^2+(1-2)^2\n+(5-2)^2\\right] = \\frac{4+1+9}{3-1} = 7,\\qquad s = \\sqrt{7}.\\]\n\n\n\nIn-class exercise: Sample Mean, Median, and Variance\nConsider a tiny data set with four observations 4, 2, -1 and 5. Find the sample mean, sample median, sample variance, and sample standard deviation.\nQuestion How to use R find the sample mean, sample median, and sample variance?\nLet’s check a very small dataset iris, which comes with the default installation of R. To check the sample mean and sample median of the data, just type summary(iris).\n\n# Generate mean, median, percentile for numeric attributes and frequency for categorical attributes\nsummary(iris)\n\n  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   \n Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  \n 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  \n Median :5.800   Median :3.000   Median :4.350   Median :1.300  \n Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  \n 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  \n Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  \n       Species  \n setosa    :50  \n versicolor:50  \n virginica :50  \n                \n                \n                \n\n\nUse var to find the variance of one attribute Petal.Width.\n\n# Generate variance for numeric attributes\nvar(iris$Petal.Width)\n\n[1] 0.5810063\n\n\n\n\nIn-class exercise: Variance\n\nOpen RStudio on your machine\nFile &gt; New File &gt; R Markdown …\nModify summary(cars) in the first code block to find the variance of Sepal.Length\nClick Knit HTML to produce an HTML file.\nSave your Rmd file as InClassEx2.Rmd\n\n\nGraphical Methods\n\nFrequency table:\n\nExample 2. The following is the life of 20 similar car batteries recorded to the nearest tenth of a year. The batteries are guaranteed to last \\(3\\) years.\n\\[\\begin{align*}\n& 2.2,\\ 4.1,\\ 3.4,\\ 4.4,\\ 3.2,\\ 3.7,\\ 2.9,\\ 2.6,\\ 3.4,\\ 1.6,\\\\\n& 3.1, 3.3, 3.8, 3.1, 4.7, 3.7, 2.7, 4.3, 3.4, 3.6.\n\\end{align*}\\]\nNext, we want to create a frequency table for the above data.\n\\[\\begin{array}{ccc}\n\\text{Interval} & \\text{ Frequency}  & \\text{Relative Frequency} \\\\\n[1.5,2.0)& 1 & 0.05 \\\\\n[2.0, 2.5) & 1 & 0.05 \\\\\n[2.5, 3.0) & 3 & 0.15\\\\\n[3.0,3.5)&  7 &  0.35 \\\\\n[3.5,4.0) & 4 & 0.2\\\\\n[4.0,4.5) & 3 & 0.15\\\\\n[4.5,5.0] & 1 & 0.05\n\\end{array}\\]\n\n\nHistogram\nGraphically displays the contents in the frequency table\n\nThe class intervals in the frequency table form the scale of the horizontal axis.\nA vertical bar is placed over each class interval, with height equal to either the class frequency or class relative frequency.\nUsed to plot the density of the data\n\nHow to plot histogram in R? Use the function hist.\n\n\nHistogram of Car Batteries\n\ncarBatteries &lt;- c(2.2,4.1,3.4,4.5,3.2,3.7,2.9,2.6,3.4,1.6, \n                  3.1, 3.3, 3.8, 3.1, 4.7, 3.7, 2.7, 4.3, 3.4, 3.6)\nhist(carBatteries, breaks = seq(1.5,5.0,l=8),col = \"blue\", \n     main = \"Histogram of Car Batteries\",xlab=\"Battery Life (years)\")\n\n\n\n\n\n\n\n\n\n\nAnother Histogram of Car Batteries\nWhat’s the difference?\n\nhist(carBatteries, breaks = seq(1.5,5.0,l=8),col = \"blue\",  freq =FALSE,\n     main = \"Histogram of Car Batteries\",xlab=\"Battery Life (years)\")\n\n\n\n\n\n\n\n\n\n\nIn-class exercise: Histogram\n\nKeep working on your Rmd file InClassEx2.Rmd\nUse the hist function to create a histogram of Petal.Length.\n\n\n\nBoxplot\nGraphically depicting groups of numerical data through their quantiles.\n\nThe line inside the box: median (50th percentile).\nThe bottom edge of the box : first quantile (Q1/25th percentile)\nThe top edge of the box: third quantile (Q3/75th percentile)\nInterquartile range (IQR): 25th to the 75th percentile.\nBottom whisker (lower bar): from Q1 down to the minimum value within \\(1.5 \\times\\) IQR (interquartile range).\nTop whisker (upper bar): from Q3 up to the maximum value within \\(1.5 \\times\\) IQR.\n\n\n\nBoxplot of Car Batteries\n\nsummary(carBatteries)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  1.600   3.050   3.400   3.365   3.725   4.700 \n\nboxplot(carBatteries)\n\n\n\n\n\n\n\n\nUse the boxplot function to create a boxplot of Petal Width.\n\nboxplot(iris$Petal.Width, horizontal = TRUE)\n\n\n\n\n\n\n\n\npar(mfrow = c(1, 2)) creates a grid of size 1x2 for plots; it divides the plot area into a grid so you see several plots on the same page as opposed to separately. Try changing the 1 and the 2 to something else!\n\npar(mfrow = c(1, 2))\nboxplot(iris$Sepal.Length)\nboxplot(iris$Sepal.Width)\nabline(h = min(iris$Sepal.Width), col = \"Blue\")\nabline(h = max(iris$Sepal.Width), col = \"Yellow\")\nabline(h = median(iris$Sepal.Width), col = \"Green\")\nabline(h = quantile(iris$Sepal.Width, c(0.25, 0.75)), col = \"Red\")\n\n\n\n\n\n\n\n\n\n\nIn-class exercise: Boxplot\n\nKeep working on your Rmd file InClassEx2.Rmd\nUse the boxplot function to create a boxplot of Petal.Length\nType your conclusion of outliers of Petal.Length in your Rmd file\nUse par(mfrow = c(1, 2)) to combine the boxplot of Petal.Length and Petal.Width\n\n\n\nIn-class exercise: A Comprehensive Exercise\n\nAdd the following code block to InClassEx2.Rmd\n\n\ncarBatteries&lt;-c(\n  2.2,4.1,3.5, 4.5, 3.2, 3.7, 3.0, 2.6, 3.4, 1.6, 3.1, 3.3, 3.8, 3.1, 4.7, 3.7, 2.5, \n  4.3, 3.4, 3.6, 2.9, 3.3, 3.9, 3.1, 3.3, 3.1, 3.7, 4.4, 3.2, 4.1, 1.9, 3.4, 4.7, \n  3.8, 3.2, 2.6, 3.9, 3.0, 4.2, 3.5\n)\n\n\nFind the mean, variance, std of carBatteries\nFind the mean, variance, std of carBatteries when carBatteries &gt; 3\nCreate a histogram of carBatteries\nCreate a boxplot of carBatteries"
+  },
+  {
+    "objectID": "source/week03_normal_distribution.html",
+    "href": "source/week03_normal_distribution.html",
+    "title": "Week 3: Normal Distributions",
+    "section": "",
+    "text": "Understand normal distribution, e.g. expectation, variance, critical value\nKnow how to generate the normal random numbers\nknow how to use qqplot to investigate if a variable follows the normal distribution\nKnow how to use qnorm function to find the quantiles of the normal distribution and pnorm to find the area under the curve"
+  },
+  {
+    "objectID": "source/week03_normal_distribution.html#objectives",
+    "href": "source/week03_normal_distribution.html#objectives",
+    "title": "Week 3: Normal Distributions",
+    "section": "",
+    "text": "Understand normal distribution, e.g. expectation, variance, critical value\nKnow how to generate the normal random numbers\nknow how to use qqplot to investigate if a variable follows the normal distribution\nKnow how to use qnorm function to find the quantiles of the normal distribution and pnorm to find the area under the curve"
+  },
+  {
+    "objectID": "source/week03_normal_distribution.html#required-packages",
+    "href": "source/week03_normal_distribution.html#required-packages",
+    "title": "Week 3: Normal Distributions",
+    "section": "Required Packages",
+    "text": "Required Packages\n\nlibrary(car)\nlibrary(MASS)\n\n\nTossing Coin Experiment Revisit\nSuppose we have a fair coin and the probability of getting a head (success) is \\(p\\). Use \\(X\\) to denote the random variable to get a head(1) or a tail(0). Thus\nPMF of \\(X\\):\n\\[\n\\begin{array}{c|cc}\nx & 0 & 1 \\\\\n\\hline\nP(X = x) & 1-p & p  \\\\\n\\end{array}\n\\]\nExpectation and Variance\n\\[E(X) = (0)(1-p)+(1)p = p,\\qquad var(X) = (0)^2(1-p)+(1)^2p -p^2 = p(1-p)\\]\nSuppose we can generate a sample with sample size 40. Let’s generate samples the replication times 10, 100, and 10000 and investigate the distribution of the sample mean of each sample.\n\n\n\n\n\n\n\n\n\nThrough the experiment, we can see the distribution of sample mean is approximately normal with mean equal to the expected value of \\(X\\). In other words, the example above illustrates a known result–the Central Limit Theorem, one of the cornerstone results used in inference!"
+  },
+  {
+    "objectID": "source/week03_normal_distribution.html#normal-distribution",
+    "href": "source/week03_normal_distribution.html#normal-distribution",
+    "title": "Week 3: Normal Distributions",
+    "section": "Normal Distribution",
+    "text": "Normal Distribution\nThe normal distribution (also be called Gaussian distribution) is a symmetric distribution that is centered around a mean and spreads out in both directions.\nExamples: Test scores for all ITMS 514 students.\n\nNotation: \\(X\\sim N(\\mu, \\sigma^2)\\)\n\n\\(\\mu\\) is the mean of the distribution\n\\(\\sigma^2\\) is the variance of the distribution\n\nX can take any value on the real line.\nAreas under the Normal Curve:\n\n\\[\\begin{align*}\nF(x) &=P(X&lt;x) = P(X \\le x) \\\\\nF(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &P(x_1\\le X&lt;x_2)= P(x_1&lt;X\\le x_2) = P(x_1 \\le X \\le x_2).\n\\end{align*}\\]\nSuppose \\(Z\\) is the standard normal random variable, i.e., \\(Z \\sim N(0, 1)\\)\n\n\n\n\n\n\n\n\n\n\nDifferent Normal Distributions\n\nSame Mean but Different Variances\n\n\n\n\n\n\n\n\n\n\n-Different Means and Variances\n\n\n\n\n\n\n\n\n\n\n\nCalculate the probability for the Normal Distribution\nQuestion: What’s the relationship between the general normal random variable \\(X \\sim N(\\mu, \\sigma^2)\\) and the standard normal random variable?\n\\[Z= \\frac{X-\\mu}{\\sigma} \\sim N(0,1).\\]\nTo calculate the probability involving \\(X\\sim N(\\mu,\\sigma^2)\\),\n\\[\n    P(a\\leq X\\leq b) = P\\left(\\frac{a-\\mu}{\\sigma}\\leq \\frac{X-\\mu}{\\sigma}\\leq \\frac{b-\\mu}{\\sigma}\\right)\n    = P\\left(\\frac{a-\\mu}{\\sigma}\\leq Z\\leq \\frac{b-\\mu}{\\sigma}\\right),\n\\]\nExample 1: The achievement scores from a college entrance examination are normally distributed with mean 75 and standard deviation 10. What fraction of the scores lies between 80 and 90?\nAnswer: The scores \\(X\\sim N(75,10^2)\\), then \\[P(80\\leq X\\leq 90) = P\\left(\\frac{80-75}{10}\\leq Z\\leq \\frac{90-75}{10}\\right) = P(0.5\\leq Z\\leq 1.5) .\\] How to get the answer in R?\n\np1&lt;- pnorm(1.5, mean = 0, sd =1) -pnorm(0.5, mean =  0, sd = 1) # find the P(0.5 &lt;=Z &lt;=1.5) \np1 # display the answer\n\n[1] 0.2417303\n\np2&lt;-pnorm(90, mean = 75, sd =10) -pnorm(80, mean = 75, sd =10) # find the P(80 &lt;=X &lt;=90)\np2 # display the answer\n\n[1] 0.2417303\n\n\n\nIn-class Exercise: pnorm\nThe midterm exam scores in ITMD/ITMS/STAT 514 are normally distributed with mean 85 and standard deviation 8. Please use pnorm to find the following:\n\nWhat fraction of the scores lies between 80 and 90?\nWhat fraction of the scores lies above 90?\nWhat fraction of the scores lies below 80?\n\n\n\n\n\nPlot Tools to check normal distribution\n\nqqPlot in package car\n\n\n# need \"car\" package\nlibrary(car)\nx &lt;- rnorm(100)\nqqPlot(x)\n\n\n\n\n\n\n\n\n[1] 45 74\n\n# Try Petal.Length in iris data set\nqqPlot(iris$Petal.Length)\n\n\n\n\n\n\n\n\n[1] 119 118\n\n\n\nqqnorm and qqline\n\n\nqqnorm(x, pch = 1, frame = FALSE)\nqqline(x, col = \"red\")\n\n\n\n\n\n\n\n# For Petal.Length\nqqnorm(iris$Petal.Length, pch = 2)\nqqline(iris$Petal.Length, col = \"green\")\n\n\n\n\n\n\n\n\n\nIn-class Exercise: Play with QQ-plot\nPlease use the above plot to investigate medv in the data set Boston built in MASS package.\n\n# Please use the following code to access the data set Boston \n# Need MASS package\ndata(Boston)\n\n\n\n\nCritical Value\nCritical value: \\(z_{\\alpha}\\) of a standard normal distribution is the value on the measurement axis for which \\(\\alpha\\) of the area under the standard normal curve lies to the right of \\(z_{\\alpha}\\).\n\n\n\n\n\n\n\n\n\nHow to find \\(Z_{0.05}\\) in R?\n\nz0&lt;- -qnorm(0.05, mean = 0, sd =1)\nz0# display the answer\n\n[1] 1.644854\n\n#verify it\npnorm(z0)\n\n[1] 0.95\n\n\n\nTwo Tailed Critical Value\nExample 2. Find the value of \\(z_0\\) such that \\(95\\%\\) of the standard normal \\(Z\\) values lie between \\(-z_0\\) and \\(z_0\\); that is, \\(P(-z_0\\leq Z\\leq z_0) = .95\\).\nAnswer: [P(-z_0Z z_0) = 1- 2P(Z &lt;-z_0) = 0.95 P(Z&lt;-z_0) = 0.025.]\nHow to find \\(z_0\\) in R?\n\nz0&lt;- -qnorm(0.025, mean = 0, sd =1)\nz0# display the answer\n\n[1] 1.959964\n\nz0&lt;-qnorm(1-0.025, mean = 0, sd =1) \nz0 # display the answer\n\n[1] 1.959964\n\n#verify it\npnorm(z0)-pnorm(-z0)\n\n[1] 0.95\n\n\n\n\n\n\n\n\n\n\n\n\n\nIn-class Exercise: Critical Values\n\nFind the value of \\(z_0\\) such that \\(99\\%\\) of the standard normal \\(Z\\) values lie between \\(-z_0\\) and \\(z_0\\); that is, \\(P(-z_0\\leq Z\\leq z_0) = .99\\).\nFind \\(z_\\alpha\\) when \\(\\alpha = 0.01\\).\n\n\n\n\nConclusion\nNormal distribution is the most important distribution. When we talk about the Central Limit Theorem, confidence interval, and hypothesis testing, we will come back to the normal distribution."
+  },
+  {
+    "objectID": "source/week03_discrete_distributions.html",
+    "href": "source/week03_discrete_distributions.html",
+    "title": "Week 3: Special Discrete Random Distributions",
+    "section": "",
+    "text": "Probability & Statistics for Engineers & Scientist, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall\nITM514 Handout Notes Sampling Distribution, Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week03_discrete_distributions.html#objectives",
+    "href": "source/week03_discrete_distributions.html#objectives",
+    "title": "Week 3: Special Discrete Random Distributions",
+    "section": "Objectives:",
+    "text": "Objectives:\n\nUnderstand the Bernoulli distributions\nUnderstand the Binomial distributions\nUnderstand tossing coin experiments\nKnow how to use barplot"
+  },
+  {
+    "objectID": "source/week03_discrete_distributions.html#special-discrete-distributions",
+    "href": "source/week03_discrete_distributions.html#special-discrete-distributions",
+    "title": "Week 3: Special Discrete Random Distributions",
+    "section": "Special Discrete Distributions",
+    "text": "Special Discrete Distributions\nBernoulli and Binomial distributions are related to experiments with binary outcome (success or failure).\n\nBernoulli Distribution\nBernoulli Trial: A single random experiment with outcome either success or failure, and the probability of the success is \\(p\\).\nExamples - Flip a single coin - Shot a free throw\nBernoulli Random Variable: A random variable that takes either \\(1\\) or \\(0\\), where it takes 1 when the outcome of the Bernoulli trial is a success and 0 when the outcome of the Bernoulli trial is a failure.\nBernoulli Distribution: The distribution of a Bernoulli random variable is called the Bernoulli distribution.\nNotation: \\(X\\sim Bernoulli(p)\\)\nPMF of Bernoulli Distribution/Random Variable:\n\\[\n\\begin{array}{c|cc}\nx & 0 & 1 \\\\\n\\hline\nP(X = x) & 1-p & p  \\\\\n\\end{array}\n\\]\nExpectation and Variance\n\\[E(X) = (0)(1-p)+(1)p = p,\\qquad var(X) = (0)^2(1-p)+(1)^2p -p^2 = p(1-p)\\]\n\n\nInvestigate \\(p\\) via Tossing Coin Experiments\nSuppose we have a fair coin and consider head as a success. Thus \\(p = 0.5\\). We generate 10 instances from the Bernoulli distribution.\n\n# number of random experiments\nn &lt;- 10\n# sample space for tossing a coin, 0--Tail, 1--Head\nx &lt;- c(0,1)\n# generate n outcomes of the experiments\ncoinToss &lt;- sample(x, size=n, replace=TRUE)\n# display the results\ncoinToss\n\n [1] 0 1 1 0 0 0 1 1 0 0\n\n\nWe can use bar plot to show the frequency of each value in a categorical/discrete variable.\n\nbarplot(table(coinToss))\n\n\n\n\n\n\n\n\nThis is actually a sample from the distribution with sample size 10. Let’s investigate the sample mean.\n\nphat &lt;- mean(coinToss)\nphat\n\n[1] 0.4\n\n\nQuestion: What happened if we increase the sample size?\nLet \\(n =100\\)\n\n# number of random experiments\nn &lt;- 100 \n# sample space for tossing a coin, 0--Tail, 1--Head\nx &lt;- c(0,1) \n# generate n outcomes of the experiments\ncoinToss &lt;- sample(x, size=n, replace=TRUE)\n# display the results\nbarplot(table(coinToss))\n\n\n\n\n\n\n\nphat &lt;- mean(coinToss)\nphat\n\n[1] 0.45\n\n\nLet’s try \\(n = 10,000\\).\n\n# number of random experiments\nn &lt;- 10000\n# sample space for tossing a coin, 0--Tail, 1--Head\nx &lt;- c(0,1) \n# generate n outcomes of the experiments\ncoinToss &lt;- sample(x, size=n, replace=TRUE)\n# display the results\nbarplot(table(coinToss))\n\n\n\n\n\n\n\nphat &lt;- mean(coinToss)\nphat\n\n[1] 0.4988\n\n\nQuestion: What can we learn from the experiment?\nConclusion: Given a sample of independent and identically distributed (IID) values, the sample mean converges to the expectation (true/population mean).\n\n\nBinomial Distribution\nBinomial Trial: Repeat Bernoulli trial independently for a certain number (\\(n\\)) of times, each repetition has the same possible outcomes (success or failure), and the probability of each success (\\(p\\)) is consistent for all trials. This experiment is called Binomial trial.\nBinomial Random Variable: The number of successes \\(X\\) of a binomial trial is called a Binomial random variable.\nBinomial Distribution: The distribution of a Binomial random variable is called the binomial distribution\nExamples:\n\nNumber of heads in 40 coin flips\nNumber of hits in 20 free throws\n\nNotation: \\(X\\sim B(n,p)\\), \\(n\\) is the number of Bernoulli trials and \\(p\\) is the probability of success in each trial.\nPMF: \\(b(x;n,p) = {n\\choose x}p^x(1-p)^{n-x}\\), \\(x=0,1,\\ldots,n\\)\nMathematical Reason: \\(f(x) = P(X=x)\\), that is, in \\(n\\) trials, we observe \\(x\\) successes. The probability of an outcome with \\(x\\) successes is \\(p^x(1-p)^{n-x}\\) (the trials are independent). The number of such outcomes is: \\({n\\choose x}\\) (choosing \\(x\\) trials for success in \\(n\\) trials).\nExpectation and Variance: \\[E(X) = np, \\qquad var(X) = np(1-p).\\] Binomial random variable \\(X\\sim B(n,p)\\) can be viewed as the sum of \\(n\\) independent and identical Bernoulli random variables, i.e., \\[X = Y_1+\\cdots+Y_n,\\] where \\(X\\sim B(n,p)\\), \\(Y_1,\\ldots,Y_n\\sim Bernoulli(p)\\) and \\(Y_1,\\ldots,Y_n\\) are independent. Thus, by the properties of expected value and variance, \\[\\begin{align*}\nE(X) & = E(Y_1+\\cdots+Y_n) = E(Y_1)+\\cdots+E(Y_n) = np,\\\\\nvar(X) &= var(Y_1+\\cdots+Y_n) = var(Y_1)+\\cdots+var(Y_n) = np(1-p).\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "source/week03_random_variables.html",
+    "href": "source/week03_random_variables.html",
+    "title": "Week3: Introduction to Random Variables",
+    "section": "",
+    "text": "Probability & Statistics for Engineers & Scientist, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall\nITM514 Handout Notes Sampling Distribution, Sonja Petrovic"
+  },
+  {
+    "objectID": "source/week03_random_variables.html#objectives",
+    "href": "source/week03_random_variables.html#objectives",
+    "title": "Week3: Introduction to Random Variables",
+    "section": "Objectives:",
+    "text": "Objectives:\n\nUnderstand random variables;\nIdentify whether a random variable is discrete or continuous;\nUnderstand the concept of Expectation and the relation with sample mean\nUnderstand the concept of Variance and the relation with sample variance\nUnderstand tossing coin experiments\nKnow how to use barplot\nUnderstand the PMF, mean and variance of the random variables"
+  },
+  {
+    "objectID": "source/week03_random_variables.html#random-variable",
+    "href": "source/week03_random_variables.html#random-variable",
+    "title": "Week3: Introduction to Random Variables",
+    "section": "Random Variable",
+    "text": "Random Variable\nVariable: A variable is a quantity that may change within the context of a mathematical problem or experiment.\nRandom Variable: A random variable is a numerical description of the outcome of an experiment.\nExamples:\n\n\\(X =\\) number of heads after tossing a fair coin 100 times.\n\\(Y =\\) number of 6s after rolling a fair die 100 times.\n\\(Z =\\) number of As in this class.\n\\(A =\\) amount of time you spent watching TV every week.\n\n\nTypes of Random Variables:\n\nDiscrete random variable: take on a finite (or countable) number of values.\nExamples:\n\nSum of two dice: \\(\\{2, 3, 4,\\ldots, 12\\}\\).\nNumber of children: \\(\\{0, 1, 2, \\ldots\\}\\).\n\nContinuous random variables: take on values in a continuum (usually an interval)。\nExamples:\n\nHeight: \\((0,2.5)\\) meters\nWeight: \\((0,200)\\) pounds\nTime: \\((0,75)\\) minutes\n\n\n\n\nDescribe a Discrete Random Variable\nTossing Coin Experiment: Toss a fair coin 3 times. Suppose we are interested in the random variable \\(X =\\) number of heads.How do we get the probabilities??\nWe know the total number of outcomes of this experiment is \\(2^3 = 8\\). Why?\n\n\\(X=0\\), i.e., \\(P(X=0)  = P(\\{TTT\\}) = 1/8 = \\frac{1}{8};\\)\n\\(X=1\\), i.e., \\(P(X=1)  = P(\\{HTT\\})+P(\\{THT\\})+P(\\{TTH\\}) = \\frac{3}{8};\\)\n\\(X =2\\), i.e., \\(P(X=2)  =P(\\{HHT\\})+P(\\{HTH\\})+P(\\{THH\\})  = \\frac{3}{8};\\)\n\\(X =3\\), i.e., \\(P(X=3)  = P(\\{HHH\\}) = \\frac{1}{8}\\)\n\nThus, we can have the following table \\[\\begin{array}{c|ccccc}\nx & 0 & 1 & 2 & 3  \\\\\n\\hline\nP(X = x) & \\frac{1}{8} & \\frac{3}{8} & \\frac{3}{8} & \\frac{1}{8}\n\\end{array}\\]\n\nUsing R to simulate this random variable\nWe can use sample function to generate an observation of this random variable\n\nn &lt;- 3\nx &lt;- c(0,1)\n#1 indicates Head 0 indicate Tail\nsample(x, size=n, replace=TRUE) #simulate flipping coin 3 times\n\n[1] 1 0 1\n\n# Here X1 is one observation\nX1&lt;- sum(sample(x, size=n, replace=TRUE)) \nX1\n\n[1] 1\n\n# Here X2 is another observation\nX2&lt;- sum(sample(x, size=n, replace=TRUE)) \nX2\n\n[1] 2\n\n\n\n\nPMF and Its Properties\nPMF(Probability Mass Function): The values on the right of the table above are called the Probability Mass Function of the random variable \\(X\\).\n\n\\(f(x)\\geq 0\\) for all \\(x\\in R\\). (PMFs are non-negative)\nThere are only finitely (or countably infinitely many) \\(x\\)’s for which \\(f(x) &gt; 0\\). (The probability of other values are 0.)\n\\(\\sum\\limits_x f(x) = 1\\). (The sum of probabilities over all possible values is 1.)\n\\(P(X = x) = f(x)\\).\n\nThe following table is the PMF for \\(X\\), the number of heads tossing a fair coin 3 times. \\[\\begin{array}{c|ccccc}\nx & 0 & 1 & 2 & 3  \\\\\n\\hline\nP(X = x) & \\frac{1}{8} & \\frac{3}{8} & \\frac{3}{8} & \\frac{1}{8}\n\\end{array}\\]\nLet’s generate a sample with size 10 of this random variable.\n\nresultOf10rep&lt;-replicate(10, sum(sample(x, size=n, replace=TRUE)))\nresultOf10rep \n\n [1] 2 2 2 3 2 1 1 2 2 2\n\nreplicate(10, sum(sample(x, size=n, replace=TRUE)))\n\n [1] 0 2 2 1 2 2 2 1 1 1\n\n\nCDF(Cumulative Distribution Function): \\(F(x)\\) of a random variable \\(X\\) with PMF \\(f(x)\\) is \\[ F(x) = P(X \\le x ) = \\sum_{t \\le x } f(t), \\qquad -\\infty &lt;x &lt;\\infty. \\]\nExample: CDF of \\(X\\), the number of heads tossing a fair coin 3 times \\[F(x) =\n\\begin{cases}\n0 & x &lt; 0\\\\\n\\frac{1}{8} &  x &lt; 1 \\\\\n\\frac{1}{2} & x &lt; 2\\\\\n\\frac{7}{8} & x &lt;3 \\\\\n1 & x \\ge 3\n\\end{cases}.\\]\n\n\n\nExpected Value of a Discrete Random Variable or a Function of a Discrete Random Variable\n\nExpected Value (Population Mean) of a Discrete Random Variable\nExpected value: The expected value of a random variable \\(X\\) with PMF \\(f(x)\\) is given by: \\[\\mu = E(X) =  \\sum_x xf(x).\\]\n\nThe expected value is a weighted average of the possible values of \\(X\\), weighted by the probabilities. We may interchangeably use population mean or mean, average, expectation, and expected value, and the notations \\(E(X)\\) or \\(\\mu\\).\nThe expected value of a random variable can be understood as the long-run average value of the random variable in repeated independent trials.\n\nExample: Expectation of \\(X\\), the number of heads tossing a fair coin 3 times is\n\\[\\begin{align*}\n    \\mu =E(X) & = \\sum_x xf(x) = 0\\cdot \\frac{1}{8} + 1 \\cdot \\frac{3}{8} + 2\\cdot \\frac{3}{8} + 3\\cdot \\frac{1}{8} = \\frac{3}{2}.\n\\end{align*}\\]\nThis means, if we perform the experiment many many many times, and each time we record the value of \\(X\\) , then the average value of these observed \\(X\\) values is approximately 3/2. If we can perform the experiment infinitely many times, then the average value will be exactly 3/2.\n\n\nUsing R to generate samples with different sizes and calculate the sample mean\nRecall the experiment we did, what value is the sample mean?\n\nmean(resultOf10rep)\n\n[1] 1.9\n\n\nIf we change the sample size to 1000, what’s the sample mean?\n\n# First time\nresultOf1000rep1&lt;-replicate(1000, sum(sample(x, size=n, replace=TRUE)))\nmean(resultOf1000rep1)\n\n[1] 1.528\n\n# Re-select the sample\nresultOf1000rep2&lt;-replicate(1000, sum(sample(x, size=n, replace=TRUE)))\nmean(resultOf1000rep2)\n\n[1] 1.485\n\n\nObservation: If the sample size is large enough, the sample mean can be a good estimation for the expectation(population mean).\n\n\nVariance of a Discrete Random Variable\nVariance of a random variable is the expected value of a special function (\\(g(X) = E[X-E(X)]^2\\)) of this random variable, which measures the variability of \\(X\\) compared to its mean \\(E(X)\\).\nVariance is a measure to quantify the variability/risk. Let \\(X\\) be a discrete random variable with PMF \\(f(x)\\). Then the variance of \\(X\\) is defined as\n\\[\\begin{align*}\n\\sigma^2 =var(X)  &= E[(X-\\mu)^2] = \\sum_x (x-\\mu)^2f(x)\\\\\n&= E(X^2)-[E(X)]^2 = \\sum_x x^2f(x)-\\left[\\sum_x^2 xf(x)\\right]= E(X^2) -\\mu^2.\n\\end{align*}\\]\n\nIt measures the mean squared distance of observations on \\(X\\) from its mean.\n\\(var(X)\\) is always non-negative \\(var(X)\\geq 0\\).\n\\(var(aX) = a^2var(X)\\).\n\nExample: Variance of \\(X\\), the number of heads tossing a fair coin 3 times is \\[\\begin{align*}\n    \\sigma^2 =E(X^2)-\\mu^2 & = \\sum_x^2 xf(x) - \\left(\\frac{3}{2}\\right)^2\\\\\n    &= 0^2\\cdot \\frac{1}{8} + 1^2 \\cdot \\frac{3}{8} + 2^2\\cdot \\frac{3}{8} + 3^2\\cdot \\frac{1}{8} -\\frac{9}{4} = \\frac{3}{4}.\n\\end{align*}\\]\n\n\nUsing R to calculate the sample variance\nWhat are the sample variance?\n\nvar(resultOf10rep)\n\n[1] 0.3222222\n\nvar(resultOf1000rep1)\n\n[1] 0.7239399\n\nvar(resultOf1000rep2)\n\n[1] 0.7445195\n\n\nObservation: If the sample size is large enough, the sample variance can be a good estimation for (population) variance."
+  },
+  {
+    "objectID": "homework/hw01.html",
+    "href": "homework/hw01.html",
+    "title": "Homework 1",
+    "section": "",
+    "text": "Part I. Changing the author field and file name. (5 points)\n\n(a) Change the author: field on the Rmd document\n\n\n(b) Rename this file to “HW1_YourFirstInitialYourLastName.Rmd”, (e.g. HW1_YDing.Rmd).\n\n\n\n\nPart II. Course Related Questions (50 points)\n\nQuestion 1. What is the instructor’s name? Please write about her office and office hours this semester.\n\nYour Answer:\n\n\n\nQuestion 2. Please list the acts of academic dishonesty in the syllabus.\n\nYour Answer:\n\n\n\nQuestion 3. What’s the policy for late homework submission? When can you request an extension? How many exams will we have?\n\nYour Answer:\n\n\n\nQuestion 4. Will we have a final exam? What is the evaluation of the final project? What is the assessment of this class? What is the grade range of A?\n\nYour Answer:\n\n\n\nQuestion 5. Is there a second chance to resubmit your assignment or exam after grading? Are there any extra assignments or work to improve your grade?\n\nYour Answer:\n\n\n\nI fully understand the rules in the syllabus and will follow them.\n\nYour Name Here As Signature:\n\n\n\n\n\nPart III. Basic R Syntax (45 points)\n\nQuestion 1. Hello World! (10 points)\nHere’s an R code chunk that prints the text ‘Hello world!’.\n\nprint(\"Hello world!\")\n\n[1] \"Hello world!\"\n\n\n\n\nModify the code chunk below to print your name and your hobbies\n\n# Edit me\n\n\n\n\nQuestion 2. Play with Dataset (35 points)\nThe following is a small data to store health information, where the unit for height is centimeters and weight is kilogram.\n\nBMI &lt;-  data.frame(\n   gender = c(\"Male\", \"Male\",\"Female\"), \n   height = c(152, 171.5, 165), \n   weight = c(81,93,78),\n   Age = c(42,38,26)\n)\nprint(BMI)\n\n  gender height weight Age\n1   Male  152.0     81  42\n2   Male  171.5     93  38\n3 Female  165.0     78  26\n\n\n\n\na) Please calculate BMI for each person and add that information to the dataframe and display the new dataframe. (15 points)\nBMI Formula: Weight (kg)/Square of Height(meters)\n\n# Edit me\n\n\n\nb) Please display gender and age for the people with BMI great than 30. (10 points)\n\n# Edit me\n\n\n\nc) Please display gender for the people with BMI great than 25 and age less than 30. (10 points)\n\n# Edit me"
+  },
+  {
+    "objectID": "homework/hw02.html",
+    "href": "homework/hw02.html",
+    "title": "Homework 2",
+    "section": "",
+    "text": "Part I. Changing the author field and file name.\n\n(a) Change the author: field on the Rmd document\n\n\n(b) Rename this file to “HW2_YourFirstInitialYourLastName.Rmd”, (e.g. HW2_YDing.Rmd).\n\n\n\n\nPart II. Cars data (45 points)\nWe’ll look at data frame and plotting in much more detail in later classes. For a previous of what’s to come, here’s a very basic example.\nFor this example we’ll use a very simple dataset. The cars data comes with the default installation of R. To see the first few rows of the data, just type head(cars).\n\nhead(cars)\n\n  speed dist\n1     4    2\n2     4   10\n3     7    4\n4     7   22\n5     8   16\n6     9   10\n\n\n\n(a) Do a summary for cars. What the min,max, mean and median values of speed and dist? (10 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(b) Calculate the variance and standard deviation of speed and dist (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(c) Calulate the average and standard deviation of dist when speed is greater than 12 and less than 19. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(d) Produce a histogram of speed with 10 bins. Please illustrate your observation from the output. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(e) Produce a histogram of dist with 20 bins. Please illustrate your observation from the output. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(f) Use the boxplot function to create a boxplot of speed. Please illustrate your observation from the output. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(g) Use the boxplot function to create a boxplot of dist. Please illustrate your observation from the output. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n(h) Use qqnorm and qqline to test if dist follow the normal distribution. (5 points)\n\n# Edit me\n\n\nType your answer here\n\n\n\n\n\nPart III. Random Variables (20 points)\n\nQuestion 1. Classify the following random variables as discrete or continuous (8 points):\nX: the number of automobile accidents per year in Illinois.\n\nType your answer here\n\nY: the length of time to play 18 holes of golf.\n\nType your answer here\n\nM: the amount of milk produced yearly by a particular cow.\n\nType your answer here\n\nN: the number of eggs laid each month by a hen.\n\nType your answer here\n\n\n\nQuestion 2: Multiple Choices (12 points):\n\n\ni) A discrete random variable\n\nTakes on only countable values\nTakes on any value in an interval\nHas a probability density function\n\n\nType your answer here\n\n\n\nii) A continuous random variable is different from a discrete random variable because:\n\nIt can only take integer values\nIt is described using a probability mass function (PMF)\nIt can take an infinite number of values within a given range\n\n\nType your answer here\n\n\n\niii) If \\(X\\) is a constant random variable, meaning \\(X=c\\) for some constant \\(c\\), what is \\(Var(X)\\)?\n\n0\n\\(c^2\\)\n\\(E[X]\\)\n\\(E[X^2]\\)\n\n\nType your answer here\n\n\n\niv) Which of the following statements about expectation is TRUE?\n\n\\(E[X]\\) is always equal to the sample mean\n\\(E[X]\\) can be estimated by the sample mean when the sample size is large\n\\(E[X]\\) is always equal to the variance of X\n\\(E[X]\\) is always an integer\n\n\nType your answer here\n\n\n\nv) If a histogram is skewed to the right, what does it indicate?\n\nThe mean is greater than the median\nThe median is greater than the mean\nThe data is symmetric\nThe data has no outliers\n\n\nType your answer here\n\n\n\nvi) Which of the following is true about outliers in a boxplot?\n\nOutliers are always errors in the data\nOutliers are represented by dots or asterisks outside the whiskers\nOutliers are included in the box\nOutliers are not shown in a boxplot\n\n\nType your answer here\n\n\n\n\nPart IV. Normal Distributions and Critial Values (35 points)\n\nQuestion 1: A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,\n\n\n(a) what fraction of the cups will contain more than 224 milliliters? (5 points)\nHint: You can use pnorm.\n\n# Edit me\n\n\n\n(b) what is the probability that a cup contains between 191 and 209 milliliters? (5 points)\n\n# Edit me\n\n\n\n(c) below what value do we get the smallest 25% of the drinks? (5 points)\n\n# Edit me\n\n\n\nQuestion 2. Critical values with qnorm\n\n\n(a) Please use qnorm to find the critical values \\(z_{0.1}\\). (5 points)\n\n# Edit me\n\n\n\n(b) Find the value of \\(z_0\\) such that \\(90\\%\\) of the standard normal \\(Z\\) values lie between \\(-z_0\\) and \\(z_0\\); that is, \\(P(-z_0\\leq Z\\leq z_0) = .90\\). (10 points)\n\n# Edit me\n\n\n\n(c) Which value is larger? Why? (5 points)\n\nType your answer here"
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "Programming for Data Analytics and Cyber Security",
+    "section": "",
+    "text": "Lecture notes are organized by topic and updated throughout the semester.\nTopics include:\n\nIntroduction to R and RStudio\nIntroduction to Statistics\nRandom Variables\nProbability Distributions\nExploratory Data Analysis\nStatistical Inference\nRegression\nProgramming for Data Analytics\n\n\n\n\n\nHomework assignments are posted here as R Markdown files.\nEach homework page includes\n\nAssignment description\nRequired files\nDownload links\nSubmission instructions\n\nPlease submit completed assignments through Canvas.\n\n\n\n\nDatasets used in lectures and homework will be available for download.\n\n\n\n\nUseful resources include\n\nR\nRStudio\nR Markdown / Quarto\nPython (selected topics)\nAdditional references"
+  },
+  {
+    "objectID": "index.html#course-workflow",
+    "href": "index.html#course-workflow",
+    "title": "Programming for Data Analytics and Cyber Security",
+    "section": "",
+    "text": "Throughout the semester, students are expected to\n\nRead the lecture notes.\nDownload the homework files.\nComplete assignments using R Markdown.\nKnit the completed document to HTML.\nSubmit the required files through Canvas.\n\n\nWe hope this website provides a convenient and organized resource throughout the course."
+  }
+]

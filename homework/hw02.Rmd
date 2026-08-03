@@ -1,0 +1,234 @@
+---
+title: "Homework 2"
+author: "Your Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Part I. Changing the author field and file name.
+
+#### (a) Change the `author:` field on the Rmd document 
+
+#### (b) Rename this file to "HW2_YourFirstInitialYourLastName.Rmd", (e.g. HW2_YDing.Rmd).
+
+<br>
+
+
+### Part II. Cars data (45 points)
+
+We'll look at data frame and plotting in much more detail in later classes.  For a previous of what's to come, here's a very basic example.
+
+For this example we'll use a very simple dataset.  The `cars` data comes with the default installation of R.  To see the first few rows of the data, just type `head(cars)`.
+
+```{r}
+head(cars)
+```
+
+#### (a) Do a summary for `cars`. What the min,max, mean and median values of `speed` and `dist`? (10 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+
+#### (b) Calculate the variance and standard deviation of `speed` and `dist` (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+
+#### (c) Calulate the average and standard deviation of `dist` when `speed`  is greater than 12 and less than 19. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+
+
+#### (d) Produce a histogram of `speed` with **10 bins**. Please illustrate your observation from the output. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+#### (e) Produce a histogram of `dist` with **20 bins**. Please illustrate your observation from the output. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+#### (f) Use the `boxplot` function to create a boxplot of `speed`. Please illustrate your observation from the output. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+#### (g) Use the `boxplot` function to create a boxplot of `dist`. Please illustrate your observation from the output. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+#### (h) Use `qqnorm` and `qqline` to test if `dist` follow the normal distribution. (5 points)
+
+```{r}
+# Edit me
+```
+
+> Type your answer here
+
+<br>
+
+### Part III. Random Variables (20 points)
+
+#### Question 1. Classify the following random variables as discrete or continuous (8 points):
+
+X: the number of automobile accidents per year in Illinois.
+
+> Type your answer here
+
+Y: the length of time to play 18 holes of golf.
+
+> Type your answer here
+
+M: the amount of milk produced yearly by a particular cow.
+
+> Type your answer here
+
+N: the number of eggs laid each month by a hen.
+
+> Type your answer here
+
+#### Question 2: Multiple Choices (12 points):
+
+#### i) A discrete random variable
+
+A) Takes on only countable values
+
+B) Takes on any value in an interval
+
+C) Has a probability density function
+
+> Type your answer here
+
+#### ii) A continuous random variable is different from a discrete random variable because:
+
+A) It can only take integer values
+
+B) It is described using a probability mass function (PMF)
+
+C) It can take an infinite number of values within a given range
+
+> Type your answer here
+
+#### iii) If $X$ is a constant random variable, meaning $X=c$ for some constant $c$, what is $Var(X)$? 
+
+A) 0
+
+B) $c^2$
+
+C) $E[X]$
+
+D) $E[X^2]$
+
+> Type your answer here
+
+#### iv) Which of the following statements about expectation is TRUE?
+
+A) $E[X]$ is always equal to the sample mean
+
+B) $E[X]$ can be estimated by the sample mean when the sample size is large
+	
+C) $E[X]$ is always equal to the variance of X
+
+D) $E[X]$ is always an integer
+
+> Type your answer here
+
+
+#### v) If a histogram is skewed to the right, what does it indicate? 
+
+A) The mean is greater than the median
+
+B) The median is greater than the mean
+
+C) The data is symmetric
+
+D) The data has no outliers
+
+> Type your answer here
+
+#### vi) Which of the following is true about outliers in a boxplot?
+
+A) Outliers are always errors in the data
+
+B) Outliers are represented by dots or asterisks outside the whiskers
+	
+C) Outliers are included in the box
+
+D) Outliers are not shown in a boxplot
+
+> Type your answer here
+
+### Part IV. Normal Distributions and Critial Values (35 points)
+
+#### Question 1: A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,
+
+#### (a) what fraction of the cups will contain more than 224 milliliters?  (5 points)
+
+**Hint**: You can use `pnorm`.
+
+```{r}
+# Edit me
+```
+
+#### (b) what is the probability that a cup contains between 191 and 209 milliliters? (5 points)
+
+```{r}
+# Edit me
+```
+
+#### (c) below what value do we get the smallest 25% of the drinks? (5 points)
+
+```{r}
+# Edit me
+```
+
+
+#### Question 2. Critical values with `qnorm` 
+
+#### (a) Please use `qnorm` to find the critical values $z_{0.1}$. (5 points)
+
+```{r}
+# Edit me
+```
+
+#### (b) Find the value of $z_0$ such that $90\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .90$. (10 points)
+
+```{r}
+# Edit me
+```
+
+#### (c) Which value is larger? Why? (5 points)
+
+> Type your answer here
+
+

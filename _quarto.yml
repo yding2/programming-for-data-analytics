@@ -1,0 +1,40 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Programming for Data Analytics/Cyber Security"
+  
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+
+      - text: Lecture Notes
+        menu:
+          - text: "Week 1:Introduction to R"
+            href: source/week01_intro_to_r.Rmd
+          - text: "Week 2:Introduction to Statistics"
+            href: source/week02_intro_to_stats.Rmd
+          - text: "─────── Week 3 ───────"
+          
+          - text: "Random Variables"
+            href: source/week03_random_variables.Rmd
+          
+          - text: "Discrete Distributions"
+            href: source/week03_discrete_distributions.Rmd
+          
+          - text: "Normal Distribution"
+            href: source/week03_normal_distribution.Rmd
+            
+      - text: "Homework"
+        menu:
+          - text: "Homework 1"
+            href: homework/hw01.Rmd
+          - text: "Homework 2"
+            href: homework/hw02.Rmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
