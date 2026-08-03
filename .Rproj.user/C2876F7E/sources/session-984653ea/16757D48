@@ -1,9 +1,9 @@
 {
     "id": "16757D48",
-    "path": "/Users/yding/Documents/GitHub/STAT514/_quarto.yml",
+    "path": "~/Documents/GitHub/STAT514/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "3670559528",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1785774909911.0,
@@ -13,7 +13,7 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "13,22",
+        "cursorPosition": "13,15",
         "scrollLine": "3"
     },
     "folds": "",
