@@ -9,6 +9,9 @@ website:
     left:
       - href: index.qmd
         text: Home
+        
+      - href: syllabus.qmd
+        text: Syllabus
 
       - text: Lecture Notes
         menu:

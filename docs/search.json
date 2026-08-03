@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Programming for Data Analytics and Cyber Security",
     "section": "",
-    "text": "STAT 514 • ITMD 514 • ITMS 514\nWelcome to the course website!\nThis website serves as the primary repository for course materials throughout the semester. Here you will find lecture notes, homework assignments, datasets, and additional resources.\n\n\n\n\n\nLecture notes are organized by topic and updated throughout the semester.\nTopics include:\n\nIntroduction to R and RStudio\nIntroduction to Statistics\nRandom Variables\nProbability Distributions\nExploratory Data Analysis\nStatistical Inference\nRegression\nProgramming for Data Analytics\n\n\n\n\n\nHomework assignments are posted here as R Markdown files.\nEach homework page includes\n\nAssignment description\nRequired files\nDownload links\nSubmission instructions\n\nPlease submit completed assignments through Canvas.\n\n\n\n\nDatasets used in lectures and homework will be available for download.\n\n\n\n\nUseful resources include\n\nR\nRStudio\nR Markdown / Quarto\nPython (selected topics)\nAdditional references\n\n\n\n\n\n\nThroughout the semester, students are expected to\n\nRead the lecture notes.\nDownload the homework files.\nComplete assignments using R Markdown.\nKnit the completed document to HTML.\nSubmit the required files through Canvas.\n\n\nWe hope this website provides a convenient and organized resource throughout the course."
+    "text": "STAT 514 • ITMD 514 • ITMS 514\nWelcome to the course website!\nThis website serves as the primary repository for course materials throughout the semester. Here you will find lecture notes, homework assignments, datasets, and additional resources."
   },
   {
     "objectID": "source/week01IntrotoR.html",
@@ -395,14 +395,126 @@
     "objectID": "index.html#course-materials",
     "href": "index.html#course-materials",
     "title": "Programming for Data Analytics and Cyber Security",
-    "section": "",
-    "text": "Lecture notes are organized by topic and updated throughout the semester.\nTopics include:\n\nIntroduction to R and RStudio\nIntroduction to Statistics\nRandom Variables\nProbability Distributions\nExploratory Data Analysis\nStatistical Inference\nRegression\nProgramming for Data Analytics\n\n\n\n\n\nHomework assignments are posted here as R Markdown files.\nEach homework page includes\n\nAssignment description\nRequired files\nDownload links\nSubmission instructions\n\nPlease submit completed assignments through Canvas.\n\n\n\n\nDatasets used in lectures and homework will be available for download.\n\n\n\n\nUseful resources include\n\nR\nRStudio\nR Markdown / Quarto\nPython (selected topics)\nAdditional references"
+    "section": "Course Materials",
+    "text": "Course Materials\n\n📘 Textbooks\nThe following textbooks are recommended for this course.\n\nR for Data Science by Garrett Grolemund and Hadley Wickham, available freely online.\nAn Introduction to Statistical Learning: with Applications in R by James, Witten, Hastie, and Tibshirani (Springer Texts in Statistics), ISBN-10: 1461471370.\nData Science Using Python and R, ISBN-10: 1119526817. (You can access the e-version via the IIT library)\n\n\n\n📖 Lecture Notes\nLecture notes are organized by topic and updated throughout the semester.\nTopics include:\n\nIntroduction to R and RStudio\nIntroduction to Statistics\nRandom Variables\nProbability Distributions\nExploratory Data Analysis\nStatistical Inference\nRegression\nClassification\n\n\n\n\n💻 Homework\nHomework assignments are posted here as R Markdown files.\nEach homework page includes\n\nAssignment description\nRequired files\nDownload links\nSubmission instructions\n\nPlease submit completed assignments through Canvas.\n\n\n\n📂 Data Sets\nDatasets used in lectures and homework will be available for download.\n\n\n\n🔗 Course Resources\nUseful resources include\n\nR\nRStudio\nMarkdown\nR Tutorials\nPython"
   },
   {
     "objectID": "index.html#course-workflow",
     "href": "index.html#course-workflow",
     "title": "Programming for Data Analytics and Cyber Security",
+    "section": "Course Workflow",
+    "text": "Course Workflow\nThroughout the semester, students are expected to\n\nRead the lecture notes.\nDownload the homework files.\nComplete assignments using R Markdown.\nKnit the completed document to HTML.\nSubmit the required files through Canvas.\n\n\nWe hope this website provides a convenient and organized resource throughout the course."
+  },
+  {
+    "objectID": "index.html#course-description-learning-objectives",
+    "href": "index.html#course-description-learning-objectives",
+    "title": "Programming for Data Analytics and Cyber Security",
+    "section": "Course Description | Learning Objectives",
+    "text": "Course Description | Learning Objectives\nStudents will\n\nbecome familiar with the fundamental statistical concepts underlying analytics, including the basics of data, samples, populations, randomness, modeling of random phenomena, and steps required for extracting information from data in general.\nlearn to recognize which descriptive statistics and predictive models are typically used in various applied scenarios through illustrative use cases.\ngain practical skills in programming in R for analytics, aiming to implement systematic data analysis algorithms and obtain information from them.\nunderstand how to perform data preprocessing and visualization techniques and generate descriptive statistics.\nlearn to apply predictive models to data and evaluate models using diagnostics and model fitting tests."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
     "section": "",
-    "text": "Throughout the semester, students are expected to\n\nRead the lecture notes.\nDownload the homework files.\nComplete assignments using R Markdown.\nKnit the completed document to HTML.\nSubmit the required files through Canvas.\n\n\nWe hope this website provides a convenient and organized resource throughout the course."
+    "text": "STAT 514 • ITMD 514 • ITMS 514\nFall 2026"
+  },
+  {
+    "objectID": "syllabus.html#instructor",
+    "href": "syllabus.html#instructor",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "👨‍🏫 Instructor",
+    "text": "👨‍🏫 Instructor\n\nInstructor: Dr. Yuhan Ding\nEmail: yding2@illinoistech.edu\nLectures: Monday & Wednesday, 11:25–12:40 PM, TBD\nOffice Hours: Monday & Wednesday, 2:00–3:00 PM (RE 116b) or by appointment"
+  },
+  {
+    "objectID": "syllabus.html#textbooks",
+    "href": "syllabus.html#textbooks",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📘 Textbooks",
+    "text": "📘 Textbooks\n\nRequired\n\nR for Data Science by Garrett Grolemund and Hadley Wickham, available freely online.\nAn Introduction to Statistical Learning: with Applications in R by James, Witten, Hastie, and Tibshirani (Springer Texts in Statistics), ISBN-10: 1461471370.\nData Science Using Python and R, ISBN-10: 1119526817. (You can access the e-version via the IIT library)\n\n\n\nAdditional References\n\nAn Introduction to Statistical Inference and its Applications with R\nProbability and Statistics for Engineers and Scientists"
+  },
+  {
+    "objectID": "syllabus.html#software",
+    "href": "syllabus.html#software",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "💻 Software",
+    "text": "💻 Software\nStudents are expected to install\n\nR\nRStudio\nR Markdown / Quarto\nRequired R packages (provided during the semester)"
+  },
+  {
+    "objectID": "syllabus.html#course-objectives",
+    "href": "syllabus.html#course-objectives",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "🎯 Course Objectives",
+    "text": "🎯 Course Objectives\nBy the end of this course, students will be able to\n\nBecome familiar with the fundamental statistical concepts underlying analytics, including the basics of data, samples, populations, randomness, modeling of random phenomena, and steps required for extracting information from data in general.\nRecognize which descriptive statistics and predictive models are typically used in various applied scenarios through illustrative use cases.\nGain practical skills in programming in R for analytics, aiming to implement systematic data analysis algorithms and obtain information from them.\nUnderstand how to perform data preprocessing and visualization techniques and generate descriptive statistics.\nApply predictive models to data and evaluate models using diagnostics and model fitting tests."
+  },
+  {
+    "objectID": "syllabus.html#assessments",
+    "href": "syllabus.html#assessments",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📊 Assessments",
+    "text": "📊 Assessments\n\n\n\nComponent\nWeight\n\n\n\n\nHomework\n20%\n\n\nMidterm Exam\n40%\n\n\nFinal Project\n40%"
+  },
+  {
+    "objectID": "syllabus.html#grading-scale",
+    "href": "syllabus.html#grading-scale",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "🎓 Grading Scale",
+    "text": "🎓 Grading Scale\n\n\n\nLetter Grade\nPercentage\n\n\n\n\nA\n85% and above\n\n\nB\n75% – 84.99%\n\n\nC\n60% – 74.99%\n\n\nE\nBelow 60%\n\n\n\nFinal grades are assigned based on the overall course percentage according to the grading scale above."
+  },
+  {
+    "objectID": "syllabus.html#homework",
+    "href": "syllabus.html#homework",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📝 Homework",
+    "text": "📝 Homework\nHomework will be assigned biweekly.\nStudents are expected to\n\nComplete assignments independently.\nSubmit all required files through Canvas.\nFollow the academic integrity policy."
+  },
+  {
+    "objectID": "syllabus.html#midterm-exam",
+    "href": "syllabus.html#midterm-exam",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📝 Midterm Exam",
+    "text": "📝 Midterm Exam\nThe midterm exam will assess your understanding of the material covered during the first half of the course, including\n\nR programming\nDescriptive statistics\nProbability\nRandom variables\nStatistical inference\n\nThe exam will primarily consist of problems similar to homework assignments and lecture examples.\nA review session will be held before the exam."
+  },
+  {
+    "objectID": "syllabus.html#final-project",
+    "href": "syllabus.html#final-project",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📈 Final Project",
+    "text": "📈 Final Project\nThe final project is completed in groups of up to three students.\nEach group will select a real-world dataset and perform a complete data analysis using the methods learned in this course.\nThe project should include\n\nData preprocessing and cleaning\nExploratory Data Analysis (EDA)\nAt least one hypothesis test\nAt least one regression model\nInterpretation of results\nA reproducible R Markdown report\n\nEach group will also give a 15-minute presentation followed by 5 minutes of questions.\nDetailed project guidelines, milestones, and grading rubrics will be posted on Canvas later in the semester."
+  },
+  {
+    "objectID": "syllabus.html#tentative-schedule",
+    "href": "syllabus.html#tentative-schedule",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📅 Tentative Schedule",
+    "text": "📅 Tentative Schedule\n\n\n\nWeek\nTopics\n\n\n\n\n1\nCourse Introduction & Intro to R / Markdown\n\n\n2\nIntroduction to Statistics and Probability\n\n\n3\nRandom Variables & Normal Distributions\n\n\n4\nExploratory Data Analysis\n\n\n5\nSampling Distributions\n\n\n6–8\nStatistical Inference\n\n\n9\nMidterm Exam\n\n\n10–12\nRegression & Statistical Learning\n\n\n13–15\nClassification & Resampling\n\n\n16\nFinal Presentations"
+  },
+  {
+    "objectID": "syllabus.html#course-policies",
+    "href": "syllabus.html#course-policies",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📌 Course Policies",
+    "text": "📌 Course Policies\n\nRegular attendance is expected.\nHomework must be submitted on time. No late homework will be accepted.\nCourse announcements and assignment submissions will be handled through Canvas.\nDue dates and additional instructions will be posted on Canvas."
+  },
+  {
+    "objectID": "syllabus.html#academic-integrity",
+    "href": "syllabus.html#academic-integrity",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "⚖️ Academic Integrity",
+    "text": "⚖️ Academic Integrity\nStudents are expected to follow the Illinois Tech Academic Integrity Policy.\nPlagiarism, unauthorized collaboration, or copying from online resources or AI tools without permission may result in academic penalties."
+  },
+  {
+    "objectID": "syllabus.html#accessibility",
+    "href": "syllabus.html#accessibility",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "♿ Accessibility",
+    "text": "♿ Accessibility\nStudents requiring accommodations should contact the Center for Disability Resources (CDR) as early as possible."
+  },
+  {
+    "objectID": "syllabus.html#questions",
+    "href": "syllabus.html#questions",
+    "title": "Syllabus for Programming for Data Analytics/Cyber Security",
+    "section": "📬 Questions?",
+    "text": "📬 Questions?\nPlease feel free to\n\nVisit office hours.\nSchedule an appointment.\nContact me by email.\n\nI look forward to working with you this semester!"
   }
 ]
