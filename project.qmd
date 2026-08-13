@@ -1,0 +1,162 @@
+
+---
+title: "Final Project Guidelines"
+---
+
+
+The final project gives you an opportunity to apply the statistical and programming methods learned in this course to a real-world dataset.
+
+The project will be completed in **groups of up to three students**. Each group must complete its own analysis and presentation.
+
+## 🎯 Project Goal
+
+Select a dataset that is interesting to your group and conduct a meaningful statistical analysis using the methods learned in this course.
+
+Your project should demonstrate your ability to:
+
+* understand and prepare a real-world dataset;
+* explore data using descriptive statistics and visualization;
+* formulate and conduct a hypothesis test;
+* build, select, and evaluate a regression model;
+* interpret statistical results in context; and
+* communicate your findings clearly.
+
+## 📂 Dataset
+
+You may use a publicly available dataset or another dataset for which you have permission to conduct the analysis.
+
+Your dataset should contain enough observations and variables to support the required statistical analyses.
+
+Clearly identify and cite the source of your dataset.
+
+## 📊 Required Analysis
+
+### 1. Data Cleaning and Preparation
+
+Introduce the dataset and provide relevant background information.
+
+Your analysis should describe:
+
+* the number of observations;
+* the number of attributes;
+* variable types;
+* missing values, if any; and
+* any data cleaning, preprocessing, or transformations performed.
+
+### 2. Exploratory Data Analysis
+
+Conduct exploratory data analysis to understand the important characteristics and relationships in your dataset.
+
+Your analysis must include at least:
+
+* one histogram;
+* one boxplot; and
+* one overlay histogram.
+
+Additional visualizations and descriptive statistics are encouraged when appropriate.
+
+### 3. Hypothesis Testing
+
+Conduct at least **one hypothesis test**.
+
+You should:
+
+* clearly state the null and alternative hypotheses;
+* select an appropriate statistical test;
+* explain why the test is appropriate; and
+* interpret the result in the context of your research question.
+
+### 4. Linear Regression
+
+Build a linear regression model and perform subset selection.
+
+Your analysis should:
+
+* identify significant predictors;
+* assess the fitted model;
+* use the model to predict the response for a test dataset; and
+* evaluate the prediction results.
+
+## 🎤 Final Presentation
+
+Each group will give a:
+
+**15-minute presentation followed by a 5-minute Q&A.**
+
+The presentation should focus on the main story of your analysis rather than simply displaying code or statistical output.
+
+All group members are expected to participate in the presentation.
+
+## 📋 Group Project Rubric
+
+Each group will receive a **Group Project Score** out of 100 points.
+
+| Category                                            |  Points |
+| --------------------------------------------------- | ------: |
+| **Content**                                         |  **70** |
+| Data Cleaning and Preparation                       |      15 |
+| Exploratory Data Analysis                           |      15 |
+| Hypothesis Testing                                  |      15 |
+| Linear Regression, Subset Selection, and Prediction |      25 |
+| **Presentation**                                    |  **30** |
+| Eye Contact and Audience Engagement                 |      10 |
+| Clear and Audible Voice                             |       5 |
+| Poised, Controlled, and Smooth Delivery             |      10 |
+| Time Management                                     |       5 |
+| **Total**                                           | **100** |
+
+## 👥 Peer Evaluation
+
+At the end of the project, each student will complete a confidential peer evaluation of **themselves and every other member of the group**.
+
+Each student will be evaluated on:
+
+* participation in group discussions;
+* contribution to effective group functioning;
+* fulfillment of assigned responsibilities;
+* completion of assigned tasks on time;
+* quality of completed work; and
+* contribution of ideas to the group.
+
+Each category is rated using the following scale:
+
+* **5** = Excellent
+* **4** = Good
+* **3** = Satisfactory
+* **2** = Needs Work
+* **1** = Poor
+
+The maximum score on each evaluation is **30 points**.
+
+For each student, the scores received from **the student and all other group members** will be averaged to obtain the student's **Peer Evaluation Score**.
+
+## 🧮 Individual Project Grade
+
+The Group Project Score will be adjusted using the peer evaluation to determine each student's individual project grade.
+
+
+$$\text{Individual Project Grade}
+=
+\frac{
+1+\dfrac{\text{Peer Evaluation Score}}
+{\text{Highest Peer Evaluation Score in the Group}}
+}{2}
+\times
+\text{Group Project Score}.
+$$
+
+The student with the highest Peer Evaluation Score in the group receives the full Group Project Score. Other group members' grades may be adjusted based on their relative contributions to the project.
+
+Therefore, **students in the same group may receive different final project grades.**
+
+## 📦 Submission
+
+Detailed submission requirements and deadlines will be posted on **Canvas**.
+
+All required project materials should be submitted through Canvas.
+
+## ⚖️ Academic Integrity
+
+Each group must complete its own work. Outside datasets and references may be used when appropriate, but all sources must be properly cited.
+
+Copying code, analysis, text, or results from another group or external source without appropriate attribution is considered academic dishonesty.

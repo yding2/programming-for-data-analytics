@@ -516,5 +516,75 @@
     "title": "Syllabus for Programming for Data Analytics/Cyber Security",
     "section": "📬 Questions?",
     "text": "📬 Questions?\nPlease feel free to\n\nVisit office hours.\nSchedule an appointment.\nContact me by email.\n\nI look forward to working with you this semester!"
+  },
+  {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "Final Project Guidelines",
+    "section": "",
+    "text": "The final project gives you an opportunity to apply the statistical and programming methods learned in this course to a real-world dataset.\nThe project will be completed in groups of up to three students. Each group must complete its own analysis and presentation."
+  },
+  {
+    "objectID": "project.html#project-goal",
+    "href": "project.html#project-goal",
+    "title": "Final Project Guidelines",
+    "section": "🎯 Project Goal",
+    "text": "🎯 Project Goal\nSelect a dataset that is interesting to your group and conduct a meaningful statistical analysis using the methods learned in this course.\nYour project should demonstrate your ability to:\n\nunderstand and prepare a real-world dataset;\nexplore data using descriptive statistics and visualization;\nformulate and conduct a hypothesis test;\nbuild, select, and evaluate a regression model;\ninterpret statistical results in context; and\ncommunicate your findings clearly."
+  },
+  {
+    "objectID": "project.html#dataset",
+    "href": "project.html#dataset",
+    "title": "Final Project Guidelines",
+    "section": "📂 Dataset",
+    "text": "📂 Dataset\nYou may use a publicly available dataset or another dataset for which you have permission to conduct the analysis.\nYour dataset should contain enough observations and variables to support the required statistical analyses.\nClearly identify and cite the source of your dataset."
+  },
+  {
+    "objectID": "project.html#required-analysis",
+    "href": "project.html#required-analysis",
+    "title": "Final Project Guidelines",
+    "section": "📊 Required Analysis",
+    "text": "📊 Required Analysis\n\n1. Data Cleaning and Preparation\nIntroduce the dataset and provide relevant background information.\nYour analysis should describe:\n\nthe number of observations;\nthe number of attributes;\nvariable types;\nmissing values, if any; and\nany data cleaning, preprocessing, or transformations performed.\n\n\n\n2. Exploratory Data Analysis\nConduct exploratory data analysis to understand the important characteristics and relationships in your dataset.\nYour analysis must include at least:\n\none histogram;\none boxplot; and\none overlay histogram.\n\nAdditional visualizations and descriptive statistics are encouraged when appropriate.\n\n\n3. Hypothesis Testing\nConduct at least one hypothesis test.\nYou should:\n\nclearly state the null and alternative hypotheses;\nselect an appropriate statistical test;\nexplain why the test is appropriate; and\ninterpret the result in the context of your research question.\n\n\n\n4. Linear Regression\nBuild a linear regression model and perform subset selection.\nYour analysis should:\n\nidentify significant predictors;\nassess the fitted model;\nuse the model to predict the response for a test dataset; and\nevaluate the prediction results."
+  },
+  {
+    "objectID": "project.html#final-presentation",
+    "href": "project.html#final-presentation",
+    "title": "Final Project Guidelines",
+    "section": "🎤 Final Presentation",
+    "text": "🎤 Final Presentation\nEach group will give a:\n15-minute presentation followed by a 5-minute Q&A.\nThe presentation should focus on the main story of your analysis rather than simply displaying code or statistical output.\nAll group members are expected to participate in the presentation."
+  },
+  {
+    "objectID": "project.html#group-project-rubric",
+    "href": "project.html#group-project-rubric",
+    "title": "Final Project Guidelines",
+    "section": "📋 Group Project Rubric",
+    "text": "📋 Group Project Rubric\nEach group will receive a Group Project Score out of 100 points.\n\n\n\nCategory\nPoints\n\n\n\n\nContent\n70\n\n\nData Cleaning and Preparation\n15\n\n\nExploratory Data Analysis\n15\n\n\nHypothesis Testing\n15\n\n\nLinear Regression, Subset Selection, and Prediction\n25\n\n\nPresentation\n30\n\n\nEye Contact and Audience Engagement\n10\n\n\nClear and Audible Voice\n5\n\n\nPoised, Controlled, and Smooth Delivery\n10\n\n\nTime Management\n5\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "project.html#peer-evaluation",
+    "href": "project.html#peer-evaluation",
+    "title": "Final Project Guidelines",
+    "section": "👥 Peer Evaluation",
+    "text": "👥 Peer Evaluation\nAt the end of the project, each student will complete a confidential peer evaluation of themselves and every other member of the group.\nEach student will be evaluated on:\n\nparticipation in group discussions;\ncontribution to effective group functioning;\nfulfillment of assigned responsibilities;\ncompletion of assigned tasks on time;\nquality of completed work; and\ncontribution of ideas to the group.\n\nEach category is rated using the following scale:\n\n5 = Excellent\n4 = Good\n3 = Satisfactory\n2 = Needs Work\n1 = Poor\n\nThe maximum score on each evaluation is 30 points.\nFor each student, the scores received from the student and all other group members will be averaged to obtain the student’s Peer Evaluation Score."
+  },
+  {
+    "objectID": "project.html#individual-project-grade",
+    "href": "project.html#individual-project-grade",
+    "title": "Final Project Guidelines",
+    "section": "🧮 Individual Project Grade",
+    "text": "🧮 Individual Project Grade\nThe Group Project Score will be adjusted using the peer evaluation to determine each student’s individual project grade.\n\\[\\text{Individual Project Grade}\n=\n\\frac{\n1+\\dfrac{\\text{Peer Evaluation Score}}\n{\\text{Highest Peer Evaluation Score in the Group}}\n}{2}\n\\times\n\\text{Group Project Score}.\n\\]\nThe student with the highest Peer Evaluation Score in the group receives the full Group Project Score. Other group members’ grades may be adjusted based on their relative contributions to the project.\nTherefore, students in the same group may receive different final project grades."
+  },
+  {
+    "objectID": "project.html#submission",
+    "href": "project.html#submission",
+    "title": "Final Project Guidelines",
+    "section": "📦 Submission",
+    "text": "📦 Submission\nDetailed submission requirements and deadlines will be posted on Canvas.\nAll required project materials should be submitted through Canvas."
+  },
+  {
+    "objectID": "project.html#academic-integrity",
+    "href": "project.html#academic-integrity",
+    "title": "Final Project Guidelines",
+    "section": "⚖️ Academic Integrity",
+    "text": "⚖️ Academic Integrity\nEach group must complete its own work. Outside datasets and references may be used when appropriate, but all sources must be properly cited.\nCopying code, analysis, text, or results from another group or external source without appropriate attribution is considered academic dishonesty."
   }
 ]

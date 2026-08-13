@@ -36,6 +36,9 @@ website:
             href: homework/hw01.Rmd
           - text: "Homework 2"
             href: homework/hw02.Rmd
+            
+      - href: project.qmd
+        text: Final Project
 
 format:
   html:
