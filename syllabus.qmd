@@ -13,7 +13,7 @@ title: "Syllabus for Programming for Data Analytics/Cyber Security"
 
 - **Instructor:** Dr. Yuhan Ding
 - **Email:** yding2@illinoistech.edu
-- **Lectures:** Monday & Wednesday, 11:25–12:40 PM, TBD
+- **Lectures:** Monday & Wednesday, 11:25 AM–12:40 PM, Robert A. Pritzker Science Center (PS), Room 240
 - **Office Hours:** Monday & Wednesday, 2:00–3:00 PM (RE 116b) or by appointment
 
 ---
@@ -87,7 +87,7 @@ Final grades are assigned based on the overall course percentage according to th
 
 ## 📝 Homework
 
-Homework will be assigned  biweekly.
+Homework will be assigned regularly throughout the semester. Specific assignments and due dates will be posted on Canvas.
 
 Students are expected to
 
@@ -130,24 +130,34 @@ The project should include
 
 Each group will also give a **15-minute presentation** followed by **5 minutes of questions**.
 
-Detailed project guidelines, milestones, and grading rubrics will be posted on Canvas later in the semester.
+Detailed project requirements, milestones, grading rubrics, and submission instructions are available on the [Final Project](project.qmd) page.
 
 ---
 
 ## 📅 Tentative Schedule
 
-| Week | Topics |
-|------|--------|
-| 1 | Course Introduction & Intro to R / Markdown |
-| 2 | Introduction to Statistics and Probability |
-| 3 | Random Variables & Normal Distributions |
-| 4 | Exploratory Data Analysis |
-| 5 | Sampling Distributions |
-| 6–8 | Statistical Inference |
-| 9 | Midterm Exam |
-| 10–12 | Regression & Statistical Learning |
-| 13–15 | Classification & Resampling |
-| 16 | Final Presentations |
+## 📅 Tentative Schedule
+
+| Week | Class Dates | Topics |
+|------|-------------|--------|
+| **1** | Aug. 17, 19 | **Course Introduction & R Foundations** — R/RStudio, R Markdown/Quarto, basic R programming, importing and working with data |
+| **2** | Aug. 24, 26 | **Introduction to Statistics & Probability** — populations and samples, descriptive statistics, probability concepts and rules |
+| **3** | Aug. 31, Sept. 2 | **Random Variables & Probability Distributions** — discrete and continuous random variables, expectation, variance, normal distribution |
+| **4** | Sept. 9 | **Exploratory Data Analysis (EDA)** — data preprocessing, numerical summaries, visualization, identifying patterns and outliers |
+| **5** | Sept. 14, 16 | **Sampling Distributions** — sampling variability, sampling distributions, Central Limit Theorem, simulation in R |
+| **6** | Sept. 21, 23 | **Statistical Inference I** — confidence intervals, hypothesis testing, inference for a single mean |
+| **7** | Sept. 28, 30 | **Statistical Inference II** — comparison of means, paired data, assumptions and interpretation |
+| **8** | Oct. 5, 7 | **Statistical Inference III** — inference for proportions and variances, review of statistical inference |
+| **9** | Oct. 14 | **Midterm Exam** |
+| **10** | Oct. 19, 21 | **Association Between Variables & Introduction to Statistical Learning** — covariance, correlation, prediction, training and test data |
+| **11** | Oct. 26, 28 | **Linear Regression** — simple linear regression, least squares, inference for regression coefficients, multiple linear regression |
+| **12** | Nov. 2, 4 | **Model Building & Diagnostics** — variable selection, model diagnostics, interactions, transformations, model assessment |
+| **13** | Nov. 9, 11 | **Classification I** — introduction to classification, logistic regression, probability and class prediction |
+| **14** | Nov. 16, 18 | **Classification II & Nonparametric Methods** — classification performance and selected nonparametric tests |
+| **15** | Nov. 23 | **Resampling Methods** — cross-validation, bootstrap, applications in statistical learning |
+| **16** | Nov. 30, Dec. 2 | **Final Project Presentations** |
+
+> **Note:** There will be no class on **Sept. 7 (Labor Day)**, **Oct. 12 (Fall Break)**, or **Nov. 25 (Thanksgiving Break)**. The schedule is tentative and may be adjusted as needed. Any changes will be announced on Canvas.
 
 ---
 
