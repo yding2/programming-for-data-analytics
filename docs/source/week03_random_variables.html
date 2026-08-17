@@ -331,19 +331,19 @@ P(X = x) &amp; \frac{1}{8} &amp; \frac{3}{8} &amp; \frac{3}{8} &amp; \frac{1}{8}
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#1 indicates Head 0 indicate Tail</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>) <span class="co">#simulate flipping coin 3 times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0 0 1</code></pre>
+<pre><code>[1] 0 0 0</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here X1 is one observation</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X1<span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)) </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here X2 is another observation</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X2<span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)) </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
 </section>
@@ -366,11 +366,11 @@ P(X = x) &amp; \frac{1}{8} &amp; \frac{3}{8} &amp; \frac{3}{8} &amp; \frac{1}{8}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>resultOf10rep<span class="ot">&lt;-</span><span class="fu">replicate</span>(<span class="dv">10</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>resultOf10rep </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2 2 2 0 3 0 1 1 0 1</code></pre>
+<pre><code> [1] 0 0 1 2 1 1 1 0 2 1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replicate</span>(<span class="dv">10</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2 2 2 2 2 1 2 0 0 2</code></pre>
+<pre><code> [1] 1 2 2 2 1 0 2 2 3 0</code></pre>
 </div>
 </div>
 <p><strong>CDF(Cumulative Distribution Function)</strong>: <span class="math inline">\(F(x)\)</span> of a random variable <span class="math inline">\(X\)</span> with PMF <span class="math inline">\(f(x)\)</span> is <span class="math display">\[ F(x) = P(X \le x ) = \sum_{t \le x } f(t), \qquad -\infty &lt;x &lt;\infty. \]</span></p>
@@ -405,7 +405,7 @@ P(X = x) &amp; \frac{1}{8} &amp; \frac{3}{8} &amp; \frac{3}{8} &amp; \frac{1}{8}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resultOf10rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.2</code></pre>
+<pre><code>[1] 0.9</code></pre>
 </div>
 </div>
 <p>If we change the sample size to 1000, what’s the sample mean?</p>
@@ -414,13 +414,13 @@ P(X = x) &amp; \frac{1}{8} &amp; \frac{3}{8} &amp; \frac{3}{8} &amp; \frac{1}{8}
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>resultOf1000rep1<span class="ot">&lt;-</span><span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resultOf1000rep1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.55</code></pre>
+<pre><code>[1] 1.517</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-select the sample</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>resultOf1000rep2<span class="ot">&lt;-</span><span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">sum</span>(<span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(resultOf1000rep2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.551</code></pre>
+<pre><code>[1] 1.48</code></pre>
 </div>
 </div>
 <p><strong>Observation</strong>: If the sample size is <em>large enough</em>, the sample mean can be a <em>good estimation</em> for the expectation(population mean).</p>
@@ -449,15 +449,15 @@ P(X = x) &amp; \frac{1}{8} &amp; \frac{3}{8} &amp; \frac{3}{8} &amp; \frac{1}{8}
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(resultOf10rep)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.066667</code></pre>
+<pre><code>[1] 0.5444444</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(resultOf1000rep1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7402402</code></pre>
+<pre><code>[1] 0.7444555</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(resultOf1000rep2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7521512</code></pre>
+<pre><code>[1] 0.8044044</code></pre>
 </div>
 </div>
 <p><strong>Observation</strong>: If the sample size is large enough, the sample variance can be a good estimation for (population) variance.</p>
