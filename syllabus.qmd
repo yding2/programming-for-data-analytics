@@ -39,10 +39,8 @@ title: "Syllabus for Programming for Data Analytics/Cyber Security"
 
 Students are expected to install
 
-- R
-- RStudio
-- R Markdown / Quarto
-- Required R packages (provided during the semester)
+- [R](https://mirror.las.iastate.edu/CRAN/)
+- [RStudio](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads)
 
 ---
 
@@ -133,8 +131,6 @@ Each group will also give a **15-minute presentation** followed by **5 minutes o
 Detailed project requirements, milestones, grading rubrics, and submission instructions are available on the [Final Project](project.qmd) page.
 
 ---
-
-## 📅 Tentative Schedule
 
 ## 📅 Tentative Schedule
 

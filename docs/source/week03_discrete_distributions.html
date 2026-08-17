@@ -304,7 +304,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>coinToss</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 1 0 0 0 0 0 0 1 0</code></pre>
+<pre><code> [1] 1 1 1 1 1 0 0 0 1 1</code></pre>
 </div>
 </div>
 <p>We can use <code>bar plot</code> to show the frequency of each value in a categorical/discrete variable.</p>
@@ -323,7 +323,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3</code></pre>
+<pre><code>[1] 0.7</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> What happened if we increase the sample size?</p>
@@ -347,7 +347,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
+<pre><code>[1] 0.52</code></pre>
 </div>
 </div>
 <p>Let’s try <span class="math inline">\(n = 10,000\)</span>.</p>
@@ -370,7 +370,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5001</code></pre>
+<pre><code>[1] 0.4952</code></pre>
 </div>
 </div>
 <p><strong>Question</strong>: What can we learn from the experiment?</p>
