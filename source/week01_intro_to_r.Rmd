@@ -252,19 +252,6 @@ course_grades
 ```
 
 
-## In-Class Exercise: Indexing
-
-1. How to use indexing to get the midterm grade of `Noah`?
-
-2. How to get the students name with `midterm grade` above 90?
-
-3. If the weight changes to 30% for midterm and 70% for final, only the students
-whose grade greater than or equal to 90 will get an A. Who will get an A in this course?
-
-
-
-
-
 ### Functions on vectors
 Command | Description
 --------|------------
@@ -323,13 +310,18 @@ students_name[course_grades >= a_threshold]
 ```
 
 
+## In-Class Exercise: Indexing
+
+1. How to use indexing to get the midterm grade of `Noah`?
+
+2. How to get the students name with `midterm grade` above 90?
+
+3. If the weight changes to 30% for midterm and 70% for final, only the students
+whose grade greater than or equal to 90 will get an A. Who will get an A in this course?
+
 ## In-class exercise: More Indexing 
 
-Using the `midterm`, `final`, and `course_grades`
-
-1. Find the students whose course grade is above 85.
-
-2. Find the students whose midterm and final grades both are greater than 85.
+Using the `midterm` and `final` defined above, find the students whose midterm and final grades both are greater than 85.
 
 
 ## Lists

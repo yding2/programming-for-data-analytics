@@ -136,21 +136,21 @@ Detailed project requirements, milestones, grading rubrics, and submission instr
 
 | Week | Class Dates | Topics |
 |------|-------------|--------|
-| **1** | Aug. 17, 19 | **Course Introduction & R Foundations** — R/RStudio, R Markdown/Quarto, basic R programming, importing and working with data |
-| **2** | Aug. 24, 26 | **Introduction to Statistics & Probability** — populations and samples, descriptive statistics, probability concepts and rules |
-| **3** | Aug. 31, Sept. 2 | **Random Variables & Probability Distributions** — discrete and continuous random variables, expectation, variance, normal distribution |
-| **4** | Sept. 9 | **Exploratory Data Analysis (EDA)** — data preprocessing, numerical summaries, visualization, identifying patterns and outliers |
-| **5** | Sept. 14, 16 | **Sampling Distributions** — sampling variability, sampling distributions, Central Limit Theorem, simulation in R |
-| **6** | Sept. 21, 23 | **Statistical Inference I** — confidence intervals, hypothesis testing, inference for a single mean |
-| **7** | Sept. 28, 30 | **Statistical Inference II** — comparison of means, paired data, assumptions and interpretation |
-| **8** | Oct. 5, 7 | **Statistical Inference III** — inference for proportions and variances, review of statistical inference |
-| **9** | Oct. 14 | **Midterm Exam** |
-| **10** | Oct. 19, 21 | **Association Between Variables & Introduction to Statistical Learning** — covariance, correlation, prediction, training and test data |
-| **11** | Oct. 26, 28 | **Linear Regression** — simple linear regression, least squares, inference for regression coefficients, multiple linear regression |
-| **12** | Nov. 2, 4 | **Model Building & Diagnostics** — variable selection, model diagnostics, interactions, transformations, model assessment |
-| **13** | Nov. 9, 11 | **Classification I** — introduction to classification, logistic regression, probability and class prediction |
-| **14** | Nov. 16, 18 | **Classification II & Nonparametric Methods** — classification performance and selected nonparametric tests |
-| **15** | Nov. 23 | **Resampling Methods** — cross-validation, bootstrap, applications in statistical learning |
+| **1** | Aug. 17, 19 | **Course Introduction & R Foundations**  |
+| **2** | Aug. 24, 26 | **Introduction to Statistics & Probability**  |
+| **3** | Aug. 31, Sept. 2 | **Random Variables & Probability Distributions**  |
+| **4** | Sept. 9 | **Exploratory Data Analysis (EDA)** |
+| **5** | Sept. 14, 16 | **Sampling Distributions**  |
+| **6** | Sept. 21, 23 | **Statistical Inference Is** |
+| **7** | Sept. 28, 30 | **Statistical Inference II**|
+| **8** | Oct. 5, 7 | **Statistical Inference III** |
+| **9** | Oct. 14 | **Association Between Variables& Introduction to Statistical Learning**  |
+| **10** | Oct. 19, 21 | **Review & Midterm Exam**  |
+| **11** | Oct. 26, 28 | **Linear Regression** |
+| **12** | Nov. 2, 4 | **Subset Selection & Qualitative Predictors** |
+| **13** | Nov. 9, 11 | **Classification I** |
+| **14** | Nov. 16, 18 | **Classification II & ** |
+| **15** | Nov. 23 | **Nonparametric Methods**  |
 | **16** | Nov. 30, Dec. 2 | **Final Project Presentations** |
 
 > **Note:** There will be no class on **Sept. 7 (Labor Day)**, **Oct. 12 (Fall Break)**, or **Nov. 25 (Thanksgiving Break)**. The schedule is tentative and may be adjusted as needed. Any changes will be announced on Canvas.

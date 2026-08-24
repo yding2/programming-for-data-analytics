@@ -1,5 +1,5 @@
 ---
-title: "Week 2:Introduction to Statistics and Descriptive Statistics"
+title: "Week 2: Introduction to Statistics and Descriptive Statistics"
 html_document: default
 ---
 
@@ -10,18 +10,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ### References
-1. __Probability & Statistics for Engineers & Scientist__, 9th Edition, Ronald E. Walpole,
+1. __Probability & Statistics for Engineers & Scientists__, 9th Edition, Ronald E. Walpole,
 Raymond H. Myers,
 Sharon L. Myers,
 Keying Ye, Prentice Hall
 
 ## Objectives:
 
-- Understand the difference between **Population** and **Sample**
+- Understand the difference between a **population** and a **sample**.
 
-- Know how to compute **Sample Mean** , **Sample Median**, and **Sample Variance**; How to interpret these measures
+- Know how to compute the **sample mean**, **sample median**, and **sample variance**, and how to interpret these measures.
 
-- Know how to create a **histogram** and **boxplot** in R; Understand the interpretation of these two plots
+- Know how to create a **histogram** and **boxplot** in R and how to interpret these two plots.
 
 <br>
 
@@ -37,17 +37,19 @@ Keying Ye, Prentice Hall
      
     + Sample: a part of the population that we actually examine in order to gather information about the whole population.
       
- **Example**:
+ **Example:**
  
-  Population: Illinois Tech students  Sample: Students in our class
+  Population: all Illinois Tech students  
+  Sample: students in our class
 
 - Types of statistics:
-    + Descriptive statistics: utilizes numerical and graphical methods to
+    + Descriptive statistics: uses numerical and graphical methods to
 	look for patterns in a data set, to summarize the information
 	revealed in a data set, and to present the information in a
 	convenient form.
 	
-    + Inferential statistics: use a fact about a sample to estimate the truth about the whole population.
+    + Inferential statistics: uses information from a sample to draw conclusions about the population.
+
 
 ```{r, out.width = "40%",out.height = "35%", echo = FALSE}
 knitr::include_graphics("../figures/fig1.png")
@@ -57,54 +59,56 @@ knitr::include_graphics("../figures/fig1.png")
 
 ### Descriptive Statistics
 
-General two types of data:
+Two general types of data:
 
 - Qualitative data: observations that cannot be measured on a numerical scale. They can only be classified into one of a group of categories.
 
-	Example: species of fish, eye color, marital status etc.
+	Examples: species of fish, eye color, and marital status.
 	
 - Quantitative data: measurements that are recorded on a naturally occurring numerical scale.
 
-	Example: height of person, score of test, etc.
+	Examples: a person's height and a test score.
 
 #### Numerical Methods
 Consider a quantitative dataset with $n$ observations, denoted as $\{x_1,\cdots,x_n\}$.
 
 - Location Measures
 
-  - Sample Mean: arithmetic average, denoted by $\bar{x}$
+  - Sample mean: arithmetic average, denoted by $\bar{x}$
 
 	$$\bar{x} = \frac{x_1+\cdots+x_n}{n} = \frac{1}{n}\sum\limits_{i=1}^n x_i=\frac{1}{n}\sum x_i$$
 
   The corresponding population parameter is population mean, denoted by $\mu$.
 
-  - Sample median: middle number when the observations are arranged in ascending order, noted by $\tilde{x}$
+  - Sample median: middle number when the observations are arranged in ascending order, denoted by $\tilde{x}$
 
 
    $$\tilde{x} = \begin{cases} x_{(n+1)/2}, & \text{ if } n \text{ is odd,} \\
      	\frac{1}{2}(x_{n/2} + x_{n/2+1}), & \text{ if } n \text{ is even.} \end{cases}
      	$$
 
-**Note**: Median is less sensitive than mean to extremely large or small observations, which is good.
+**Note:** The median is less sensitive than the mean to extremely large or small observations.
 
-For example, a dataset $\{-3,0,4\}$, the **sample mean** is $1/3$ and the sample median is $0$. 
+For example, for the data set $\{-3,0,4\}$, the **sample mean** is $1/3$ and the sample median is $0$.
 
 If the observation 4 is changed to 18, then the **sample mean** becomes $5$, while the sample median stays unchanged as $0$.
 
 - Variability Measures
 
-  + Sample range: measure of variability, $x_{\max} -x_{\min}$
+  + Sample range: a measure of variability, $x_{\max} - x_{\min}$.
   
-  + Sample variance: measure of variability, spread out, denoted by $s^2$
+  + Sample variance: a measure of how spread out the observations are, denoted by $s^2$.
 
-$$ s^2 = \frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1} = \frac{\sum\limits_{i=1}^n (x_i-\bar{x})^2}{n-1} $$
+$$s^2 = \frac{(x_1-\bar{x})^2+\cdots+(x_n-\bar{x})^2}{n-1} = \frac{\sum\limits_{i=1}^n (x_i-\bar{x})^2}{n-1} $$
 
-	The corresponding population parameter is population variance, denoted as $\sigma^2$.
+The corresponding population parameter is the population variance, denoted 
+by $\sigma^2$.
 	
   + Sample standard deviation:
-	$s = \sqrt{s^2}$, common way for measuring how far observations are away from the mean.
+	$s = \sqrt{s^2}$, a common measure of how far observations are from the mean.
 
-	The corresponding population parameter is the population standard deviation, denoted as $\sigma$.
+The corresponding population parameter is the population standard deviation, 
+denoted as $\sigma$.
 
 **Example 1**. Consider a tiny data set with three observations 5, 0, and 1. Find the sample mean, sample median, sample variance, and sample standard deviation.
 
@@ -117,21 +121,22 @@ $$s^2 = \frac{1}{3-1}\left[(0-2)^2+(1-2)^2
 
 ### In-class exercise: Sample Mean, Median, and Variance
 
-Consider a tiny data set with four observations 4, 2, -1 and 5. Find the sample mean, sample median, sample variance, and sample standard deviation.
+Consider a tiny data set with four observations 4, 2, -1 and 5. Find the 
+sample mean, sample median, sample variance, and sample standard deviation.
 
 
 
-
-**Question** How to use R find the sample mean, sample median, and sample variance?
+**Question:** How can we use R to find the sample mean, sample median, and sample variance?
 
 Let's check a very small dataset `iris`, which comes with the default installation of R.  To check the sample mean and sample median of the data, just type `summary(iris)`.
 
 ```{r summary}
-# Generate mean, median, percentile for numeric attributes and frequency for categorical attributes
+# Generate mean, median, percentile for numeric attributes and frequency for 
+# categorical attributes
 summary(iris)
 ```
 
-Use `var` to find the variance of one attribute `Petal.Width`.
+Use `var()` to find the variance of the `Petal.Width` variable.
 
 ```{r variance}
 # Generate variance for numeric attributes
@@ -142,9 +147,88 @@ var(iris$Petal.Width)
 
 1. Open **RStudio** on your machine
 2. File > New File > R Markdown ...
-3. Modify `summary(cars)` in the first code block to find the variance of `Sepal.Length`
+3. Add a code block that uses `var()` to find the variance of `Sepal.Length`.
 4. Click `Knit HTML` to produce an HTML file.
 5. Save your Rmd file as `InClassEx2.Rmd`
+
+### Quick Check: Population and Sample
+
+This short practice is not graded. Select an answer to receive immediate 
+feedback.
+
+<style>
+.quick-check {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.55rem 0.85rem;
+  margin: 0.6rem 0;
+  background: #f8fafc;
+}
+.quick-check p { margin: 0 0 0.3rem; }
+.quick-check label {
+  display: block;
+  margin: 0.12rem 0;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.quiz-feedback {
+  min-height: 1.1rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+.quiz-correct { color: #18794e; }
+.quiz-incorrect { color: #b42318; }
+</style>
+
+<div class="quick-check" data-answer="b">
+<p><strong>1. A researcher wants to study the commuting time of all Illinois Tech students and surveys 100 randomly selected students. What is the sample?</strong></p>
+<label><input type="radio" name="pop-sample-q1" value="a" onchange="checkPractice(this)"> All Illinois Tech students</label>
+<label><input type="radio" name="pop-sample-q1" value="b" onchange="checkPractice(this)"> The 100 surveyed students</label>
+<label><input type="radio" name="pop-sample-q1" value="c" onchange="checkPractice(this)"> All college students in Chicago</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="a">
+<p><strong>2. A factory produces 10,000 batteries and tests 200 randomly selected batteries. What is the population?</strong></p>
+<label><input type="radio" name="pop-sample-q2" value="a" onchange="checkPractice(this)"> The 10,000 batteries</label>
+<label><input type="radio" name="pop-sample-q2" value="b" onchange="checkPractice(this)"> The 200 tested batteries</label>
+<label><input type="radio" name="pop-sample-q2" value="c" onchange="checkPractice(this)"> Only the batteries that failed the test</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="b">
+<p><strong>3. Which statement about a sample is correct?</strong></p>
+<label><input type="radio" name="pop-sample-q3" value="a" onchange="checkPractice(this)"> A sample must include at least 50% of the population.</label>
+<label><input type="radio" name="pop-sample-q3" value="b" onchange="checkPractice(this)"> Random selection can help a sample represent the population.</label>
+<label><input type="radio" name="pop-sample-q3" value="c" onchange="checkPractice(this)"> A sample and its population must be the same size.</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="b">
+<p><strong>4. A population in statistics must consist of people.</strong></p>
+<label><input type="radio" name="pop-sample-q4" value="a" onchange="checkPractice(this)"> True</label>
+<label><input type="radio" name="pop-sample-q4" value="b" onchange="checkPractice(this)"> False</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="b">
+<p><strong>5. A teacher wants to understand the test performance of the entire class but analyzes only the five highest scores. The five scores form:</strong></p>
+<label><input type="radio" name="pop-sample-q5" value="a" onchange="checkPractice(this)"> A random sample</label>
+<label><input type="radio" name="pop-sample-q5" value="b" onchange="checkPractice(this)"> A biased sample</label>
+<label><input type="radio" name="pop-sample-q5" value="c" onchange="checkPractice(this)"> The population</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<script>
+function checkPractice(input) {
+  const question = input.closest('.quick-check');
+  const feedback = question.querySelector('.quiz-feedback');
+  const isCorrect = input.value === question.dataset.answer;
+  feedback.textContent = isCorrect ? 'Correct!' : 'Try again.';
+  feedback.className = 'quiz-feedback ' + (isCorrect ? 'quiz-correct' : 'quiz-incorrect');
+}
+</script>
+
 
 #### Graphical Methods
 - Frequency table:
@@ -172,20 +256,20 @@ Next, we want to create a frequency table for the above data.
 
 #### Histogram
 
- Graphically displays the contents in the frequency table
+ A histogram graphically displays the distribution summarized by a frequency table.
 
  - The class intervals in the frequency table form the scale of the horizontal axis.
 
 - A vertical bar is placed over each class interval, with height equal to either the class frequency or class relative frequency.
 
-- Used to plot the density of the data
+- The overall shape shows how the observations are distributed.
 
-How to plot histogram in R? Use the function `hist`.
+How can we plot a histogram in R? Use the `hist()` function.
 
 #### Histogram of Car Batteries
 
 ```{r hist, echo = TRUE}
-carBatteries <- c(2.2,4.1,3.4,4.5,3.2,3.7,2.9,2.6,3.4,1.6, 
+carBatteries <- c(2.2,4.1,3.4,4.4,3.2,3.7,2.9,2.6,3.4,1.6, 
                   3.1, 3.3, 3.8, 3.1, 4.7, 3.7, 2.7, 4.3, 3.4, 3.6)
 hist(carBatteries, breaks = seq(1.5,5.0,l=8),col = "blue", 
      main = "Histogram of Car Batteries",xlab="Battery Life (years)")
@@ -196,27 +280,54 @@ hist(carBatteries, breaks = seq(1.5,5.0,l=8),col = "blue",
 What's the difference?
 
 ```{r histRelative, echo = TRUE}
-hist(carBatteries, breaks = seq(1.5,5.0,l=8),col = "blue",  freq =FALSE,
+hist(carBatteries, breaks = seq(1.5,5.0,l=8),col = "blue", freq = FALSE,
      main = "Histogram of Car Batteries",xlab="Battery Life (years)")
 ```
+
+#### Quick Check: Histograms
+
+
+<div class="quick-check" data-answer="a">
+<p><strong>1. What does the horizontal axis of a histogram represent?</strong></p>
+<label><input type="radio" name="hist-q1" value="a" onchange="checkPractice(this)"> Intervals of values for a quantitative variable</label>
+<label><input type="radio" name="hist-q1" value="b" onchange="checkPractice(this)"> The names of individual observations</label>
+<label><input type="radio" name="hist-q1" value="c" onchange="checkPractice(this)"> Only the mean and median</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="b">
+<p><strong>2. In a frequency histogram, what does the height of each bar represent?</strong></p>
+<label><input type="radio" name="hist-q2" value="a" onchange="checkPractice(this)"> The largest observation in the interval</label>
+<label><input type="radio" name="hist-q2" value="b" onchange="checkPractice(this)"> The number of observations in the interval</label>
+<label><input type="radio" name="hist-q2" value="c" onchange="checkPractice(this)"> The width of the interval</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="c">
+<p><strong>3. Which variable is most appropriate to display with a histogram?</strong></p>
+<label><input type="radio" name="hist-q3" value="a" onchange="checkPractice(this)"> Students' majors</label>
+<label><input type="radio" name="hist-q3" value="b" onchange="checkPractice(this)"> Eye colors</label>
+<label><input type="radio" name="hist-q3" value="c" onchange="checkPractice(this)"> Commute times in minutes</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
 
 #### In-class exercise: Histogram
 
 1. Keep working on your Rmd file `InClassEx2.Rmd`
-2. Use the `hist` function to create a histogram of `Petal.Length`.
+2. Use the `hist()` function to create a histogram of `Petal.Length`.
 
 #### Boxplot
 
-Graphically depicting groups of numerical data through their quantiles.
+A boxplot graphically displays numerical data using quartiles.
 
 - The line inside the box: median (50th percentile).
 
-- The bottom edge of the box : first quantile (Q1/25th percentile)
+- The bottom edge of the box: first quartile (Q1/25th percentile).
   
-- The top edge of the box: third quantile (Q3/75th percentile)
+- The top edge of the box: third quartile (Q3/75th percentile).
   
-- Interquartile range (IQR): 25th to the 75th percentile.
+- Interquartile range (IQR): the distance from Q1 to Q3.
 
 - Bottom whisker (lower bar): from Q1 down to the minimum value within $1.5 \times$ IQR (interquartile range).
 
@@ -229,13 +340,13 @@ summary(carBatteries)
 boxplot(carBatteries)
 ```
 
-Use the `boxplot` function to create a boxplot of Petal Width.
+Use the `boxplot()` function to create a boxplot of `Petal.Width`.
 
 ```{r, out.width = "60%",out.height = "25%"}
 boxplot(iris$Petal.Width, horizontal = TRUE)
 ```
 
-`par(mfrow = c(1, 2))` creates a grid of size 1x2 for plots; it divides the plot area into a grid so you see several plots on the same page as opposed to separately. Try changing the 1 and the 2 to something else!
+`par(mfrow = c(1, 2))` creates a 1-by-2 grid for plots. It divides the plot area so that multiple plots can appear side by side. Try changing the 1 and 2 to see what happens!
 
 ``` {r, out.width = "60%",out.height = "75%"}
 par(mfrow = c(1, 2))
@@ -247,6 +358,33 @@ abline(h = median(iris$Sepal.Width), col = "Green")
 abline(h = quantile(iris$Sepal.Width, c(0.25, 0.75)), col = "Red")
 ```
 
+#### Quick Check: Boxplots
+
+
+<div class="quick-check" data-answer="b">
+<p><strong>1. What does the line inside the box represent?</strong></p>
+<label><input type="radio" name="box-q1" value="a" onchange="checkPractice(this)"> The mean</label>
+<label><input type="radio" name="box-q1" value="b" onchange="checkPractice(this)"> The median</label>
+<label><input type="radio" name="box-q1" value="c" onchange="checkPractice(this)"> The maximum</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="c">
+<p><strong>2. If Q1 = 12 and Q3 = 20, what is the interquartile range (IQR)?</strong></p>
+<label><input type="radio" name="box-q2" value="a" onchange="checkPractice(this)"> 12</label>
+<label><input type="radio" name="box-q2" value="b" onchange="checkPractice(this)"> 20</label>
+<label><input type="radio" name="box-q2" value="c" onchange="checkPractice(this)"> 8</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
+<div class="quick-check" data-answer="a">
+<p><strong>3. A point plotted beyond a whisker of a boxplot is usually interpreted as:</strong></p>
+<label><input type="radio" name="box-q3" value="a" onchange="checkPractice(this)"> A potential outlier</label>
+<label><input type="radio" name="box-q3" value="b" onchange="checkPractice(this)"> The median</label>
+<label><input type="radio" name="box-q3" value="c" onchange="checkPractice(this)"> A missing value</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
+
 
 #### In-class exercise: Boxplot
 
@@ -254,7 +392,7 @@ abline(h = quantile(iris$Sepal.Width, c(0.25, 0.75)), col = "Red")
 
 2. Use the `boxplot` function to create a boxplot of `Petal.Length` 
 
-3. Type your conclusion of outliers of `Petal.Length` in your Rmd file
+3. State your conclusion about potential outliers in `Petal.Length` in your Rmd file.
 
 4. Use `par(mfrow = c(1, 2))` to combine the boxplot of `Petal.Length` and `Petal.Width` 
 
@@ -271,12 +409,10 @@ carBatteries<-c(
 )
 ```
 
-2. Find the `mean`, `variance`, `std` of `carBatteries`
+2. Find the mean, variance, and standard deviation of `carBatteries` using `mean()`, `var()`, and `sd()`.
 
-3. Find the `mean`, `variance`, `std` of `carBatteries` when `carBatteries > 3`
+3. Find the mean, variance, and standard deviation of the observations for which `carBatteries > 3`.
 
-3. Create a `histogram` of `carBatteries`
+4. Create a histogram of `carBatteries`.
 
-4. Create a `boxplot` of `carBatteries`
-
-
+5. Create a boxplot of `carBatteries`.

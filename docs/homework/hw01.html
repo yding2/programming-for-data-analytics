@@ -107,6 +107,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -199,8 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#part-i.-changing-the-author-field-and-file-name.-5-points" id="toc-part-i.-changing-the-author-field-and-file-name.-5-points" class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.-5-points">Part I. Changing the author field and file name. (5 points)</a></li>
-  <li><a href="#part-ii.-course-related-questions-50-points" id="toc-part-ii.-course-related-questions-50-points" class="nav-link" data-scroll-target="#part-ii.-course-related-questions-50-points">Part II. Course Related Questions (50 points)</a></li>
-  <li><a href="#part-iii.-basic-r-syntax-45-points" id="toc-part-iii.-basic-r-syntax-45-points" class="nav-link" data-scroll-target="#part-iii.-basic-r-syntax-45-points">Part III. Basic R Syntax (45 points)</a></li>
+  <li><a href="#part-ii.-course-related-questions-30-points" id="toc-part-ii.-course-related-questions-30-points" class="nav-link" data-scroll-target="#part-ii.-course-related-questions-30-points">Part II. Course Related Questions (30 points)</a></li>
+  <li><a href="#part-iii.-basic-r-syntax-65-points" id="toc-part-iii.-basic-r-syntax-65-points" class="nav-link" data-scroll-target="#part-iii.-basic-r-syntax-65-points">Part III. Basic R Syntax (65 points)</a></li>
   </ul>
 </nav>
     </div>
@@ -242,8 +271,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 </section>
 </section>
-<section id="part-ii.-course-related-questions-50-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii.-course-related-questions-50-points">Part II. Course Related Questions (50 points)</h3>
+<section id="part-ii.-course-related-questions-30-points" class="level3">
+<h3 class="anchored" data-anchor-id="part-ii.-course-related-questions-30-points">Part II. Course Related Questions (30 points)</h3>
 <section id="question-1.-what-is-the-instructors-name-please-write-about-her-office-and-office-hours-this-semester." class="level4">
 <h4 class="anchored" data-anchor-id="question-1.-what-is-the-instructors-name-please-write-about-her-office-and-office-hours-this-semester.">Question 1. What is the instructor’s name? Please write about her office and office hours this semester.</h4>
 <blockquote class="blockquote">
@@ -282,8 +311,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 </section>
 </section>
-<section id="part-iii.-basic-r-syntax-45-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii.-basic-r-syntax-45-points">Part III. Basic R Syntax (45 points)</h3>
+<section id="part-iii.-basic-r-syntax-65-points" class="level3">
+<h3 class="anchored" data-anchor-id="part-iii.-basic-r-syntax-65-points">Part III. Basic R Syntax (65 points)</h3>
 <section id="question-1.-hello-world-10-points" class="level4">
 <h4 class="anchored" data-anchor-id="question-1.-hello-world-10-points">Question 1. Hello World! (10 points)</h4>
 <p>Here’s an R code chunk that prints the text ‘Hello world!’.</p>
@@ -301,17 +330,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><br></p>
 </section>
-<section id="question-2.-play-with-dataset-35-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-2.-play-with-dataset-35-points">Question 2. Play with Dataset (35 points)</h4>
-<p>The following is a small data to store health information, where the unit for height is centimeters and weight is kilogram.</p>
+<section id="question-2.-online-store-sales-20-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-2.-online-store-sales-20-points">Question 2. Online Store Sales (20 points)</h4>
+<p>An online store recorded the number of units sold and the price of five products.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Male"</span>,<span class="st">"Female"</span>), </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">152</span>, <span class="fl">171.5</span>, <span class="dv">165</span>), </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">81</span>,<span class="dv">93</span>,<span class="dv">78</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">42</span>,<span class="dv">38</span>,<span class="dv">26</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(BMI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Keyboard"</span>, <span class="st">"Mouse"</span>, <span class="st">"Webcam"</span>, <span class="st">"Headphones"</span>, <span class="st">"USB Drive"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>units_sold <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>unit_price <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">20</span>, <span class="dv">65</span>, <span class="dv">35</span>, <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-product-revenue-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-product-revenue-5-points">a) Product Revenue (5 points)</h4>
+<p>Calculate the revenue generated by each product. Store the results in a vector named <code>revenue</code> and display it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="b-total-and-average-revenue-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="b-total-and-average-revenue-5-points">b) Total and Average Revenue (5 points)</h4>
+<p>Calculate the total revenue and the average revenue per product.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="c-high-revenue-products-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-high-revenue-products-5-points">c) High-Revenue Products (5 points)</h4>
+<p>Display the names of the products that generated more than $500 in revenue.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="d-popular-and-affordable-products-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="d-popular-and-affordable-products-5-points">d) Popular and Affordable Products (5 points)</h4>
+<p>Display the names of the products for which more than 15 units were sold and the unit price was less than $25.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="question-3.-working-with-a-data-frame-35-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-3.-working-with-a-data-frame-35-points">Question 3. Working with a Data Frame (35 points)</h4>
+<p>The following data frame contains health information for three individuals. Height is measured in centimeters, and weight is measured in kilograms.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">152</span>, <span class="fl">171.5</span>, <span class="dv">165</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">81</span>, <span class="dv">93</span>, <span class="dv">78</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">42</span>, <span class="dv">38</span>, <span class="dv">26</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(BMI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  gender height weight Age
 1   Male  152.0     81  42
@@ -320,23 +387,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="a-please-calculate-bmi-for-each-person-and-add-that-information-to-the-dataframe-and-display-the-new-dataframe.-15-points" class="level4">
-<h4 class="anchored" data-anchor-id="a-please-calculate-bmi-for-each-person-and-add-that-information-to-the-dataframe-and-display-the-new-dataframe.-15-points">a) Please calculate BMI for each person and add that information to the dataframe and display the new dataframe. (15 points)</h4>
-<p><strong>BMI Formula: Weight (kg)/Square of Height(meters)</strong></p>
+<section id="a-calculate-bmi-15-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-calculate-bmi-15-points">a) Calculate BMI (15 points)</h4>
+<p>Calculate the BMI of each individual, add the results as a new column named <code>BMI</code>, and display the updated data frame.</p>
+<p><span class="math display">\[
+\text{BMI}=\frac{\text{weight (kg)}}{[\text{height (m)}]^2}
+\]</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="b-please-display-gender-and-age-for-the-people-with-bmi-great-than-30.-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="b-please-display-gender-and-age-for-the-people-with-bmi-great-than-30.-10-points">b) Please display <code>gender</code> and <code>age</code> for the people with BMI great than 30. (10 points)</h4>
+<section id="b-filter-by-bmi-10-points" class="level4">
+<h4 class="anchored" data-anchor-id="b-filter-by-bmi-10-points">b) Filter by BMI (10 points)</h4>
+<p>Display the <code>gender</code> and <code>Age</code> of individuals whose BMI is greater than 30.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="c-please-display-gender-for-the-people-with-bmi-great-than-25-and-age-less-than-30.-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="c-please-display-gender-for-the-people-with-bmi-great-than-25-and-age-less-than-30.-10-points">c) Please display <code>gender</code> for the people with BMI great than 25 and age less than 30. (10 points)</h4>
+<section id="c-filter-using-two-conditions-10-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-filter-using-two-conditions-10-points">c) Filter Using Two Conditions (10 points)</h4>
+<p>Display the <code>gender</code> of individuals whose BMI is greater than 25 and whose <code>Age</code> is less than 30.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
