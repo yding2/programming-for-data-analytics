@@ -26,11 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - Understand the concept of **Variance** and the relation with *sample
   variance*
 
-- Understand tossing coin experiments
-
-- Know how to use `barplot`
-
-- Understand the PMF, mean and variance of the random variables
+- Understand the PMF and CDF
 
 ## Random Variable
 
@@ -69,8 +65,8 @@ context of a mathematical problem or experiment.
 ### Describe a Discrete Random Variable
 
 *Tossing Coin Experiment*: Toss a fair coin 3 times. Suppose we are
-interested in the random variable $X =$ number of heads.How do we get
-the probabilities??
+interested in the random variable $X =$ number of heads. How do we get
+the probabilities?
 
 We know the total number of outcomes of this experiment is $2^3 = 8$.
 Why?
@@ -212,7 +208,7 @@ defined as
 
 \begin{align*}
 \sigma^2 =var(X)  &= E[(X-\mu)^2] = \sum_x (x-\mu)^2f(x)\\
-&= E(X^2)-[E(X)]^2 = \sum_x x^2f(x)-\left[\sum_x^2 xf(x)\right]= E(X^2) -\mu^2.
+&= E(X^2)-[E(X)]^2 = \sum_x x^2f(x)-\left[\sum_x xf(x)\right]^2= E(X^2) -\mu^2.
 \end{align*}
 
 - It measures the mean squared distance of observations on $X$ from its
@@ -222,7 +218,7 @@ defined as
 
 **Example**: Variance of $X$, the number of heads tossing a fair coin 3
 times is \begin{align*}
-    \sigma^2 =E(X^2)-\mu^2 & = \sum_x^2 xf(x) - \left(\frac{3}{2}\right)^2\\
+    \sigma^2 =E(X^2)-\mu^2 & = \sum_x x^2f(x) - \left(\frac{3}{2}\right)^2\\
     &= 0^2\cdot \frac{1}{8} + 1^2 \cdot \frac{3}{8} + 2^2\cdot \frac{3}{8} + 3^2\cdot \frac{1}{8} -\frac{9}{4} = \frac{3}{4}.
 \end{align*}
 
@@ -238,3 +234,85 @@ var(resultOf1000rep2)
 
 **Observation**: If the sample size is large enough, the sample variance
 can be a good estimation for (population) variance.
+
+### Quiz for Random Variables, Expectation, and Variance (9 Points)
+
+**1. A discrete random variable:**
+
+A. Takes on only countable values  
+B. Takes on any value in an interval  
+C. Has a probability density function
+
+**2. The probability mass function (PMF) applies to:**
+
+A. Continuous random variables  
+B. Discrete random variables  
+C. Both discrete and continuous random variables  
+D. None of the above
+
+**3. The cumulative distribution function (CDF) of a random variable is
+always non-decreasing.**
+
+A. True  
+B. False
+
+**4. A continuous random variable is different from a discrete random
+variable because:**
+
+A. It can only take integer values  
+B. It is described using a probability mass function (PMF)  
+C. It can take infinitely many values within a given range
+
+**5. Which of the following is NOT an example of a continuous random
+variable?**
+
+A. The time a person spends waiting in line  
+B. The number of defective products in a batch  
+C. The height of a randomly selected tree  
+D. The temperature in a city at noon
+
+**6. The expectation $E(X)$ of a random variable $X$ represents:**
+
+A. The most frequently occurring value of $X$  
+B. The sum of all possible values of $X$  
+C. The long-run average value of $X$ over many repetitions of the
+experiment  
+D. The probability that $X$ takes a particular value
+
+**7. Which of the following is TRUE about variance?**
+
+A. Variance can be negative  
+B. Variance is always non-negative  
+C. Variance is equal to the mean of the random variable  
+D. Variance is always greater than the expected value
+
+**8. Which of the following statements about expectation is TRUE?**
+
+A. $E(X)$ is always equal to the sample mean  
+B. $E(X)$ can be estimated by the sample mean when the sample size is
+large  
+C. $E(X)$ is always equal to $var(X)$  
+D. $E(X)$ is always an integer
+
+**9. If $X$ is a constant random variable, meaning $X=c$ for some
+constant $c$, what is $var(X)$?**
+
+A. $0$  
+B. $c^2$  
+C. $E(X)$  
+D. $E(X^2)$
+
+<details>
+<summary><strong>Answers</strong></summary>
+
+1. **A**  
+2. **B**  
+3. **A (True)**  
+4. **C**  
+5. **B**  
+6. **C**  
+7. **B**  
+8. **B**  
+9. **A**
+
+</details>

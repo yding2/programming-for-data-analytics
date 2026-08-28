@@ -15,20 +15,28 @@ website:
 
       - text: Lecture Notes
         menu:
-          - text: "Week 1:Introduction to R"
+          - text: "Week 1: Introduction to R"
             href: source/week01_intro_to_r.Rmd
-          - text: "Week 2:Introduction to Statistics"
+          - text: "Week 2: Introduction to Statistics"
             href: source/week02_intro_to_stats.Rmd
           - text: "─────── Week 3 ───────"
           
-          - text: "Random Variables"
+          - text: "Week 3: Random Variables"
             href: source/week03_random_variables.Rmd
           
-          - text: "Discrete Distributions"
+          - text: "Week 3: Discrete Distributions"
             href: source/week03_discrete_distributions.Rmd
           
-          - text: "Normal Distribution"
+          - text: "Week 3: Normal Distribution"
             href: source/week03_normal_distribution.Rmd
+          
+          - text: "─────── Week 4 ───────"
+
+          - text: "Week 4: EDA Notes"
+            href: source/week04_EDA.Rmd
+
+          - text: "Week 4: EDA Jupyter Notebook"
+            href: source/week04_EDA_python.ipynb
             
       - text: "Homework"
         menu:

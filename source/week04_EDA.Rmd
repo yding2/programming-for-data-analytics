@@ -1,0 +1,498 @@
+---
+title: "Week4: Exploratory Data Analysis (EDA)"
+output: html_document
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Objectives:
+
+Students will
+
+- Understand what is data
+
+- Understand more about different types of attributes
+
+- Know the data quality issues
+
+- Know how to standardize the numeric variables
+
+- Know how to choose the optimal visualization tool 
+to analyze the co-variation of two variables in R and Python
+
+## Reading Materials
+
+1.  Chapter 7, R for Data Science by Garrett Grolemund and Hadley Wickham, available freely online. https://r4ds.had.co.nz/exploratory-data-analysis.html
+
+2. Chapter 3 & 4, Data Science Using Python and R, Print ISBN:9781119526810 , Online ISBN:9781119526865. https://onlinelibrary.wiley.com/doi/book/10.1002/9781119526865
+
+
+## Required Packages
+```{r, message=FALSE}
+library(ggplot2)
+library(MASS) #To play with Boston data set
+```
+
+## Data
+
+**Question**: What is *Data*?
+
+**Answer**: Collection of data *objects* and their *attributes*.
+
+- An *attribute* is a property of characteristic of an object, also known as *variable*, *field*, or *feature*
+
+- A collection of attributes describe an *object*, also known as a *record*, *observation*, or *instance*.
+
+#### A Simple Dataset
+
+
+```{r}
+head(iris,10)
+```
+
+### Attribute
+
+- *Same* attribute can be mapped to *different* attribute values
+
+  Example: height can be measured in feet or meters
+
+- *Different* attributes can be mapped to the *same* set of values
+
+  Example: Attribute values for ID and age are integers
+
+#### Types of Attributes
+
+- Qualitative
+
+  - Nominal: The values are just different names
+
+    Examples: ID numbers, eye color, zip codes
+
+  - Ordinal: The values are provide enough information to order objects.
+
+    Examples: rankings (e.g., taste of potato chips on a scale from 1-10), grades, height in tall, medium, short
+
+- Quantitative
+
+  - Interval: The differences between values are meaningful
+
+    Examples: calendar dates, temperatures in Celsius or Fahrenheit.
+
+  - Ratio: Both differences and ratios are meaningful.
+
+    Examples: temperature in Kelvin, length, time, counts 
+
+#### Properties of Attribute Values 
+
+- Properties of Attribute Values
+
+<center>
+
+| Concept         | Symbols      |
+|:----------------|:-------------|
+| **Distinctness** | = , ≠        |
+| **Order**        | < , >        |
+| **Addition**     | + , −        |
+| **Multiplication** | * , /      |
+
+</center>
+
+
+- Relationship with Type of Attributes
+
+<center>
+
+| Attribute Type     | Properties                          |
+|:-------------------|:------------------------------------|
+| **Nominal**         | Distinctness                        |
+| **Ordinal**         | Distinctness & Order                |
+| **Interval attribute** | Distinctness, Order & Addition     |
+| **Ratio attribute**    | All four properties                |
+
+</center>
+
+### Discrete and Continuous Attributes
+
+- **Discrete Attribute**
+  - Has only a *finite* or *countably infinite* set of values  
+    *Examples:* zip codes, counts, or the set of words in a collection of documents  
+  - Often represented as **integer** variables.  
+    *Note:* binary attributes are a special case of discrete attributes.
+
+- **Continuous Attribute**
+  - Has **real numbers** as attribute values  
+    *Examples:* temperature, height, or weight  
+  - Practically, real values can only be measured and represented using a finite number of digits.  
+    Continuous attributes are typically represented as **floating-point** variables.
+
+
+### Examples of data quality problems: 
+- Noise and outliers 
+- Missing values 
+- Duplicate data 
+
+#### Noise
+
+Noise refers to *modification* of original values
+
+```{r,echo = FALSE}
+# Generate x values from 0 to 4π
+x <- seq(0, 4 * pi, length.out = 500)
+
+# Original sine values
+y <- sin(x)
+
+# Add standard normal noise
+y_noisy <- y + rnorm(length(x), mean = 0, sd = 0.2)
+
+# Set up plot area (2 plots side by side)
+par(mfrow = c(1, 2))
+
+# Plot 1: Original sine wave
+plot(x, y, type = "l", col = "blue", lwd = 2,
+     main = "Original sin(x)",
+     xlab = "x", ylab = "sin(x)")
+
+# Plot 2: Sine wave with noise
+plot(x, y_noisy, type = "l", col = "red", lwd = 2,
+     main = "sin(x) with Random Noise",
+     xlab = "x", ylab = "sin(x) + noise")
+
+# Optional: overlay original curve for comparison
+lines(x, y, col = "blue", lwd = 2, lty = 2)
+legend("topright", legend = c("Noisy", "Original"),
+       col = c("red", "blue"), lwd = 2, lty = c(1, 2))
+```
+
+#### Outlier
+Outliers are data objects with characteristics that are *considerably different* than most of the other data objects in the data set.
+
+```{r,echo = FALSE}
+# Generate normal data (100 points)
+x <- rnorm(100, mean = 50, sd = 3)
+
+# Add some extreme outliers
+outliers <- c(80, 85, 90)  # manually added high values
+
+# Combine into one vector
+x_with_outliers <- c(x, outliers)
+
+# Plot comparison: boxplot
+par(mfrow = c(1, 2))
+
+# Boxplot without outliers
+boxplot(x, main = "Original Data (No Outliers)",
+        col = "lightblue", horizontal = TRUE)
+
+# Boxplot with outliers
+boxplot(x_with_outliers, main = "Data with Outliers",
+        col = "salmon", horizontal = TRUE)
+
+# Reset layout
+par(mfrow = c(1, 1))
+
+# Scatterplot visualization
+plot(x_with_outliers, type = "p", col = "darkred",
+     main = "Outliers in Dataset",
+     ylab = "Value", xlab = "Index", pch = 19)
+abline(h = mean(x), col = "blue", lty = 2)
+text(105, mean(x), "Mean", col = "blue", pos = 3)
+```
+
+
+#### Missing Values
+Reasons for missing values
+
+  - Information is not collected
+  - Attributes may not be applicable to all cases
+
+Handling missing values
+
+  - Eliminate Data Objects
+  - Estimating Missing Values
+  - Ignore the Missing Value During Analysis
+  - Replace with all possible values (weighted by their probabilities)
+
+#### Duplicate Data
+
+- Data set may include data objects that are duplicates or almost duplicates of one another
+
+  Examples: Same person with multiple email addresses
+
+- Data cleaning: Process of dealing with duplicate data issues
+
+
+## Standardizing the Numeric Fields
+
+Certain algorithms perform better when the numeric fields are standardized so the filed mean equals 0 and the field standard deviation equals 1, as follows:
+
+\[ z = \frac{x-\bar{x}}{s} \]
+
+Let's do a standardization with `medv` in `Boston` data set
+
+```{r standardizing, out.width = "50%",out.height = "50%"}
+hist(Boston$medv,breaks=seq(min(Boston$medv),max(Boston$medv),l=21)) #histogram of medv in Boston data set
+medv_z <- scale(Boston$medv) #standardizing medv
+hist(medv_z,breaks =seq(min(medv_z),max(medv_z),l=21))
+```
+
+**Note**: We can also do normalization in `python` using `zscore` in `stats`. Please see Jupyter Noterbook *EDA.ipynb*.
+
+**Question:**Why we want to do standardization?
+
+## Exploratory Data Analysis (EDA)
+
+A task that how to use visualization and transformation to explore your data in a systematic way is called exploratory data analysis, or EDA for short. 
+
+
+- Use graphics to explore the relationship between the predictor variables and the target variable.
+
+- Use graphics and tables to derive new variables that will increase predictive value
+
+
+Next, we will play with a built-in data set `diamonds` in the package `ggplot2` with 53940 rows and 10 variables.
+
+```{r}
+#Get the genearl information of diamonds data set
+summary(diamonds)
+```
+
+
+#### Information on `diamonds`
+
+
+- price: price in US dollars ($\$326–\$18,823$)
+
+- carat: weight of the diamond (0.2–5.01)
+
+- cut: quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+
+- color: diamond color, from D (best) to J (worst)
+
+- clarity: a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+
+- x:length in mm (0–10.74)
+
+- y: width in mm (0–58.9)
+
+- z: depth in mm (0–31.8)
+
+- depth: total depth percentage $=  2 * z / (x + y) (43–79)$
+
+- table: width of top of diamond relative to widest point (43–95)
+
+### Visualization on Two Continuous Variables In R
+
+We can use a regular `plot` to do that.
+
+```{r regularplot, out.width = "50%",out.height = "50%"}
+plot(price~carat,data = diamonds)
+```
+
+Draw a scatterplot with `geom_point()`.
+
+```{r scatterplot, out.width = "50%",out.height = "50%"}
+ ggplot(data = diamonds) + geom_point(mapping = aes(x = carat, y = price))
+```
+
+Let's play with `iris` dataset.
+
+```{r plotwithresponse, out.width = "50%",out.height = "50%"}
+cols <-ifelse(iris$Species == 'setosa',"yellow",ifelse(iris$Species == 'virginica',"orange","green"))
+plot(Sepal.Length~Sepal.Width,data = iris,col = cols)
+leg.txt <- c("Setosa", "Virgnica","Versicolor")
+col.txt <- c("yellow", "orange", "green")
+legend(4,8,pch = 1, leg.txt, col = col.txt)
+```
+
+What about `ggplot`?
+
+```{r fancyscatterplot, out.width = "50%",out.height = "50%"}
+ggplot(data = iris) +
+  geom_point(mapping = aes(x = Sepal.Width, y = Sepal.Length,colour = Species))
+```
+
+
+#### In-class Exercise: Two Continuous Variables by `geom_point()`
+
+1. Please use `geom_point()` to investigate the relationship between `depth` and `price`.
+
+2. Please use `geom_point()` to investigate the relationship between `Petal.Length` and `Petal.Width` with `Species` in `iris` dataset.
+
+### Correlation between Numerical Variables
+
+To investigate the correlation, we can use `pairs` function to do the scatter plot.
+
+```{r}
+pairs(iris[,1:4], col = cols)
+```
+
+To get the Pearson correlation coefficients `r` using `cor` function
+
+```{r}
+cor(iris[,1:4])
+```
+
+We can also use `cor` to see the correlation between `carat` and `price`.
+
+```{r}
+cor(diamonds$carat,diamonds$price)
+```
+
+
+* $|r|<0.3$, weak correlation
+
+* $0.3<|r|<0.7$, moderate correlation 
+
+* $|r|>0.7$, high correlation
+
+```{r, echo = FALSE}
+set.seed(123)
+
+# Target correlations
+rhos <- c(-0.8, -0.5, -0.2, 0, 0.1, 0.45, 0.85,0.98)
+
+# Plot layout
+par(mfrow = c(2, 4), mar = c(4,4,3,1))
+
+n <- 200  # number of points
+
+for (rho in rhos) {
+  
+  # Covariance matrix
+  Sigma <- matrix(c(1, rho,
+                    rho, 1), 2, 2)
+  
+  # Generate data
+  data <- mvrnorm(n = n, mu = c(0,0), Sigma = Sigma)
+  
+  x <- data[,1]
+  y <- data[,2]
+  
+  # Sample correlation
+  r_sample <- cor(x, y)
+  
+  # Plot
+  plot(x, y,
+       main = paste0("\nSample r = ", round(r_sample, 2)),
+       xlab = "X", ylab = "Y",
+       pch = 19, col = "steelblue")
+}
+```
+
+
+
+#### In-class Exercise: Two Continuous Variables by correlation
+
+1. Check the Pearson correlation coefficients between `depth` and `price`.
+
+
+### Visualization on One Continuous and One Discrete Variables using Histogram with Overlay In R
+
+```{r histoverlay, out.width = "50%",out.height = "50%"}
+ggplot(data = diamonds, aes(x = price)) +
+  geom_histogram(aes(fill = cut),bins = 30)
+ggplot(data = diamonds, aes(x = price)) +
+  geom_histogram(aes(fill = cut), bins = 30, color = "black")  #have black lines around each bar
+ggplot(data = diamonds, aes(x = price)) +
+  geom_histogram(aes(fill = cut), bins = 30, color = "black", position = "fill")  #normalize the histogram
+```
+
+
+#### In-class Exercise: Investigate A Categorical and A Continuous Variable by `geom_histogram()`
+
+1. Please use `geom_histogram()` to investigate the relationship between `price` and `color`.
+
+2. Please use `geom_histogram()` to investigate the relationship between `Petal.Length` and `Species` in `iris` data set.
+
+
+
+
+
+### Visualization on One Continuous and One Discrete Variables using Boxplot In R
+
+Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the **boxplot.**
+
+```{r boxplot, out.width = "50%",out.height = "50%"}
+ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
+  geom_boxplot()
+```
+
+
+We see much less information about the distribution, but the boxplots are much more compact so we can more easily compare them (and fit more on one plot). It supports the counterintuitive finding that better quality diamonds are cheaper on average! 
+
+
+
+To make the trend easier to see, we can reorder `cut` based on the median value of `price`:
+
+```{r sortboxplot, out.width = "50%",out.height = "50%"}
+ggplot(data = diamonds) +
+  geom_boxplot(mapping = aes(x = reorder(cut, price, FUN = median), y = price))
+```
+
+If you have long variable names, geom_boxplot() will work better if you flip it 90°. You can do that with coord_flip().
+
+
+```{r horiboxplot, out.width = "50%",out.height = "50%"}
+ggplot(data = diamonds) +
+  geom_boxplot(mapping = aes(x = reorder(cut, price, FUN = median), y = price)) + coord_flip()
+```
+
+#### In-class Exercise: Investigate A Categorical and A Continuous Variable by `geom_boxplot`
+
+1. Please use `geom_boxplot()` to investigate the relationship between `price` and `color`. You can choose to flip the boxplot or not.
+
+2. Please use `geom_boxplot()` to investigate the relationship between `Petal.Length` and `Species` in the `iris` data set. You can choose to flip the boxplot or not.
+
+We will introduce **ANOVA test** to check the association between one numerical variable and one categorical variable in the future.
+
+### Visualization on a Categorical/Discrete Variable
+
+From the above information, we know `cut` is a categorical field with five levels. We can use `barplot` to visualize the distribution of the **categorical/discrete** variable.
+
+```{r barplot, out.width = "50%",out.height = "50%"}
+barplot(table(diamonds$cut)) #regular way
+ggplot(data = diamonds) +
+  geom_bar(mapping = aes(x = cut)) #we can also use ggplot
+```
+
+#### In-class Exercise: `geom_bar()`
+
+Please use `barplot` and `geom_bar()` to investigate `clarity` attribute in `diamonds` data set.
+
+### Visualization on two Categorical/Discrete Variables using Barplot with Overlay In R
+
+```{r baroverlay, out.width = "50%",out.height = "50%"}
+ggplot(data = diamonds, aes(x = cut)) +
+  geom_bar(aes(fill = color)) 
+ggplot(data = diamonds, aes(x = cut)) +
+  geom_bar(aes(fill = color), position = "fill")  #normalized the barplot
+ggplot(data = diamonds, aes(x = cut)) +
+  geom_bar(aes(fill = color), position = "fill") +
+   coord_flip() #normalized the barplot and make it horizontal
+```
+
+
+To visualize the co-variation between categorical variables, we can also use `geom_count()`
+
+
+```{r covoftwocateg,out.width = "50%",out.height = "50%" }
+ggplot(data = diamonds) +
+  geom_count(mapping = aes(x = cut, y = color))
+```
+
+The size of each circle in the plot displays how many observations occurred at each combination of values. Co-variation will appear as a strong correlation between specific x values and specific y values.
+
+
+
+#### In-class Exercise: Investigate Two Categorical Variables
+
+1. Please use `geom_bar()` to investigate the relationship between `clarity` and `cut`.
+
+2. Please use `geom_count()` to investigate the relationship between `clarity` and `cut`.
+
+We will introduce **Chi-squared  Test** and **Cramer's V Coefficient** to check the association between two categorical variables in the future.
+
+**Note**: Continue to the [Python Jupyter Notebook](week04_EDA_python.ipynb).

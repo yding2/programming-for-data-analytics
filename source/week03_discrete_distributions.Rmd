@@ -163,4 +163,46 @@ E(X) & = E(Y_1+\cdots+Y_n) = E(Y_1)+\cdots+E(Y_n) = np,\\
 var(X) &= var(Y_1+\cdots+Y_n) = var(Y_1)+\cdots+var(Y_n) = np(1-p).
 \end{align*}
 
+### Quiz for Bernoulli and Binomial Distributions (5 Points)
+
+**1. A Bernoulli trial has:**
+
+A. Two possible outcomes  
+B. Three possible outcomes  
+C. Infinitely many possible outcomes
+
+**2. A Bernoulli random variable can take the values:**
+
+A. $0$ and $1$  
+B. Any value between $0$ and $1$  
+C. Any non-negative integer
+
+**3. In a Bernoulli distribution, $p$ represents:**
+
+A. The number of trials  
+B. The probability of success  
+C. The number of successes
+
+**4. A binomial random variable represents:**
+
+A. The outcome of one trial  
+B. The number of successes in a fixed number of trials  
+C. The time required to complete an experiment
+
+**5. Which is an example of a binomial random variable?**
+
+A. The number of heads in 20 coin flips  
+B. The height of a student  
+C. The time spent waiting in line
+
+<details>
+<summary><strong>Answers</strong></summary>
+
+1. **A**  
+2. **A**  
+3. **B**  
+4. **B**  
+5. **A**
+
+</details>
 
