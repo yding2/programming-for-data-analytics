@@ -239,7 +239,7 @@ window.Quarto = {
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives:</a></li>
   <li><a href="#special-discrete-distributions" id="toc-special-discrete-distributions" class="nav-link" data-scroll-target="#special-discrete-distributions">Special Discrete Distributions</a>
   <ul class="collapse">
-  <li><a href="#quiz-for-bernoulli-and-binomial-distributions-5-points" id="toc-quiz-for-bernoulli-and-binomial-distributions-5-points" class="nav-link" data-scroll-target="#quiz-for-bernoulli-and-binomial-distributions-5-points">Quiz for Bernoulli and Binomial Distributions (5 Points)</a></li>
+  <li><a href="#quick-check-discrete-random-variables" id="toc-quick-check-discrete-random-variables" class="nav-link" data-scroll-target="#quick-check-discrete-random-variables">Quick Check: Discrete Random Variables</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -316,7 +316,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>coinToss</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 0 0 0 0 1 1 0 1 1</code></pre>
+<pre><code> [1] 1 1 1 0 1 1 1 1 1 1</code></pre>
 </div>
 </div>
 <p>We can use <code>bar plot</code> to show the frequency of each value in a categorical/discrete variable.</p>
@@ -335,7 +335,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
+<pre><code>[1] 0.9</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> What happened if we increase the sample size?</p>
@@ -359,7 +359,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.61</code></pre>
+<pre><code>[1] 0.5</code></pre>
 </div>
 </div>
 <p>Let’s try <span class="math inline">\(n = 10,000\)</span>.</p>
@@ -382,7 +382,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5005</code></pre>
+<pre><code>[1] 0.5015</code></pre>
 </div>
 </div>
 <p><strong>Question</strong>: What can we learn from the experiment?</p>
@@ -406,44 +406,89 @@ E(X) &amp; = E(Y_1+\cdots+Y_n) = E(Y_1)+\cdots+E(Y_n) = np,\\
 var(X) &amp;= var(Y_1+\cdots+Y_n) = var(Y_1)+\cdots+var(Y_n) = np(1-p).
 \end{align*}\]</span></p>
 </section>
-<section id="quiz-for-bernoulli-and-binomial-distributions-5-points" class="level3">
-<h3 class="anchored" data-anchor-id="quiz-for-bernoulli-and-binomial-distributions-5-points">Quiz for Bernoulli and Binomial Distributions (5 Points)</h3>
-<p><strong>1. A Bernoulli trial has:</strong></p>
-<p>A. Two possible outcomes<br>
-B. Three possible outcomes<br>
-C. Infinitely many possible outcomes</p>
-<p><strong>2. A Bernoulli random variable can take the values:</strong></p>
-<p>A. <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span><br>
-B. Any value between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span><br>
-C. Any non-negative integer</p>
-<p><strong>3. In a Bernoulli distribution, <span class="math inline">\(p\)</span> represents:</strong></p>
-<p>A. The number of trials<br>
-B. The probability of success<br>
-C. The number of successes</p>
-<p><strong>4. A binomial random variable represents:</strong></p>
-<p>A. The outcome of one trial<br>
-B. The number of successes in a fixed number of trials<br>
-C. The time required to complete an experiment</p>
-<p><strong>5. Which is an example of a binomial random variable?</strong></p>
-<p>A. The number of heads in 20 coin flips<br>
-B. The height of a student<br>
-C. The time spent waiting in line</p>
-<details>
-<summary>
-<strong>Answers</strong>
-</summary>
-<ol type="1">
-<li><strong>A</strong><br>
-</li>
-<li><strong>A</strong><br>
-</li>
-<li><strong>B</strong><br>
-</li>
-<li><strong>B</strong><br>
-</li>
-<li><strong>A</strong></li>
-</ol>
-</details>
+<section id="quick-check-discrete-random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="quick-check-discrete-random-variables">Quick Check: Discrete Random Variables</h3>
+<p>This short practice is not graded. Select an answer to receive immediate feedback.</p>
+<style>
+.quick-check {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.55rem 0.85rem;
+  margin: 0.6rem 0;
+  background: #f8fafc;
+}
+.quick-check p { margin: 0 0 0.3rem; }
+.quick-check label {
+  display: block;
+  margin: 0.12rem 0;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.quiz-feedback {
+  min-height: 1.1rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+.quiz-correct { color: #18794e; }
+.quiz-incorrect { color: #b42318; }
+</style>
+<div class="quick-check" data-answer="a">
+<p>
+<strong>1. A Bernoulli trial has:</strong>
+</p>
+<label><input type="radio" name="discrete-q1" value="a" onchange="checkPractice(this)"> Two possible outcomes</label> <label><input type="radio" name="discrete-q1" value="b" onchange="checkPractice(this)"> Three possible outcomes</label> <label><input type="radio" name="discrete-q1" value="c" onchange="checkPractice(this)"> Infinitely many possible outcomes</label>
+<div class="quiz-feedback" aria-live="polite">
+
+</div>
+</div>
+<div class="quick-check" data-answer="a">
+<p>
+<strong>2. A Bernoulli random variable can take the values:</strong>
+</p>
+<label><input type="radio" name="discrete-q2" value="a" onchange="checkPractice(this)"> 0 and 1</label> <label><input type="radio" name="discrete-q2" value="b" onchange="checkPractice(this)"> Any value between 0 and 1</label> <label><input type="radio" name="discrete-q2" value="c" onchange="checkPractice(this)"> Any non-negative integer</label>
+<div class="quiz-feedback" aria-live="polite">
+
+</div>
+</div>
+<div class="quick-check" data-answer="b">
+<p>
+<strong>3. In a Bernoulli distribution, p represents:</strong>
+</p>
+<label><input type="radio" name="discrete-q3" value="a" onchange="checkPractice(this)"> The number of trials</label> <label><input type="radio" name="discrete-q3" value="b" onchange="checkPractice(this)"> The probability of success</label> <label><input type="radio" name="discrete-q3" value="c" onchange="checkPractice(this)"> The number of successes</label>
+<div class="quiz-feedback" aria-live="polite">
+
+</div>
+</div>
+<div class="quick-check" data-answer="b">
+<p>
+<strong>4. A binomial random variable represents:</strong>
+</p>
+<label><input type="radio" name="discrete-q4" value="a" onchange="checkPractice(this)"> The outcome of one trial</label> <label><input type="radio" name="discrete-q4" value="b" onchange="checkPractice(this)"> The number of successes in a fixed number of trials</label> <label><input type="radio" name="discrete-q4" value="c" onchange="checkPractice(this)"> The time required to complete an experiment</label>
+<div class="quiz-feedback" aria-live="polite">
+
+</div>
+</div>
+<div class="quick-check" data-answer="a">
+<p>
+<strong>5. Which is an example of a binomial random variable?</strong>
+</p>
+<label><input type="radio" name="discrete-q5" value="a" onchange="checkPractice(this)"> The number of heads in 20 coin flips</label> <label><input type="radio" name="discrete-q5" value="b" onchange="checkPractice(this)"> The height of a student</label> <label><input type="radio" name="discrete-q5" value="c" onchange="checkPractice(this)"> The time spent waiting in line</label>
+<div class="quiz-feedback" aria-live="polite">
+
+</div>
+</div>
+<script>
+function checkPractice(input) {
+  const question = input.closest('.quick-check');
+  const feedback = question.querySelector('.quiz-feedback');
+  const isCorrect = input.value === question.dataset.answer;
+
+  feedback.textContent = isCorrect ? 'Correct!' : 'Try again.';
+  feedback.className =
+    'quiz-feedback ' +
+    (isCorrect ? 'quiz-correct' : 'quiz-incorrect');
+}
+</script>
 
 
 </section>

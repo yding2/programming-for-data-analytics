@@ -238,8 +238,8 @@ window.Quarto = {
   <ul>
   <li><a href="#part-i.-changing-the-author-field-and-file-name." id="toc-part-i.-changing-the-author-field-and-file-name." class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</a></li>
   <li><a href="#part-ii.-cars-data-45-points" id="toc-part-ii.-cars-data-45-points" class="nav-link" data-scroll-target="#part-ii.-cars-data-45-points">Part II. Cars data (45 points)</a></li>
-  <li><a href="#part-iii.-random-variables-20-points" id="toc-part-iii.-random-variables-20-points" class="nav-link" data-scroll-target="#part-iii.-random-variables-20-points">Part III. Random Variables (20 points)</a></li>
-  <li><a href="#part-iv.-normal-distributions-and-critial-values-35-points" id="toc-part-iv.-normal-distributions-and-critial-values-35-points" class="nav-link" data-scroll-target="#part-iv.-normal-distributions-and-critial-values-35-points">Part IV. Normal Distributions and Critial Values (35 points)</a></li>
+  <li><a href="#part-iii.-random-variables-and-data-visualization-20-points" id="toc-part-iii.-random-variables-and-data-visualization-20-points" class="nav-link" data-scroll-target="#part-iii.-random-variables-and-data-visualization-20-points">Part III. Random Variables and Data Visualization (20 points)</a></li>
+  <li><a href="#part-iv.-normal-distributions-and-critical-values" id="toc-part-iv.-normal-distributions-and-critical-values" class="nav-link" data-scroll-target="#part-iv.-normal-distributions-and-critical-values">Part IV. Normal Distributions and Critical Values</a></li>
   </ul>
 </nav>
     </div>
@@ -278,12 +278,15 @@ window.Quarto = {
 </section>
 <section id="b-rename-this-file-to-hw2_yourfirstinitialyourlastname.rmd-e.g.-hw2_yding.rmd." class="level4">
 <h4 class="anchored" data-anchor-id="b-rename-this-file-to-hw2_yourfirstinitialyourlastname.rmd-e.g.-hw2_yding.rmd.">(b) Rename this file to “HW2_YourFirstInitialYourLastName.Rmd”, (e.g.&nbsp;HW2_YDing.Rmd).</h4>
+</section>
+<section id="c-knit-the-completed-rmd-file-to-html.-submit-both-the-rmd-file-and-the-html-file." class="level4">
+<h4 class="anchored" data-anchor-id="c-knit-the-completed-rmd-file-to-html.-submit-both-the-rmd-file-and-the-html-file.">(c) Knit the completed Rmd file to HTML. Submit both the Rmd file and the HTML file.</h4>
 <p><br></p>
 </section>
 </section>
 <section id="part-ii.-cars-data-45-points" class="level3">
 <h3 class="anchored" data-anchor-id="part-ii.-cars-data-45-points">Part II. Cars data (45 points)</h3>
-<p>We’ll look at data frame and plotting in much more detail in later classes. For a previous of what’s to come, here’s a very basic example.</p>
+<p>We’ll look at data frame and plotting in much more detail in later classes. For a preview of what’s to come, here’s a very basic example.</p>
 <p>For this example we’ll use a very simple dataset. The <code>cars</code> data comes with the default installation of R. To see the first few rows of the data, just type <code>head(cars)</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -297,8 +300,8 @@ window.Quarto = {
 6     9   10</code></pre>
 </div>
 </div>
-<section id="a-do-a-summary-for-cars.-what-the-minmax-mean-and-median-values-of-speed-and-dist-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="a-do-a-summary-for-cars.-what-the-minmax-mean-and-median-values-of-speed-and-dist-10-points">(a) Do a summary for <code>cars</code>. What the min,max, mean and median values of <code>speed</code> and <code>dist</code>? (10 points)</h4>
+<section id="a-use-summary-to-summarize-cars.-report-the-minimum-maximum-mean-and-median-of-both-speed-and-dist.-10-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-use-summary-to-summarize-cars.-report-the-minimum-maximum-mean-and-median-of-both-speed-and-dist.-10-points">(a) Use <code>summary()</code> to summarize <code>cars</code>. Report the minimum, maximum, mean, and median of both <code>speed</code> and <code>dist</code>. (10 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -315,8 +318,8 @@ window.Quarto = {
 <p>Type your answer here</p>
 </blockquote>
 </section>
-<section id="c-calulate-the-average-and-standard-deviation-of-dist-when-speed-is-greater-than-12-and-less-than-19.-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="c-calulate-the-average-and-standard-deviation-of-dist-when-speed-is-greater-than-12-and-less-than-19.-5-points">(c) Calulate the average and standard deviation of <code>dist</code> when <code>speed</code> is greater than 12 and less than 19. (5 points)</h4>
+<section id="c-calculate-the-mean-and-standard-deviation-of-dist-for-observations-where-speed-is-greater-than-12-and-less-than-19.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-calculate-the-mean-and-standard-deviation-of-dist-for-observations-where-speed-is-greater-than-12-and-less-than-19.-5-points">(c) Calculate the mean and standard deviation of <code>dist</code> for observations where <code>speed</code> is greater than 12 and less than 19. (5 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -324,8 +327,8 @@ window.Quarto = {
 <p>Type your answer here</p>
 </blockquote>
 </section>
-<section id="d-produce-a-histogram-of-speed-with-10-bins.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="d-produce-a-histogram-of-speed-with-10-bins.-please-illustrate-your-observation-from-the-output.-5-points">(d) Produce a histogram of <code>speed</code> with <strong>10 bins</strong>. Please illustrate your observation from the output. (5 points)</h4>
+<section id="d-produce-a-histogram-of-speed-with-10-breaks.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="d-produce-a-histogram-of-speed-with-10-breaks.-please-illustrate-your-observation-from-the-output.-5-points">(d) Produce a histogram of <code>speed</code> with <strong>10 breaks</strong>. Please illustrate your observation from the output. (5 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -333,8 +336,8 @@ window.Quarto = {
 <p>Type your answer here</p>
 </blockquote>
 </section>
-<section id="e-produce-a-histogram-of-dist-with-20-bins.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="e-produce-a-histogram-of-dist-with-20-bins.-please-illustrate-your-observation-from-the-output.-5-points">(e) Produce a histogram of <code>dist</code> with <strong>20 bins</strong>. Please illustrate your observation from the output. (5 points)</h4>
+<section id="e-produce-a-histogram-of-dist-with-20-breaks.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="e-produce-a-histogram-of-dist-with-20-breaks.-please-illustrate-your-observation-from-the-output.-5-points">(e) Produce a histogram of <code>dist</code> with <strong>20 breaks</strong>. Please illustrate your observation from the output. (5 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -342,8 +345,8 @@ window.Quarto = {
 <p>Type your answer here</p>
 </blockquote>
 </section>
-<section id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-please-illustrate-your-observation-from-the-output.-5-points">(f) Use the <code>boxplot</code> function to create a boxplot of <code>speed</code>. Please illustrate your observation from the output. (5 points)</h4>
+<section id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-briefly-describe-the-center-spread-and-any-possible-outliers.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-briefly-describe-the-center-spread-and-any-possible-outliers.-5-points">(f) Use the <code>boxplot</code> function to create a boxplot of <code>speed</code>. Briefly describe the center, spread, and any possible outliers. (5 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -360,8 +363,8 @@ window.Quarto = {
 <p>Type your answer here</p>
 </blockquote>
 </section>
-<section id="h-use-qqnorm-and-qqline-to-test-if-dist-follow-the-normal-distribution.-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="h-use-qqnorm-and-qqline-to-test-if-dist-follow-the-normal-distribution.-5-points">(h) Use <code>qqnorm</code> and <code>qqline</code> to test if <code>dist</code> follow the normal distribution. (5 points)</h4>
+<section id="h-use-qqnorm-and-qqline-to-investigate-whether-dist-is-approximately-normally-distributed.-briefly-explain-your-conclusion.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="h-use-qqnorm-and-qqline-to-investigate-whether-dist-is-approximately-normally-distributed.-briefly-explain-your-conclusion.-5-points">(h) Use <code>qqnorm</code> and <code>qqline</code> to investigate whether <code>dist</code> is approximately normally distributed. Briefly explain your conclusion. (5 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -371,8 +374,8 @@ window.Quarto = {
 <p><br></p>
 </section>
 </section>
-<section id="part-iii.-random-variables-20-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii.-random-variables-20-points">Part III. Random Variables (20 points)</h3>
+<section id="part-iii.-random-variables-and-data-visualization-20-points" class="level3">
+<h3 class="anchored" data-anchor-id="part-iii.-random-variables-and-data-visualization-20-points">Part III. Random Variables and Data Visualization (20 points)</h3>
 <section id="question-1.-classify-the-following-random-variables-as-discrete-or-continuous-8-points" class="level4">
 <h4 class="anchored" data-anchor-id="question-1.-classify-the-following-random-variables-as-discrete-or-continuous-8-points">Question 1. Classify the following random variables as discrete or continuous (8 points):</h4>
 <p>X: the number of automobile accidents per year in Illinois.</p>
@@ -411,7 +414,7 @@ window.Quarto = {
 <ol type="A">
 <li><p>It can only take integer values</p></li>
 <li><p>It is described using a probability mass function (PMF)</p></li>
-<li><p>It can take an infinite number of values within a given range</p></li>
+<li><p>It can take any value within a given interval</p></li>
 </ol>
 <blockquote class="blockquote">
 <p>Type your answer here</p>
@@ -466,8 +469,8 @@ window.Quarto = {
 </blockquote>
 </section>
 </section>
-<section id="part-iv.-normal-distributions-and-critial-values-35-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv.-normal-distributions-and-critial-values-35-points">Part IV. Normal Distributions and Critial Values (35 points)</h3>
+<section id="part-iv.-normal-distributions-and-critical-values" class="level3">
+<h3 class="anchored" data-anchor-id="part-iv.-normal-distributions-and-critical-values">Part IV. Normal Distributions and Critical Values</h3>
 <section id="question-1-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters" class="level4">
 <h4 class="anchored" data-anchor-id="question-1-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters">Question 1: A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,</h4>
 </section>
@@ -477,6 +480,9 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Report and briefly interpret your answer here.</p>
+</blockquote>
 </section>
 <section id="b-what-is-the-probability-that-a-cup-contains-between-191-and-209-milliliters-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="b-what-is-the-probability-that-a-cup-contains-between-191-and-209-milliliters-5-points">(b) what is the probability that a cup contains between 191 and 209 milliliters? (5 points)</h4>
@@ -489,6 +495,9 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Report and briefly interpret your answer here.</p>
+</blockquote>
 </section>
 <section id="question-2.-critical-values-with-qnorm" class="level4">
 <h4 class="anchored" data-anchor-id="question-2.-critical-values-with-qnorm">Question 2. Critical values with <code>qnorm</code></h4>
@@ -498,17 +507,23 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Report and briefly interpret your answer here.</p>
+</blockquote>
 </section>
 <section id="b-find-the-value-of-z_0-such-that-90-of-the-standard-normal-z-values-lie-between--z_0-and-z_0-that-is-p-z_0leq-zleq-z_0-.90.-10-points" class="level4">
 <h4 class="anchored" data-anchor-id="b-find-the-value-of-z_0-such-that-90-of-the-standard-normal-z-values-lie-between--z_0-and-z_0-that-is-p-z_0leq-zleq-z_0-.90.-10-points">(b) Find the value of <span class="math inline">\(z_0\)</span> such that <span class="math inline">\(90\%\)</span> of the standard normal <span class="math inline">\(Z\)</span> values lie between <span class="math inline">\(-z_0\)</span> and <span class="math inline">\(z_0\)</span>; that is, <span class="math inline">\(P(-z_0\leq Z\leq z_0) = .90\)</span>. (10 points)</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Report and briefly interpret your answer here.</p>
+</blockquote>
 </section>
 <section id="c-which-value-is-larger-why-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="c-which-value-is-larger-why-5-points">(c) Which value is larger? Why? (5 points)</h4>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p>Your answer here.</p>
 </blockquote>
 
 

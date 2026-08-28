@@ -235,84 +235,120 @@ var(resultOf1000rep2)
 **Observation**: If the sample size is large enough, the sample variance
 can be a good estimation for (population) variance.
 
-### Quiz for Random Variables, Expectation, and Variance (9 Points)
+### Quick Check: Random Variables, Expectation, and Variance
 
-**1. A discrete random variable:**
+This short practice is not graded. Select an answer to receive immediate
+feedback.
 
-A. Takes on only countable values  
-B. Takes on any value in an interval  
-C. Has a probability density function
+<style>
+.quick-check {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.55rem 0.85rem;
+  margin: 0.6rem 0;
+  background: #f8fafc;
+}
+.quick-check p { margin: 0 0 0.3rem; }
+.quick-check label {
+  display: block;
+  margin: 0.12rem 0;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.quiz-feedback {
+  min-height: 1.1rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+.quiz-correct { color: #18794e; }
+.quiz-incorrect { color: #b42318; }
+</style>
 
-**2. The probability mass function (PMF) applies to:**
+<div class="quick-check" data-answer="a">
+<p><strong>1. A discrete random variable:</strong></p>
+<label><input type="radio" name="rv-q1" value="a" onchange="checkPractice(this)"> Takes on only countable values</label>
+<label><input type="radio" name="rv-q1" value="b" onchange="checkPractice(this)"> Takes on any value in an interval</label>
+<label><input type="radio" name="rv-q1" value="c" onchange="checkPractice(this)"> Has a probability density function</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-A. Continuous random variables  
-B. Discrete random variables  
-C. Both discrete and continuous random variables  
-D. None of the above
+<div class="quick-check" data-answer="b">
+<p><strong>2. The probability mass function (PMF) applies to:</strong></p>
+<label><input type="radio" name="rv-q2" value="a" onchange="checkPractice(this)"> Continuous random variables</label>
+<label><input type="radio" name="rv-q2" value="b" onchange="checkPractice(this)"> Discrete random variables</label>
+<label><input type="radio" name="rv-q2" value="c" onchange="checkPractice(this)"> Both discrete and continuous random variables</label>
+<label><input type="radio" name="rv-q2" value="d" onchange="checkPractice(this)"> None of the above</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-**3. The cumulative distribution function (CDF) of a random variable is
-always non-decreasing.**
+<div class="quick-check" data-answer="a">
+<p><strong>3. The cumulative distribution function (CDF) of a random variable is always non-decreasing.</strong></p>
+<label><input type="radio" name="rv-q3" value="a" onchange="checkPractice(this)"> True</label>
+<label><input type="radio" name="rv-q3" value="b" onchange="checkPractice(this)"> False</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-A. True  
-B. False
+<div class="quick-check" data-answer="c">
+<p><strong>4. A continuous random variable is different from a discrete random variable because:</strong></p>
+<label><input type="radio" name="rv-q4" value="a" onchange="checkPractice(this)"> It can only take integer values</label>
+<label><input type="radio" name="rv-q4" value="b" onchange="checkPractice(this)"> It is described using a probability mass function (PMF)</label>
+<label><input type="radio" name="rv-q4" value="c" onchange="checkPractice(this)"> It can take infinitely many values within a given range</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-**4. A continuous random variable is different from a discrete random
-variable because:**
+<div class="quick-check" data-answer="b">
+<p><strong>5. Which of the following is NOT an example of a continuous random variable?</strong></p>
+<label><input type="radio" name="rv-q5" value="a" onchange="checkPractice(this)"> The time a person spends waiting in line</label>
+<label><input type="radio" name="rv-q5" value="b" onchange="checkPractice(this)"> The number of defective products in a batch</label>
+<label><input type="radio" name="rv-q5" value="c" onchange="checkPractice(this)"> The height of a randomly selected tree</label>
+<label><input type="radio" name="rv-q5" value="d" onchange="checkPractice(this)"> The temperature in a city at noon</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-A. It can only take integer values  
-B. It is described using a probability mass function (PMF)  
-C. It can take infinitely many values within a given range
+<div class="quick-check" data-answer="c">
+<p><strong>6. The expectation E(X) of a random variable X represents:</strong></p>
+<label><input type="radio" name="rv-q6" value="a" onchange="checkPractice(this)"> The most frequently occurring value of X</label>
+<label><input type="radio" name="rv-q6" value="b" onchange="checkPractice(this)"> The sum of all possible values of X</label>
+<label><input type="radio" name="rv-q6" value="c" onchange="checkPractice(this)"> The long-run average value of X over many repetitions of the experiment</label>
+<label><input type="radio" name="rv-q6" value="d" onchange="checkPractice(this)"> The probability that X takes a particular value</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-**5. Which of the following is NOT an example of a continuous random
-variable?**
+<div class="quick-check" data-answer="b">
+<p><strong>7. Which of the following is TRUE about variance?</strong></p>
+<label><input type="radio" name="rv-q7" value="a" onchange="checkPractice(this)"> Variance can be negative</label>
+<label><input type="radio" name="rv-q7" value="b" onchange="checkPractice(this)"> Variance is always non-negative</label>
+<label><input type="radio" name="rv-q7" value="c" onchange="checkPractice(this)"> Variance is equal to the mean of the random variable</label>
+<label><input type="radio" name="rv-q7" value="d" onchange="checkPractice(this)"> Variance is always greater than the expected value</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-A. The time a person spends waiting in line  
-B. The number of defective products in a batch  
-C. The height of a randomly selected tree  
-D. The temperature in a city at noon
+<div class="quick-check" data-answer="b">
+<p><strong>8. Which of the following statements about expectation is TRUE?</strong></p>
+<label><input type="radio" name="rv-q8" value="a" onchange="checkPractice(this)"> E(X) is always equal to the sample mean</label>
+<label><input type="radio" name="rv-q8" value="b" onchange="checkPractice(this)"> E(X) can be estimated by the sample mean when the sample size is large</label>
+<label><input type="radio" name="rv-q8" value="c" onchange="checkPractice(this)"> E(X) is always equal to var(X)</label>
+<label><input type="radio" name="rv-q8" value="d" onchange="checkPractice(this)"> E(X) is always an integer</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-**6. The expectation $E(X)$ of a random variable $X$ represents:**
+<div class="quick-check" data-answer="a">
+<p><strong>9. If X is a constant random variable, meaning X = c for some constant c, what is var(X)?</strong></p>
+<label><input type="radio" name="rv-q9" value="a" onchange="checkPractice(this)"> 0</label>
+<label><input type="radio" name="rv-q9" value="b" onchange="checkPractice(this)"> c<sup>2</sup></label>
+<label><input type="radio" name="rv-q9" value="c" onchange="checkPractice(this)"> E(X)</label>
+<label><input type="radio" name="rv-q9" value="d" onchange="checkPractice(this)"> E(X<sup>2</sup>)</label>
+<div class="quiz-feedback" aria-live="polite"></div>
+</div>
 
-A. The most frequently occurring value of $X$  
-B. The sum of all possible values of $X$  
-C. The long-run average value of $X$ over many repetitions of the
-experiment  
-D. The probability that $X$ takes a particular value
-
-**7. Which of the following is TRUE about variance?**
-
-A. Variance can be negative  
-B. Variance is always non-negative  
-C. Variance is equal to the mean of the random variable  
-D. Variance is always greater than the expected value
-
-**8. Which of the following statements about expectation is TRUE?**
-
-A. $E(X)$ is always equal to the sample mean  
-B. $E(X)$ can be estimated by the sample mean when the sample size is
-large  
-C. $E(X)$ is always equal to $var(X)$  
-D. $E(X)$ is always an integer
-
-**9. If $X$ is a constant random variable, meaning $X=c$ for some
-constant $c$, what is $var(X)$?**
-
-A. $0$  
-B. $c^2$  
-C. $E(X)$  
-D. $E(X^2)$
-
-<details>
-<summary><strong>Answers</strong></summary>
-
-1. **A**  
-2. **B**  
-3. **A (True)**  
-4. **C**  
-5. **B**  
-6. **C**  
-7. **B**  
-8. **B**  
-9. **A**
-
-</details>
+<script>
+function checkPractice(input) {
+  const question = input.closest('.quick-check');
+  const feedback = question.querySelector('.quiz-feedback');
+  const isCorrect = input.value === question.dataset.answer;
+  feedback.textContent = isCorrect ? 'Correct!' : 'Try again.';
+  feedback.className =
+    'quiz-feedback ' +
+    (isCorrect ? 'quiz-correct' : 'quiz-incorrect');
+}
+</script>
