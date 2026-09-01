@@ -37,11 +37,16 @@ website:
 
           - text: "Week 4: EDA Jupyter Notebook"
             href: source/week04_EDA_python.ipynb
+
+          - text: "Week 5: Sampling Distribution of Sample Mean(s)"
+            href: source/week05_sampling_distribution_of_sample_mean(s).Rmd 
             
       - text: "Homework"
         menu:
           - text: "Homework 1"
             href: homework/hw01.Rmd
+          - text: "Homework 1 Solution"
+            href: solutions/hw01_Solution.Rmd
           - text: "Homework 2"
             href: homework/hw02.Rmd
             
