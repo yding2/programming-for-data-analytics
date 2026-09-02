@@ -63,7 +63,7 @@ The **normal distribution** (also be called *Gaussian distribution*) is a **symm
 Examples:
 Test scores for all ITMS 514 students.
 
-- Notation: $X\sim N(\mu, \sigma^2)$
+- Notation: $X\sim \mathcal{N}(\mu, \sigma^2)$
 	+ $\mu$ is the mean of the distribution
 	+	$\sigma^2$ is the variance of the distribution
 
@@ -76,7 +76,7 @@ Test scores for all ITMS 514 students.
  F(x_2) -F(x_1) =P(x_1<X<x_2)= &P(x_1\le X<x_2)= P(x_1<X\le x_2) = P(x_1 \le X \le x_2).
  \end{align*}
 	
-Suppose $Z$ is the standard normal random variable, i.e., $Z \sim N(0, 1)$
+Suppose $Z$ is the standard normal random variable, i.e., $Z \sim \mathcal{N}(0, 1)$
 
 ```{r, echo=FALSE}
 n <- 1e6 # number of sample size
@@ -136,9 +136,9 @@ legend("topright", legend = c("N(0,1)", "N(-1,2^2)"),
 
 **Question**: What's the relationship between the general normal random variable $X \sim N(\mu, \sigma^2)$ and the standard normal random variable?
 
-$$Z= \frac{X-\mu}{\sigma} \sim N(0,1).$$
+$$Z= \frac{X-\mu}{\sigma} \sim \mathcal{N}(0,1).$$
 
-To calculate the probability involving $X\sim N(\mu,\sigma^2)$,
+To calculate the probability involving $X\sim \mathcal{N}(\mu,\sigma^2)$,
 
 $$
 	P(a\leq X\leq b) = P\left(\frac{a-\mu}{\sigma}\leq \frac{X-\mu}{\sigma}\leq \frac{b-\mu}{\sigma}\right)
@@ -148,7 +148,7 @@ $$
 
 **Example 1**: The achievement scores from a college entrance examination are normally distributed with mean 75 and standard deviation 10. What fraction of the scores lies between 80 and 90?
 	
-**Answer**: The scores $X\sim N(75,10^2)$, then
+**Answer**: The scores $X\sim \mathcal{N}(75,10^2)$, then
 		$$P(80\leq X\leq 90) = P\left(\frac{80-75}{10}\leq Z\leq \frac{90-75}{10}\right) = P(0.5\leq Z\leq 1.5) .$$
 How to get the answer in `R`?
 
@@ -239,6 +239,8 @@ How to find $Z_{0.05}$ in R?
 ```{r, echo=TRUE, comment = ''}
 z0<- -qnorm(0.05, mean = 0, sd =1)
 z0# display the answer
+z0<- qnorm(1-0.05)
+z0
 #verify it
 pnorm(z0)
 ```
@@ -247,8 +249,8 @@ pnorm(z0)
 
 **Example 2**. Find the value of $z_0$ such that $95\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .95$.
 
-**Answer**:	\[P(-z_0\le Z \le z_0) 
- = 1- 2P(Z <-z_0) = 0.95 \Rightarrow P(Z<-z_0) = 0.025.\]
+**Answer**:	$$P(-z_0\le Z \le z_0) 
+ = 1- 2P(Z <-z_0) = 0.95 \Rightarrow P(Z<-z_0) = 0.025.$$
 
 How to find $z_0$ in `R`?
 
@@ -296,10 +298,9 @@ text(crit_right, 0.02, round(crit_right, 2), pos = 4, col = "red")
 	
 #### In-class Exercise: Critical Values
 
-1. Find the value of $z_0$ such that $99\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .99$.
+1. Find $z_\alpha$ when $\alpha = 0.01$.
 
-2. Find $z_\alpha$ when $\alpha = 0.01$.
-
+2. Find the value of $z_0$ such that $99\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .99$.
 
 ### Conclusion
 Normal distribution is the most important distribution. When we talk about the Central Limit Theorem, confidence interval, and hypothesis testing, we will come back to the normal distribution.

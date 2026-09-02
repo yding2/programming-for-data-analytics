@@ -327,7 +327,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <p>The <strong>normal distribution</strong> (also be called <em>Gaussian distribution</em>) is a <strong>symmetric</strong> distribution that is centered around a <strong>mean</strong> and spreads out in both directions.</p>
 <p>Examples: Test scores for all ITMS 514 students.</p>
 <ul>
-<li><p>Notation: <span class="math inline">\(X\sim N(\mu, \sigma^2)\)</span></p>
+<li><p>Notation: <span class="math inline">\(X\sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
 <ul>
 <li><span class="math inline">\(\mu\)</span> is the mean of the distribution</li>
 <li><span class="math inline">\(\sigma^2\)</span> is the variance of the distribution</li>
@@ -339,7 +339,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 F(x) &amp;=P(X&lt;x) = P(X \le x) \\
 F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) = P(x_1 \le X \le x_2).
 \end{align*}\]</span></p>
-<p>Suppose <span class="math inline">\(Z\)</span> is the standard normal random variable, i.e., <span class="math inline">\(Z \sim N(0, 1)\)</span></p>
+<p>Suppose <span class="math inline">\(Z\)</span> is the standard normal random variable, i.e., <span class="math inline">\(Z \sim \mathcal{N}(0, 1)\)</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -377,14 +377,14 @@ F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) 
 <section id="calculate-the-probability-for-the-normal-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="calculate-the-probability-for-the-normal-distribution">Calculate the probability for the Normal Distribution</h3>
 <p><strong>Question</strong>: What’s the relationship between the general normal random variable <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> and the standard normal random variable?</p>
-<p><span class="math display">\[Z= \frac{X-\mu}{\sigma} \sim N(0,1).\]</span></p>
-<p>To calculate the probability involving <span class="math inline">\(X\sim N(\mu,\sigma^2)\)</span>,</p>
+<p><span class="math display">\[Z= \frac{X-\mu}{\sigma} \sim \mathcal{N}(0,1).\]</span></p>
+<p>To calculate the probability involving <span class="math inline">\(X\sim \mathcal{N}(\mu,\sigma^2)\)</span>,</p>
 <p><span class="math display">\[
     P(a\leq X\leq b) = P\left(\frac{a-\mu}{\sigma}\leq \frac{X-\mu}{\sigma}\leq \frac{b-\mu}{\sigma}\right)
     = P\left(\frac{a-\mu}{\sigma}\leq Z\leq \frac{b-\mu}{\sigma}\right),
 \]</span></p>
 <p><strong>Example 1</strong>: The achievement scores from a college entrance examination are normally distributed with mean 75 and standard deviation 10. What fraction of the scores lies between 80 and 90?</p>
-<p><strong>Answer</strong>: The scores <span class="math inline">\(X\sim N(75,10^2)\)</span>, then <span class="math display">\[P(80\leq X\leq 90) = P\left(\frac{80-75}{10}\leq Z\leq \frac{90-75}{10}\right) = P(0.5\leq Z\leq 1.5) .\]</span> How to get the answer in <code>R</code>?</p>
+<p><strong>Answer</strong>: The scores <span class="math inline">\(X\sim \mathcal{N}(75,10^2)\)</span>, then <span class="math display">\[P(80\leq X\leq 90) = P\left(\frac{80-75}{10}\leq Z\leq \frac{90-75}{10}\right) = P(0.5\leq Z\leq 1.5) .\]</span> How to get the answer in <code>R</code>?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="fl">1.5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span><span class="dv">1</span>) <span class="sc">-</span><span class="fu">pnorm</span>(<span class="fl">0.5</span>, <span class="at">mean =</span>  <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) <span class="co"># find the P(0.5 &lt;=Z &lt;=1.5) </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="co"># display the answer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -426,7 +426,7 @@ F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) 
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 31 58</code></pre>
+<pre><code>[1] 78 53</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try Petal.Length in iris data set</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(iris<span class="sc">$</span>Petal.Length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -494,8 +494,13 @@ F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) 
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.644854</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#verify it</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>z0<span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.05</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>z0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#verify it</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.95</code></pre>
 </div>
@@ -503,21 +508,22 @@ F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) 
 <section id="two-tailed-critical-value" class="level4">
 <h4 class="anchored" data-anchor-id="two-tailed-critical-value">Two Tailed Critical Value</h4>
 <p><strong>Example 2</strong>. Find the value of <span class="math inline">\(z_0\)</span> such that <span class="math inline">\(95\%\)</span> of the standard normal <span class="math inline">\(Z\)</span> values lie between <span class="math inline">\(-z_0\)</span> and <span class="math inline">\(z_0\)</span>; that is, <span class="math inline">\(P(-z_0\leq Z\leq z_0) = .95\)</span>.</p>
-<p><strong>Answer</strong>: [P(-z_0Z z_0) = 1- 2P(Z &lt;-z_0) = 0.95 P(Z&lt;-z_0) = 0.025.]</p>
+<p><strong>Answer</strong>: <span class="math display">\[P(-z_0\le Z \le z_0)
+= 1- 2P(Z &lt;-z_0) = 0.95 \Rightarrow P(Z&lt;-z_0) = 0.025.\]</span></p>
 <p>How to find <span class="math inline">\(z_0\)</span> in <code>R</code>?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>z0<span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span><span class="dv">1</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>z0<span class="co"># display the answer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>z0<span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span><span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>z0<span class="co"># display the answer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.959964</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>z0<span class="ot">&lt;-</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span><span class="dv">1</span>) </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>z0 <span class="co"># display the answer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>z0<span class="ot">&lt;-</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="fl">-0.025</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span><span class="dv">1</span>) </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>z0 <span class="co"># display the answer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.959964</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#verify it</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z0)<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span>z0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#verify it</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z0)<span class="sc">-</span><span class="fu">pnorm</span>(<span class="sc">-</span>z0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.95</code></pre>
 </div>
@@ -535,8 +541,8 @@ F(x_2) -F(x_1) =P(x_1&lt;X&lt;x_2)= &amp;P(x_1\le X&lt;x_2)= P(x_1&lt;X\le x_2) 
 <section id="in-class-exercise-critical-values" class="level4">
 <h4 class="anchored" data-anchor-id="in-class-exercise-critical-values">In-class Exercise: Critical Values</h4>
 <ol type="1">
-<li><p>Find the value of <span class="math inline">\(z_0\)</span> such that <span class="math inline">\(99\%\)</span> of the standard normal <span class="math inline">\(Z\)</span> values lie between <span class="math inline">\(-z_0\)</span> and <span class="math inline">\(z_0\)</span>; that is, <span class="math inline">\(P(-z_0\leq Z\leq z_0) = .99\)</span>.</p></li>
 <li><p>Find <span class="math inline">\(z_\alpha\)</span> when <span class="math inline">\(\alpha = 0.01\)</span>.</p></li>
+<li><p>Find the value of <span class="math inline">\(z_0\)</span> such that <span class="math inline">\(99\%\)</span> of the standard normal <span class="math inline">\(Z\)</span> values lie between <span class="math inline">\(-z_0\)</span> and <span class="math inline">\(z_0\)</span>; that is, <span class="math inline">\(P(-z_0\leq Z\leq z_0) = .99\)</span>.</p></li>
 </ol>
 </section>
 </section>

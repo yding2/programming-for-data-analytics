@@ -85,7 +85,7 @@ as $n\rightarrow \infty$, is the standard normal distribution, i.e., $Z \sim \ma
 *Answer*: Since the sample size $n = 50 >30$, we can assume the distribution of sample mean $\bar{X}$ is **approximately normal** with mean and standard deviation
 	$$\mu_{\bar{X}} = \mu = 4.0,\qquad \sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} = \frac{1.5}{\sqrt{50}} = 0.2121.$$
 Thus, 
-$$		P(3.5\leq \bar{X}\leq 3.8) = P\left(\frac{3.5-4}{0.2121}\leq Z\leq \frac{3.8-4}{0.2121}\right)
+$$P(3.5\leq \bar{X}\leq 3.8) = P\left(\frac{3.5-4}{0.2121}\leq Z\leq \frac{3.8-4}{0.2121}\right)
 		= P(-2.36\leq Z\leq -0.94)
 		= 0.1645$$
 
