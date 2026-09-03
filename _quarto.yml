@@ -39,7 +39,10 @@ website:
             href: source/week04_EDA_python.ipynb
 
           - text: "Week 5: Sampling Distribution of Sample Mean(s)"
-            href: source/week05_sampling_distribution_of_sample_mean(s).Rmd 
+            href: source/week05_sampling_distribution_of_sample_mean(s).Rmd
+
+          - text: "Week 6: Estimation on Mean(s)"
+            href: source/week06_estimation_on_means.Rmd  
             
       - text: "Homework"
         menu:

@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 6: Statistical Inference I: Estimation on Mean(s) – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a>
+  <ul class="collapse">
+  <li><a href="#review-central-limit-theorem-clt" id="toc-review-central-limit-theorem-clt" class="nav-link" data-scroll-target="#review-central-limit-theorem-clt">Review Central Limit Theorem (CLT)</a></li>
+  </ul></li>
+  <li><a href="#interval-estimate" id="toc-interval-estimate" class="nav-link" data-scroll-target="#interval-estimate">Interval Estimate</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-on-mu-when-sigma-known" id="toc-confidence-interval-on-mu-when-sigma-known" class="nav-link" data-scroll-target="#confidence-interval-on-mu-when-sigma-known">Confidence Interval on <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> known</a></li>
+  <li><a href="#if-we-dont-know-sigma" id="toc-if-we-dont-know-sigma" class="nav-link" data-scroll-target="#if-we-dont-know-sigma">If we don’t know <span class="math inline">\(\sigma\)</span></a></li>
+  <li><a href="#confidence-interval-on-mu-when-sigma2-unknown" id="toc-confidence-interval-on-mu-when-sigma2-unknown" class="nav-link" data-scroll-target="#confidence-interval-on-mu-when-sigma2-unknown">Confidence Interval on <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma^2\)</span> unknown</a></li>
+  <li><a href="#check-point-questions" id="toc-check-point-questions" class="nav-link" data-scroll-target="#check-point-questions">Check Point Questions:</a></li>
+  <li><a href="#quick-check-confidence-intervals-for-a-population-mean" id="toc-quick-check-confidence-intervals-for-a-population-mean" class="nav-link" data-scroll-target="#quick-check-confidence-intervals-for-a-population-mean">Quick Check: Confidence Intervals for a Population Mean</a></li>
+  <li><a href="#quick-check-matching-statistical-terms" id="toc-quick-check-matching-statistical-terms" class="nav-link" data-scroll-target="#quick-check-matching-statistical-terms">Quick Check: Matching Statistical Terms</a></li>
+  </ul></li>
+  <li><a href="#estimating-the-difference-between-two-means" id="toc-estimating-the-difference-between-two-means" class="nav-link" data-scroll-target="#estimating-the-difference-between-two-means">Estimating the Difference between Two Means</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-on-mu_1-mu_2-when-sigma_12-and-sigma_22-known" id="toc-confidence-interval-on-mu_1-mu_2-when-sigma_12-and-sigma_22-known" class="nav-link" data-scroll-target="#confidence-interval-on-mu_1-mu_2-when-sigma_12-and-sigma_22-known">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span> when <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> known</a></li>
+  <li><a href="#confidence-interval-on-mu_1-mu_2-when-sigma_12-sigma_22-but-both-unknown" id="toc-confidence-interval-on-mu_1-mu_2-when-sigma_12-sigma_22-but-both-unknown" class="nav-link" data-scroll-target="#confidence-interval-on-mu_1-mu_2-when-sigma_12-sigma_22-but-both-unknown">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span> when <span class="math inline">\(\sigma_1^2  = \sigma_2^2\)</span> but Both Unknown</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion:</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval-on-mu" id="toc-confidence-interval-on-mu" class="nav-link" data-scroll-target="#confidence-interval-on-mu">Confidence Interval on <span class="math inline">\(\mu\)</span></a></li>
+  <li><a href="#confidence-interval-on-mu_1-mu_2" id="toc-confidence-interval-on-mu_1-mu_2" class="nav-link" data-scroll-target="#confidence-interval-on-mu_1-mu_2">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 6: Statistical Inference I: Estimation on Mean(s)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><strong>Probability &amp; Statistics for Engineers &amp; Scientist</strong>, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall</li>
+</ol>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li><p>Understand the reasons why we use interval estimate instead of point estimate</p></li>
+<li><p>Know how to <strong>use R</strong> to construct a confidence interval(CI) on <strong>Mean</strong> and <strong>Difference of Two Means</strong></p></li>
+<li><p>Understand when to use <code>t.test</code> to construct CI for <strong>Mean</strong> and <strong>Difference of Two Means</strong></p></li>
+</ul>
+<section id="review-central-limit-theorem-clt" class="level3">
+<h3 class="anchored" data-anchor-id="review-central-limit-theorem-clt">Review Central Limit Theorem (CLT)</h3>
+<p>Let <span class="math inline">\(\bar{X}\)</span> be the mean of a random sample of size <span class="math inline">\(n\)</span> taken from a population with mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, then the limiting form of the distribution of <span class="math display">\[Z = \frac{\bar{X} -\mu}{\sigma/\sqrt{n}},\]</span> as <span class="math inline">\(n\rightarrow \infty\)</span>, is the standard normal distribution, i.e., <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span>.</p>
+<p>This tells us sample mean <span class="math inline">\(\bar{X}\)</span> should be a <strong>good estimate</strong> of population mean <span class="math inline">\(\mu\)</span>, when sample size large enough. However, it is not good enough to estimate <span class="math inline">\(\mu\)</span> just by one point <span class="math inline">\(\bar{X}\)</span>. We want to use an interval to estimate <span class="math inline">\(\mu\)</span>.</p>
+</section>
+</section>
+<section id="interval-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="interval-estimate">Interval Estimate</h2>
+<p>An <strong>interval estimate</strong> of a population parameter <span class="math inline">\(\theta\)</span> is an interval of the form <span class="math inline">\(\theta_{L} &lt; \theta &lt; \theta_{U}.\)</span></p>
+<p>For example, a random sample of SAT verbal scores for students in the entering freshman class might produce an interval from 530 to 550, within which we expect to find the true average of all SAT verbal scores for the freshman class.</p>
+<p><strong>Question</strong>: How to choose <span class="math inline">\(\theta_{L}\)</span> and <span class="math inline">\(\theta_{U}\)</span>?</p>
+<p>If we find <span class="math inline">\(\theta_{L}\)</span> and <span class="math inline">\(\theta_{U}\)</span> such that <span class="math display">\[ P(\theta_{L} &lt; \theta &lt; \theta_{U}) = 1- \alpha,\]</span> where <span class="math inline">\(0 &lt; \alpha &lt; 1,\)</span> the interval <span class="math inline">\((\theta_{L} , \theta_{U})\)</span> is called a <span class="math inline">\(100(1-\alpha)\%\)</span> <strong>confidence interval</strong>, the fraction <span class="math inline">\(1-\alpha\)</span> is called the <strong>confidence coefficient</strong>, and <span class="math inline">\(\theta_{L}\)</span> and <span class="math inline">\(\theta_{U}\)</span> are called the <em>lower and upper confidence limits</em>.</p>
+<section id="confidence-interval-on-mu-when-sigma-known" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu-when-sigma-known">Confidence Interval on <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma\)</span> known</h3>
+<p>As we know <span class="math display">\[ Z = \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0,1), \]</span> suppose <span class="math inline">\(z_{\alpha/2}\)</span> denote the value such that <span class="math display">\[P(-z_{\alpha/2} &lt; Z &lt;z_{\alpha/2}) = 1- \alpha\]</span> as the following figure, where <span class="math inline">\(\alpha =0.05\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week06_estimation_on_means_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can have <span class="math display">\[P(-z_{\alpha/2} &lt; \frac{\bar{X}-\mu}{\sigma/\sqrt{n}}  &lt;z_{\alpha/2}) = P(-\frac{\sigma}{\sqrt{n} }z_{\alpha/2} &lt; \bar{X}-\mu&lt; \frac{\sigma}{\sqrt{n} }z_{\alpha/2})
+= P(\bar{X} -\frac{\sigma}{\sqrt{n} }z_{\alpha/2} &lt; \mu&lt; \bar{X} +\frac{\sigma}{\sqrt{n} }z_{\alpha/2})
+=1- \alpha.\]</span> That is the interval <span class="math inline">\((\bar{X} -\frac{\sigma}{\sqrt{n} }z_{\alpha/2}, \bar{X} +\frac{\sigma}{\sqrt{n} }z_{\alpha/2})\)</span> is an <strong>interval estimate</strong> of <span class="math inline">\(\mu\)</span> with confidence <span class="math inline">\(100(1-\alpha)\%.\)</span> Actually the confidence is the probability.</p>
+<p>Suppose confidence is 95%, we know <span class="math inline">\(\alpha = 1-95\%  = 0.05\)</span>, that is <span class="math inline">\(\alpha/2 = 0.025\)</span>. How to find <span class="math inline">\(z_{\alpha/2}\)</span>?</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>z_0<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="co"># why?</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>z_0<span class="fl">.025</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">pnorm</span>(z_0<span class="fl">.025</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span>z_0<span class="fl">.025</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.95</code></pre>
+</div>
+</div>
+<p>Different samples will yield different values of <span class="math inline">\(\bar{x}\)</span> and therefore produce different interval estimates of the parameter <span class="math inline">\(\mu\)</span>, as shown below.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/fig9_8.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Can you construct a 99% confidence interval for <span class="math inline">\(\mu\)</span>?</p>
+<p><strong>Example 1</strong> The average zinc concentration recovered from a sample of measurements taken in 36 different locations in a river is found to be 2.6 grams per milliliter. Find the 95% and 99% confidence intervals for the mean zinc concentration in the river. Assume that the population standard deviation is 0.3 gram per milliliter.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">36</span> <span class="co">#sample size</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fl">2.6</span>  <span class="co">#sample mean</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.3</span>  <span class="co">#population sd</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>alpha1 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Left endpoint for confidence 95%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>lend1 <span class="ot">&lt;-</span> xbar <span class="sc">-</span> sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha1<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Right endpoint for confidence 95%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>rend1 <span class="ot">&lt;-</span> xbar <span class="sc">+</span> sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha1<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>alpha2 <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Left endpoint for confidence 99%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>lend2 <span class="ot">&lt;-</span> xbar <span class="sc">-</span> sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha2<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Right endpoint for confidence 99%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>rend2 <span class="ot">&lt;-</span> xbar <span class="sc">+</span> sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha2<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <span class="math inline">\(95\%\)</span> confidence interval is (2.5020018, 2.6979982). The <span class="math inline">\(99\%\)</span> confidence interval is (2.4712085, 2.7287915).</p>
+<p><strong>Question</strong>: Suppose some evidence shows the mean zinc concentration in the river (<span class="math inline">\(\mu\)</span>) should be <span class="math inline">\(2.5\)</span>. Does that make sense?</p>
+<p>As we know <span class="math inline">\(\bar{X} \sim \mathcal{N}(\mu, \sigma^2/n),\)</span> let’s find the probability <span class="math inline">\(\bar{X} \ge 2.6\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">&lt;-</span><span class="dv">1</span><span class="sc">-</span> <span class="fu">pnorm</span>(xbar,<span class="at">mean =</span> <span class="fl">2.5</span>, <span class="at">sd =</span> sigma<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02275013</code></pre>
+</div>
+</div>
+<p>Actually, this is one way to do the hypothesis testing. We will talk about that later.</p>
+<section id="in-class-exercise-ci-on-mean" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-ci-on-mean">In-class Exercise: CI on mean</h4>
+<p>A manufacturer of sports equipment has developed a new synthetic fishing line with a standard deviation of 0.5 kilogram. If a random sample of 50 lines is tested and found to have a mean breaking strength of 7.8 kilograms, can you construct a <span class="math inline">\(99\%\)</span> confidence interval.</p>
+</section>
+</section>
+<section id="if-we-dont-know-sigma" class="level3">
+<h3 class="anchored" data-anchor-id="if-we-dont-know-sigma">If we don’t know <span class="math inline">\(\sigma\)</span></h3>
+<p>If the population follows <strong>normal distribution</strong> or <em>approximately</em> <strong>normal distribution</strong>, we can use <strong><span class="math inline">\(t-\)</span>distribution</strong>.</p>
+<p>If we have a random sample from a <strong>normal distribution</strong>, then the random variable <span class="math display">\[T = \frac{\bar{X}-\mu}{S/\sqrt{n}}\]</span> has a Student <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-1\)</span> degrees of freedom. Here <span class="math inline">\(S\)</span> is the sample standard deviation.</p>
+<p>Let <span class="math inline">\(\alpha = 0.05, n-1 =10\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week06_estimation_on_means_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confidence-interval-on-mu-when-sigma2-unknown" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu-when-sigma2-unknown">Confidence Interval on <span class="math inline">\(\mu\)</span> when <span class="math inline">\(\sigma^2\)</span> unknown</h3>
+<p>If <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s\)</span> are the mean and the standard deviation of a random sample of size <span class="math inline">\(n\)</span> from a distribution with unknown variance <span class="math inline">\(\sigma^2\)</span>, a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math display">\[\bar{x} - t_{n-1,\alpha/2}\frac{S}{\sqrt{n}} &lt; \mu &lt; \bar{x} + t_{n-1,\alpha/2}\frac{S}{\sqrt{n}},\]</span> where <span class="math inline">\(t_{n-1,\alpha/2}\)</span> is the <span class="math inline">\(t-\)</span>value with <span class="math inline">\(v =n-1\)</span> degrees of freedom, leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right.</p>
+<p><strong>Example 2</strong> The contents of seven similar containers of sulfuric acid are 9.8, 10.2, 10.4, 9.8, 10.0, 10.2, and 9.6 liters. Find a 95% confidence interval for the mean contents of all such containers, assuming an <em>approximately normal distribution</em>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sulfruicAcid<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">9.8</span>,<span class="fl">10.2</span>,<span class="fl">10.4</span>,<span class="fl">9.8</span>,<span class="fl">10.0</span>,<span class="fl">10.2</span>,<span class="fl">9.6</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(sulfruicAcid)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span><span class="fu">sd</span>(sulfruicAcid)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>t6_0<span class="fl">.025</span><span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>lowerBound <span class="ot">&lt;-</span> xbar<span class="sc">-</span>t6_0<span class="fl">.025</span><span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>lowerBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.738414</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>upperBound <span class="ot">&lt;-</span> xbar<span class="sc">+</span>t6_0<span class="fl">.025</span><span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>upperBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.26159</code></pre>
+</div>
+</div>
+<p>A different way to get confidence interval</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(sulfruicAcid, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  sulfruicAcid
+t = 93.541, df = 6, p-value = 1.006e-10
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  9.738414 10.261586
+sample estimates:
+mean of x 
+       10 </code></pre>
+</div>
+</div>
+<section id="in-class-exercise-ci-on-mu-with-unknown-variance" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-ci-on-mu-with-unknown-variance">In-class Exercise: CI on <span class="math inline">\(\mu\)</span> with unknown variance</h4>
+<ol type="1">
+<li><p>Regular consumption of presweetened cereals contributes to tooth decay, heart disease, and other degenerative diseases, according to studies conducted by Dr.&nbsp;W. H. Bowen of the National Institute of Health and Dr.&nbsp;J. Yudben, Professor of Nutrition and Dietetics at the University of London. In a random sample consisting of 20 similar single servings of Alpha-Bits, the average sugar content was 11.3 grams with a standard deviation of 2.45 grams. Assuming that the sugar contents are normally distributed, construct a 95% confidence interval for the mean sugar content for single servings of Alpha-Bits.</p></li>
+<li><p>Please construct a 95% confidence interval for the mean of <code>Sepal.Length</code> in the <code>iris</code> data set, assume the normal distribution.</p></li>
+</ol>
+</section>
+</section>
+<section id="check-point-questions" class="level3">
+<h3 class="anchored" data-anchor-id="check-point-questions">Check Point Questions:</h3>
+</section>
+<section id="quick-check-confidence-intervals-for-a-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="quick-check-confidence-intervals-for-a-population-mean">Quick Check: Confidence Intervals for a Population Mean</h3>
+<p>This short practice is not graded. Select an answer to receive immediate feedback.</p>
+<style>
+.quick-check {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.7rem 0.9rem;
+  margin: 0.8rem 0;
+  background: #f8fafc;
+}
+.quick-check p {
+  margin: 0 0 0.4rem;
+}
+.quick-check label {
+  display: block;
+  margin: 0.18rem 0;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.quiz-feedback {
+  min-height: 1.2rem;
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+</style>
+<div class="quick-check">
+<p>
+<strong>1. To find a confidence interval for a population mean when the population variance is known, which of the following should we use?</strong>
+</p>
+<p>
+Suppose <span class="math inline">\(X_1,\ldots,X_{100}\)</span> is a random sample of size 100 from an unknown distribution.
+</p>
+<p><label> <input type="radio" name="ci-known" value="correct"> A. The normal distribution (with the Z statistic) </label></p>
+<p><label> <input type="radio" name="ci-known" value="incorrect"> B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution </label></p>
+<p><label> <input type="radio" name="ci-known" value="incorrect"> C. The t-distribution (with the T statistic) </label></p>
+<p><label> <input type="radio" name="ci-known" value="incorrect"> D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution </label></p>
+<div id="feedback-ci-known" class="quiz-feedback">
+
+</div>
+</div>
+<div class="quick-check">
+<p>
+<strong>2. To find a confidence interval for a population mean when the population variance is unknown, which of the following should we use?</strong>
+</p>
+<p>
+Suppose <span class="math inline">\(X_1,\ldots,X_{20}\)</span> is a random sample of size 20 from an unknown distribution.
+</p>
+<p><label> <input type="radio" name="ci-unknown" value="incorrect"> A. The normal distribution (with the Z statistic) </label></p>
+<p><label> <input type="radio" name="ci-unknown" value="incorrect"> B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution </label></p>
+<p><label> <input type="radio" name="ci-unknown" value="incorrect"> C. The t-distribution (with the T statistic) </label></p>
+<p><label> <input type="radio" name="ci-unknown" value="correct"> D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution </label></p>
+<div id="feedback-ci-unknown" class="quiz-feedback">
+
+</div>
+</div>
+<script>
+(function () {
+  function setUpQuestion(name, feedbackId, explanation) {
+    const choices = document.querySelectorAll(
+      'input[name="' + name + '"]'
+    );
+    const feedback = document.getElementById(feedbackId);
+
+    choices.forEach(function (choice) {
+      choice.addEventListener("change", function () {
+        if (this.value === "correct") {
+          feedback.innerHTML =
+            '<span style="color:#16803a;">Correct!</span> ' + explanation;
+        } else {
+          feedback.innerHTML =
+            '<span style="color:#c53030;">Not quite.</span> Try again.';
+        }
+      });
+    });
+  }
+
+  setUpQuestion(
+    "ci-known",
+    "feedback-ci-known",
+    "Because the population variance is known, we use the Z statistic. " +
+    "The large sample size allows us to use the normal approximation."
+  );
+
+  setUpQuestion(
+    "ci-unknown",
+    "feedback-ci-unknown",
+    "When the population variance is unknown, the T statistic has an exact " +
+    "t-distribution only if the population is normally distributed. Since " +
+    "the sample size is small, normality of the population is required."
+  );
+})();
+</script>
+</section>
+<section id="quick-check-matching-statistical-terms" class="level3">
+<h3 class="anchored" data-anchor-id="quick-check-matching-statistical-terms">Quick Check: Matching Statistical Terms</h3>
+<p>Match each description with the appropriate term by dragging the terms into the boxes.</p>
+<div class="term-bank">
+<div class="term" draggable="true" data-term="Population">
+Population
+</div>
+<div class="term" draggable="true" data-term="Sample">
+Sample
+</div>
+<div class="term" draggable="true" data-term="Descriptive statistic">
+<pre><code>Descriptive statistic</code></pre>
+</div>
+<div class="term" draggable="true" data-term="Parameter">
+Parameter
+</div>
+<div class="term" draggable="true" data-term="Inferential statistic">
+<pre><code>Inferential statistic</code></pre>
+</div>
+</div>
+<div class="match-row">
+<div>
+<strong>a.</strong> All home compost bins in Galicia, Spain
+</div>
+<div class="drop-zone" data-answer="Population">
+
+</div>
+</div>
+<div class="match-row">
+<div>
+<strong>b.</strong> The 87 randomly selected home compost bins
+</div>
+<div class="drop-zone" data-answer="Sample">
+
+</div>
+</div>
+<div class="match-row">
+<div>
+<strong>c.</strong> The sample mean moisture content, <span class="math inline">\(\bar{x}=68.1\%\)</span>
+</div>
+<div class="drop-zone" data-answer="Descriptive statistic">
+
+</div>
+</div>
+<div class="match-row">
+<div>
+<strong>d.</strong> The mean moisture content for all compost similarly produced by home compost bins in Galicia, Spain, <span class="math inline">\(\mu\)</span>
+</div>
+<div class="drop-zone" data-answer="Parameter">
+
+</div>
+</div>
+<div class="match-row">
+<div>
+<strong>e.</strong> The 95% confidence interval for the population mean moisture content, <span class="math inline">\((66.1\%,70.1\%)\)</span>
+</div>
+<div class="drop-zone" data-answer="Inferential statistic">
+
+</div>
+</div>
+<button type="button" id="check-match">
+Check Answers
+</button>
+<button type="button" id="reset-match">
+Reset
+</button>
+<p id="match-result">
+</p>
+<style>
+.term-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 45px;
+  padding: 0.7rem;
+  margin: 0.8rem 0;
+  border: 2px dashed #94a3b8;
+  border-radius: 7px;
+  background: #f8fafc;
+}
+
+.term {
+  padding: 0.4rem 0.7rem;
+  border: 1px solid #64748b;
+  border-radius: 5px;
+  background: white;
+  cursor: grab;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin: 0.7rem 0;
+}
+
+.drop-zone {
+  min-height: 42px;
+  padding: 0.3rem;
+  border: 2px dashed #94a3b8;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.drop-zone .term {
+  display: inline-block;
+}
+
+#check-match,
+#reset-match {
+  margin: 0.8rem 0.3rem 0 0;
+  padding: 0.4rem 0.8rem;
+}
+
+#match-result {
+  min-height: 1.2rem;
+  font-weight: 600;
+}
+</style>
+<script>
+(function () {
+  const terms = document.querySelectorAll(".term");
+  const zones = document.querySelectorAll(".drop-zone");
+  const bank = document.querySelector(".term-bank");
+  const result = document.getElementById("match-result");
+  let draggedTerm = null;
+
+  terms.forEach(function (term) {
+    term.addEventListener("dragstart", function () {
+      draggedTerm = term;
+    });
+  });
+
+  zones.forEach(function (zone) {
+    zone.addEventListener("dragover", function (event) {
+      event.preventDefault();
+    });
+
+    zone.addEventListener("drop", function (event) {
+      event.preventDefault();
+
+      if (zone.children.length > 0) {
+        bank.appendChild(zone.firstElementChild);
+      }
+
+      zone.appendChild(draggedTerm);
+    });
+  });
+
+  bank.addEventListener("dragover", function (event) {
+    event.preventDefault();
+  });
+
+  bank.addEventListener("drop", function (event) {
+    event.preventDefault();
+    bank.appendChild(draggedTerm);
+  });
+
+  document.getElementById("check-match").onclick = function () {
+    let correct = 0;
+
+    zones.forEach(function (zone) {
+      if (
+        zone.firstElementChild &&
+        zone.firstElementChild.dataset.term === zone.dataset.answer
+      ) {
+        zone.style.borderColor = "#16803a";
+        zone.style.background = "#ecfdf3";
+        correct++;
+      } else {
+        zone.style.borderColor = "#c53030";
+        zone.style.background = "#fff5f5";
+      }
+    });
+
+    result.textContent = correct + " out of 5 correct.";
+    result.style.color = correct === 5 ? "#16803a" : "#c53030";
+  };
+
+  document.getElementById("reset-match").onclick = function () {
+    terms.forEach(function (term) {
+      bank.appendChild(term);
+    });
+
+    zones.forEach(function (zone) {
+      zone.style.borderColor = "#94a3b8";
+      zone.style.background = "#f8fafc";
+    });
+
+    result.textContent = "";
+  };
+})();
+</script>
+</section>
+</section>
+<section id="estimating-the-difference-between-two-means" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-the-difference-between-two-means">Estimating the Difference between Two Means</h2>
+<p>Next, we want to investigate two populations with means <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> and variances <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, respectively. Thus we can have a point estimator of the difference between <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span> is given by the statistic <span class="math inline">\(\bar{x}_1-\bar{x}_2\)</span>.</p>
+<section id="confidence-interval-on-mu_1-mu_2-when-sigma_12-and-sigma_22-known" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu_1-mu_2-when-sigma_12-and-sigma_22-known">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span> when <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> known</h3>
+<p>If <span class="math inline">\(\bar{x}_1\)</span> and <span class="math inline">\(\bar{x}_2\)</span> are the means of independent random samples of sizes <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> from populations with known variances <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, respectively,<br>
+a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\mu_1-\mu_2\)</span> is given by <span class="math display">\[ (\bar{x}_1-\bar{x}_2) - z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1} +\frac{\sigma^2_2}{n_2}}&lt; \mu_1-\mu_2 &lt; (\bar{x}_1-\bar{x}_2) + z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1} +\frac{\sigma^2_2}{n_2}},\]</span> where <span class="math inline">\(z_{\alpha/2}\)</span> is the <span class="math inline">\(z-\)</span>value leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right.</p>
+<p><strong>Example 3</strong> A study was conducted in which two types of engines, <span class="math inline">\(A\)</span> and <span class="math inline">\(B,\)</span> were compared. Gas mileage, in miles per gallon, was measured. Fifty experiments were conducted using engine type <span class="math inline">\(A\)</span> and 75 experiments were done with engine type <span class="math inline">\(B.\)</span> The gasoline used and other conditions were held constant. The average gas mileage was 36 miles per gallon for engine <span class="math inline">\(A\)</span> and 42 miles per gallon for engine <span class="math inline">\(B\)</span>. Find a 96% confidence interval on <span class="math inline">\(\mu_B - \mu_A,\)</span> where <span class="math inline">\(\mu_A\)</span> and <span class="math inline">\(\mu_B\)</span> are population mean gas mileages for engines <span class="math inline">\(A\)</span> and <span class="math inline">\(B,\)</span> respectively. Assume that the population standard deviations are 6 and 8 for engines <span class="math inline">\(A\)</span> and <span class="math inline">\(B,\)</span> respectively.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.04</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="dv">36</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">75</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="dv">42</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>sigma1 <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>standerror <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sigma1<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span>n1 <span class="sc">+</span> sigma2<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n2)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>lowerBound <span class="ot">&lt;-</span> x2<span class="sc">-</span>x1 <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>standerror</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>lowerBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.42393</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>upperBound <span class="ot">&lt;-</span> x2<span class="sc">-</span>x1 <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>standerror</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>upperBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.57607</code></pre>
+</div>
+</div>
+<section id="in-class-exercise-ci-on-mu_1-mu_2-with-known-sigma_1-and-sigma_2" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-ci-on-mu_1-mu_2-with-known-sigma_1-and-sigma_2">In-class Exercise: CI on <span class="math inline">\(\mu_1-\mu_2\)</span> with known <span class="math inline">\(\sigma_1\)</span> and <span class="math inline">\(\sigma_2\)</span></h4>
+<ol type="1">
+<li><p>Generate 50 normal random numbers with <span class="math inline">\(\mu_1 = 3\)</span> and <span class="math inline">\(\sigma_1 = 3\)</span> and get the sample mean <span class="math inline">\(\bar{x}_1\)</span>. Hint: <code>rnorm</code></p></li>
+<li><p>Generate 75 normal random numbers with <span class="math inline">\(\mu_2 = 2\)</span> and <span class="math inline">\(\sigma_2 = 4\)</span> and get the sample mean <span class="math inline">\(\bar{x}_2\)</span></p></li>
+<li><p>Please construct a 95% confidence interval on <span class="math inline">\(\mu_1-\mu_2\)</span>.</p></li>
+</ol>
+<p><strong>Question</strong>: If we don’t know the variances, what should we do?</p>
+</section>
+</section>
+<section id="confidence-interval-on-mu_1-mu_2-when-sigma_12-sigma_22-but-both-unknown" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu_1-mu_2-when-sigma_12-sigma_22-but-both-unknown">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span> when <span class="math inline">\(\sigma_1^2  = \sigma_2^2\)</span> but Both Unknown</h3>
+<p>If <span class="math inline">\(\bar{x}_1\)</span> and <span class="math inline">\(\bar{x}_2\)</span> are the means of independent random samples of sizes <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>, respectively, from with ,<br>
+a <span class="math inline">\(100(1-\alpha)\%\)</span> cofidence interval for <span class="math inline">\(\mu_1-\mu_2\)</span> is given by <span class="math display">\[ (\bar{x}_1-\bar{x}_2) - t_{n_1+n_2-2,\alpha/2}s_p\sqrt{\frac{1}{n_1} +\frac{1}{n_2}}&lt; \mu_1-\mu_2 &lt; (\bar{x}_1-\bar{x}_2) + t_{n_1+n_2-2,\alpha/2}s_p\sqrt{\frac{1}{n_1} +\frac{1}{n_2}},\]</span> where <span class="math display">\[s_p^2 = \frac{(n_1-1)S_1^2 +(n_2-1)S_2^2  }{n_1+n_2-2}\]</span> is the pooled estimater of the population standard deviation and <span class="math inline">\(t_{n_1+n_2-2,\alpha/2}\)</span> is the <span class="math inline">\(t-\)</span>value with <span class="math inline">\(v =n_1+n_2-2\)</span> degrees of freedom, leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right.</p>
+<p><strong>Example 4</strong> In a study conducted at Virginia Tech on the development of ectomycorrhizal, a symbiotic relationship between the roots of trees and a fungus, in which minerals are transferred from the fungus to the trees and sugars from the trees to the fungus, 20 northern red oak seedlings exposed to the fungus Pisolithus tinctorus were grown in a greenhouse. All seedlings were planted in the same type of soil and received the same amount of sunshine and water. Half received no nitrogen at planting time, to serve as a control, and the other half received 368 ppm of nitrogen in the form NaNO3. The stem weights, in grams, at the end of 140 days were recorded as follows:</p>
+<p>No Nitrogen: 0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43</p>
+<p>Nitrogen: 0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46</p>
+<p>Construct a 95% confidence interval for the difference in the mean stem weight between seedlings that receive no nitrogen and those that receive 368 ppm of nitrogen. Assume the populations to be normally distributed with equal variances.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>noNitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x1bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(noNitro)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(noNitro)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>Nitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>x2bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(Nitro)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>s2<span class="ot">&lt;-</span> <span class="fu">sd</span>(Nitro)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>n2<span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>sp<span class="ot">&lt;-</span> <span class="fu">sqrt</span>(((n1<span class="dv">-1</span>)<span class="sc">*</span>s1<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span>s2<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(n1<span class="sc">+</span>n2<span class="dv">-2</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>loBound<span class="ot">&lt;-</span> x1bar<span class="sc">-</span>x2bar <span class="sc">-</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n1<span class="sc">+</span>n2<span class="dv">-2</span>)<span class="sc">*</span>sp<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>n2)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>loBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.2991579</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>upBound<span class="ot">&lt;-</span>x1bar<span class="sc">-</span>x2bar <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n1<span class="sc">+</span>n2<span class="dv">-2</span>)<span class="sc">*</span>sp<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span>n2)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>upBound</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.03284212</code></pre>
+</div>
+</div>
+<p>Can we use <code>t.test</code>? <em>Yes!</em></p>
+<p>We can use two sample t-test. Don’t forget to add the condition <code>var.equal = TURE</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(noNitro,Nitro, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  noNitro and Nitro
+t = -2.6191, df = 18, p-value = 0.01739
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.29915788 -0.03284212
+sample estimates:
+mean of x mean of y 
+    0.399     0.565 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct a data frame with two columns</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>stemWeight<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>,<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>group<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span>),<span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">10</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>stemData<span class="ot">&lt;-</span><span class="fu">data.frame</span>(stemWeight,group)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>stemData</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   stemWeight group
+1        0.32     0
+2        0.53     0
+3        0.28     0
+4        0.37     0
+5        0.47     0
+6        0.43     0
+7        0.36     0
+8        0.42     0
+9        0.38     0
+10       0.43     0
+11       0.26     1
+12       0.43     1
+13       0.47     1
+14       0.49     1
+15       0.52     1
+16       0.75     1
+17       0.79     1
+18       0.86     1
+19       0.62     1
+20       0.46     1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(stemWeight<span class="sc">~</span>group, <span class="at">data =</span> stemData,<span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  stemWeight by group
+t = -2.6191, df = 18, p-value = 0.01739
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -0.29915788 -0.03284212
+sample estimates:
+mean in group 0 mean in group 1 
+          0.399           0.565 </code></pre>
+</div>
+</div>
+<section id="note-if-the-population-variances-are-unknow-but-different-you-still-can-use-t.test-to-construct-the-confidence-interval-on-mu_1-mu_2-with-var.equal-false.-in-this-case-the-degree-of-freedoms-is-no-longer-an-integer." class="level4">
+<h4 class="anchored" data-anchor-id="note-if-the-population-variances-are-unknow-but-different-you-still-can-use-t.test-to-construct-the-confidence-interval-on-mu_1-mu_2-with-var.equal-false.-in-this-case-the-degree-of-freedoms-is-no-longer-an-integer.">Note: If the population variances are unknow but different, you still can use <code>t.test</code> to construct the confidence interval on <span class="math inline">\(\mu_1-\mu_2\)</span> with <code>var.equal = FALSE</code>. In this case, the degree of freedoms is no longer an integer.</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(noNitro,Nitro, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  noNitro and Nitro
+t = -2.6191, df = 11.673, p-value = 0.02286
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.30452438 -0.02747562
+sample estimates:
+mean of x mean of y 
+    0.399     0.565 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or you can use</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(stemWeight<span class="sc">~</span>group, <span class="at">data =</span> stemData,<span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  stemWeight by group
+t = -2.6191, df = 11.673, p-value = 0.02286
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -0.30452438 -0.02747562
+sample estimates:
+mean in group 0 mean in group 1 
+          0.399           0.565 </code></pre>
+</div>
+</div>
+</section>
+<section id="in-class-exercise-a-ci-on-mu_1-mu_2-with-unknown-sigma_1-sigma_2" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-a-ci-on-mu_1-mu_2-with-unknown-sigma_1-sigma_2">In-class Exercise A: CI on <span class="math inline">\(\mu_1-\mu_2\)</span> with unknown <span class="math inline">\(\sigma_1 = \sigma_2\)</span></h4>
+<p>Let’s play with <code>iris</code> data set. We want to compare the population mean of <code>Sepal.Length</code> between <code>Setosa</code> and <code>Virginica</code>. Suppose we know these two species come from the normal distribution with the same variance. Can you construct a confidence interval on <span class="math inline">\(\mu_{virginica}-\mu_{setosa}\)</span> with 95% confidence?</p>
+</section>
+<section id="in-class-exercise-b-ci-on-mu_1-mu_2-with-unknown-sigma_1-ne-sigma_2" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-b-ci-on-mu_1-mu_2-with-unknown-sigma_1-ne-sigma_2">In-class Exercise B: CI on <span class="math inline">\(\mu_1-\mu_2\)</span> with unknown <span class="math inline">\(\sigma_1 \ne \sigma_2\)</span></h4>
+<p>Let’s play with <code>iris</code> data set. We want to compare the population mean of <code>Sepal.Length</code> between <code>Setosa</code> and <code>Virginica</code>. Suppose we know these two species come from the normal distribution with different variances. Can you construct a confidence interval on <span class="math inline">\(\mu_{virginica}-\mu_{setosa}\)</span> with 95% confidence?</p>
+<p><strong>Question</strong>: How to choose <code>var.equal = TRUE</code> or <code>var.equal = FALSE</code>?</p>
+<p>We can do a hypothesis testing for variance. We will talk about it in the future lectures.</p>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion:</h2>
+<section id="confidence-interval-on-mu" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu">Confidence Interval on <span class="math inline">\(\mu\)</span></h3>
+<ul>
+<li><strong>When <span class="math inline">\(\sigma^2\)</span> Known</strong></li>
+</ul>
+<p>Suppose <span class="math inline">\(z_{\alpha/2}\)</span> denote the value such that <span class="math display">\[P(-z_{\alpha/2} &lt; \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} &lt;z_{\alpha/2}) = 1- \alpha.\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/fig9_2.png" class="quarto-figure quarto-figure-center figure-img" style="width:50.0%;height:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If <span class="math inline">\(\bar{x}\)</span> is the mean of a random sample of size <span class="math inline">\(n\)</span> from a population with <strong>known</strong> variance <span class="math inline">\(\sigma^2\)</span>, a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math display">\[ \bar{x} - z_{\alpha/2} \frac{\sigma}{\sqrt{n}} &lt; \mu &lt; \bar{x} + z_{\alpha/2} \frac{\sigma}{\sqrt{n}},\]</span> where <span class="math inline">\(z_{\alpha/2}\)</span> is the z-value leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right, which can be founded by <code>qnorm(1-alpha/2)</code>.</p>
+<ul>
+<li><strong>When <span class="math inline">\(\sigma^2\)</span> Unknown</strong></li>
+</ul>
+<p>If the population follows <strong>normal distribution</strong> or <em>approximately</em> <strong>normal distribution</strong>, we can use <span class="math inline">\(t-\)</span>distribution. Suppose <span class="math inline">\(t_{\alpha/2}\)</span> denote the value such that <span class="math display">\[P(-t_{\alpha/2} &lt; \frac{\bar{X}-\mu}{s/\sqrt{n}} &lt;t_{\alpha/2}) = 1- \alpha.\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/fig9_4.png" class="quarto-figure quarto-figure-center figure-img" style="width:50.0%;height:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>If <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(s\)</span> are the mean and the standard deviation of a random sample of size <span class="math inline">\(n\)</span> from a distribution with unknown variance <span class="math inline">\(\sigma^2\)</span>, a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\mu\)</span> is given by <span class="math display">\[ \bar{x} - t_{\alpha/2}\frac{s}{\sqrt{n}} &lt; \mu &lt; \bar{x} + t_{\alpha/2}\frac{s}{\sqrt{n}},\]</span> where <span class="math inline">\(t_{\alpha/2}\)</span> is the <span class="math inline">\(t-\)</span>value with <span class="math inline">\(v =n-1\)</span> degrees of freedom, leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right, which can be founded by <code>qt(1-alpha/2,v)</code>. You can also use <code>t.test</code> to find the confidence interval, if the data is given.</p>
+</section>
+<section id="confidence-interval-on-mu_1-mu_2" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-on-mu_1-mu_2">Confidence Interval on <span class="math inline">\(\mu_1-\mu_2\)</span></h3>
+<ul>
+<li><strong>When <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> known</strong></li>
+</ul>
+<p>If <span class="math inline">\(\bar{x}_1\)</span> and <span class="math inline">\(\bar{x}_2\)</span> are the means of independent random samples of sizes <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> from populations with known variances <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span>, respectively,<br>
+a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\mu_1-\mu_2\)</span> is given by <span class="math display">\[ (\bar{x}_1-\bar{x}_2) - z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1} +\frac{\sigma^2_2}{n_2}}&lt; \mu_1-\mu_2 &lt; (\bar{x}_1-\bar{x}_2) + z_{\alpha/2}\sqrt{\frac{\sigma^2_1}{n_1} +\frac{\sigma^2_2}{n_2}},\]</span> where <span class="math inline">\(z_{\alpha/2}\)</span> is the <span class="math inline">\(z-\)</span>value leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right, which can be founded by <code>qnorm(1-alpha/2)</code>.</p>
+<ul>
+<li><strong>When <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> Unknown</strong></li>
+</ul>
+<p>You can use <code>t.test</code> to find the confidence interval, if the data is given. Please choose the approporiate condition for <code>var.equal</code>.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
