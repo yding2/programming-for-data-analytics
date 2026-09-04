@@ -206,6 +206,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
  <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesit_test_on_means.Rmd">
+ <span class="dropdown-text">Week 7: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -342,7 +346,7 @@ window.Quarto = {
 </section>
 <section id="central-limit-theorem-clt" class="level3">
 <h3 class="anchored" data-anchor-id="central-limit-theorem-clt">Central Limit Theorem (CLT)</h3>
-<p>Let <span class="math inline">\(\bar{X}\)</span> be the mean of a random sample of size <span class="math inline">\(n\)</span> taken from a population with mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, then the limiting form of the distribution of [ Z = ,] as <span class="math inline">\(n\rightarrow \infty\)</span>, is the standard normal distribution, i.e., <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span>.</p>
+<p>Let <span class="math inline">\(\bar{X}\)</span> be the mean of a random sample of size <span class="math inline">\(n\)</span> taken from a population with mean <span class="math inline">\(\mu\)</span> and finite variance <span class="math inline">\(\sigma^2\)</span>, then the limiting form of the distribution of <span class="math display">\[ Z = \frac{\bar{X} -\mu}{\sigma/\sqrt{n}},\]</span> as <span class="math inline">\(n\rightarrow \infty\)</span>, is the standard normal distribution, i.e., <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span>.</p>
 <p><strong>Remark</strong></p>
 <ul>
 <li><p>When sample size <span class="math inline">\(n\)</span> is large (<span class="math inline">\(n&gt;30\)</span>), approximately, <span class="math display">\[\bar{X}\sim \mathcal{N}(\mu, \sigma^2/n)\]</span></p></li>
@@ -447,7 +451,7 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="in-class-exercise-difference-between-two-means">In-class Exercise: Difference between Two Means</h4>
 <p>Two different box-filling machines are used to fill cereal boxes on an assembly line. The critical measurement influenced by these machines is the weight of the product in the boxes. Engineers are quite certain that the variance of the weight of product is <span class="math inline">\(\sigma^2  = 1\)</span> ounce. Experiments are conducted using both machines with sample sizes of 36 each. The sample averages for machines <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <span class="math inline">\(\bar{x}_A = 4.5\)</span> ounces and <span class="math inline">\(\bar{x}_B = 4.7\)</span> ounces. Engineers are surprised that the two sample averages for the filling machines are so different.</p>
 <ol type="a">
-<li><p>Use the Central Limit Theorem to determine [P({X}_B-{X}_A )] under the condition that <span class="math inline">\(\mu_A = \mu_B\)</span>.</p></li>
+<li><p>Use the Central Limit Theorem to determine <span class="math display">\[P(\bar{X}_B-\bar{X}_A \ge 0.2)\]</span> under the condition that <span class="math inline">\(\mu_A = \mu_B\)</span>.</p></li>
 <li><p>Do the aforementioned experiments seem to, in any way, strongly support a conjecture that the population means for the two machines are different? Explain using your answer in a.</p></li>
 </ol>
 <p><strong>Question</strong>: If we have no idea about the population variance, what can we do?</p>
@@ -474,7 +478,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Example 3</strong>. A chemical engineer claims that the population mean yield of a certain batch process is 500 grams per milliliter of raw material. To check this claim he samples 25 batches each month. If the computed <span class="math inline">\(t-\)</span>value falls between <span class="math inline">\(-t_{0.05}\)</span> and <span class="math inline">\(t_{0.05},\)</span> he is satisfied with this claim. What conclusion should he draw from a sample that has a mean <span class="math inline">\(\bar{x} = 518\)</span> grams per milliliter and a sample standard deviation <span class="math inline">\(s = 40\)</span> grams? Assume the distribution of yields to be approximately normal.</p>
-<p><em>Answer</em>: We know <span class="math inline">\(\mu = 500, \bar{x}=518, s = 40, n = 25\)</span>. Thus <span class="math inline">\(v = n-1=24\)</span>. Then [ t = = 2.25.]</p>
+<p><em>Answer</em>: We know <span class="math inline">\(\mu = 500, \bar{x}=518, s = 40, n = 25\)</span>. Thus <span class="math inline">\(v = n-1=24\)</span>. Then <span class="math display">\[ t = \frac{518-500}{40/\sqrt{25}} = 2.25.\]</span></p>
 <p>How to find <span class="math inline">\(\pm t_{0.05}\)</span>? We should consider the quantile function <code>qt</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To get t_{0.05} with v = 24</span></span>

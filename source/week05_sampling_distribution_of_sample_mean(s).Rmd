@@ -67,7 +67,7 @@ As we will see, the sampling distribution of $X$ is approximately **normal** wit
 ### Central Limit Theorem (CLT)
 
 Let $\bar{X}$ be the mean of a random sample of size $n$ taken from a population with mean $\mu$ and finite variance $\sigma^2$, then the limiting form of the distribution of 
-\[ Z = \frac{\bar{X} -\mu}{\sigma/\sqrt{n}},\]
+$$ Z = \frac{\bar{X} -\mu}{\sigma/\sqrt{n}},$$
 as $n\rightarrow \infty$, is the standard normal distribution, i.e., $Z \sim \mathcal{N}(0,1)$.
 
 **Remark**
@@ -212,7 +212,7 @@ Two different box-filling machines are used to fill cereal boxes on an assembly 
 		averages for the filling machines are so different.
 		
 (a) Use the Central Limit Theorem to determine
-			\[P(\bar{X}_B-\bar{X}_A \ge 0.2)\]
+			$$P(\bar{X}_B-\bar{X}_A \ge 0.2)$$
 			under the condition that $\mu_A = \mu_B$.
 
 (b) Do the aforementioned experiments seem to, in any
@@ -285,7 +285,7 @@ has a mean $\bar{x} = 518$  grams per milliliter and a sample standard deviation
 grams? Assume the distribution of yields to be approximately normal.
 
 *Answer*: We know $\mu = 500, \bar{x}=518, s = 40, n = 25$. Thus $v = n-1=24$. Then
-\[ t = \frac{518-500}{40/\sqrt{25}} = 2.25.\]
+$$ t = \frac{518-500}{40/\sqrt{25}} = 2.25.$$
 
 How to find $\pm t_{0.05}$? We should consider the quantile function `qt`.
 

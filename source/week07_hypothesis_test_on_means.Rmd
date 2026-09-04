@@ -1,0 +1,547 @@
+---
+title: "Week 7: Hypothesis Testing on Mean(s)"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,comment = '', fig.align = 'center'  , out.width="65%"
+)
+knitr::include_graphics
+```
+
+
+## References
+1. __Data Science Foundations with Python with zyLabs__, zyBooks, a Wiley brand. http://www.zybooks.com
+2. __Probability & Statistics for Engineers & Scientist__, 9th Edition, Ronald E. Walpole,
+Raymond H. Myers,
+Sharon L. Myers,
+Keying Ye, Prentice Hall
+
+## Objectives
+
+- Know the process and result of a hypothesis test for a population parameter.
+
+- Recognize that a hypothesis test may result in an incorrect conclusion, or one of two possible types of error, and each error has consequences.
+
+- Identify the appropriate inference method to answer questions about one mean, and two means.
+
+- State the null and alternative hypotheses for one mean, and two means hypothesis tests.
+
+- Interpret the test statistic and p-value and make a conclusion about the population parameter(s) based on a p-value.
+
+- Know how to use `t.test`.
+
+## Intro to Hypothesis testing
+
+A **hypothesis test** is a method for evaluating a claim, or hypothesis, about a **population parameter** by examining the statistical evidence against the claim based on a sample. The conclusion of a hypothesis test is a decision that the observed data either indicate the claim is plausible or support an alternative explanation. The following steps outline the general process of conducting a hypothesis test.
+
+1. State null and alternative hypotheses about parameters. The **null hypothesis**, $H_0$ , is typically the by-chance or no-effect explanation, and the **alternative hypothesis**,$H_1$, is typically the explanation of an effect, or difference.
+
+2. Calculate a statistic of interest from the sample data that is used to evaluate the null hypothesis.
+
+3. Determine the **p-value**, or likelihood, of obtaining a statistic at least as extreme as the observed statistic when the null hypothesis is true.
+
+4. Draw a conclusion about the null hypothesis based on the statistical evidence provided by the p-value.
+
+
+
+## Inference for Mean(s)
+
+### One mean
+
+For a numerical characteristic of a population, typically the **population mean** is of interest. If we know the population variance, theory-based inference methods for a mean are similar to the methods for a proportion, i.e., using the *standard normal distribution*. However, in general, we have no idea of variance. Therefore, the statistics tend to follow the **t-distribution** rather than the standard normal distribution.
+
+*Remark*:
+	The $t$-distribution can still be used even if the population distribution is not **normal**, as long as
+
+- the sample size $n$ is **large**.
+- the population distribution is not **too-skewed**.
+
+#### Example 1. One mean hypothesis test
+
+Data are collected on a neutral substance (pH
+= 7.0). A sample of the measurements were taken with the data as follows:
+$$7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08$$
+Assume this follows *approximately normal distribution*.
+
+**Parameter**: A neutral substance pH value, $\mu$
+
+
+**Hypotheses**:
+
+The null hypothesis states that the mean is 7.0. The alternative hypothesis states the mean is different from 7.0.
+
+\begin{align*}
+H_0: \mu = 7.0,\\
+H_1: \mu \ne 7.0.
+\end{align*}
+
+**Observed data**:
+
+A sample of meansurements
+$$7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08$$
+
+We can have 
+$$ \bar{x} = 7.025,\qquad s = 0.044$$
+
+**Test statistic**
+
+The standardized $t$ test statistic's calculation assumes the null hypothesis is true. The standard deviation of the sample mean's sampling distribution is estimated by $s/\sqrt{n}$.
+
+$$ t = \frac{\bar{x}-\mu}{s/\sqrt{n}} = \frac{7.025-7}{0.044/\sqrt{10}} \approx 1.7954$$
+
+This should follow t-distribution with $df = n-1 = 9$.
+
+**Critical Region**
+
+For the two-sided hypothesis
+\begin{align*}
+H_0: \mu = \mu_0,\\
+H_1: \mu \ne \mu_0.
+\end{align*}
+
+We reject $H_0$ at significance level $\alpha$, When
+the computed $t$-statistic
+$$t = \frac{\bar{x}-\mu_0}{s/\sqrt{n}}$$
+exceeds $t_{\alpha/2, n-1}$ or is less than $-t_{\alpha/2,n-1}$. These regions are called *critical regions*.
+
+Let's consider $\alpha = 0.05,n =10$. We can see the red *critical regions*.
+
+```{r,echo=FALSE}
+# Parameters
+alpha <- 0.05
+df <- 9
+
+# Critical t value for two-tailed test
+t_crit <- qt(1 - alpha/2, df)
+
+# Range for x-axis
+x <- seq(-4, 4, length = 500)
+y <- dt(x, df)
+
+# Plot t-distribution
+plot(x, y, type = "l", lwd = 2, col = "blue",
+     main = expression(paste("t-Distribution with df = 9, ", alpha, " = 0.05")),
+     ylab = "Density", xlab = "t value")
+
+# Shade critical regions
+x_crit_left <- seq(-4, -t_crit, length = 100)
+x_crit_right <- seq(t_crit, 4, length = 100)
+
+polygon(c(x_crit_left, rev(x_crit_left)), 
+        c(dt(x_crit_left, df), rep(0, length(x_crit_left))), 
+        col = "red", border = NA)
+
+polygon(c(x_crit_right, rev(x_crit_right)), 
+        c(dt(x_crit_right, df), rep(0, length(x_crit_right))), 
+        col = "red", border = NA)
+
+# Add vertical lines at critical values
+abline(v = c(-t_crit, t_crit), col = "darkred", lwd = 2, lty = 2)
+
+# Add text annotations
+text(-t_crit, 0.02, sprintf("t = %.3f", -t_crit), pos = 2, col = "darkred")
+text(t_crit, 0.02, sprintf("t = %.3f", t_crit), pos = 4, col = "darkred")
+
+# Add legend
+legend("topright", legend = c("t density", "Critical regions (α = 0.05)"),
+       col = c("blue", "red"), lwd = 2, bty = "n")
+```
+
+We know here the test statistic is **not** in the critical region. We should *not* reject the null hypothesis.
+
+**p-value**
+
+We can also calculate *p-value* $P(|t| > t)$ of this statistic.
+
+```{r}
+tstatistic <- 1.7954
+2*pt(-tstatistic,df = 9)
+```
+
+The p-value is much larger than $0.05$. We should not reject the hypothesis. 
+
+We can also use `t.test` here.
+```{r}
+#Need to specify mu
+phmeter <-c(7.07,7.00,7.10,6.97,7.00,7.03,7.01,7.01, 6.98,7.08)
+t.test(phmeter, mu = 7)
+```
+
+When p-value is less than or equal to the level of significance $\alpha$, we **reject** the null hypothesis; otherwise we **do not reject** the null hypothesis.
+
+Notice that the sample size of 10 is rather small. An increase in sample size (perhaps another
+experiment) may sort things out.
+
+**Note**: How to choose a good sample size is an advanced topic.
+
+#### In-class Exercise: Tests on a Single Mean (Variance Unknown)
+
+Test the hypothesis that the average content of containers of a particular lubricant is 10 liters if the contents of a random sample of 10 containers are 10.2, 9.7, 10.1, 10.3, 10.1, 9.8, 9.9, 10.4, 10.3, and 9.8 liters. Use a 0.01 level of significance and assume that the
+distribution of contents is normal.
+
+
+### Type I and type II errors
+
+The decision from a hypothesis test is to *either reject the null hypothesis or fail to reject the null hypothesis*. The **significance level**, $\alpha$ , of a hypothesis test is how small the p-value must be to conclude the data provide enough statistical evidence to reject the null hypothesis. The decision is to reject the null hypothesis if the p-value is less than or equal to $\alpha$, and fail to reject the null hypothesis if the p-value is greater than $\alpha$.
+
+In reality, either the null hypothesis is true or the alternative hypothesis is true. Thus, the conclusion from a hypothesis test is either correct or incorrect. Ex: Suppose the conclusion from a hypothesis test is that the data support a population mean commute time of 25 minutes. If the mean commute time of the population is actually about 25 minutes, then a correct decision is made. But, if the population mean commute time is actually 40 minutes, then an incorrect decision is made.
+
+- A **type I error**  is rejecting the null hypothesis in favor of the alternative when in reality the null hypothesis is true.
+
+- A **type II error** is failing to reject the null hypothesis when in reality the alternative hypothesis is true. 
+
+$$
+\begin{array}{c|cc}
+\text{Decision V.S. In Reality}  & H_0 \text{ is true}     & H_0 \text{ is false} \\
+\hline
+\text{Reject } H_0 &  \text{Type I error} & \text{Correct decision}\\
+\text{Do not rejct } H_0 &  \text{Correct decision} & \text{Type II error}
+\end{array}
+$$
+
+
+#### Checkpoint Questions: Type I and type II errors
+
+<div class="match-terms" id="fitness-app-match">
+  <p><strong>Match each description with the correct term.</strong></p>
+
+  <p><strong>Terms:</strong> Hypotheses; Type I error; Type II error;
+    Type I error consequence; Type II error consequence</p>
+
+  <div class="match-item" data-answer="hypotheses">
+    <p>
+      <strong>a)</strong>
+      \(H_0: \mu = 100, \qquad H_1: \mu > 100\)
+    </p>
+    <select>
+      <option value="">Select a term</option>
+      <option value="hypotheses">Hypotheses</option>
+      <option value="type1">Type I error</option>
+      <option value="type2">Type II error</option>
+      <option value="type1-consequence">Type I error consequence</option>
+      <option value="type2-consequence">Type II error consequence</option>
+    </select>
+    <span class="match-feedback"></span>
+  </div>
+
+  <div class="match-item" data-answer="type1-consequence">
+    <p>
+      <strong>b)</strong>
+      Spend additional time and money to improve the app’s accuracy when
+      the app already meets the desired accuracy level.
+    </p>
+    <select>
+      <option value="">Select a term</option>
+      <option value="hypotheses">Hypotheses</option>
+      <option value="type1">Type I error</option>
+      <option value="type2">Type II error</option>
+      <option value="type1-consequence">Type I error consequence</option>
+      <option value="type2-consequence">Type II error consequence</option>
+    </select>
+    <span class="match-feedback"></span>
+  </div>
+
+  <div class="match-item" data-answer="type2">
+    <p>
+      <strong>c)</strong>
+      Decide based on the hypothesis test that the mean error is 100
+      calories, but in reality the mean error is greater than 100 calories.
+    </p>
+    <select>
+      <option value="">Select a term</option>
+      <option value="hypotheses">Hypotheses</option>
+      <option value="type1">Type I error</option>
+      <option value="type2">Type II error</option>
+      <option value="type1-consequence">Type I error consequence</option>
+      <option value="type2-consequence">Type II error consequence</option>
+    </select>
+    <span class="match-feedback"></span>
+  </div>
+
+  <div class="match-item" data-answer="type1">
+    <p>
+      <strong>d)</strong>
+      Decide based on the hypothesis test that the mean error is greater
+      than 100 calories, but in reality the mean error is 100 calories.
+    </p>
+    <select>
+      <option value="">Select a term</option>
+      <option value="hypotheses">Hypotheses</option>
+      <option value="type1">Type I error</option>
+      <option value="type2">Type II error</option>
+      <option value="type1-consequence">Type I error consequence</option>
+      <option value="type2-consequence">Type II error consequence</option>
+    </select>
+    <span class="match-feedback"></span>
+  </div>
+
+  <div class="match-item" data-answer="type2-consequence">
+    <p>
+      <strong>e)</strong>
+      Release the app claiming the mean error is at most 100 calories,
+      but users complain because the app is actually much less accurate.
+    </p>
+    <select>
+      <option value="">Select a term</option>
+      <option value="hypotheses">Hypotheses</option>
+      <option value="type1">Type I error</option>
+      <option value="type2">Type II error</option>
+      <option value="type1-consequence">Type I error consequence</option>
+      <option value="type2-consequence">Type II error consequence</option>
+    </select>
+    <span class="match-feedback"></span>
+  </div>
+
+  <button type="button" class="check-match">Check Answers</button>
+  <button type="button" class="reset-match">Reset</button>
+  <div class="overall-feedback" aria-live="polite"></div>
+</div>
+
+<style>
+.match-terms {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  background: #f8fafc;
+}
+
+.match-item {
+  margin: 0.9rem 0;
+}
+
+.match-item p {
+  margin-bottom: 0.35rem;
+}
+
+.match-item select {
+  min-width: 230px;
+  padding: 0.3rem;
+}
+
+.match-feedback {
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+.correct-feedback {
+  color: #16803a;
+}
+
+.incorrect-feedback {
+  color: #c62828;
+}
+
+.check-match,
+.reset-match {
+  margin: 0.6rem 0.4rem 0 0;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.overall-feedback {
+  min-height: 1.3rem;
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const quiz = document.getElementById("fitness-app-match");
+  const items = quiz.querySelectorAll(".match-item");
+  const overallFeedback = quiz.querySelector(".overall-feedback");
+
+  quiz.querySelector(".check-match").addEventListener("click", function () {
+    let correctCount = 0;
+    let unansweredCount = 0;
+
+    items.forEach(function (item) {
+      const select = item.querySelector("select");
+      const feedback = item.querySelector(".match-feedback");
+      const correctAnswer = item.dataset.answer;
+
+      feedback.classList.remove(
+        "correct-feedback",
+        "incorrect-feedback"
+      );
+
+      if (select.value === "") {
+        feedback.textContent = "Please select an answer.";
+        feedback.classList.add("incorrect-feedback");
+        unansweredCount++;
+      } else if (select.value === correctAnswer) {
+        feedback.textContent = "Correct!";
+        feedback.classList.add("correct-feedback");
+        correctCount++;
+      } else {
+        feedback.textContent = "Try again.";
+        feedback.classList.add("incorrect-feedback");
+      }
+    });
+
+    overallFeedback.classList.remove(
+      "correct-feedback",
+      "incorrect-feedback"
+    );
+
+    if (correctCount === items.length) {
+      overallFeedback.textContent = "Excellent! All answers are correct.";
+      overallFeedback.classList.add("correct-feedback");
+    } else if (unansweredCount > 0) {
+      overallFeedback.textContent =
+        "Please answer all items and check again.";
+      overallFeedback.classList.add("incorrect-feedback");
+    } else {
+      overallFeedback.textContent =
+        correctCount + " of " + items.length + " answers are correct.";
+      overallFeedback.classList.add("incorrect-feedback");
+    }
+  });
+
+  quiz.querySelector(".reset-match").addEventListener("click", function () {
+    items.forEach(function (item) {
+      item.querySelector("select").value = "";
+      const feedback = item.querySelector(".match-feedback");
+      feedback.textContent = "";
+      feedback.classList.remove(
+        "correct-feedback",
+        "incorrect-feedback"
+      );
+    });
+
+    overallFeedback.textContent = "";
+    overallFeedback.classList.remove(
+      "correct-feedback",
+      "incorrect-feedback"
+    );
+  });
+});
+</script>
+
+### Two means
+
+If we know the population variances, theory-based inference methods for a mean are similar to the methods for two proportions. However, in general, we have no idea of variances. We should consider the population variances are equal or not. The good thing is no matter the variances are equal or not, the $t$-statistic is the same. The difference is the degrees of freedom. 
+
+#### Example 2. Comparison of two population means
+
+In a study in which
+minerals are transferred from the fungus to the trees
+and sugars from the trees to the fungus, 20 northern
+red oak seedlings exposed to the fungus Pisolithus tinctorus were grown in a greenhouse. All seedlings were
+planted in the same type of soil and received the same
+amount of sunshine and water. Half received no nitrogen
+at planting time, to serve as a control, and the
+other half received 368 ppm of nitrogen in the form
+NaNO3. The stem weights, in grams, at the end of 140
+days were recorded as follows:
+
+No Nitrogen: 
+0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43
+
+Nitrogen: 
+0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46
+
+**Parameter**:
+
+$\mu_{NON} =$ mean stem weight of the seedlings without nitrogen 
+
+$\mu_{NIT} =$ mean stem weight of the seedlings with nitrogen 
+
+**Hypotheses**:
+
+\begin{align*}
+H_0: \mu_{NIT}  = \mu_{NON} ,\\
+H_1: \mu_{NIT} \ne \mu_{NON}.
+\end{align*}
+where the population means indicate mean weights.
+
+**Observed data**:
+
+$$ n_{NIT} = 10, \bar{x}_{NIT} = 0.565, s_{NIT} = 0.1867  \qquad n_{NON} = 10, \bar{x}_{NON} = 0.399, s_{NON} = 0.0728 $$
+
+
+**Test statistic**
+
+
+The $t$ test statistic and the p-value can be obtained using statistical software. Here, assume variances are the same, we have
+
+$$s_p^2 = \frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2} = \frac{4.33^2(14-1)+5.33^2(8-1)}{14+8-2} = 0.1417235 $$
+
+Thus
+$$t = \frac{\bar{x}_1-\bar{x}_2-0}{s_p\sqrt{1/n_1+1/n_2}} = \frac{0.565-0.399}{0.1417235\sqrt{(1/10+1/10)}} \approx 2.619095$$
+
+
+Let's calculate *p-value* $P(|t| > t)$ of this statistic.
+
+```{r}
+tstatistic <- 2.619096
+2*(1-pt(tstatistic,df = 18))
+```
+
+
+In `R`, we can use `t.test` for two sample t-test. Don't forget to add the condition `var.equal = TURE`. 
+
+```{r}
+noNitro<- c(0.32,0.53 ,0.28, 0.37, 0.47, 0.43, 0.36, 0.42,0.38,0.43)
+Nitro<- c(0.26,0.43,0.47,0.49,0.52,0.75,0.79,0.86, 0.62,0.46)
+t.test(Nitro,noNitro, var.equal = TRUE, conf.level = .95)
+```
+
+Here we make an assumption that the variances are equal. Does that make sense?
+
+```{r}
+boxplot(Nitro,noNitro)
+```
+
+Can we do a mean test with **different variances**? Yes!
+
+```{r}
+t.test(Nitro,noNitro, var.equal = FALSE, conf.level = .95)
+```
+
+No matter which method we choose, we should reject $H_0$.
+
+
+#### In-class Exercise: Tests on Two Means (Unknown But Not Equal Variance) 
+
+A study was conducted by the Department of
+Zoology at Virginia Tech to determine if there is a
+significant difference in the density of organisms at
+two different stations located on Cedar Run, a secondary
+stream in the Roanoke River drainage basin.
+Sewage from a sewage treatment plant and overflow
+from the Federal Mogul Corporation settling pond enter
+the stream near its headwaters. The following data
+give the density measurements, in number of organisms
+per square meter, at the two collecting stations:
+
+Stations 1:
+$$5030,13700,10730,11400,860,2200,4250,15040,4980,11910,8130,26850,17660,
+22800,1130,1690$$
+
+Stations 2:
+$$2800, 4670,6890,7720,7030,7330,2810,1330,3320,1230,2130,2190$$
+
+Can we conclude, at the 0.05 level of significance, that
+the average densities at the two stations are equal?
+Assume that the observations come from normal populations
+with different variances.
+
+<br>
+
+
+#### Checkpoint Question Answers:
+
+
+- Type I and type II errors
+
+a. <span style="color: magenta;"> Hypotheses </span>
+b. <span style="color: magenta;"> Type I error consequence </span>
+c. <span style="color: magenta;"> Type II error</span>
+d. <span style="color: magenta;"> Type I error </span>
+e.  <span style="color: magenta;"> Type II error consequence.</span>
+

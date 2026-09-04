@@ -42,7 +42,10 @@ website:
             href: source/week05_sampling_distribution_of_sample_mean(s).Rmd
 
           - text: "Week 6: Estimation on Mean(s)"
-            href: source/week06_estimation_on_means.Rmd  
+            href: source/week06_estimation_on_means.Rmd 
+
+          - text: "Week 7: Hypothesis Testing on Mean(s)"
+            href: source/week07_hypothesit_test_on_means.Rmd   
             
       - text: "Homework"
         menu:

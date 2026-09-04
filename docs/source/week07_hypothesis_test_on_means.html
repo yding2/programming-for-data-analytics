@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 7: Hypothesis Testing on Mean(s) – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesit_test_on_means.Rmd">
+ <span class="dropdown-text">Week 7: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#intro-to-hypothesis-testing" id="toc-intro-to-hypothesis-testing" class="nav-link" data-scroll-target="#intro-to-hypothesis-testing">Intro to Hypothesis testing</a></li>
+  <li><a href="#inference-for-means" id="toc-inference-for-means" class="nav-link" data-scroll-target="#inference-for-means">Inference for Mean(s)</a>
+  <ul class="collapse">
+  <li><a href="#one-mean" id="toc-one-mean" class="nav-link" data-scroll-target="#one-mean">One mean</a></li>
+  <li><a href="#type-i-and-type-ii-errors" id="toc-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#type-i-and-type-ii-errors">Type I and type II errors</a></li>
+  <li><a href="#two-means" id="toc-two-means" class="nav-link" data-scroll-target="#two-means">Two means</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 7: Hypothesis Testing on Mean(s)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><strong>Data Science Foundations with Python with zyLabs</strong>, zyBooks, a Wiley brand. http://www.zybooks.com</li>
+<li><strong>Probability &amp; Statistics for Engineers &amp; Scientist</strong>, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall</li>
+</ol>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li><p>Know the process and result of a hypothesis test for a population parameter.</p></li>
+<li><p>Recognize that a hypothesis test may result in an incorrect conclusion, or one of two possible types of error, and each error has consequences.</p></li>
+<li><p>Identify the appropriate inference method to answer questions about one mean, and two means.</p></li>
+<li><p>State the null and alternative hypotheses for one mean, and two means hypothesis tests.</p></li>
+<li><p>Interpret the test statistic and p-value and make a conclusion about the population parameter(s) based on a p-value.</p></li>
+<li><p>Know how to use <code>t.test</code>.</p></li>
+</ul>
+</section>
+<section id="intro-to-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="intro-to-hypothesis-testing">Intro to Hypothesis testing</h2>
+<p>A <strong>hypothesis test</strong> is a method for evaluating a claim, or hypothesis, about a <strong>population parameter</strong> by examining the statistical evidence against the claim based on a sample. The conclusion of a hypothesis test is a decision that the observed data either indicate the claim is plausible or support an alternative explanation. The following steps outline the general process of conducting a hypothesis test.</p>
+<ol type="1">
+<li><p>State null and alternative hypotheses about parameters. The <strong>null hypothesis</strong>, <span class="math inline">\(H_0\)</span> , is typically the by-chance or no-effect explanation, and the <strong>alternative hypothesis</strong>,<span class="math inline">\(H_1\)</span>, is typically the explanation of an effect, or difference.</p></li>
+<li><p>Calculate a statistic of interest from the sample data that is used to evaluate the null hypothesis.</p></li>
+<li><p>Determine the <strong>p-value</strong>, or likelihood, of obtaining a statistic at least as extreme as the observed statistic when the null hypothesis is true.</p></li>
+<li><p>Draw a conclusion about the null hypothesis based on the statistical evidence provided by the p-value.</p></li>
+</ol>
+</section>
+<section id="inference-for-means" class="level2">
+<h2 class="anchored" data-anchor-id="inference-for-means">Inference for Mean(s)</h2>
+<section id="one-mean" class="level3">
+<h3 class="anchored" data-anchor-id="one-mean">One mean</h3>
+<p>For a numerical characteristic of a population, typically the <strong>population mean</strong> is of interest. If we know the population variance, theory-based inference methods for a mean are similar to the methods for a proportion, i.e., using the <em>standard normal distribution</em>. However, in general, we have no idea of variance. Therefore, the statistics tend to follow the <strong>t-distribution</strong> rather than the standard normal distribution.</p>
+<p><em>Remark</em>: The <span class="math inline">\(t\)</span>-distribution can still be used even if the population distribution is not <strong>normal</strong>, as long as</p>
+<ul>
+<li>the sample size <span class="math inline">\(n\)</span> is <strong>large</strong>.</li>
+<li>the population distribution is not <strong>too-skewed</strong>.</li>
+</ul>
+<section id="example-1.-one-mean-hypothesis-test" class="level4">
+<h4 class="anchored" data-anchor-id="example-1.-one-mean-hypothesis-test">Example 1. One mean hypothesis test</h4>
+<p>Data are collected on a neutral substance (pH = 7.0). A sample of the measurements were taken with the data as follows: <span class="math display">\[7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08\]</span> Assume this follows <em>approximately normal distribution</em>.</p>
+<p><strong>Parameter</strong>: A neutral substance pH value, <span class="math inline">\(\mu\)</span></p>
+<p><strong>Hypotheses</strong>:</p>
+<p>The null hypothesis states that the mean is 7.0. The alternative hypothesis states the mean is different from 7.0.</p>
+<p><span class="math display">\[\begin{align*}
+H_0: \mu = 7.0,\\
+H_1: \mu \ne 7.0.
+\end{align*}\]</span></p>
+<p><strong>Observed data</strong>:</p>
+<p>A sample of meansurements <span class="math display">\[7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08\]</span></p>
+<p>We can have <span class="math display">\[ \bar{x} = 7.025,\qquad s = 0.044\]</span></p>
+<p><strong>Test statistic</strong></p>
+<p>The standardized <span class="math inline">\(t\)</span> test statistic’s calculation assumes the null hypothesis is true. The standard deviation of the sample mean’s sampling distribution is estimated by <span class="math inline">\(s/\sqrt{n}\)</span>.</p>
+<p><span class="math display">\[ t = \frac{\bar{x}-\mu}{s/\sqrt{n}} = \frac{7.025-7}{0.044/\sqrt{10}} \approx 1.7954\]</span></p>
+<p>This should follow t-distribution with <span class="math inline">\(df = n-1 = 9\)</span>.</p>
+<p><strong>Critical Region</strong></p>
+<p>For the two-sided hypothesis <span class="math display">\[\begin{align*}
+H_0: \mu = \mu_0,\\
+H_1: \mu \ne \mu_0.
+\end{align*}\]</span></p>
+<p>We reject <span class="math inline">\(H_0\)</span> at significance level <span class="math inline">\(\alpha\)</span>, When the computed <span class="math inline">\(t\)</span>-statistic <span class="math display">\[t = \frac{\bar{x}-\mu_0}{s/\sqrt{n}}\]</span> exceeds <span class="math inline">\(t_{\alpha/2, n-1}\)</span> or is less than <span class="math inline">\(-t_{\alpha/2,n-1}\)</span>. These regions are called <em>critical regions</em>.</p>
+<p>Let’s consider <span class="math inline">\(\alpha = 0.05,n =10\)</span>. We can see the red <em>critical regions</em>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week07_hypothesis_test_on_means_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We know here the test statistic is <strong>not</strong> in the critical region. We should <em>not</em> reject the null hypothesis.</p>
+<p><strong>p-value</strong></p>
+<p>We can also calculate <em>p-value</em> <span class="math inline">\(P(|t| &gt; t)\)</span> of this statistic.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tstatistic <span class="ot">&lt;-</span> <span class="fl">1.7954</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span>tstatistic,<span class="at">df =</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1061606</code></pre>
+</div>
+</div>
+<p>The p-value is much larger than <span class="math inline">\(0.05\)</span>. We should not reject the hypothesis.</p>
+<p>We can also use <code>t.test</code> here.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Need to specify mu</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>phmeter <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">7.07</span>,<span class="fl">7.00</span>,<span class="fl">7.10</span>,<span class="fl">6.97</span>,<span class="fl">7.00</span>,<span class="fl">7.03</span>,<span class="fl">7.01</span>,<span class="fl">7.01</span>, <span class="fl">6.98</span>,<span class="fl">7.08</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(phmeter, <span class="at">mu =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  phmeter
+t = 1.7954, df = 9, p-value = 0.1062
+alternative hypothesis: true mean is not equal to 7
+95 percent confidence interval:
+ 6.993501 7.056499
+sample estimates:
+mean of x 
+    7.025 </code></pre>
+</div>
+</div>
+<p>When p-value is less than or equal to the level of significance <span class="math inline">\(\alpha\)</span>, we <strong>reject</strong> the null hypothesis; otherwise we <strong>do not reject</strong> the null hypothesis.</p>
+<p>Notice that the sample size of 10 is rather small. An increase in sample size (perhaps another experiment) may sort things out.</p>
+<p><strong>Note</strong>: How to choose a good sample size is an advanced topic.</p>
+</section>
+<section id="in-class-exercise-tests-on-a-single-mean-variance-unknown" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-tests-on-a-single-mean-variance-unknown">In-class Exercise: Tests on a Single Mean (Variance Unknown)</h4>
+<p>Test the hypothesis that the average content of containers of a particular lubricant is 10 liters if the contents of a random sample of 10 containers are 10.2, 9.7, 10.1, 10.3, 10.1, 9.8, 9.9, 10.4, 10.3, and 9.8 liters. Use a 0.01 level of significance and assume that the distribution of contents is normal.</p>
+</section>
+</section>
+<section id="type-i-and-type-ii-errors" class="level3">
+<h3 class="anchored" data-anchor-id="type-i-and-type-ii-errors">Type I and type II errors</h3>
+<p>The decision from a hypothesis test is to <em>either reject the null hypothesis or fail to reject the null hypothesis</em>. The <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span> , of a hypothesis test is how small the p-value must be to conclude the data provide enough statistical evidence to reject the null hypothesis. The decision is to reject the null hypothesis if the p-value is less than or equal to <span class="math inline">\(\alpha\)</span>, and fail to reject the null hypothesis if the p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>In reality, either the null hypothesis is true or the alternative hypothesis is true. Thus, the conclusion from a hypothesis test is either correct or incorrect. Ex: Suppose the conclusion from a hypothesis test is that the data support a population mean commute time of 25 minutes. If the mean commute time of the population is actually about 25 minutes, then a correct decision is made. But, if the population mean commute time is actually 40 minutes, then an incorrect decision is made.</p>
+<ul>
+<li><p>A <strong>type I error</strong> is rejecting the null hypothesis in favor of the alternative when in reality the null hypothesis is true.</p></li>
+<li><p>A <strong>type II error</strong> is failing to reject the null hypothesis when in reality the alternative hypothesis is true.</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{c|cc}
+\text{Decision V.S. In Reality}  &amp; H_0 \text{ is true}     &amp; H_0 \text{ is false} \\
+\hline
+\text{Reject } H_0 &amp;  \text{Type I error} &amp; \text{Correct decision}\\
+\text{Do not rejct } H_0 &amp;  \text{Correct decision} &amp; \text{Type II error}
+\end{array}
+\]</span></p>
+<section id="checkpoint-questions-type-i-and-type-ii-errors" class="level4">
+<h4 class="anchored" data-anchor-id="checkpoint-questions-type-i-and-type-ii-errors">Checkpoint Questions: Type I and type II errors</h4>
+<div id="fitness-app-match" class="match-terms">
+<p>
+<strong>Match each description with the correct term.</strong>
+</p>
+<p>
+<strong>Terms:</strong> Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence
+</p>
+<div class="match-item" data-answer="hypotheses">
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;a)&lt;/strong&gt;
+  \(H_0: \mu = 100, \qquad H_1: \mu &gt; 100\)
+&lt;/p&gt;
+&lt;select&gt;
+  &lt;option value=""&gt;Select a term&lt;/option&gt;
+  &lt;option value="hypotheses"&gt;Hypotheses&lt;/option&gt;
+  &lt;option value="type1"&gt;Type I error&lt;/option&gt;
+  &lt;option value="type2"&gt;Type II error&lt;/option&gt;
+  &lt;option value="type1-consequence"&gt;Type I error consequence&lt;/option&gt;
+  &lt;option value="type2-consequence"&gt;Type II error consequence&lt;/option&gt;
+&lt;/select&gt;
+&lt;span class="match-feedback"&gt;&lt;/span&gt;</code></pre>
+</div>
+<div class="match-item" data-answer="type1-consequence">
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;b)&lt;/strong&gt;
+  Spend additional time and money to improve the app’s accuracy when
+  the app already meets the desired accuracy level.
+&lt;/p&gt;
+&lt;select&gt;
+  &lt;option value=""&gt;Select a term&lt;/option&gt;
+  &lt;option value="hypotheses"&gt;Hypotheses&lt;/option&gt;
+  &lt;option value="type1"&gt;Type I error&lt;/option&gt;
+  &lt;option value="type2"&gt;Type II error&lt;/option&gt;
+  &lt;option value="type1-consequence"&gt;Type I error consequence&lt;/option&gt;
+  &lt;option value="type2-consequence"&gt;Type II error consequence&lt;/option&gt;
+&lt;/select&gt;
+&lt;span class="match-feedback"&gt;&lt;/span&gt;</code></pre>
+</div>
+<div class="match-item" data-answer="type2">
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;c)&lt;/strong&gt;
+  Decide based on the hypothesis test that the mean error is 100
+  calories, but in reality the mean error is greater than 100 calories.
+&lt;/p&gt;
+&lt;select&gt;
+  &lt;option value=""&gt;Select a term&lt;/option&gt;
+  &lt;option value="hypotheses"&gt;Hypotheses&lt;/option&gt;
+  &lt;option value="type1"&gt;Type I error&lt;/option&gt;
+  &lt;option value="type2"&gt;Type II error&lt;/option&gt;
+  &lt;option value="type1-consequence"&gt;Type I error consequence&lt;/option&gt;
+  &lt;option value="type2-consequence"&gt;Type II error consequence&lt;/option&gt;
+&lt;/select&gt;
+&lt;span class="match-feedback"&gt;&lt;/span&gt;</code></pre>
+</div>
+<div class="match-item" data-answer="type1">
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;d)&lt;/strong&gt;
+  Decide based on the hypothesis test that the mean error is greater
+  than 100 calories, but in reality the mean error is 100 calories.
+&lt;/p&gt;
+&lt;select&gt;
+  &lt;option value=""&gt;Select a term&lt;/option&gt;
+  &lt;option value="hypotheses"&gt;Hypotheses&lt;/option&gt;
+  &lt;option value="type1"&gt;Type I error&lt;/option&gt;
+  &lt;option value="type2"&gt;Type II error&lt;/option&gt;
+  &lt;option value="type1-consequence"&gt;Type I error consequence&lt;/option&gt;
+  &lt;option value="type2-consequence"&gt;Type II error consequence&lt;/option&gt;
+&lt;/select&gt;
+&lt;span class="match-feedback"&gt;&lt;/span&gt;</code></pre>
+</div>
+<div class="match-item" data-answer="type2-consequence">
+<pre><code>&lt;p&gt;
+  &lt;strong&gt;e)&lt;/strong&gt;
+  Release the app claiming the mean error is at most 100 calories,
+  but users complain because the app is actually much less accurate.
+&lt;/p&gt;
+&lt;select&gt;
+  &lt;option value=""&gt;Select a term&lt;/option&gt;
+  &lt;option value="hypotheses"&gt;Hypotheses&lt;/option&gt;
+  &lt;option value="type1"&gt;Type I error&lt;/option&gt;
+  &lt;option value="type2"&gt;Type II error&lt;/option&gt;
+  &lt;option value="type1-consequence"&gt;Type I error consequence&lt;/option&gt;
+  &lt;option value="type2-consequence"&gt;Type II error consequence&lt;/option&gt;
+&lt;/select&gt;
+&lt;span class="match-feedback"&gt;&lt;/span&gt;</code></pre>
+</div>
+<button type="button" class="check-match">Check Answers</button> <button type="button" class="reset-match">Reset</button>
+<div class="overall-feedback" aria-live="polite">
+
+</div>
+</div>
+<style>
+.match-terms {
+  border: 1px solid #d9e2ec;
+  border-radius: 7px;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  background: #f8fafc;
+}
+
+.match-item {
+  margin: 0.9rem 0;
+}
+
+.match-item p {
+  margin-bottom: 0.35rem;
+}
+
+.match-item select {
+  min-width: 230px;
+  padding: 0.3rem;
+}
+
+.match-feedback {
+  margin-left: 0.5rem;
+  font-weight: 600;
+}
+
+.correct-feedback {
+  color: #16803a;
+}
+
+.incorrect-feedback {
+  color: #c62828;
+}
+
+.check-match,
+.reset-match {
+  margin: 0.6rem 0.4rem 0 0;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.overall-feedback {
+  min-height: 1.3rem;
+  margin-top: 0.6rem;
+  font-weight: 600;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const quiz = document.getElementById("fitness-app-match");
+  const items = quiz.querySelectorAll(".match-item");
+  const overallFeedback = quiz.querySelector(".overall-feedback");
+
+  quiz.querySelector(".check-match").addEventListener("click", function () {
+    let correctCount = 0;
+    let unansweredCount = 0;
+
+    items.forEach(function (item) {
+      const select = item.querySelector("select");
+      const feedback = item.querySelector(".match-feedback");
+      const correctAnswer = item.dataset.answer;
+
+      feedback.classList.remove(
+        "correct-feedback",
+        "incorrect-feedback"
+      );
+
+      if (select.value === "") {
+        feedback.textContent = "Please select an answer.";
+        feedback.classList.add("incorrect-feedback");
+        unansweredCount++;
+      } else if (select.value === correctAnswer) {
+        feedback.textContent = "Correct!";
+        feedback.classList.add("correct-feedback");
+        correctCount++;
+      } else {
+        feedback.textContent = "Try again.";
+        feedback.classList.add("incorrect-feedback");
+      }
+    });
+
+    overallFeedback.classList.remove(
+      "correct-feedback",
+      "incorrect-feedback"
+    );
+
+    if (correctCount === items.length) {
+      overallFeedback.textContent = "Excellent! All answers are correct.";
+      overallFeedback.classList.add("correct-feedback");
+    } else if (unansweredCount > 0) {
+      overallFeedback.textContent =
+        "Please answer all items and check again.";
+      overallFeedback.classList.add("incorrect-feedback");
+    } else {
+      overallFeedback.textContent =
+        correctCount + " of " + items.length + " answers are correct.";
+      overallFeedback.classList.add("incorrect-feedback");
+    }
+  });
+
+  quiz.querySelector(".reset-match").addEventListener("click", function () {
+    items.forEach(function (item) {
+      item.querySelector("select").value = "";
+      const feedback = item.querySelector(".match-feedback");
+      feedback.textContent = "";
+      feedback.classList.remove(
+        "correct-feedback",
+        "incorrect-feedback"
+      );
+    });
+
+    overallFeedback.textContent = "";
+    overallFeedback.classList.remove(
+      "correct-feedback",
+      "incorrect-feedback"
+    );
+  });
+});
+</script>
+</section>
+</section>
+<section id="two-means" class="level3">
+<h3 class="anchored" data-anchor-id="two-means">Two means</h3>
+<p>If we know the population variances, theory-based inference methods for a mean are similar to the methods for two proportions. However, in general, we have no idea of variances. We should consider the population variances are equal or not. The good thing is no matter the variances are equal or not, the <span class="math inline">\(t\)</span>-statistic is the same. The difference is the degrees of freedom.</p>
+<section id="example-2.-comparison-of-two-population-means" class="level4">
+<h4 class="anchored" data-anchor-id="example-2.-comparison-of-two-population-means">Example 2. Comparison of two population means</h4>
+<p>In a study in which minerals are transferred from the fungus to the trees and sugars from the trees to the fungus, 20 northern red oak seedlings exposed to the fungus Pisolithus tinctorus were grown in a greenhouse. All seedlings were planted in the same type of soil and received the same amount of sunshine and water. Half received no nitrogen at planting time, to serve as a control, and the other half received 368 ppm of nitrogen in the form NaNO3. The stem weights, in grams, at the end of 140 days were recorded as follows:</p>
+<p>No Nitrogen: 0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43</p>
+<p>Nitrogen: 0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46</p>
+<p><strong>Parameter</strong>:</p>
+<p><span class="math inline">\(\mu_{NON} =\)</span> mean stem weight of the seedlings without nitrogen</p>
+<p><span class="math inline">\(\mu_{NIT} =\)</span> mean stem weight of the seedlings with nitrogen</p>
+<p><strong>Hypotheses</strong>:</p>
+<p><span class="math display">\[\begin{align*}
+H_0: \mu_{NIT}  = \mu_{NON} ,\\
+H_1: \mu_{NIT} \ne \mu_{NON}.
+\end{align*}\]</span> where the population means indicate mean weights.</p>
+<p><strong>Observed data</strong>:</p>
+<p><span class="math display">\[ n_{NIT} = 10, \bar{x}_{NIT} = 0.565, s_{NIT} = 0.1867  \qquad n_{NON} = 10, \bar{x}_{NON} = 0.399, s_{NON} = 0.0728 \]</span></p>
+<p><strong>Test statistic</strong></p>
+<p>The <span class="math inline">\(t\)</span> test statistic and the p-value can be obtained using statistical software. Here, assume variances are the same, we have</p>
+<p><span class="math display">\[s_p^2 = \frac{s_1^2(n_1-1)+s_2^2(n_2-1)}{n_1+n_2-2} = \frac{4.33^2(14-1)+5.33^2(8-1)}{14+8-2} = 0.1417235 \]</span></p>
+<p>Thus <span class="math display">\[t = \frac{\bar{x}_1-\bar{x}_2-0}{s_p\sqrt{1/n_1+1/n_2}} = \frac{0.565-0.399}{0.1417235\sqrt{(1/10+1/10)}} \approx 2.619095\]</span></p>
+<p>Let’s calculate <em>p-value</em> <span class="math inline">\(P(|t| &gt; t)\)</span> of this statistic.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tstatistic <span class="ot">&lt;-</span> <span class="fl">2.619096</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(tstatistic,<span class="at">df =</span> <span class="dv">18</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01738643</code></pre>
+</div>
+</div>
+<p>In <code>R</code>, we can use <code>t.test</code> for two sample t-test. Don’t forget to add the condition <code>var.equal = TURE</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>noNitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Nitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Nitro,noNitro, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  Nitro and noNitro
+t = 2.6191, df = 18, p-value = 0.01739
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.03284212 0.29915788
+sample estimates:
+mean of x mean of y 
+    0.565     0.399 </code></pre>
+</div>
+</div>
+<p>Here we make an assumption that the variances are equal. Does that make sense?</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Nitro,noNitro)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week07_hypothesis_test_on_means_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Can we do a mean test with <strong>different variances</strong>? Yes!</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Nitro,noNitro, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  Nitro and noNitro
+t = 2.6191, df = 11.673, p-value = 0.02286
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.02747562 0.30452438
+sample estimates:
+mean of x mean of y 
+    0.565     0.399 </code></pre>
+</div>
+</div>
+<p>No matter which method we choose, we should reject <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="in-class-exercise-tests-on-two-means-unknown-but-not-equal-variance" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-tests-on-two-means-unknown-but-not-equal-variance">In-class Exercise: Tests on Two Means (Unknown But Not Equal Variance)</h4>
+<p>A study was conducted by the Department of Zoology at Virginia Tech to determine if there is a significant difference in the density of organisms at two different stations located on Cedar Run, a secondary stream in the Roanoke River drainage basin. Sewage from a sewage treatment plant and overflow from the Federal Mogul Corporation settling pond enter the stream near its headwaters. The following data give the density measurements, in number of organisms per square meter, at the two collecting stations:</p>
+<p>Stations 1: <span class="math display">\[5030,13700,10730,11400,860,2200,4250,15040,4980,11910,8130,26850,17660,
+22800,1130,1690\]</span></p>
+<p>Stations 2: <span class="math display">\[2800, 4670,6890,7720,7030,7330,2810,1330,3320,1230,2130,2190\]</span></p>
+<p>Can we conclude, at the 0.05 level of significance, that the average densities at the two stations are equal? Assume that the observations come from normal populations with different variances.</p>
+<p><br></p>
+</section>
+<section id="checkpoint-question-answers" class="level4">
+<h4 class="anchored" data-anchor-id="checkpoint-question-answers">Checkpoint Question Answers:</h4>
+<ul>
+<li>Type I and type II errors</li>
+</ul>
+<ol type="a">
+<li><span style="color: magenta;"> Hypotheses </span></li>
+<li><span style="color: magenta;"> Type I error consequence </span></li>
+<li><span style="color: magenta;"> Type II error</span></li>
+<li><span style="color: magenta;"> Type I error </span></li>
+<li><span style="color: magenta;"> Type II error consequence.</span></li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
