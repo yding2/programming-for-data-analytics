@@ -1,0 +1,271 @@
+---
+title: "Homework 2 Solution"
+author: "Yuhan Ding"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Part II. Cars Data (45 points)
+
+We'll look at data frame and plotting in much more detail in later classes.  For a preview of what's to come, here's a very basic example.
+
+For this example we'll use a very simple dataset.  The `cars` data comes with the default installation of R.  To see the first few rows of the data, just type `head(cars)`.
+
+```{r}
+head(cars)
+```
+
+#### (a) Use `summary()` to summarize `cars`. Report the minimum, maximum, mean, and median of both `speed` and `dist`. (10 points)
+
+```{r}
+summary(cars)
+```
+
+> <span style="color: magenta;"> The minimal value of `speed` is `r min(cars$speed)`, maximal value of `speed` is `r max(cars$speed)`, mean value of `speed` is `r mean(cars$speed)`, and meadian value of `speed` is `r median(cars$speed)`.
+The minimal value of `dist` is `r min(cars$dist)`, maximal value of `dist` is `r max(cars$dist)`, mean value of `dist` is `r mean(cars$dist)`, and meadian value of `dist` is `r median(cars$dist)`.
+ </span>
+
+#### (b) Calculate the variance and standard deviation of `speed` and `dist` (5 points)
+
+```{r}
+var_speed <- var(cars$speed)
+var_speed
+std_speed <- sd(cars$speed)
+std_speed
+
+var_dist <- var(cars$dist)
+var_dist
+std_dist <- sd(cars$dist)
+std_dist
+```
+
+> <span style="color: magenta;"> The variance of `speed` is `r var_speed`. The standard deviation of `speed` is `r std_speed`. The variance of `dist` is `r var_dist`. The standard deviation of `dist` is `r std_dist`.</span>
+
+#### (c) Calculate the mean and standard deviation of `dist` for observations where `speed` is greater than 12 and less than 19. (5 points)
+
+```{r}
+selected.dist <- cars$dist[cars$speed > 12 & cars$speed < 19]
+
+mean(selected.dist)
+sd(selected.dist)
+```
+
+> <span style="color: magenta;"> The average of `dist` when `speed` is greater than 12 and less than 19 is `r mean(cars$dist[cars$speed<19&cars$speed>12])`. The standard deviation is `18.6183`. </span>
+
+
+#### (d) Produce a histogram of `speed` with **10 breaks**. Please illustrate your observation from the output. (5 points)
+
+```{r}
+hist(cars$speed,
+     breaks = seq(min(cars$speed), max(cars$speed), length.out = 11),
+     main = "Histogram of Speed",
+     xlab = "Speed",
+     col = "lightblue",
+     border = "white")
+```
+
+>  <span style="color: magenta;"> Most speeds fall between approximately 10 and 20, with the largest concentration near the middle of this range. The distribution is roughly unimodal and does not appear to be strongly skewed. </span>
+
+#### (e) Produce a histogram of `dist` with **20 breaks**. Please illustrate your observation from the output. (5 points)
+
+```{r}
+hist(cars$dist,
+     breaks = seq(min(cars$dist), max(cars$dist), length.out = 21),
+     main = "Histogram of Stopping Distance",
+     xlab = "Stopping Distance",
+     col = "lightgreen",
+     border = "white")
+```
+
+> <span style="color: magenta;"> Most stopping distances are relatively small or moderate, while a few observations have much larger distances. The distribution is right-skewed.</span>
+
+#### (f) Use the `boxplot` function to create a boxplot of `speed`. Briefly describe the center, spread, and any possible outliers. (5 points)
+
+```{r}
+boxplot(cars$speed,
+        main = "Boxplot of Speed",
+        ylab = "Speed",
+        col = "lightblue")
+
+boxplot.stats(cars$speed)$stats
+boxplot.stats(cars$speed)$out
+```
+
+> <span style="color: magenta;"> The median speed is 15. The middle 50% of the speeds extend from 12 to 19, so the IQR is 7. No observations are identified as possible outliers by the boxplot rule.</span>
+
+#### (g) Use the `boxplot` function to create a boxplot of `dist`. Please illustrate your observation from the output. (5 points)
+
+```{r}
+boxplot(cars$dist,
+        main = "Boxplot of Stopping Distance",
+        ylab = "Stopping Distance",
+        col = "lightgreen")
+
+boxplot.stats(cars$dist)$stats
+boxplot.stats(cars$dist)$out
+```
+
+> <span style="color: magenta;"> The median stopping distance is 36. The middle 50% of the distances extend from 26 to 56, so the IQR is 30. The value 120 is shown as a possible outlier above the upper whisker. The longer upper portion of the plot is consistent with a right-skewed distribution. </span>
+
+#### (h) Use `qqnorm` and `qqline` to investigate whether `dist` is approximately normally distributed. Briefly explain your conclusion. (5 points)
+
+```{r}
+qqnorm(cars$dist,
+       main = "Normal Q-Q Plot of Stopping Distance")
+qqline(cars$dist, col = "red", lwd = 2)
+```
+
+> <span style="color: magenta;"> If `dist` were approximately normally distributed, the points would lie close to the reference line. The points deviate noticeably from the line, especially in the upper tail. Together with the right-skewed histogram and the high outlier, this suggests that `dist` is not approximately normally distributed.</span>
+
+### Part III. Random Variables and Data Visualization (20 points)
+
+#### Question 1. Discrete or continuous (8 points)
+
+X: the number of automobile accidents per year in Illinois.
+
+> <span style="color: magenta;"> Discrete</span>
+
+Y: the length of time to play 18 holes of golf.
+
+> <span style="color: magenta;"> Continuous</span>
+
+M: the amount of milk produced yearly by a particular cow.
+
+> <span style="color: magenta;"> Continuous</span>
+
+
+N: the number of eggs laid each month by a hen.
+
+> <span style="color: magenta;"> Discrete</span>
+
+#### Question 2. Multiple choice (12 points)
+
+#### i) A discrete random variable
+
+A) Takes on only countable values
+
+B) Takes on any value in an interval
+
+C) Has a probability density function
+
+> <span style="color: magenta;"> A </span>
+
+#### ii) A continuous random variable is different from a discrete random variable because:
+
+A) It can only take integer values
+
+B) It is described using a probability mass function (PMF)
+
+C) It can take an infinite number of values within a given range
+
+>  <span style="color: magenta;"> C </span>
+
+#### iii) If $X$ is a constant random variable, meaning $X=c$ for some constant $c$, what is $Var(X)$? 
+
+A) 0
+
+B) $c^2$
+
+C) $E[X]$
+
+D) $E[X^2]$
+
+>  <span style="color: magenta;"> A </span>
+
+#### iv) Which of the following statements about expectation is TRUE?
+
+A) $E[X]$ is always equal to the sample mean
+
+B) $E[X]$ can be estimated by the sample mean when the sample size is large
+	
+C) $E[X]$ is always equal to the variance of X
+
+D) $E[X]$ is always an integer
+
+>  <span style="color: magenta;"> B </span>
+
+#### v) If a histogram is skewed to the right, what does it indicate? 
+
+A) The mean is greater than the median
+
+B) The median is greater than the mean
+
+C) The data is symmetric
+
+D) The data has no outliers
+
+>  <span style="color: magenta;"> A </span>
+
+#### vi) Which of the following is true about outliers in a boxplot?
+
+A) Outliers are always errors in the data
+
+B) Outliers are represented by dots or asterisks outside the whiskers
+	
+C) Outliers are included in the box
+
+D) Outliers are not shown in a boxplot
+
+>  <span style="color: magenta;"> B </span>
+
+### Part IV. Normal Distributions and Critical Values (35 points)
+
+#### Question 1. A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,
+
+#### (a) what fraction of the cups will contain more than 224 milliliters?  (5 points)
+
+
+```{r}
+pmt224 <- pnorm(224, mean = 200, sd = 15, lower.tail = FALSE)
+pmt224
+```
+
+> <span style="color: magenta;">  The fraction of the cups will contain more than 224 milliliters is `r pmt224`. </span>
+
+#### (b) what is the probability that a cup contains between 191 and 209 milliliters? (5 points)
+
+```{r}
+pbd <- pnorm(209, mean = 200, sd = 15) - pnorm(191, mean = 200, sd = 15)
+pbd
+```
+
+> <span style="color: magenta;"> The probability that a cup contains between 191 and 209 milliliters `r pbd`. </span>
+
+#### (c) below what value do we get the smallest 25% of the drinks? (5 points)
+
+```{r}
+q25 <- qnorm(0.25, mean = 200, sd = 15)
+q25
+```
+
+> <span style="color: magenta;">  Below `r q25` we get the smallest 25% of the drinks. </span>
+
+#### Question 2. Critical values with `qnorm` 
+
+#### (a) Please use `qnorm` to find the critical values $z_{0.1}$. (5 points)
+
+```{r}
+alpha <- 0.1
+zalpha <- qnorm(1 - 0.10)
+zalpha
+```
+
+> <span style="color: magenta;"> $z_{0.1}$ is `r zalpha`. </span>
+
+#### (b) Find the value of $z_0$ such that $90\%$ of the standard normal $Z$ values lie between $-z_0$ and $z_0$; that is, $P(-z_0\leq Z\leq z_0) = .90$. (10 points)
+
+```{r}
+alpha <- 1 - 0.90
+z0 <- qnorm(1 - alpha / 2)
+z0
+```
+
+> <span style="color: magenta;"> $z_{0}$ is `r z0`. </span>
+
+#### (c) Which value is larger? Why? (5 points)
+
+>  <span style="color: magenta;"> Here $z_{0}$ is $z_{0.05}$, which should be larger than $z_{0.1}$.
+Because $P(Z \le z_{0.05}) = 1-0.05 = 0.95 > 0.9 = 1-0.1 = P(Z \le z_{0.1})$. </span>

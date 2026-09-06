@@ -1,0 +1,177 @@
+---
+title: "Homework 3"
+author: "Your Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE}
+# Import needed packages
+library(ggplot2)
+```
+
+
+## Part I. Changing the author field and file name.
+
+
+1. Change the `author` field to your name.
+2. Rename this file as `HW3_YourFirstInitialYourLastName.Rmd` (for example, `HW3_YDing.Rmd`).
+3. Complete all questions in the designated code and response spaces.
+4. Knit the completed file to HTML.
+5. Submit both the completed `.Rmd` file and the knitted `.html` file. Make sure both files open correctly before submitting.
+
+
+<br>
+
+## Part II. Exploratory Data Analysis (100 points)
+
+In this part, we work on the cyber security breach report data downloaded 2015-02-26 from the US Health and Human Services. 
+
+To understand what the data represents, here is some information from the *Office for Civil Rights* of the  *U.S. Department of Health and Human Services*: 
+
+* "As required by section 13402(e)(4) of the HITECH Act, the Secretary must post a list of breaches of unsecured protected health information affecting 500 or more individuals. 
+* "Since October 2009 organizations in the U.S. that store data on human health are required to report any incident that compromises the confidentiality of 500 or more patients / human subjects (45 C.F.R. 164.408). These reports are publicly available. Our data  set  was downloaded from the Office for Civil Rights of the U.S. Department of Health and Human Services, 2015-02-26."  
+
+Load the data and save it as `cyberData` using the following code. The first column of the CSV file contains row identifiers, so it is imported as row names rather than as a data variable. The file also uses `\N` to represent missing values.
+
+```{r}
+cyberData <- read.csv(
+  url("https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/HHSCyberSecurityBreaches.csv"),
+  row.names = 1,
+  na.strings = "\\N"
+)
+```
+
+### Question 1. Understanding and Checking the Data (30 points)
+
+#### (a) Check the structure of the data using the `str` command. What type of object is `cyberData`?  How many observations are recorded? How  many variables are recorded?List all  of  the types of  variables that are  recorded based on the output (i.e. int/float etc.). (7 points) 
+
+```{r}
+# Edit me
+```
+
+> *[Your  text answer here.]* The data set is stored as a ..... with .... rows and .... columns. There are  .... observations of ....  variables.  All  of  the types of variables are ....
+
+#### (b) Examine the missing values in the data. For each variable, report both the number and the percentage of missing values. Which variable has the largest percentage of missing values? (8 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+  
+#### (c) Use the `table` function to display the frequencies of the values in `Type.of.Breach`. How many observations are recorded exactly as `"Hacking/IT Incident"`? (5 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (d) What type of breach is reported in the 748th row of `cyberData`? How about the 349th row? Was row 349 included in the number of Hacking/IT incidents computed in part (c)? Explain why or why not. (5 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (e) Some observations contain more than one breach type separated by a comma. Use `strsplit()` to separate the breach types, and then find the correct total number of incidents involving Hacking/IT. (5 points)
+
+**Hint:** The following example demonstrates how `strsplit()` works. Study its output and adapt the idea to `Type.of.Breach`.
+
+```{r}
+example.types <- c("type a", "type b", "type a, type b")
+strsplit(example.types, ", ")
+unlist(strsplit(example.types, ", "))
+```
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+### Question 2. Exploring `Individuals.Affected` (25 points)
+
+#### (a) Create a histogram of `Individuals.Affected` using 20 bins. Include an informative title and appropriate axis labels. Describe the shape of the distribution. (6 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (b) Calculate the mean, median, standard deviation, minimum, and maximum of `Individuals.Affected`. Explain why the mean and median are substantially different. (6 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (c) Identify the three incidents with the largest values of `Individuals.Affected`. For each incident, report the covered entity, state, breach type, and number of individuals affected. (6 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (d) Create a second histogram using a base-10 logarithmic scale for `Individuals.Affected`. Again, use 20 bins and include an informative title and appropriate axis labels. Compare this graph with the histogram in part (a). Which graph makes the overall distribution easier to examine, and why? (7 points)
+
+**Hint:** You can create a transformed variable using `log10(cyberData$Individuals.Affected)` and then make a histogram of the transformed values.
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+### Question 3. Comparing Groups (25 points)
+
+#### (a) Create a frequency table for `Covered.Entity.Type`. Then create an appropriate bar chart displaying the same frequencies. Order the categories from the largest to the smallest frequency, and include an informative title and appropriate axis labels. (8 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (b) For each value of `Covered.Entity.Type`, calculate the number of incidents and the median number of individuals affected. Present the results in a clearly labeled table. Which entity type has the largest median? (8 points)
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+#### (c) Create side-by-side boxplots to compare `Individuals.Affected` across the different values of `Covered.Entity.Type`. Use a logarithmic scale for the numerical axis so that the distributions can be seen more clearly. Describe one meaningful pattern and one limitation of this comparison. (9 points)
+
+**Hint:** If you use `ggplot2`, you can add `scale_y_log10()` to display the numerical axis on a base-10 logarithmic scale.
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+### Question 4. Changes Over Time (10 points)
+
+Convert `Breach.Submission.Date` to a date variable and create a new variable containing the submission year. Then calculate the number of reported incidents in each year and display the results in an appropriate graph. Describe the overall pattern. Remember that the data for 2015 cover only part of the year.
+
+```{r}
+# Your code here
+```
+
+> **Your response:**
+
+### Question 5. EDA Summary (10 points)
+
+Write a short paragraph summarizing **three important findings** from your exploratory analysis. Each finding must be supported by a numerical result or a visualization produced in this homework. Also state one question about the data that you would investigate next. Do not make causal claims based only on this exploratory analysis.
+
+> **Your response:**

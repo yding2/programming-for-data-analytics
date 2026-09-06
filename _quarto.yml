@@ -45,7 +45,7 @@ website:
             href: source/week06_estimation_on_means.Rmd 
 
           - text: "Week 7: Hypothesis Testing on Mean(s)"
-            href: source/week07_hypothesit_test_on_means.Rmd   
+            href: source/week07_hypothesis_test_on_means.Rmd   
             
       - text: "Homework"
         menu:
@@ -55,6 +55,8 @@ website:
             href: solutions/hw01_Solution.Rmd
           - text: "Homework 2"
             href: homework/hw02.Rmd
+          - text: "Homework 3"
+            href: homework/hw03.Rmd 
             
       - href: project.qmd
         text: Final Project

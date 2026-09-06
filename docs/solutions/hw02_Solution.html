@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="Yuhan Ding">
 
-<title>Homework 2 – Programming for Data Analytics/Cyber Security</title>
+<title>Homework 2 Solution – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -256,10 +256,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-i.-changing-the-author-field-and-file-name." id="toc-part-i.-changing-the-author-field-and-file-name." class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</a></li>
-  <li><a href="#part-ii.-cars-data-45-points" id="toc-part-ii.-cars-data-45-points" class="nav-link" data-scroll-target="#part-ii.-cars-data-45-points">Part II. Cars data (45 points)</a></li>
+  <li><a href="#part-ii.-cars-data-45-points" id="toc-part-ii.-cars-data-45-points" class="nav-link active" data-scroll-target="#part-ii.-cars-data-45-points">Part II. Cars Data (45 points)</a></li>
   <li><a href="#part-iii.-random-variables-and-data-visualization-20-points" id="toc-part-iii.-random-variables-and-data-visualization-20-points" class="nav-link" data-scroll-target="#part-iii.-random-variables-and-data-visualization-20-points">Part III. Random Variables and Data Visualization (20 points)</a></li>
-  <li><a href="#part-iv.-normal-distributions-and-critical-values" id="toc-part-iv.-normal-distributions-and-critical-values" class="nav-link" data-scroll-target="#part-iv.-normal-distributions-and-critical-values">Part IV. Normal Distributions and Critical Values</a></li>
+  <li><a href="#part-iv.-normal-distributions-and-critical-values-35-points" id="toc-part-iv.-normal-distributions-and-critical-values-35-points" class="nav-link" data-scroll-target="#part-iv.-normal-distributions-and-critical-values-35-points">Part IV. Normal Distributions and Critical Values (35 points)</a></li>
   </ul>
 </nav>
     </div>
@@ -268,7 +267,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 2</h1>
+<h1 class="title">Homework 2 Solution</h1>
 </div>
 
 
@@ -278,7 +277,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>Yuhan Ding </p>
           </div>
   </div>
     
@@ -291,21 +290,8 @@ window.Quarto = {
 </header>
 
 
-<section id="part-i.-changing-the-author-field-and-file-name." class="level3">
-<h3 class="anchored" data-anchor-id="part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</h3>
-<section id="a-change-the-author-field-on-the-rmd-document" class="level4">
-<h4 class="anchored" data-anchor-id="a-change-the-author-field-on-the-rmd-document">(a) Change the <code>author:</code> field on the Rmd document</h4>
-</section>
-<section id="b-rename-this-file-to-hw2_yourfirstinitialyourlastname.rmd-e.g.-hw2_yding.rmd." class="level4">
-<h4 class="anchored" data-anchor-id="b-rename-this-file-to-hw2_yourfirstinitialyourlastname.rmd-e.g.-hw2_yding.rmd.">(b) Rename this file to “HW2_YourFirstInitialYourLastName.Rmd”, (e.g.&nbsp;HW2_YDing.Rmd).</h4>
-</section>
-<section id="c-knit-the-completed-rmd-file-to-html.-submit-both-the-rmd-file-and-the-html-file." class="level4">
-<h4 class="anchored" data-anchor-id="c-knit-the-completed-rmd-file-to-html.-submit-both-the-rmd-file-and-the-html-file.">(c) Knit the completed Rmd file to HTML. Submit both the Rmd file and the HTML file.</h4>
-<p><br></p>
-</section>
-</section>
 <section id="part-ii.-cars-data-45-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii.-cars-data-45-points">Part II. Cars data (45 points)</h3>
+<h3 class="anchored" data-anchor-id="part-ii.-cars-data-45-points">Part II. Cars Data (45 points)</h3>
 <p>We’ll look at data frame and plotting in much more detail in later classes. For a preview of what’s to come, here’s a very basic example.</p>
 <p>For this example we’ll use a very simple dataset. The <code>cars</code> data comes with the default installation of R. To see the first few rows of the data, just type <code>head(cars)</code>.</p>
 <div class="cell">
@@ -323,100 +309,205 @@ window.Quarto = {
 <section id="a-use-summary-to-summarize-cars.-report-the-minimum-maximum-mean-and-median-of-both-speed-and-dist.-10-points" class="level4">
 <h4 class="anchored" data-anchor-id="a-use-summary-to-summarize-cars.-report-the-minimum-maximum-mean-and-median-of-both-speed-and-dist.-10-points">(a) Use <code>summary()</code> to summarize <code>cars</code>. Report the minimum, maximum, mean, and median of both <code>speed</code> and <code>dist</code>. (10 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cars)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     speed           dist       
+ Min.   : 4.0   Min.   :  2.00  
+ 1st Qu.:12.0   1st Qu.: 26.00  
+ Median :15.0   Median : 36.00  
+ Mean   :15.4   Mean   : 42.98  
+ 3rd Qu.:19.0   3rd Qu.: 56.00  
+ Max.   :25.0   Max.   :120.00  </code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> The minimal value of <code>speed</code> is 4, maximal value of <code>speed</code> is 25, mean value of <code>speed</code> is 15.4, and meadian value of <code>speed</code> is 15. The minimal value of <code>dist</code> is 2, maximal value of <code>dist</code> is 120, mean value of <code>dist</code> is 42.98, and meadian value of <code>dist</code> is 36. </span></p>
 </blockquote>
 </section>
 <section id="b-calculate-the-variance-and-standard-deviation-of-speed-and-dist-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="b-calculate-the-variance-and-standard-deviation-of-speed-and-dist-5-points">(b) Calculate the variance and standard deviation of <code>speed</code> and <code>dist</code> (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>var_speed <span class="ot">&lt;-</span> <span class="fu">var</span>(cars<span class="sc">$</span>speed)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>var_speed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27.95918</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>std_speed <span class="ot">&lt;-</span> <span class="fu">sd</span>(cars<span class="sc">$</span>speed)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>std_speed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.287644</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>var_dist <span class="ot">&lt;-</span> <span class="fu">var</span>(cars<span class="sc">$</span>dist)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>var_dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 664.0608</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>std_dist <span class="ot">&lt;-</span> <span class="fu">sd</span>(cars<span class="sc">$</span>dist)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>std_dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25.76938</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> The variance of <code>speed</code> is 27.9591837. The standard deviation of <code>speed</code> is 5.2876444. The variance of <code>dist</code> is 664.0608163. The standard deviation of <code>dist</code> is 25.7693775.</span></p>
 </blockquote>
 </section>
 <section id="c-calculate-the-mean-and-standard-deviation-of-dist-for-observations-where-speed-is-greater-than-12-and-less-than-19.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="c-calculate-the-mean-and-standard-deviation-of-dist-for-observations-where-speed-is-greater-than-12-and-less-than-19.-5-points">(c) Calculate the mean and standard deviation of <code>dist</code> for observations where <code>speed</code> is greater than 12 and less than 19. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>selected.dist <span class="ot">&lt;-</span> cars<span class="sc">$</span>dist[cars<span class="sc">$</span>speed <span class="sc">&gt;</span> <span class="dv">12</span> <span class="sc">&amp;</span> cars<span class="sc">$</span>speed <span class="sc">&lt;</span> <span class="dv">19</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(selected.dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44.7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(selected.dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18.61833</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> The average of <code>dist</code> when <code>speed</code> is greater than 12 and less than 19 is 44.7. The standard deviation is <code>18.6183</code>. </span></p>
 </blockquote>
 </section>
 <section id="d-produce-a-histogram-of-speed-with-10-breaks.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="d-produce-a-histogram-of-speed-with-10-breaks.-please-illustrate-your-observation-from-the-output.-5-points">(d) Produce a histogram of <code>speed</code> with <strong>10 breaks</strong>. Please illustrate your observation from the output. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(cars<span class="sc">$</span>speed,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(cars<span class="sc">$</span>speed), <span class="fu">max</span>(cars<span class="sc">$</span>speed), <span class="at">length.out =</span> <span class="dv">11</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of Speed"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Speed"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"white"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw02_Solution_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Most speeds fall between approximately 10 and 20, with the largest concentration near the middle of this range. The distribution is roughly unimodal and does not appear to be strongly skewed. </span></p>
 </blockquote>
 </section>
 <section id="e-produce-a-histogram-of-dist-with-20-breaks.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="e-produce-a-histogram-of-dist-with-20-breaks.-please-illustrate-your-observation-from-the-output.-5-points">(e) Produce a histogram of <code>dist</code> with <strong>20 breaks</strong>. Please illustrate your observation from the output. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(cars<span class="sc">$</span>dist,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fu">min</span>(cars<span class="sc">$</span>dist), <span class="fu">max</span>(cars<span class="sc">$</span>dist), <span class="at">length.out =</span> <span class="dv">21</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of Stopping Distance"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stopping Distance"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">border =</span> <span class="st">"white"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw02_Solution_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Most stopping distances are relatively small or moderate, while a few observations have much larger distances. The distribution is right-skewed.</span></p>
 </blockquote>
 </section>
 <section id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-briefly-describe-the-center-spread-and-any-possible-outliers.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="f-use-the-boxplot-function-to-create-a-boxplot-of-speed.-briefly-describe-the-center-spread-and-any-possible-outliers.-5-points">(f) Use the <code>boxplot</code> function to create a boxplot of <code>speed</code>. Briefly describe the center, spread, and any possible outliers. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(cars<span class="sc">$</span>speed,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Speed"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Speed"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw02_Solution_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(cars<span class="sc">$</span>speed)<span class="sc">$</span>stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4 12 15 19 25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(cars<span class="sc">$</span>speed)<span class="sc">$</span>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>numeric(0)</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> The median speed is 15. The middle 50% of the speeds extend from 12 to 19, so the IQR is 7. No observations are identified as possible outliers by the boxplot rule.</span></p>
 </blockquote>
 </section>
 <section id="g-use-the-boxplot-function-to-create-a-boxplot-of-dist.-please-illustrate-your-observation-from-the-output.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="g-use-the-boxplot-function-to-create-a-boxplot-of-dist.-please-illustrate-your-observation-from-the-output.-5-points">(g) Use the <code>boxplot</code> function to create a boxplot of <code>dist</code>. Please illustrate your observation from the output. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(cars<span class="sc">$</span>dist,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Boxplot of Stopping Distance"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Stopping Distance"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"lightgreen"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw02_Solution_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(cars<span class="sc">$</span>dist)<span class="sc">$</span>stats</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2 26 36 56 93</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot.stats</span>(cars<span class="sc">$</span>dist)<span class="sc">$</span>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 120</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> The median stopping distance is 36. The middle 50% of the distances extend from 26 to 56, so the IQR is 30. The value 120 is shown as a possible outlier above the upper whisker. The longer upper portion of the plot is consistent with a right-skewed distribution. </span></p>
 </blockquote>
 </section>
 <section id="h-use-qqnorm-and-qqline-to-investigate-whether-dist-is-approximately-normally-distributed.-briefly-explain-your-conclusion.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="h-use-qqnorm-and-qqline-to-investigate-whether-dist-is-approximately-normally-distributed.-briefly-explain-your-conclusion.-5-points">(h) Use <code>qqnorm</code> and <code>qqline</code> to investigate whether <code>dist</code> is approximately normally distributed. Briefly explain your conclusion. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(cars<span class="sc">$</span>dist,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Normal Q-Q Plot of Stopping Distance"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(cars<span class="sc">$</span>dist, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hw02_Solution_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> If <code>dist</code> were approximately normally distributed, the points would lie close to the reference line. The points deviate noticeably from the line, especially in the upper tail. Together with the right-skewed histogram and the high outlier, this suggests that <code>dist</code> is not approximately normally distributed.</span></p>
 </blockquote>
-<p><br></p>
 </section>
 </section>
 <section id="part-iii.-random-variables-and-data-visualization-20-points" class="level3">
 <h3 class="anchored" data-anchor-id="part-iii.-random-variables-and-data-visualization-20-points">Part III. Random Variables and Data Visualization (20 points)</h3>
-<section id="question-1.-classify-the-following-random-variables-as-discrete-or-continuous-8-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-1.-classify-the-following-random-variables-as-discrete-or-continuous-8-points">Question 1. Classify the following random variables as discrete or continuous (8 points):</h4>
+<section id="question-1.-discrete-or-continuous-8-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-1.-discrete-or-continuous-8-points">Question 1. Discrete or continuous (8 points)</h4>
 <p>X: the number of automobile accidents per year in Illinois.</p>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Discrete</span></p>
 </blockquote>
 <p>Y: the length of time to play 18 holes of golf.</p>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Continuous</span></p>
 </blockquote>
 <p>M: the amount of milk produced yearly by a particular cow.</p>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Continuous</span></p>
 </blockquote>
 <p>N: the number of eggs laid each month by a hen.</p>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> Discrete</span></p>
 </blockquote>
 </section>
-<section id="question-2-multiple-choices-12-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-2-multiple-choices-12-points">Question 2: Multiple Choices (12 points):</h4>
+<section id="question-2.-multiple-choice-12-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-2.-multiple-choice-12-points">Question 2. Multiple choice (12 points)</h4>
 </section>
 <section id="i-a-discrete-random-variable" class="level4">
 <h4 class="anchored" data-anchor-id="i-a-discrete-random-variable">i) A discrete random variable</h4>
@@ -426,7 +517,7 @@ window.Quarto = {
 <li><p>Has a probability density function</p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> A </span></p>
 </blockquote>
 </section>
 <section id="ii-a-continuous-random-variable-is-different-from-a-discrete-random-variable-because" class="level4">
@@ -434,10 +525,10 @@ window.Quarto = {
 <ol type="A">
 <li><p>It can only take integer values</p></li>
 <li><p>It is described using a probability mass function (PMF)</p></li>
-<li><p>It can take any value within a given interval</p></li>
+<li><p>It can take an infinite number of values within a given range</p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> C </span></p>
 </blockquote>
 </section>
 <section id="iii-if-x-is-a-constant-random-variable-meaning-xc-for-some-constant-c-what-is-varx" class="level4">
@@ -449,7 +540,7 @@ window.Quarto = {
 <li><p><span class="math inline">\(E[X^2]\)</span></p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> A </span></p>
 </blockquote>
 </section>
 <section id="iv-which-of-the-following-statements-about-expectation-is-true" class="level4">
@@ -461,7 +552,7 @@ window.Quarto = {
 <li><p><span class="math inline">\(E[X]\)</span> is always an integer</p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> B </span></p>
 </blockquote>
 </section>
 <section id="v-if-a-histogram-is-skewed-to-the-right-what-does-it-indicate" class="level4">
@@ -473,7 +564,7 @@ window.Quarto = {
 <li><p>The data has no outliers</p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> A </span></p>
 </blockquote>
 </section>
 <section id="vi-which-of-the-following-is-true-about-outliers-in-a-boxplot" class="level4">
@@ -485,38 +576,52 @@ window.Quarto = {
 <li><p>Outliers are not shown in a boxplot</p></li>
 </ol>
 <blockquote class="blockquote">
-<p>Type your answer here</p>
+<p><span style="color: magenta;"> B </span></p>
 </blockquote>
 </section>
 </section>
-<section id="part-iv.-normal-distributions-and-critical-values" class="level3">
-<h3 class="anchored" data-anchor-id="part-iv.-normal-distributions-and-critical-values">Part IV. Normal Distributions and Critical Values</h3>
-<section id="question-1-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters" class="level4">
-<h4 class="anchored" data-anchor-id="question-1-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters">Question 1: A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,</h4>
+<section id="part-iv.-normal-distributions-and-critical-values-35-points" class="level3">
+<h3 class="anchored" data-anchor-id="part-iv.-normal-distributions-and-critical-values-35-points">Part IV. Normal Distributions and Critical Values (35 points)</h3>
+<section id="question-1.-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters" class="level4">
+<h4 class="anchored" data-anchor-id="question-1.-a-soft-drink-machine-is-regulated-so-that-it-discharges-an-average-of-200-milliliters-per-cup.-if-the-amount-of-drink-is-normally-distributed-with-a-standard-deviation-equal-to-15-milliliters">Question 1. A soft-drink machine is regulated so that it discharges an average of 200 milliliters per cup. If the amount of drink is normally distributed with a standard deviation equal to 15 milliliters,</h4>
 </section>
 <section id="a-what-fraction-of-the-cups-will-contain-more-than-224-milliliters-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="a-what-fraction-of-the-cups-will-contain-more-than-224-milliliters-5-points">(a) what fraction of the cups will contain more than 224 milliliters? (5 points)</h4>
-<p><strong>Hint</strong>: You can use <code>pnorm</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pmt224 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">224</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pmt224</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05479929</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Report and briefly interpret your answer here.</p>
+<p><span style="color: magenta;"> The fraction of the cups will contain more than 224 milliliters is 0.0547993. </span></p>
 </blockquote>
 </section>
 <section id="b-what-is-the-probability-that-a-cup-contains-between-191-and-209-milliliters-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="b-what-is-the-probability-that-a-cup-contains-between-191-and-209-milliliters-5-points">(b) what is the probability that a cup contains between 191 and 209 milliliters? (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pbd <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">209</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">191</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>pbd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4514938</code></pre>
 </div>
+</div>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> The probability that a cup contains between 191 and 209 milliliters 0.4514938. </span></p>
+</blockquote>
 </section>
 <section id="c-below-what-value-do-we-get-the-smallest-25-of-the-drinks-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="c-below-what-value-do-we-get-the-smallest-25-of-the-drinks-5-points">(c) below what value do we get the smallest 25% of the drinks? (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>q25 <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.25</span>, <span class="at">mean =</span> <span class="dv">200</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>q25</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 189.8827</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Report and briefly interpret your answer here.</p>
+<p><span style="color: magenta;"> Below 189.8826537 we get the smallest 25% of the drinks. </span></p>
 </blockquote>
 </section>
 <section id="question-2.-critical-values-with-qnorm" class="level4">
@@ -525,25 +630,35 @@ window.Quarto = {
 <section id="a-please-use-qnorm-to-find-the-critical-values-z_0.1.-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="a-please-use-qnorm-to-find-the-critical-values-z_0.1.-5-points">(a) Please use <code>qnorm</code> to find the critical values <span class="math inline">\(z_{0.1}\)</span>. (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>zalpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.10</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>zalpha</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.281552</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Report and briefly interpret your answer here.</p>
+<p><span style="color: magenta;"> <span class="math inline">\(z_{0.1}\)</span> is 1.2815516. </span></p>
 </blockquote>
 </section>
 <section id="b-find-the-value-of-z_0-such-that-90-of-the-standard-normal-z-values-lie-between--z_0-and-z_0-that-is-p-z_0leq-zleq-z_0-.90.-10-points" class="level4">
 <h4 class="anchored" data-anchor-id="b-find-the-value-of-z_0-such-that-90-of-the-standard-normal-z-values-lie-between--z_0-and-z_0-that-is-p-z_0leq-zleq-z_0-.90.-10-points">(b) Find the value of <span class="math inline">\(z_0\)</span> such that <span class="math inline">\(90\%\)</span> of the standard normal <span class="math inline">\(Z\)</span> values lie between <span class="math inline">\(-z_0\)</span> and <span class="math inline">\(z_0\)</span>; that is, <span class="math inline">\(P(-z_0\leq Z\leq z_0) = .90\)</span>. (10 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.90</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>z0 <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>z0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.644854</code></pre>
+</div>
 </div>
 <blockquote class="blockquote">
-<p>Report and briefly interpret your answer here.</p>
+<p><span style="color: magenta;"> <span class="math inline">\(z_{0}\)</span> is 1.6448536. </span></p>
 </blockquote>
 </section>
 <section id="c-which-value-is-larger-why-5-points" class="level4">
 <h4 class="anchored" data-anchor-id="c-which-value-is-larger-why-5-points">(c) Which value is larger? Why? (5 points)</h4>
 <blockquote class="blockquote">
-<p>Your answer here.</p>
+<p><span style="color: magenta;"> Here <span class="math inline">\(z_{0}\)</span> is <span class="math inline">\(z_{0.05}\)</span>, which should be larger than <span class="math inline">\(z_{0.1}\)</span>. Because <span class="math inline">\(P(Z \le z_{0.05}) = 1-0.05 = 0.95 &gt; 0.9 = 1-0.1 = P(Z \le z_{0.1})\)</span>. </span></p>
 </blockquote>
 
 

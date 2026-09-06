@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Your Name">
 
-<title>Week 3: Special Discrete Random Distributions – Programming for Data Analytics/Cyber Security</title>
+<title>Homework 3 – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -106,35 +107,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -255,11 +227,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives:</a></li>
-  <li><a href="#special-discrete-distributions" id="toc-special-discrete-distributions" class="nav-link" data-scroll-target="#special-discrete-distributions">Special Discrete Distributions</a>
+  <li><a href="#part-i.-changing-the-author-field-and-file-name." id="toc-part-i.-changing-the-author-field-and-file-name." class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</a></li>
+  <li><a href="#part-ii.-exploratory-data-analysis-100-points" id="toc-part-ii.-exploratory-data-analysis-100-points" class="nav-link" data-scroll-target="#part-ii.-exploratory-data-analysis-100-points">Part II. Exploratory Data Analysis (100 points)</a>
   <ul class="collapse">
-  <li><a href="#quick-check-discrete-random-variables" id="toc-quick-check-discrete-random-variables" class="nav-link" data-scroll-target="#quick-check-discrete-random-variables">Quick Check: Discrete Random Variables</a></li>
+  <li><a href="#question-1.-understanding-and-checking-the-data-30-points" id="toc-question-1.-understanding-and-checking-the-data-30-points" class="nav-link" data-scroll-target="#question-1.-understanding-and-checking-the-data-30-points">Question 1. Understanding and Checking the Data (30 points)</a></li>
+  <li><a href="#question-2.-exploring-individuals.affected-25-points" id="toc-question-2.-exploring-individuals.affected-25-points" class="nav-link" data-scroll-target="#question-2.-exploring-individuals.affected-25-points">Question 2. Exploring <code>Individuals.Affected</code> (25 points)</a></li>
+  <li><a href="#question-3.-comparing-groups-25-points" id="toc-question-3.-comparing-groups-25-points" class="nav-link" data-scroll-target="#question-3.-comparing-groups-25-points">Question 3. Comparing Groups (25 points)</a></li>
+  <li><a href="#question-4.-changes-over-time-10-points" id="toc-question-4.-changes-over-time-10-points" class="nav-link" data-scroll-target="#question-4.-changes-over-time-10-points">Question 4. Changes Over Time (10 points)</a></li>
+  <li><a href="#question-5.-eda-summary-10-points" id="toc-question-5.-eda-summary-10-points" class="nav-link" data-scroll-target="#question-5.-eda-summary-10-points">Question 5. EDA Summary (10 points)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -269,13 +244,19 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 3: Special Discrete Random Distributions</h1>
+<h1 class="title">Homework 3</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name </p>
+          </div>
+  </div>
     
   
     
@@ -286,229 +267,191 @@ window.Quarto = {
 </header>
 
 
-<section id="references" class="level3">
-<h3 class="anchored" data-anchor-id="references">References</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import needed packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="part-i.-changing-the-author-field-and-file-name." class="level2">
+<h2 class="anchored" data-anchor-id="part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</h2>
 <ol type="1">
-<li><strong>Probability &amp; Statistics for Engineers &amp; Scientist</strong>, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall</li>
-<li>ITM514 Handout Notes Sampling Distribution, Sonja Petrovic</li>
+<li>Change the <code>author</code> field to your name.</li>
+<li>Rename this file as <code>HW3_YourFirstInitialYourLastName.Rmd</code> (for example, <code>HW3_YDing.Rmd</code>).</li>
+<li>Complete all questions in the designated code and response spaces.</li>
+<li>Knit the completed file to HTML.</li>
+<li>Submit both the completed <code>.Rmd</code> file and the knitted <code>.html</code> file. Make sure both files open correctly before submitting.</li>
 </ol>
+<p><br></p>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives:</h2>
+<section id="part-ii.-exploratory-data-analysis-100-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii.-exploratory-data-analysis-100-points">Part II. Exploratory Data Analysis (100 points)</h2>
+<p>In this part, we work on the cyber security breach report data downloaded 2015-02-26 from the US Health and Human Services.</p>
+<p>To understand what the data represents, here is some information from the <em>Office for Civil Rights</em> of the <em>U.S. Department of Health and Human Services</em>:</p>
 <ul>
-<li><p>Understand the Bernoulli distributions</p></li>
-<li><p>Understand the Binomial distributions</p></li>
-<li><p>Understand tossing coin experiments</p></li>
-<li><p>Know how to use <code>barplot</code></p></li>
+<li>“As required by section 13402(e)(4) of the HITECH Act, the Secretary must post a list of breaches of unsecured protected health information affecting 500 or more individuals.</li>
+<li>“Since October 2009 organizations in the U.S. that store data on human health are required to report any incident that compromises the confidentiality of 500 or more patients / human subjects (45 C.F.R. 164.408). These reports are publicly available. Our data set was downloaded from the Office for Civil Rights of the U.S. Department of Health and Human Services, 2015-02-26.”</li>
 </ul>
+<p>Load the data and save it as <code>cyberData</code> using the following code. The first column of the CSV file contains row identifiers, so it is imported as row names rather than as a data variable. The file also uses <code>\N</code> to represent missing values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cyberData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">url</span>(<span class="st">"https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/HHSCyberSecurityBreaches.csv"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.strings =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">N"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="question-1.-understanding-and-checking-the-data-30-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-understanding-and-checking-the-data-30-points">Question 1. Understanding and Checking the Data (30 points)</h3>
+<section id="a-check-the-structure-of-the-data-using-the-str-command.-what-type-of-object-is-cyberdata-how-many-observations-are-recorded-how-many-variables-are-recordedlist-all-of-the-types-of-variables-that-are-recorded-based-on-the-output-i.e.-intfloat-etc..-7-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-check-the-structure-of-the-data-using-the-str-command.-what-type-of-object-is-cyberdata-how-many-observations-are-recorded-how-many-variables-are-recordedlist-all-of-the-types-of-variables-that-are-recorded-based-on-the-output-i.e.-intfloat-etc..-7-points">(a) Check the structure of the data using the <code>str</code> command. What type of object is <code>cyberData</code>? How many observations are recorded? How many variables are recorded?List all of the types of variables that are recorded based on the output (i.e.&nbsp;int/float etc.). (7 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><em>[Your text answer here.]</em> The data set is stored as a ….. with …. rows and …. columns. There are …. observations of …. variables. All of the types of variables are ….</p>
+</blockquote>
 </section>
-<section id="special-discrete-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="special-discrete-distributions">Special Discrete Distributions</h2>
-<p><strong>Bernoulli and Binomial distributions</strong> are related to experiments with binary outcome (success or failure).</p>
-<section id="bernoulli-distribution" class="level4">
-<h4 class="anchored" data-anchor-id="bernoulli-distribution">Bernoulli Distribution</h4>
-<p><strong>Bernoulli Trial</strong>: A single random experiment with outcome either success or failure, and the probability of the success is <span class="math inline">\(p\)</span>.</p>
-<p><em>Examples</em> - Flip a single coin - Shot a free throw</p>
-<p><strong>Bernoulli Random Variable</strong>: A random variable that takes either <span class="math inline">\(1\)</span> or <span class="math inline">\(0\)</span>, where it takes 1 when the outcome of the Bernoulli trial is a success and 0 when the outcome of the Bernoulli trial is a failure.</p>
-<p><strong>Bernoulli Distribution</strong>: The distribution of a Bernoulli random variable is called the Bernoulli distribution.</p>
-<p><strong>Notation</strong>: <span class="math inline">\(X\sim Bernoulli(p)\)</span></p>
-<p><strong>PMF of Bernoulli Distribution/Random Variable</strong>:</p>
-<p><span class="math display">\[
-\begin{array}{c|cc}
-x &amp; 0 &amp; 1 \\
-\hline
-P(X = x) &amp; 1-p &amp; p  \\
-\end{array}
-\]</span></p>
-<p><strong>Expectation and Variance</strong></p>
-<p><span class="math display">\[E(X) = (0)(1-p)+(1)p = p,\qquad var(X) = (0)^2(1-p)+(1)^2p -p^2 = p(1-p)\]</span></p>
+<section id="b-examine-the-missing-values-in-the-data.-for-each-variable-report-both-the-number-and-the-percentage-of-missing-values.-which-variable-has-the-largest-percentage-of-missing-values-8-points" class="level4">
+<h4 class="anchored" data-anchor-id="b-examine-the-missing-values-in-the-data.-for-each-variable-report-both-the-number-and-the-percentage-of-missing-values.-which-variable-has-the-largest-percentage-of-missing-values-8-points">(b) Examine the missing values in the data. For each variable, report both the number and the percentage of missing values. Which variable has the largest percentage of missing values? (8 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
 </section>
-<section id="investigate-p-via-tossing-coin-experiments" class="level4">
-<h4 class="anchored" data-anchor-id="investigate-p-via-tossing-coin-experiments">Investigate <span class="math inline">\(p\)</span> via Tossing Coin Experiments</h4>
-<p>Suppose we have a fair coin and consider head as a success. Thus <span class="math inline">\(p = 0.5\)</span>. We generate 10 instances from the Bernoulli distribution.</p>
+<section id="c-use-the-table-function-to-display-the-frequencies-of-the-values-in-type.of.breach.-how-many-observations-are-recorded-exactly-as-hackingit-incident-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-use-the-table-function-to-display-the-frequencies-of-the-values-in-type.of.breach.-how-many-observations-are-recorded-exactly-as-hackingit-incident-5-points">(c) Use the <code>table</code> function to display the frequencies of the values in <code>Type.of.Breach</code>. How many observations are recorded exactly as <code>"Hacking/IT Incident"</code>? (5 points)</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of random experiments</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sample space for tossing a coin, 0--Tail, 1--Head</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate n outcomes of the experiments</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>coinToss <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>coinToss</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 1 1 0 0 1 1 0 0 0</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<p>We can use <code>bar plot</code> to show the frequency of each value in a categorical/discrete variable.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(coinToss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="week03_discrete_distributions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>This is actually a sample from the distribution with sample size 10. Let’s investigate the sample mean.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4</code></pre>
-</div>
-</div>
-<p><strong>Question:</strong> What happened if we increase the sample size?</p>
-<p>Let <span class="math inline">\(n =100\)</span></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of random experiments</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sample space for tossing a coin, 0--Tail, 1--Head</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate n outcomes of the experiments</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>coinToss <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(coinToss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="week03_discrete_distributions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.47</code></pre>
-</div>
-</div>
-<p>Let’s try <span class="math inline">\(n = 10,000\)</span>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of random experiments</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sample space for tossing a coin, 0--Tail, 1--Head</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>) </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># generate n outcomes of the experiments</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>coinToss <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(coinToss))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="week03_discrete_distributions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4999</code></pre>
-</div>
-</div>
-<p><strong>Question</strong>: What can we learn from the experiment?</p>
-<p><strong>Conclusion</strong>: Given a sample of <strong>independent and identically distributed (IID)</strong> values, the <em>sample mean converges to the expectation (true/population mean)</em>.</p>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
 </section>
-<section id="binomial-distribution" class="level4">
-<h4 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h4>
-<p><strong>Binomial Trial</strong>: Repeat Bernoulli trial independently for a certain number (<span class="math inline">\(n\)</span>) of times, each repetition has the same possible outcomes (success or failure), and the probability of each success (<span class="math inline">\(p\)</span>) is consistent for all trials. This experiment is called Binomial trial.</p>
-<p><strong>Binomial Random Variable</strong>: The number of successes <span class="math inline">\(X\)</span> of a binomial trial is called a Binomial random variable.</p>
-<p><strong>Binomial Distribution</strong>: The distribution of a Binomial random variable is called the binomial distribution</p>
-<p><em>Examples</em>:</p>
-<ul>
-<li><p>Number of heads in 40 coin flips</p></li>
-<li><p>Number of hits in 20 free throws</p></li>
-</ul>
-<p><strong>Notation</strong>: <span class="math inline">\(X\sim B(n,p)\)</span>, <span class="math inline">\(n\)</span> is the number of Bernoulli trials and <span class="math inline">\(p\)</span> is the probability of success in each trial.</p>
-<p><strong>PMF</strong>: <span class="math inline">\(b(x;n,p) = {n\choose x}p^x(1-p)^{n-x}\)</span>, <span class="math inline">\(x=0,1,\ldots,n\)</span></p>
-<p><strong>Mathematical Reason</strong>: <span class="math inline">\(f(x) = P(X=x)\)</span>, that is, in <span class="math inline">\(n\)</span> trials, we observe <span class="math inline">\(x\)</span> successes. The probability of an outcome with <span class="math inline">\(x\)</span> successes is <span class="math inline">\(p^x(1-p)^{n-x}\)</span> (the trials are independent). The number of such outcomes is: <span class="math inline">\({n\choose x}\)</span> (choosing <span class="math inline">\(x\)</span> trials for success in <span class="math inline">\(n\)</span> trials).</p>
-<p><strong>Expectation and Variance</strong>: <span class="math display">\[E(X) = np, \qquad var(X) = np(1-p).\]</span> Binomial random variable <span class="math inline">\(X\sim B(n,p)\)</span> can be viewed as the sum of <span class="math inline">\(n\)</span> <em>independent and identical</em> Bernoulli random variables, i.e., <span class="math display">\[X = Y_1+\cdots+Y_n,\]</span> where <span class="math inline">\(X\sim B(n,p)\)</span>, <span class="math inline">\(Y_1,\ldots,Y_n\sim Bernoulli(p)\)</span> and <span class="math inline">\(Y_1,\ldots,Y_n\)</span> are independent. Thus, by the properties of expected value and variance, <span class="math display">\[\begin{align*}
-E(X) &amp; = E(Y_1+\cdots+Y_n) = E(Y_1)+\cdots+E(Y_n) = np,\\
-var(X) &amp;= var(Y_1+\cdots+Y_n) = var(Y_1)+\cdots+var(Y_n) = np(1-p).
-\end{align*}\]</span></p>
+<section id="d-what-type-of-breach-is-reported-in-the-748th-row-of-cyberdata-how-about-the-349th-row-was-row-349-included-in-the-number-of-hackingit-incidents-computed-in-part-c-explain-why-or-why-not.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="d-what-type-of-breach-is-reported-in-the-748th-row-of-cyberdata-how-about-the-349th-row-was-row-349-included-in-the-number-of-hackingit-incidents-computed-in-part-c-explain-why-or-why-not.-5-points">(d) What type of breach is reported in the 748th row of <code>cyberData</code>? How about the 349th row? Was row 349 included in the number of Hacking/IT incidents computed in part (c)? Explain why or why not. (5 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
 </section>
-<section id="quick-check-discrete-random-variables" class="level3">
-<h3 class="anchored" data-anchor-id="quick-check-discrete-random-variables">Quick Check: Discrete Random Variables</h3>
-<p>This short practice is not graded. Select an answer to receive immediate feedback.</p>
-<style>
-.quick-check {
-  border: 1px solid #d9e2ec;
-  border-radius: 7px;
-  padding: 0.55rem 0.85rem;
-  margin: 0.6rem 0;
-  background: #f8fafc;
-}
-.quick-check p { margin: 0 0 0.3rem; }
-.quick-check label {
-  display: block;
-  margin: 0.12rem 0;
-  line-height: 1.35;
-  cursor: pointer;
-}
-.quiz-feedback {
-  min-height: 1.1rem;
-  margin-top: 0.25rem;
-  font-weight: 600;
-}
-.quiz-correct { color: #18794e; }
-.quiz-incorrect { color: #b42318; }
-</style>
-<div class="quick-check" data-answer="a">
-<p>
-<strong>1. A Bernoulli trial has:</strong>
-</p>
-<label><input type="radio" name="discrete-q1" value="a" onchange="checkPractice(this)"> Two possible outcomes</label> <label><input type="radio" name="discrete-q1" value="b" onchange="checkPractice(this)"> Three possible outcomes</label> <label><input type="radio" name="discrete-q1" value="c" onchange="checkPractice(this)"> Infinitely many possible outcomes</label>
-<div class="quiz-feedback" aria-live="polite">
+<section id="e-some-observations-contain-more-than-one-breach-type-separated-by-a-comma.-use-strsplit-to-separate-the-breach-types-and-then-find-the-correct-total-number-of-incidents-involving-hackingit.-5-points" class="level4">
+<h4 class="anchored" data-anchor-id="e-some-observations-contain-more-than-one-breach-type-separated-by-a-comma.-use-strsplit-to-separate-the-breach-types-and-then-find-the-correct-total-number-of-incidents-involving-hackingit.-5-points">(e) Some observations contain more than one breach type separated by a comma. Use <code>strsplit()</code> to separate the breach types, and then find the correct total number of incidents involving Hacking/IT. (5 points)</h4>
+<p><strong>Hint:</strong> The following example demonstrates how <code>strsplit()</code> works. Study its output and adapt the idea to <code>Type.of.Breach</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>example.types <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"type a"</span>, <span class="st">"type b"</span>, <span class="st">"type a, type b"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">strsplit</span>(example.types, <span class="st">", "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "type a"
 
-</div>
-</div>
-<div class="quick-check" data-answer="a">
-<p>
-<strong>2. A Bernoulli random variable can take the values:</strong>
-</p>
-<label><input type="radio" name="discrete-q2" value="a" onchange="checkPractice(this)"> 0 and 1</label> <label><input type="radio" name="discrete-q2" value="b" onchange="checkPractice(this)"> Any value between 0 and 1</label> <label><input type="radio" name="discrete-q2" value="c" onchange="checkPractice(this)"> Any non-negative integer</label>
-<div class="quiz-feedback" aria-live="polite">
+[[2]]
+[1] "type b"
 
+[[3]]
+[1] "type a" "type b"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(<span class="fu">strsplit</span>(example.types, <span class="st">", "</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "type a" "type b" "type a" "type b"</code></pre>
 </div>
 </div>
-<div class="quick-check" data-answer="b">
-<p>
-<strong>3. In a Bernoulli distribution, p represents:</strong>
-</p>
-<label><input type="radio" name="discrete-q3" value="a" onchange="checkPractice(this)"> The number of trials</label> <label><input type="radio" name="discrete-q3" value="b" onchange="checkPractice(this)"> The probability of success</label> <label><input type="radio" name="discrete-q3" value="c" onchange="checkPractice(this)"> The number of successes</label>
-<div class="quiz-feedback" aria-live="polite">
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="question-2.-exploring-individuals.affected-25-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-exploring-individuals.affected-25-points">Question 2. Exploring <code>Individuals.Affected</code> (25 points)</h3>
+<section id="a-create-a-histogram-of-individuals.affected-using-20-bins.-include-an-informative-title-and-appropriate-axis-labels.-describe-the-shape-of-the-distribution.-6-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-create-a-histogram-of-individuals.affected-using-20-bins.-include-an-informative-title-and-appropriate-axis-labels.-describe-the-shape-of-the-distribution.-6-points">(a) Create a histogram of <code>Individuals.Affected</code> using 20 bins. Include an informative title and appropriate axis labels. Describe the shape of the distribution. (6 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="quick-check" data-answer="b">
-<p>
-<strong>4. A binomial random variable represents:</strong>
-</p>
-<label><input type="radio" name="discrete-q4" value="a" onchange="checkPractice(this)"> The outcome of one trial</label> <label><input type="radio" name="discrete-q4" value="b" onchange="checkPractice(this)"> The number of successes in a fixed number of trials</label> <label><input type="radio" name="discrete-q4" value="c" onchange="checkPractice(this)"> The time required to complete an experiment</label>
-<div class="quiz-feedback" aria-live="polite">
-
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="b-calculate-the-mean-median-standard-deviation-minimum-and-maximum-of-individuals.affected.-explain-why-the-mean-and-median-are-substantially-different.-6-points" class="level4">
+<h4 class="anchored" data-anchor-id="b-calculate-the-mean-median-standard-deviation-minimum-and-maximum-of-individuals.affected.-explain-why-the-mean-and-median-are-substantially-different.-6-points">(b) Calculate the mean, median, standard deviation, minimum, and maximum of <code>Individuals.Affected</code>. Explain why the mean and median are substantially different. (6 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="c-identify-the-three-incidents-with-the-largest-values-of-individuals.affected.-for-each-incident-report-the-covered-entity-state-breach-type-and-number-of-individuals-affected.-6-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-identify-the-three-incidents-with-the-largest-values-of-individuals.affected.-for-each-incident-report-the-covered-entity-state-breach-type-and-number-of-individuals-affected.-6-points">(c) Identify the three incidents with the largest values of <code>Individuals.Affected</code>. For each incident, report the covered entity, state, breach type, and number of individuals affected. (6 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="quick-check" data-answer="a">
-<p>
-<strong>5. Which is an example of a binomial random variable?</strong>
-</p>
-<label><input type="radio" name="discrete-q5" value="a" onchange="checkPractice(this)"> The number of heads in 20 coin flips</label> <label><input type="radio" name="discrete-q5" value="b" onchange="checkPractice(this)"> The height of a student</label> <label><input type="radio" name="discrete-q5" value="c" onchange="checkPractice(this)"> The time spent waiting in line</label>
-<div class="quiz-feedback" aria-live="polite">
-
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="d-create-a-second-histogram-using-a-base-10-logarithmic-scale-for-individuals.affected.-again-use-20-bins-and-include-an-informative-title-and-appropriate-axis-labels.-compare-this-graph-with-the-histogram-in-part-a.-which-graph-makes-the-overall-distribution-easier-to-examine-and-why-7-points" class="level4">
+<h4 class="anchored" data-anchor-id="d-create-a-second-histogram-using-a-base-10-logarithmic-scale-for-individuals.affected.-again-use-20-bins-and-include-an-informative-title-and-appropriate-axis-labels.-compare-this-graph-with-the-histogram-in-part-a.-which-graph-makes-the-overall-distribution-easier-to-examine-and-why-7-points">(d) Create a second histogram using a base-10 logarithmic scale for <code>Individuals.Affected</code>. Again, use 20 bins and include an informative title and appropriate axis labels. Compare this graph with the histogram in part (a). Which graph makes the overall distribution easier to examine, and why? (7 points)</h4>
+<p><strong>Hint:</strong> You can create a transformed variable using <code>log10(cyberData$Individuals.Affected)</code> and then make a histogram of the transformed values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="question-3.-comparing-groups-25-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-3.-comparing-groups-25-points">Question 3. Comparing Groups (25 points)</h3>
+<section id="a-create-a-frequency-table-for-covered.entity.type.-then-create-an-appropriate-bar-chart-displaying-the-same-frequencies.-order-the-categories-from-the-largest-to-the-smallest-frequency-and-include-an-informative-title-and-appropriate-axis-labels.-8-points" class="level4">
+<h4 class="anchored" data-anchor-id="a-create-a-frequency-table-for-covered.entity.type.-then-create-an-appropriate-bar-chart-displaying-the-same-frequencies.-order-the-categories-from-the-largest-to-the-smallest-frequency-and-include-an-informative-title-and-appropriate-axis-labels.-8-points">(a) Create a frequency table for <code>Covered.Entity.Type</code>. Then create an appropriate bar chart displaying the same frequencies. Order the categories from the largest to the smallest frequency, and include an informative title and appropriate axis labels. (8 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<script>
-function checkPractice(input) {
-  const question = input.closest('.quick-check');
-  const feedback = question.querySelector('.quiz-feedback');
-  const isCorrect = input.value === question.dataset.answer;
-
-  feedback.textContent = isCorrect ? 'Correct!' : 'Try again.';
-  feedback.className =
-    'quiz-feedback ' +
-    (isCorrect ? 'quiz-correct' : 'quiz-incorrect');
-}
-</script>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="b-for-each-value-of-covered.entity.type-calculate-the-number-of-incidents-and-the-median-number-of-individuals-affected.-present-the-results-in-a-clearly-labeled-table.-which-entity-type-has-the-largest-median-8-points" class="level4">
+<h4 class="anchored" data-anchor-id="b-for-each-value-of-covered.entity.type-calculate-the-number-of-incidents-and-the-median-number-of-individuals-affected.-present-the-results-in-a-clearly-labeled-table.-which-entity-type-has-the-largest-median-8-points">(b) For each value of <code>Covered.Entity.Type</code>, calculate the number of incidents and the median number of individuals affected. Present the results in a clearly labeled table. Which entity type has the largest median? (8 points)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="c-create-side-by-side-boxplots-to-compare-individuals.affected-across-the-different-values-of-covered.entity.type.-use-a-logarithmic-scale-for-the-numerical-axis-so-that-the-distributions-can-be-seen-more-clearly.-describe-one-meaningful-pattern-and-one-limitation-of-this-comparison.-9-points" class="level4">
+<h4 class="anchored" data-anchor-id="c-create-side-by-side-boxplots-to-compare-individuals.affected-across-the-different-values-of-covered.entity.type.-use-a-logarithmic-scale-for-the-numerical-axis-so-that-the-distributions-can-be-seen-more-clearly.-describe-one-meaningful-pattern-and-one-limitation-of-this-comparison.-9-points">(c) Create side-by-side boxplots to compare <code>Individuals.Affected</code> across the different values of <code>Covered.Entity.Type</code>. Use a logarithmic scale for the numerical axis so that the distributions can be seen more clearly. Describe one meaningful pattern and one limitation of this comparison. (9 points)</h4>
+<p><strong>Hint:</strong> If you use <code>ggplot2</code>, you can add <code>scale_y_log10()</code> to display the numerical axis on a base-10 logarithmic scale.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="question-4.-changes-over-time-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-4.-changes-over-time-10-points">Question 4. Changes Over Time (10 points)</h3>
+<p>Convert <code>Breach.Submission.Date</code> to a date variable and create a new variable containing the submission year. Then calculate the number of reported incidents in each year and display the results in an appropriate graph. Describe the overall pattern. Remember that the data for 2015 cover only part of the year.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
+</section>
+<section id="question-5.-eda-summary-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-5.-eda-summary-10-points">Question 5. EDA Summary (10 points)</h3>
+<p>Write a short paragraph summarizing <strong>three important findings</strong> from your exploratory analysis. Each finding must be supported by a numerical result or a visualization produced in this homework. Also state one question about the data that you would investigate next. Do not make causal claims based only on this exploratory analysis.</p>
+<blockquote class="blockquote">
+<p><strong>Your response:</strong></p>
+</blockquote>
 
 
 </section>

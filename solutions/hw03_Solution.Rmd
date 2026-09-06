@@ -1,0 +1,282 @@
+---
+title: "Homework 3 Solution"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE}
+# Import needed packages
+library(ggplot2)
+```
+
+
+## Part I. Changing the author field and file name.
+
+
+1. Change the `author` field to your name.
+2. Rename this file as `HW3_YourFirstInitialYourLastName.Rmd` (for example, `HW3_YDing.Rmd`).
+3. Complete all questions in the designated code and response spaces.
+4. Knit the completed file to HTML.
+5. Submit both the completed `.Rmd` file and the knitted `.html` file. Make sure both files open correctly before submitting.
+
+
+<br>
+
+## Part II. Exploratory Data Analysis (100 points)
+
+In this part, we work on the cyber security breach report data downloaded 2015-02-26 from the US Health and Human Services. 
+
+To understand what the data represents, here is some information from the *Office for Civil Rights* of the  *U.S. Department of Health and Human Services*: 
+
+* "As required by section 13402(e)(4) of the HITECH Act, the Secretary must post a list of breaches of unsecured protected health information affecting 500 or more individuals. 
+* "Since October 2009 organizations in the U.S. that store data on human health are required to report any incident that compromises the confidentiality of 500 or more patients / human subjects (45 C.F.R. 164.408). These reports are publicly available. Our data  set  was downloaded from the Office for Civil Rights of the U.S. Department of Health and Human Services, 2015-02-26."  
+
+Load the data and save it as `cyberData` using the following code. The first column of the CSV file contains row identifiers, so it is imported as row names rather than as a data variable. The file also uses `\N` to represent missing values.
+
+```{r}
+cyberData <- read.csv(
+  url("https://vincentarelbundock.github.io/Rdatasets/csv/Ecdat/HHSCyberSecurityBreaches.csv"),
+  row.names = 1,
+  na.strings = "\\N"
+)
+```
+
+### Question 1. Understanding and Checking the Data (30 points)
+
+#### (a) Check the structure of the data using the `str` command. What type of object is `cyberData`?  How many observations are recorded? How  many variables are recorded?List all  of  the types of  variables that are  recorded based on the output (i.e. int/float etc.). (7 points) 
+
+```{r}
+str(cyberData)
+```
+
+> `cyberData` is a data frame with 1,151 observations and 9 variables. Most variables are stored as character variables, `Individuals.Affected` is an integer variable, and `Business.Associate.Present` is a logical variable. `Breach.Submission.Date` is initially stored as a character variable rather than as a date.
+
+#### (b) Examine the missing values in the data. For each variable, report both the number and the percentage of missing values. Which variable has the largest percentage of missing values? (8 points)
+
+```{r}
+missing.count <- colSums(is.na(cyberData))
+missing.percent <- 100 * missing.count / nrow(cyberData)
+
+missing.summary <- data.frame(
+  Variable = names(cyberData),
+  Missing = as.numeric(missing.count),
+  Percent.Missing = round(as.numeric(missing.percent), 2)
+)
+
+missing.summary
+```
+
+> `Web.Description` has the largest percentage of missing values: 942 of the 1,151 observations, or approximately 81.84%. The other variables do not contain missing values.
+  
+#### (c) Use the `table` function to display the frequencies of the values in `Type.of.Breach`. How many observations are recorded exactly as `"Hacking/IT Incident"`? (5 points)
+
+```{r}
+breach.table <- table(cyberData$Type.of.Breach)
+breach.table
+breach.table["Hacking/IT Incident"]
+```
+
+> There are 77 observations recorded exactly as `"Hacking/IT Incident"`.
+
+#### (d) What type of breach is reported in the 748th row of `cyberData`? How about the 349th row? Was row 349 included in the number of Hacking/IT incidents computed in part (c)? Explain why or why not. (5 points)
+
+```{r}
+cyberData$Type.of.Breach[c(748, 349)]
+```
+
+> Row 748 is recorded as `"Loss, Theft"`, and row 349 is recorded as `"Hacking/IT Incident, Unauthorized Access/Disclosure"`. Row 349 was not included in the count from part (c), because `table()` treats the complete string as one category. It does not automatically recognize Hacking/IT as one component of a combined category.
+
+#### (e) Some observations contain more than one breach type separated by a comma. Use `strsplit()` to separate the breach types, and then find the correct total number of incidents involving Hacking/IT. (5 points)
+
+```{r}
+breach.types <- strsplit(cyberData$Type.of.Breach, ", ")
+breach.types <- trimws(unlist(breach.types))
+individual.type.table <- table(breach.types)
+individual.type.table
+individual.type.table["Hacking/IT Incident"]
+```
+
+> After the combined categories are separated, 94 incidents involve Hacking/IT. The ordinary frequency table in part (c) missed 17 incidents in which Hacking/IT appeared together with another breach type.
+
+### Question 2. Exploring `Individuals.Affected` (25 points)
+
+#### (a) Create a histogram of `Individuals.Affected` using 20 bins. Include an informative title and appropriate axis labels. Describe the shape of the distribution. (6 points)
+
+```{r}
+ggplot(cyberData, aes(x = Individuals.Affected)) +
+  geom_histogram(bins = 20, color = "white", fill = "steelblue") +
+  labs(
+    title = "Distribution of Individuals Affected",
+    x = "Number of Individuals Affected",
+    y = "Number of Incidents"
+  ) +
+  theme_minimal()
+```
+
+> The distribution is strongly right-skewed. Most incidents affected relatively few individuals, while a small number of incidents affected several million individuals. These extreme observations compress most of the histogram into the left side of the graph.
+
+#### (b) Calculate the mean, median, standard deviation, minimum, and maximum of `Individuals.Affected`. Explain why the mean and median are substantially different. (6 points)
+
+```{r}
+x <- cyberData$Individuals.Affected
+
+c(
+  Mean = mean(x),
+  Median = median(x),
+  Standard.Deviation = sd(x),
+  Minimum = min(x),
+  Maximum = max(x)
+)
+```
+
+> The mean = 35,778.58, median = 2,365, standard deviation = 263,402.81, minimum = 500, and maximum = 4,900,000. The mean is much larger than the median because a few extremely large incidents pull the mean upward. The median is more representative of a typical incident in this strongly right-skewed distribution.
+
+#### (c) Identify the three incidents with the largest values of `Individuals.Affected`. For each incident, report the covered entity, state, breach type, and number of individuals affected. (6 points)
+
+```{r}
+top.three <- cyberData[order(cyberData$Individuals.Affected, decreasing = TRUE), ]
+
+top.three[1:3, c(
+  "Name.of.Covered.Entity",
+  "State",
+  "Type.of.Breach",
+  "Individuals.Affected"
+)]
+```
+
+> The three largest incidents are `Science Applications International Corporation (SA` in Virginia (Loss; 4,900,000), Community Health Systems Professional Services Corporation in Tennessee (Theft; 4,500,000), and Advocate Health and Hospitals Corporation, d/b/a Advocate Medical Group in Illinois (Theft; 4,029,530). The first entity name appears to be truncated in the source data and is reported here exactly as recorded.
+
+#### (d) Create a second histogram using a base-10 logarithmic scale for `Individuals.Affected`. Again, use 20 bins and include an informative title and appropriate axis labels. Compare this graph with the histogram in part (a). Which graph makes the overall distribution easier to examine, and why? (7 points)
+
+```{r}
+cyberData$Log10.Individuals.Affected <- log10(cyberData$Individuals.Affected)
+
+ggplot(cyberData, aes(x = Log10.Individuals.Affected)) +
+  geom_histogram(bins = 20, color = "white", fill = "darkorange") +
+  labs(
+    title = "Distribution of Individuals Affected on a Logarithmic Scale",
+    x = "log10(Number of Individuals Affected)",
+    y = "Number of Incidents"
+  ) +
+  theme_minimal()
+```
+
+> The histogram of the log-transformed values makes the overall distribution easier to examine. It spreads out the smaller and moderate observations while reducing the visual influence of the few extremely large incidents. The transformed distribution is still not perfectly symmetric, but its structure is much clearer than it was on the original scale.
+
+### Question 3. Comparing Groups (25 points)
+
+#### (a) Create a frequency table for `Covered.Entity.Type`. Then create an appropriate bar chart displaying the same frequencies. Order the categories from the largest to the smallest frequency, and include an informative title and appropriate axis labels. (8 points)
+
+```{r}
+entity.frequency <- sort(table(cyberData$Covered.Entity.Type), decreasing = TRUE)
+entity.frequency
+
+entity.frequency.df <- data.frame(
+  Covered.Entity.Type = factor(
+    names(entity.frequency),
+    levels = names(entity.frequency)
+  ),
+  Frequency = as.numeric(entity.frequency)
+)
+
+ggplot(entity.frequency.df,
+       aes(x = Covered.Entity.Type, y = Frequency)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Reported Breaches by Covered Entity Type",
+    x = "Covered Entity Type",
+    y = "Number of Incidents"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+> Healthcare Providers account for the largest number of reported incidents (767), followed by Business Associates (272), Health Plans (108), and Healthcare Clearing Houses (4).
+
+#### (b) For each value of `Covered.Entity.Type`, calculate the number of incidents and the median number of individuals affected. Present the results in a clearly labeled table. Which entity type has the largest median? (8 points)
+
+```{r}
+entity.count <- aggregate(
+  Individuals.Affected ~ Covered.Entity.Type,
+  data = cyberData,
+  FUN = length
+)
+
+entity.median <- aggregate(
+  Individuals.Affected ~ Covered.Entity.Type,
+  data = cyberData,
+  FUN = median
+)
+
+names(entity.count)[2] <- "Number.of.Incidents"
+names(entity.median)[2] <- "Median.Individuals.Affected"
+
+entity.summary <- merge(entity.count, entity.median,
+                        by = "Covered.Entity.Type")
+entity.summary <- entity.summary[
+  order(entity.summary$Median.Individuals.Affected, decreasing = TRUE),
+]
+entity.summary
+```
+
+> Business Associates have the largest median number of individuals affected: 3,730.5. The remaining medians are 3,252 for Healthcare Clearing Houses, 3,000 for Health Plans, and 2,000 for Healthcare Providers. The Healthcare Clearing House result should be interpreted cautiously because it is based on only four incidents.
+
+#### (c) Create side-by-side boxplots to compare `Individuals.Affected` across the different values of `Covered.Entity.Type`. Use a logarithmic scale for the numerical axis so that the distributions can be seen more clearly. Describe one meaningful pattern and one limitation of this comparison. (9 points)
+
+```{r}
+ggplot(cyberData,
+       aes(x = Covered.Entity.Type,
+           y = Individuals.Affected,
+           fill = Covered.Entity.Type)) +
+  geom_boxplot(show.legend = FALSE) +
+  scale_y_log10() +
+  labs(
+    title = "Individuals Affected by Covered Entity Type",
+    x = "Covered Entity Type",
+    y = "Number of Individuals Affected (log10 scale)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+> Business Associates have a higher median than Healthcare Providers, although the distributions overlap considerably. One important limitation is the extremely unequal group sizes. In particular, only four Healthcare Clearing House incidents were reported, so its boxplot does not provide a stable representation of that group.
+
+### Question 4. Changes Over Time (10 points)
+
+Convert `Breach.Submission.Date` to a date variable and create a new variable containing the submission year. Then calculate the number of reported incidents in each year and display the results in an appropriate graph. Describe the overall pattern. Remember that the data for 2015 cover only part of the year.
+
+```{r}
+cyberData$Breach.Submission.Date <- as.Date(cyberData$Breach.Submission.Date)
+cyberData$Submission.Year <- as.integer(
+  format(cyberData$Breach.Submission.Date, "%Y")
+)
+
+year.frequency <- as.data.frame(table(cyberData$Submission.Year))
+names(year.frequency) <- c("Year", "Number.of.Incidents")
+year.frequency$Year <- as.integer(as.character(year.frequency$Year))
+year.frequency
+
+ggplot(year.frequency,
+       aes(x = Year, y = Number.of.Incidents)) +
+  geom_line(linewidth = 0.8, color = "steelblue") +
+  geom_point(size = 2, color = "steelblue") +
+  scale_x_continuous(breaks = year.frequency$Year) +
+  labs(
+    title = "Reported Breaches by Submission Year",
+    x = "Submission Year",
+    y = "Number of Incidents"
+  ) +
+  theme_minimal()
+```
+
+> The number of reported incidents was 18 in 2009, 197 in 2010, 192 in both 2011 and 2012, 249 in 2013, and 278 in 2014. The 2015 count is only 25 because the data end on February 26, 2015, so it should not be compared directly with the counts for complete years. Among the complete years shown, the number of reports generally increased after 2012.
+
+### Question 5. EDA Summary (10 points)
+
+Write a short paragraph summarizing **three important findings** from your exploratory analysis. Each finding must be supported by a numerical result or a visualization produced in this homework. Also state one question about the data that you would investigate next. Do not make causal claims based only on this exploratory analysis.
+
+> The number of individuals affected is strongly right-skewed: the median is only 2,365, while the mean is approximately 35,779 because several incidents affected millions of individuals. Healthcare Providers account for most of the reported incidents (767 of 1,151), but Business Associates have the largest median number of individuals affected (3,730.5), showing that frequency and typical incident size are different characteristics. The number of reports also increased from 192 in 2012 to 278 in 2014, although this exploratory pattern alone does not establish the cause of the increase. One useful next question would be whether the distribution of breach types changed over time.
