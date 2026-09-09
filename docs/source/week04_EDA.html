@@ -533,7 +533,7 @@ Continuous attributes are typically represented as <strong>floating-point</stron
 <section id="standardizing-the-numeric-fields" class="level2">
 <h2 class="anchored" data-anchor-id="standardizing-the-numeric-fields">Standardizing the Numeric Fields</h2>
 <p>Certain algorithms perform better when the numeric fields are standardized so the filed mean equals 0 and the field standard deviation equals 1, as follows:</p>
-<p>[ z = ]</p>
+<p><span class="math display">\[z = \frac{x-\bar{x}}{s}\]</span></p>
 <p>Let’s do a standardization with <code>medv</code> in <code>Boston</code> data set</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Boston<span class="sc">$</span>medv,<span class="at">breaks=</span><span class="fu">seq</span>(<span class="fu">min</span>(Boston<span class="sc">$</span>medv),<span class="fu">max</span>(Boston<span class="sc">$</span>medv),<span class="at">l=</span><span class="dv">21</span>)) <span class="co">#histogram of medv in Boston data set</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

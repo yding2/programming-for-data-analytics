@@ -228,7 +228,7 @@ Handling missing values
 
 Certain algorithms perform better when the numeric fields are standardized so the filed mean equals 0 and the field standard deviation equals 1, as follows:
 
-\[ z = \frac{x-\bar{x}}{s} \]
+$$z = \frac{x-\bar{x}}{s}$$
 
 Let's do a standardization with `medv` in `Boston` data set
 
