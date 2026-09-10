@@ -55,6 +55,8 @@ website:
             href: solutions/hw01_Solution.Rmd
           - text: "Homework 2"
             href: homework/hw02.Rmd
+          - text: "Homework 2 Solution"
+            href: solutions/hw02_Solution.Rmd
           - text: "Homework 3"
             href: homework/hw03.Rmd 
             
