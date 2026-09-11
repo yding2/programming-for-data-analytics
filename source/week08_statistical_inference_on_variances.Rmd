@@ -1,0 +1,796 @@
+---
+title: "Week 8: Statistical Inference on Variance(s)"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,comment = '', fig.align = 'center'  , out.width="50%"
+)
+knitr::include_graphics
+library(ggplot2)
+```
+
+
+
+### References
+1. __Probability & Statistics for Engineers & Scientists__, 9th Edition, Ronald E. Walpole,
+Raymond H. Myers,
+Sharon L. Myers,
+Keying Ye, Prentice Hall
+
+
+## Objectives:
+
+- Know the sampling distribution of the sample variance, and the ratio of two sample variances
+
+- Understand $\chi^2$, and $F$ distributions and know how to use `q-` and `p-` function to find the **critical value** and probability of all these distributions
+
+- Know how to **use R** to construct a confidence interval on **Variance** and **Ratio of Variances**
+
+- Know how to use `var.test` to do the test for the ratio of variances and how to interpret the result 
+
+## Probability Distributions
+
+### The Chi-squared distribution
+
+Chi-squared distribution is usually used when we seek some conclusion on variance of a population.
+
+If $S^2$ is the variance of a random sample of size $n$ taken from a **normal population** having the variance $\sigma^2$, then the statistic
+$$ \chi^2 = \frac{(n-1)S^2}{\sigma^2} = \sum_{i=1}^n \frac{(X_i-\bar{X})^2}{\sigma^2}$$
+has a **chi-squared distribution** with $v = n − 1$ degrees of freedom. The shape of **chi-squared distribution** is *not symmetric*.
+
+The probability that a random sample produces a $\chi^2$ value greater than some
+specified value is equal to the area under the curve to the right of this value. It is
+customary to let $\chi^2_\alpha$ represent the 
+$\chi^2$ value above which we find an area of 
+$\alpha$. This
+is illustrated by the shaded region in the following figure, with $v= 4,\alpha=0.05$.
+
+```{r, echo = FALSE}
+# Degrees of freedom and chi-square statistic
+df_value <- 4
+chisq_value <- 9.49
+
+# Create data
+x <- seq(0, 20, length.out = 1000)
+y <- dchisq(x, df = df_value)
+df <- data.frame(x, y)
+
+# Shade right tail (p-value region)
+shade <- subset(df, x >= chisq_value)
+
+# Plot
+ggplot(df, aes(x, y)) +
+  geom_line(color = "blue", linewidth = 1) +
+  geom_area(data = shade, aes(x, y), fill = "red", alpha = 0.4) +
+  geom_vline(xintercept = chisq_value, color = "red", linetype = "dashed", linewidth = 1) +
+  annotate("text", x = chisq_value + 0.5, y = 0.02, 
+           label = paste0("χ² = ", chisq_value), color = "red") +
+  labs(
+    title = paste0("Chi-Square Distribution (df = ", df_value, ")"),
+    x = expression(chi^2),
+    y = "Density"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+#### Find Critical Value of Chi-squared distribution in R
+
+Let $\alpha = 0.05$ and $n = 20$.
+
+```{r}
+alpha <- 0.05
+n <- 20
+chiCriVal <- qchisq(1-alpha,n-1)
+chiCriVal
+1-pchisq(chiCriVal,df = n-1)
+chiCriVal <- qchisq(alpha,n-1)
+pchisq(chiCriVal,df = n-1)
+```
+
+### The $F$ Distribution
+
+Suppose that we have a random sample of $n_1$ observations from the **normal population** $N(\mu_1,\sigma_1^2)$ and an independent random sample of $n_2$ observations from a second **normal population** $N(\mu_2,\sigma_2^2)$. Then,
+	$$F_{n_1-1,n_2-1} = \frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} =  \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2},$$
+	follows an $F$ distribution with $v_1 = n_1-1$ and $v_2 = n_2-1$, where $S_1$, $S_2$  and $\sigma_1$, $\sigma_2$ are sample and population standard deviations of sample 1 and sample 2, respectively. This $F$ statistic can be used to compare variances from two independent groups.
+	
+
+Here are some density curves of $F$ distribution with different degrees of freedom:
+
+```{r,echo = FALSE}
+
+# Define x range and several (df1, df2) combinations
+x <- seq(0, 5, length.out = 1000)
+dfs <- data.frame(
+  df1 = c(1, 3, 5, 10),
+  df2 = c(10, 20, 30, 40)
+)
+
+# Generate data for each F distribution
+data_list <- lapply(1:nrow(dfs), function(i) {
+  df1 <- dfs$df1[i]
+  df2 <- dfs$df2[i]
+  data.frame(
+    x = x,
+    y = df(x, df1 = df1, df2 = df2),
+    label = paste0("df1=", df1, ", df2=", df2)
+  )
+})
+
+df_all <- do.call(rbind, data_list)
+
+# Plot all F-distributions
+ggplot(df_all, aes(x = x, y = y, color = label)) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "F Distributions with Different Degrees of Freedom",
+    x = "F value",
+    y = "Density",
+    color = "Parameters"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "top")
+```
+
+$$f_{1-\alpha,v_1,v_2}=\frac{1}{f_{\alpha,v_2,v_1}}.$$
+
+The $F-$distribution finds enormous application
+in **comparing sample variances**. Applications of the $F-$distribution are found in
+problems involving **two or more samples**.
+
+#### Find Critical Value of F distribution in R
+
+Let $\alpha = 0.05,n_1 = 20,n_2=20$.
+
+```{r}
+alpha <- 0.05
+n1 <- 20
+n2 <- 20
+fVal <- qf(1-alpha,n1-1,n2-1)
+fVal
+#Check the probability
+1-pf(fVal,df1 = n1-1,df2 = n2-1)
+```
+
+
+```{r,echo = FALSE}
+# Parameters
+df1 <- 19
+df2 <- 19
+alpha <- 0.05
+
+# Critical value
+F_crit <- qf(0.95, df1, df2)
+
+# Sequence for F values
+F_values <- seq(0, 3, length.out = 500)  # adjust upper limit if needed
+
+# F density
+y_values <- df(F_values, df1, df2)
+
+# Plot
+plot(F_values, y_values, type = "l", lwd = 2, col = "blue",
+     main = "F-Distribution (df1=19, df2=19)",
+     xlab = "F value", ylab = "Density")
+
+# Shade the rejection region
+x_shade <- seq(F_crit, max(F_values), length.out = 100)
+y_shade <- df(x_shade, df1, df2)
+polygon(c(F_crit, x_shade, max(F_values)), c(0, y_shade, 0), col = "red", density = 20)
+
+# Add vertical line for critical value
+abline(v = F_crit, col = "red", lwd = 2, lty = 2)
+
+# Add text label
+text(F_crit, max(y_values)/2, labels = paste("Critical F =", round(F_crit, 3)), pos = 4, col="red")
+```
+
+<div class="practice-quiz" id="chi-f-practice">
+<h4>Practice: The Chi-Squared and F Distribution</h4>
+
+<div class="quiz-question" data-answer="b">
+<p><strong>1.</strong> Which distribution is commonly used for inference about one population variance?</p>
+<label><input type="radio" name="cf-q1" value="a"> a) Normal distribution</label><br>
+<label><input type="radio" name="cf-q1" value="b"> b) Chi-squared distribution</label><br>
+<label><input type="radio" name="cf-q1" value="c"> c) F distribution</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">The chi-squared distribution is used for inference about the variance of one normally distributed population.</p>
+</div>
+
+<div class="quiz-question" data-answer="c">
+<p><strong>2.</strong> Which distribution is commonly used for inference about the ratio of two population variances?</p>
+<label><input type="radio" name="cf-q2" value="a"> a) Normal distribution</label><br>
+<label><input type="radio" name="cf-q2" value="b"> b) Chi-squared distribution</label><br>
+<label><input type="radio" name="cf-q2" value="c"> c) F distribution</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">The F distribution is used for inference about the ratio of two population variances.</p>
+</div>
+
+<div class="quiz-question" data-answer="a">
+<p><strong>3.</strong> We can use a confidence interval to make inference about the variance of a population.</p>
+<label><input type="radio" name="cf-q3" value="a"> a) True</label><br>
+<label><input type="radio" name="cf-q3" value="b"> b) False</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">A confidence interval based on the chi-squared distribution can be used to estimate a population variance.</p>
+</div>
+
+<div class="quiz-question" data-answer="b">
+<p><strong>4.</strong> The F distribution is symmetric.</p>
+<label><input type="radio" name="cf-q4" value="a"> a) True</label><br>
+<label><input type="radio" name="cf-q4" value="b"> b) False</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">The F distribution is not symmetric. It is right-skewed, especially for small degrees of freedom.</p>
+</div>
+
+<button type="button" class="check-btn">Check Answers</button>
+<button type="button" class="reset-btn">Reset</button>
+</div>
+
+## Interval Estimate of the Variance
+
+We already know $S^2$ is an unbiased estimator of $\sigma^2$. If a sample of size $n$ is drawn
+from a **normal population** with variance $\sigma^2$, an interval estimate of $\sigma^2$ can be established by using the statistic
+$$\chi^2 = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}.$$
+
+```{r,echo = FALSE}
+# Parameters
+df <- 15
+alpha <- 0.05
+
+# Two-tailed critical values
+chisq_upper <- qchisq(1 - alpha/2, df)
+chisq_lower <- qchisq(alpha/2, df)  # note: lower tail critical value
+
+# Sequence for F values
+chisq_values <- seq(0, 40, length.out = 500)  # adjust upper limit if needed
+
+# F density
+y_values <- dchisq(chisq_values, df)
+
+# Plot F-distribution
+plot(chisq_values, y_values, type = "l", lwd = 2, col = "blue",
+     main = "Two-tailed Chi-Square Distribution (df = 15)",
+     xlab = "Chi-Square value", ylab = "Density")
+
+# Shade lower rejection region
+x_shade_lower <- seq(min(chisq_values), chisq_lower, length.out = 100)
+y_shade_lower <- dchisq(x_shade_lower, df)
+polygon(c(min(chisq_values), x_shade_lower, chisq_lower), c(0, y_shade_lower, 0),
+        col = "red", density = 20)
+
+# Shade upper rejection region
+x_shade_upper <- seq(chisq_upper, max(chisq_values), length.out = 100)
+y_shade_upper <- dchisq(x_shade_upper, df)
+polygon(c(chisq_upper, x_shade_upper, max(chisq_values)), c(0, y_shade_upper, 0),
+        col = "red", density = 20)
+
+# Add vertical lines for critical values
+abline(v = chisq_lower, col = "red", lwd = 2, lty = 2)
+abline(v = chisq_upper, col = "red", lwd = 2, lty = 2)
+
+# Add text labels
+text(chisq_lower, max(y_values)/2, labels = paste("Chi-Square lower =", round(chisq_lower, 3)), pos = 2, col="red")
+text(chisq_upper, max(y_values)/2, labels = paste("Chi-Square upper =", round(chisq_upper, 3)), pos = 4, col="red")
+```
+
+## Confidence Interval for $\sigma^2$
+
+If $s^2$ is the variance of a random sample of size $n$ from a \textit{normal population}, a $100(1-\alpha)\%$ confidence interval for $\sigma^2$ is given by
+$$\frac{(n-1)S^2}{\chi^2_{\alpha/2,n-1}}   < \sigma^2  < \frac{(n-1)S^2}{\chi^2_{1-\alpha/2,n-1}},$$
+where $\chi^2_{1-\alpha/2,n-1}$ and $\chi^2_{\alpha/2,n-1}$ are values of the chi-squared distribution with $n-1$ degrees of freedom, leaving areas of $1-\alpha/2$ and $\alpha/2$, respectively, to the right.
+
+
+#### Example 1
+
+The following are the weights, in decagrams, of 10 packages of grass seed distributed
+by a certain company: 46.4, 46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2, and 46.0.
+Find a 95\% confidence interval for the variance of the weights of all such packages
+of grass seed distributed by this company, **assuming a normal population**.
+
+**Sample Variance**
+
+First, we need to find $s^2$.
+
+```{r,echo=TRUE}
+weight <-c(46.4,46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2,46.0)
+n<- length(weight)
+ssquare <- var(weight)
+ssquare
+```
+
+**Critical Value**
+
+Here $\alpha = 0.05$ since we are constructing a 95\% confidence interval. The sample size is 10. Thus $df = 10-1=9$. We need two critical values
+$\chi^2_{\alpha/2,n-1}$ and $\chi^2_{1-\alpha/2,n-1}$ 
+
+
+```{r,echo=TRUE}
+alpha <- 0.05  # 95% confidence interval
+# chi-squared alpha/2
+chiVal1 <- qchisq(1-alpha/2,n-1)
+chiVal1
+# chi-squared 1-alpha/2
+chiVal2 <- qchisq(alpha/2,n-1)
+chiVal2
+```
+
+**Construct the Confidence Interval**
+
+```{r,echo = TRUE}
+loBd <- (n-1)*ssquare/chiVal1
+loBd
+upBd <- (n-1)*ssquare/chiVal2
+upBd
+```
+
+#### Practice: CI for One Population Variance
+
+Construct a 90% confidence interval for the variance of `Sepal.Length`
+of all records in the `iris` data set, assuming a normal distribution.
+<div class="practice-quiz" id="one-variance-ci">
+
+<div class="quiz-question" data-answer="c">
+<p><strong>1)</strong> Which distribution should we use to construct a 90% CI here?</p>
+<label><input type="radio" name="onevar-q1" value="a"> a) normal distribution</label><br>
+<label><input type="radio" name="onevar-q1" value="b"> b) t-distribution</label><br>
+<label><input type="radio" name="onevar-q1" value="c"> c) Chi-squared distribution</label><br>
+<label><input type="radio" name="onevar-q1" value="d"> d) F distribution</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+We use the Chi-squared distribution to construct a confidence interval for the variance of one normally distributed population.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="b">
+<p><strong>2)</strong> What is the value of $\alpha$?</p>
+<label><input type="radio" name="onevar-q2" value="a"> a) 0.9</label><br>
+<label><input type="radio" name="onevar-q2" value="b"> b) 0.1</label><br>
+<label><input type="radio" name="onevar-q2" value="c"> c) 0.05</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+For a 90% confidence interval, $\alpha = 1 - 0.90 = 0.10$.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="d">
+<p><strong>3)</strong> Suppose there are 150 observations. To construct the CI, which critical values do we need?</p>
+<label><input type="radio" name="onevar-q3" value="a"> a) $\chi^2_{0.9,150}$ and $\chi^2_{0.1,150}$</label><br>
+<label><input type="radio" name="onevar-q3" value="b"> b) $\chi^2_{0.95,150}$ and $\chi^2_{0.05,150}$</label><br>
+<label><input type="radio" name="onevar-q3" value="c"> c) $\chi^2_{0.9,149}$ and $\chi^2_{0.1,149}$</label><br>
+<label><input type="radio" name="onevar-q3" value="d"> d) $\chi^2_{0.95,149}$ and $\chi^2_{0.05,149}$</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+Since $\alpha = 0.10$, we use $\alpha/2 = 0.05$. With $n=150$, the degrees of freedom are $n-1=149$. Therefore, we need $\chi^2_{0.95,149}$ and $\chi^2_{0.05,149}$.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="a">
+<p><strong>4)</strong> Suppose the sample variance is 0.69. Which of the following is the 90% confidence interval?</p>
+<label><input type="radio" name="onevar-q4" value="a"> a) $[149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]$</label><br>
+<label><input type="radio" name="onevar-q4" value="b"> b) $[149(0.69)/\chi^2_{0.05,149},\;149(0.69)/\chi^2_{0.95,149}]$</label><br>
+<label><input type="radio" name="onevar-q4" value="c"> c) $[150(0.69)/\chi^2_{0.95,150},\;150(0.69)/\chi^2_{0.05,150}]$</label><br>
+<label><input type="radio" name="onevar-q4" value="d"> d) $[150(0.69)/\chi^2_{0.05,150},\;150(0.69)/\chi^2_{0.95,150}]$</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+For one population variance, the confidence interval is based on $(n-1)s^2$. Here, $n-1=149$, $\alpha/2=0.05$, and $s^2=0.69$. Using the right-tail Chi-squared notation from this handout, the interval is $[149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]$.
+</div>
+</div>
+
+<p>
+<button type="button" class="check-btn">Check Answers</button>
+<button type="button" class="reset-btn">Reset</button>
+</p>
+
+</div>
+
+## Estimating the Ratio of Two Variances
+
+A point estimate of the ratio of two population variances $\sigma^2_1/\sigma_2^2$ is  given by the ratio
+$s_1^2/s_2^2$ of the sample variances. Hence, the statistic $S_1^2/S_2^2$ is called an **estimator** of $\sigma^2_1/\sigma_2^2$.  If $\sigma^2_1$ and $\sigma_2^2$ are the variances of **normal populations**, we can use the statistic
+$$ F = \frac{\sigma_2^2S_1^2}{\sigma_1^2S_2^2} \sim F_{n_1-1,n_2-1}$$
+to establish an interval estimate of $\sigma_1^2/\sigma_2^2$.
+
+```{r,echo = FALSE}
+# Parameters
+df1 <- 19
+df2 <- 19
+alpha <- 0.05
+
+# Two-tailed critical values
+F_upper <- qf(1 - alpha/2, df1, df2)
+F_lower <- qf(alpha/2, df1, df2)  # note: lower tail critical value
+
+# Sequence for F values
+F_values <- seq(0, 5, length.out = 500)  # adjust upper limit if needed
+
+# F density
+y_values <- df(F_values, df1, df2)
+
+# Plot F-distribution
+plot(F_values, y_values, type = "l", lwd = 2, col = "blue",
+     main = "Two-tailed F-Distribution (df1=19, df2=19)",
+     xlab = "F value", ylab = "Density")
+
+# Shade lower rejection region
+x_shade_lower <- seq(min(F_values), F_lower, length.out = 100)
+y_shade_lower <- df(x_shade_lower, df1, df2)
+polygon(c(min(F_values), x_shade_lower, F_lower), c(0, y_shade_lower, 0),
+        col = "red", density = 20)
+
+# Shade upper rejection region
+x_shade_upper <- seq(F_upper, max(F_values), length.out = 100)
+y_shade_upper <- df(x_shade_upper, df1, df2)
+polygon(c(F_upper, x_shade_upper, max(F_values)), c(0, y_shade_upper, 0),
+        col = "red", density = 20)
+
+# Add vertical lines for critical values
+abline(v = F_lower, col = "red", lwd = 2, lty = 2)
+abline(v = F_upper, col = "red", lwd = 2, lty = 2)
+
+# Add text labels
+text(F_lower, max(y_values)/2, labels = paste("F lower =", round(F_lower, 3)), pos = 2, col="red")
+text(F_upper, max(y_values)/2, labels = paste("F upper =", round(F_upper, 3)), pos = 4, col="red")
+```
+
+
+## Confidence Interval for $\sigma_1^2/\sigma_2^2$
+
+If $s_1^2$ and $s_2^2$ are the variances of a random sample of size $n_1$ and $n_2$, respectively, from **normal populations**, then a $100(1-\alpha)\%$ confidence interval for $\sigma_1^2/\sigma_2^2$ is given by  
+$$\frac{s_1^2}{s_2^2} \frac{1}{f_{\alpha/2,n_1-1,n_2-1}} < \frac{\sigma_1^2}{\sigma_2^2}  < \frac{s_1^2}{s_2^2}f_{\alpha/2,n_2-1,n_1-1}, $$
+where $f_{\alpha/2,n_1-1,n_2-1}$ is  an $f$-value with $n_1-1$ and $n_2-1$ degrees of freedom, leaving an area of $\alpha/2$ to the right,  and $f_{\alpha/2,n_2-1,n_1-1}$ is  an $f$-value with $n_2-1$ and $n_1-1$ degrees of freedom.
+
+**Example 2** Orthophosphorus was measured, in milligrams per liter, at two stations on the James River. Fifteen samples were collected from station 1, and 12 samples were collected from station 2. The 15 samples from station 1 had an average orthophosphorus content of 3.84 milligrams per liter and a standard deviation of 3.07 milligrams per liter, while the 12 samples from station 2 had an average orthophosphorus content of 1.49 milligrams per liter and a standard deviation of 0.80 milligram per liter.
+
+We would like to determine whether it is reasonable to assume that the population variances at the two stations are unequal. Justify this assumption by constructing 98% confidence intervals for $\sigma_1^2/\sigma_2^2$ and for $\sigma_1/\sigma_2$ where $\sigma_1^2$ and $\sigma_2^2$ are the population variances of orthophosphorus content at stations 1 and 2, respectively. Assume that the orthophosphorus contents at both stations are normally distributed.
+
+
+**Sample Variances**
+
+$s_1 = 3.07$ and $s_2=0.80$ are given
+
+**Critical Values**
+
+Here $\alpha = 0.02$ as it is 98\% confidence interval. Sample sizes are $n_1=15$ and $n_2=12$, we need to two critical values
+$f_{\alpha/2,n_1-1,n_2-1}$ and $f_{1-\alpha/2,n_1-1,n_2-1} = 1/f_{\alpha/2,n_2-1,n_1-1}$ 
+
+**Construct CI**
+
+```{r, echo =TRUE}
+n1 <- 15
+n2 <- 12
+s1 <- 3.07
+s2 <- 0.80
+alpha <- 0.02
+loBd <- s1^2/s2^2/qf(1-alpha/2, n1-1, n2-1)
+loBd
+upBd <- s1^2/s2^2*qf(1-alpha/2, n2-1, n1-1)
+upBd
+```
+
+Taking square roots of the confidence limits, we find that a 98\% confidence interval for $\sigma_1/\sigma_2$
+is 
+$$1.851 < \frac{\sigma_1}{\sigma_2} 
+< 7.549. $$
+Since this interval does not allow for the possibility of $\sigma_1/\sigma_2$ being equal to 1, we were correct in assuming that $\sigma_1 \ne \sigma_2$ or $\sigma_1^2 \ne \sigma^2_2$.
+
+#### Practice: CI for the Ratio of Variances
+
+Construct a 96% confidence interval for the ratio of variances of `Sepal.Length`
+between `virginica` and `setosa` in the `iris` data set, i.e.,
+$\sigma^2_{virginica}/\sigma^2_{setosa}$.
+Assume that `Sepal.Length` is approximately normally distributed for both species.
+
+<div class="practice-quiz" id="ratio-variance-ci">
+
+<div class="quiz-question" data-answer="d">
+<p><strong>1)</strong> Which distribution should we use to construct a 96% CI here?</p>
+<label><input type="radio" name="ratio-q1" value="a"> a) normal distribution</label><br>
+<label><input type="radio" name="ratio-q1" value="b"> b) t-distribution</label><br>
+<label><input type="radio" name="ratio-q1" value="c"> c) Chi-squared distribution</label><br>
+<label><input type="radio" name="ratio-q1" value="d"> d) F distribution</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+We use the F distribution to construct a confidence interval for the ratio of two population variances.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="a">
+<p><strong>2)</strong> What is the value of $\alpha$?</p>
+<label><input type="radio" name="ratio-q2" value="a"> a) 0.04</label><br>
+<label><input type="radio" name="ratio-q2" value="b"> b) 0.96</label><br>
+<label><input type="radio" name="ratio-q2" value="c"> c) 0.05</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+For a 96% confidence interval, $\alpha = 1 - 0.96 = 0.04$.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="d">
+<p><strong>3)</strong> Suppose there are 50 observations for each species. To construct the CI, which critical value do we need?</p>
+<label><input type="radio" name="ratio-q3" value="a"> a) $f_{0.04,50,50}$</label><br>
+<label><input type="radio" name="ratio-q3" value="b"> b) $f_{0.04,49,49}$</label><br>
+<label><input type="radio" name="ratio-q3" value="c"> c) $f_{0.02,50,50}$</label><br>
+<label><input type="radio" name="ratio-q3" value="d"> d) $f_{0.02,49,49}$</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+Since $\alpha = 0.04$, we use $\alpha/2 = 0.02$. With 50 observations in each group, the degrees of freedom are $50-1=49$ and $50-1=49$. Therefore, the critical value is $f_{0.02,49,49}$.
+</div>
+</div>
+
+<div class="quiz-question" data-answer="d">
+<p><strong>4)</strong> Suppose the ratio of sample variances is 0.69. Which of the following is the 96% confidence interval?</p>
+<label><input type="radio" name="ratio-q4" value="a"> a) $[0.69/f_{0.04,50,50},\; 0.69f_{0.04,50,50}]$</label><br>
+<label><input type="radio" name="ratio-q4" value="b"> b) $[0.69/f_{0.04,49,49},\; 0.69f_{0.04,49,49}]$</label><br>
+<label><input type="radio" name="ratio-q4" value="c"> c) $[0.69/f_{0.02,50,50},\; 0.69f_{0.02,50,50}]$</label><br>
+<label><input type="radio" name="ratio-q4" value="d"> d) $[0.69/f_{0.02,49,49},\; 0.69f_{0.02,49,49}]$</label>
+<p class="feedback"></p>
+<div class="explanation" style="display:none;">
+Using the right-tail F critical-value notation from this handout, the 96% confidence interval is $[0.69/f_{0.02,49,49},\; 0.69f_{0.02,49,49}]$.
+</div>
+</div>
+
+<p>
+<button type="button" class="check-btn">Check Answers</button>
+<button type="button" class="reset-btn">Reset</button>
+</p>
+
+</div>
+
+## Inference on Variances
+
+In this section, we are concerned with testing hypotheses concerning **comparison of population variances or standard deviations**.  Attention is focused on comparative experiments between methods or processes, where inherent reproducibility or variability must formally be compared. In addition, to determine if the equal variance assumption is violated, a test comparing two variances is often applied **prior to conducting a t-test** on two means.
+
+**Example 3** Comparison of Two Variances
+
+Let's continue with the weights of the no-nitrogen and nitrogen samples.
+
+No Nitrogen: 
+0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43
+Nitrogen: 
+0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46
+Do these two samples have the same variance? Consider $\alpha = 0.05$.
+
+**Parameter:**
+
+$\sigma^2_{NON} =$ variances of the weight without nitrogen
+
+$\sigma^2_{NIT} =$ variances of the weight with nitrogen
+
+**Hypotheses:**
+
+A hypothesis test for two independent population variances can be used to determine whether or not the data provide statistical evidence of a difference in the variance of the weight between no nitrogen and nitrogen.
+
+\begin{align*} 
+H_0: & \sigma^2_{NON}  = \sigma^2_{NIT}  \qquad \text{or} \qquad \sigma^2_{NON}/\sigma^2_{NIT} = 1, \\
+H_1: & \sigma^2_{NON} \ne \sigma^2_{NIT}  \qquad \text{or} \qquad \sigma^2_{NON}/\sigma^2_{NIT} \ne 1
+\end{align*}
+
+**Observed data:**
+$$n_{NON} = 10, s_{NON} = 0.07279 \qquad n_{NIT} = 10, s_{NIT} = 0.18674$$
+
+**Assumptions:**
+
+We assume that both populations are normally distributed.
+
+**Test statistic:**
+
+Here we use the $F$ statistic to test whether $\sigma^2_{NON} = \sigma_{NIT}^2$. The test statistics is
+$$f =\frac{s_{NON}^2}{s_{NIT}^2} = \frac{(0.07279)^2}{(0.18674)^2} =0.15195$$
+
+**p value**
+
+The $F$ distribution is not symmetric. We calculate the p-value as follows.
+
+```{r}
+noNitro<- c(0.32,0.53 ,0.28, 0.37, 0.47, 0.43, 0.36, 0.42,0.38,0.43)
+s1 <- sd(noNitro)
+Nitro<- c(0.26,0.43,0.47,0.49,0.52,0.75,0.79,0.86, 0.62,0.46)
+s2<- sd(Nitro)
+2*pf(s1^2/s2^2,9,9)
+```
+
+The p-value is 0.009786692 < $\alpha$, so we should **reject $H_0$**.
+
+We can also  make a conclusion based on **critical regions**, if we are given significance level $\alpha$.
+
+**Critical regions:**
+
+We have $\alpha = 0.05$. For the two-sided alternative
+$\sigma_{NON}^2 \ne \sigma_{NIT} ^2$ 
+the critical region is $f < f_{1-\alpha/2,n_{NON}-1,n_{NIT}-1} =0.24839$
+or $f> f_{\alpha/2,n_{NON}-1,n_{NIT}-1} = 4.025994.$
+
+Since the observed $F$-statistic is less than $f_{0.975,9,9}$, we **reject $H_0$**.
+
+**F-test in R:**
+
+In `R`, we use `var.test` to do the F test.
+
+```{r}
+var.test(noNitro,Nitro,alternative = "two.sided",conf.level = 0.95)
+```
+
+We get the same result.
+
+
+In `Python`, there is no direct equivalent of `R`'s `var.test()`. However, we can use `stats.f.ppf` to find critical values or `stats.f.cdf` to calculate the p-value.
+
+Based on the results, we can see F value is in the critical region and the p value is much less than significance level $\alpha$. Therefore, we reject $H_0$.
+
+**Note**:
+
+- $F$ test is very **sensitive** to the distributions of the populations.
+- The critical regions of size $\alpha$ corresponding to the one-sided alternatives 
+$\sigma_1^2 < \sigma_2^2$ and  $\sigma_1^2 > \sigma_2^2$ are, respectively, $f < f_{1-\alpha,v_1,v_2}$ and $f> f_{\alpha,v_1,v_2}$
+
+
+<div class="practice-quiz" id="variance-test-practice">
+<h4>Practice: Inference for Two Variances</h4>
+
+<p>
+Suppose we want to test whether two population variances are equal.
+Assume that both populations are normally distributed.
+</p>
+
+<div class="quiz-question" data-answer="c">
+<p><strong>1.</strong> Which distribution should we use for the hypothesis test?</p>
+<label><input type="radio" name="var-q1" value="a"> a) Normal distribution</label><br>
+<label><input type="radio" name="var-q1" value="b"> b) Chi-squared distribution</label><br>
+<label><input type="radio" name="var-q1" value="c"> c) F distribution</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">
+An F-test is used to compare the variances of two normally distributed populations.
+</p>
+</div>
+
+<div class="quiz-question" data-answer="a">
+<p><strong>2.</strong> Which hypotheses are appropriate for testing whether the two population variances are equal?</p>
+<label><input type="radio" name="var-q2" value="a"> a) $H_0: \sigma_1^2=\sigma_2^2$, $H_1: \sigma_1^2\ne\sigma_2^2$</label><br>
+<label><input type="radio" name="var-q2" value="b"> b) $H_0: \sigma_1^2\ne\sigma_2^2$, $H_1: \sigma_1^2=\sigma_2^2$</label><br>
+<label><input type="radio" name="var-q2" value="c"> c) $H_0: \sigma_1^2=0$, $H_1: \sigma_2^2=0$</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">
+Equality of the two variances is the null hypothesis. The two-sided alternative states that the variances are different.
+</p>
+</div>
+
+<div class="quiz-question" data-answer="c">
+<p><strong>3.</strong> If the p-value is 0.03245, what should we conclude?</p>
+<label><input type="radio" name="var-q3" value="a"> a) Reject $H_0$</label><br>
+<label><input type="radio" name="var-q3" value="b"> b) Fail to reject $H_0$</label><br>
+<label><input type="radio" name="var-q3" value="c"> c) It depends on the significance level $\alpha$</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">
+We must compare the p-value with $\alpha$. For example, we would reject $H_0$ at $\alpha=0.05$, but fail to reject $H_0$ at $\alpha=0.01$.
+</p>
+</div>
+
+<div class="quiz-question" data-answer="b">
+<p>
+<strong>4.</strong> Suppose $\alpha=0.01$. Let $f$ denote the F-statistic.
+What is the critical region for a two-sided test?
+</p>
+<label><input type="radio" name="var-q4" value="a"> a) $f < f_{0.005}$ or $f > f_{0.995}$</label><br>
+<label><input type="radio" name="var-q4" value="b"> b) $f < f_{0.995}$ or $f > f_{0.005}$</label><br>
+<label><input type="radio" name="var-q4" value="c"> c) $f < f_{0.01}$ or $f > f_{0.99}$</label>
+<p class="feedback"></p>
+<p class="explanation" style="display:none;">
+Using the right-tail critical-value notation from this handout, a two-sided test with $\alpha=0.01$ places $\alpha/2=0.005$ in each tail. Therefore, the critical region is $f < f_{0.995}$ or $f > f_{0.005}$.
+</p>
+</div>
+
+<button type="button" class="check-btn">Check Answers</button>
+<button type="button" class="reset-btn">Reset</button>
+</div>
+
+**Practice in R**: Let $\alpha = 0.01$.
+
+```{r}
+sample1 <- c(19.8,12.7,13.2,16.9,10.6,18.8,11.1 ,14.3,17.0,12.5)
+sample2 <- c(24.9,22.8,23.6,22.1,20.4,21.6,21.8 ,22.5)
+var.test(sample1,sample2,alternative = "two.sided",conf.level = 0.99)
+```
+
+When we let $\alpha = 0.01$, we should not reject the null hypothesis. However, if $\alpha = 0.05$, we should reject the null hypothesis.
+
+
+### One Comprehensive Example
+
+Let's play with a data set `ToothGrowth`. We want to investigate whether the mean of `len` is the same for the two levels of `supp`. We assume that `len` follows an approximately normal distribution within each group. However, we do not know whether the two groups have equal variances. Let's see what we can do.
+
+```{r}
+head(ToothGrowth)
+summary(ToothGrowth)
+```
+
+Before conducting hypothesis testing, let's do a visualization for the data.
+
+```{r}
+ggplot(data = ToothGrowth) + geom_point(mapping = aes(x = len, y = dose, colour = supp))
+```
+
+Based on the plot, `len` appears to increase as `dose` increases. We cannot see a clear relationship between `len` and `supp`, so let's try a `boxplot`.
+
+
+```{r}
+ggplot(data = ToothGrowth) + geom_boxplot(mapping = aes(x = supp, y = len))
+```
+
+Based on the boxplot, we may conjecture that the means and variances of `len` differ between the two groups. Let's do an $F$-test first. Consider $\alpha = 0.05$.
+
+\begin{align*}
+H_0: \sigma_{OJ}^2 = \sigma_{VC}^2, \\
+H_1:  \sigma_{OJ}^2 \ne \sigma_{VC}^2 
+\end{align*}
+
+```{r}
+var.test(len ~ supp, data = ToothGrowth)
+```
+
+#### In-Class Exercise: T-test based on the result of F-test
+
+1. Will you reject $H_0$ or not? Why?
+
+2. Based on the result of F test, do a hypothesis testing for the mean of `len` between two `supp`. What is your conclusion?
+
+
+#### In-Class Exercise: Hypothesis Test for two means
+
+We want to investigate the sepal lengths of two species of Iris, `setosa` and `virginica`. We conjecture that the mean sepal length of `virginica` is greater than that of `setosa`. Conduct a hypothesis test at a significance level of $\alpha=0.05$. Determine whether the data provide sufficient evidence to support this conjecture.
+
+ 
+
+
+## Conclusions:
+
+1. $\chi^2$ distribution is used for sample variance; $F$ distribution is used for the ratio of two variances. 
+
+2. To estimate $\sigma^2$ for normal distributions, we need $\chi^2$ distribution; To estimate $\sigma_1^2/\sigma^2_2$, we need $F$-distribution.
+
+3. We can use `var.test()` to test whether two population variances are equal. Based on the result of the F-test, we can assess whether the equal-variance assumption is reasonable and choose the appropriate setting for `var.equal` in `t.test()`.
+
+<script>
+document.querySelectorAll('.practice-quiz').forEach(function(quiz) {
+
+  quiz.querySelector('.check-btn').addEventListener('click', function() {
+    quiz.querySelectorAll('.quiz-question').forEach(function(question) {
+
+      const selected = question.querySelector('input[type="radio"]:checked');
+      const feedback = question.querySelector('.feedback');
+      const explanation = question.querySelector('.explanation');
+      const correctAnswer = question.dataset.answer;
+
+      if (!selected) {
+        feedback.textContent = 'Please select an answer.';
+        feedback.style.color = '#b26a00';
+        explanation.style.display = 'none';
+      } else if (selected.value === correctAnswer) {
+        feedback.textContent = '✓ Correct!';
+        feedback.style.color = 'green';
+        explanation.style.display = 'block';
+      } else {
+        feedback.textContent = '✗ Incorrect. Try again.';
+        feedback.style.color = 'red';
+        explanation.style.display = 'block';
+      }
+    });
+  });
+
+  quiz.querySelector('.reset-btn').addEventListener('click', function() {
+    quiz.querySelectorAll('input[type="radio"]').forEach(function(input) {
+      input.checked = false;
+    });
+
+    quiz.querySelectorAll('.feedback').forEach(function(feedback) {
+      feedback.textContent = '';
+    });
+
+    quiz.querySelectorAll('.explanation').forEach(function(explanation) {
+      explanation.style.display = 'none';
+    });
+  });
+
+});
+</script>

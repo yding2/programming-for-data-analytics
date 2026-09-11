@@ -141,7 +141,7 @@ Detailed project requirements, milestones, grading rubrics, and submission instr
 | **3** | Aug. 31, Sept. 2 | **Random Variables & Probability Distributions**  |
 | **4** | Sept. 9 | **Exploratory Data Analysis (EDA) I** |
 | **5** | Sept. 14, 16 | **EDA II & Sampling Distributions**  |
-| **6** | Sept. 21, 23 | **Statistical Inference Is** |
+| **6** | Sept. 21, 23 | **Statistical Inference I** |
 | **7** | Sept. 28, 30 | **Statistical Inference II**|
 | **8** | Oct. 5, 7 | **Statistical Inference III** |
 | **9** | Oct. 14 | **Association Between Variables& Introduction to Statistical Learning**  |

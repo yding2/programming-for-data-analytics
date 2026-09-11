@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 7: Hypothesis Testing on Mean(s) – Programming for Data Analytics/Cyber Security</title>
+<title>Hypothesis Testing – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -276,14 +276,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#intro-to-hypothesis-testing" id="toc-intro-to-hypothesis-testing" class="nav-link" data-scroll-target="#intro-to-hypothesis-testing">Intro to Hypothesis testing</a></li>
-  <li><a href="#inference-for-means" id="toc-inference-for-means" class="nav-link" data-scroll-target="#inference-for-means">Inference for Mean(s)</a>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#hypothesis-test" id="toc-hypothesis-test" class="nav-link" data-scroll-target="#hypothesis-test">Hypothesis Test</a>
   <ul class="collapse">
-  <li><a href="#one-mean" id="toc-one-mean" class="nav-link" data-scroll-target="#one-mean">One mean</a></li>
-  <li><a href="#type-i-and-type-ii-errors" id="toc-type-i-and-type-ii-errors" class="nav-link" data-scroll-target="#type-i-and-type-ii-errors">Type I and type II errors</a></li>
-  <li><a href="#two-means" id="toc-two-means" class="nav-link" data-scroll-target="#two-means">Two means</a></li>
+  <li><a href="#inference-for-proportions" id="toc-inference-for-proportions" class="nav-link" data-scroll-target="#inference-for-proportions">Inference for proportions</a></li>
+  <li><a href="#inference-for-means" id="toc-inference-for-means" class="nav-link" data-scroll-target="#inference-for-means">Inference for means</a></li>
+  <li><a href="#variance-test" id="toc-variance-test" class="nav-link" data-scroll-target="#variance-test">Variance Test</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -293,7 +291,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 7: Hypothesis Testing on Mean(s)</h1>
+<h1 class="title">Hypothesis Testing</h1>
 </div>
 
 
@@ -310,325 +308,140 @@ window.Quarto = {
 </header>
 
 
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<ol type="1">
-<li><strong>Data Science Foundations with Python with zyLabs</strong>, zyBooks, a Wiley brand. http://www.zybooks.com</li>
-<li><strong>Probability &amp; Statistics for Engineers &amp; Scientist</strong>, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall</li>
-</ol>
-</section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ul>
-<li><p>Know the process and result of a hypothesis test for a population parameter.</p></li>
-<li><p>Recognize that a hypothesis test may result in an incorrect conclusion, or one of two possible types of error, and each error has consequences.</p></li>
-<li><p>Identify the appropriate inference method to answer questions about one mean, and two means.</p></li>
-<li><p>State the null and alternative hypotheses for one mean, and two means hypothesis tests.</p></li>
-<li><p>Interpret the test statistic and p-value and make a conclusion about the population parameter(s) based on a p-value.</p></li>
-<li><p>Know how to use <code>t.test</code>.</p></li>
+<li>Know how to conduct a hypothesis test on proportions and means</li>
+<li>Know how to build a multiple linear regression model</li>
 </ul>
+<div id="cell-2" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import the necessary packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="intro-to-hypothesis-testing" class="level2">
-<h2 class="anchored" data-anchor-id="intro-to-hypothesis-testing">Intro to Hypothesis testing</h2>
-<p>A <strong>hypothesis test</strong> is a method for evaluating a claim, or hypothesis, about a <strong>population parameter</strong> by examining the statistical evidence against the claim based on a sample. The conclusion of a hypothesis test is a decision that the observed data either indicate the claim is plausible or support an alternative explanation. The following steps outline the general process of conducting a hypothesis test.</p>
-<ol type="1">
-<li><p>State null and alternative hypotheses about parameters. The <strong>null hypothesis</strong>, <span class="math inline">\(H_0\)</span> , is typically the by-chance or no-effect explanation, and the <strong>alternative hypothesis</strong>,<span class="math inline">\(H_1\)</span>, is typically the explanation of an effect, or difference.</p></li>
-<li><p>Calculate a statistic of interest from the sample data that is used to evaluate the null hypothesis.</p></li>
-<li><p>Determine the <strong>p-value</strong>, or likelihood, of obtaining a statistic at least as extreme as the observed statistic when the null hypothesis is true.</p></li>
-<li><p>Draw a conclusion about the null hypothesis based on the statistical evidence provided by the p-value.</p></li>
-</ol>
-</section>
-<section id="inference-for-means" class="level2">
-<h2 class="anchored" data-anchor-id="inference-for-means">Inference for Mean(s)</h2>
-<section id="one-mean" class="level3">
-<h3 class="anchored" data-anchor-id="one-mean">One mean</h3>
-<p>For a numerical characteristic of a population, typically the <strong>population mean</strong> is of interest. If we know the population variance, theory-based inference methods for a mean are similar to the methods for a proportion, i.e., using the <em>standard normal distribution</em>. However, in general, the population variance is unknown. Therefore, the statistics tend to follow the <strong>t-distribution</strong> rather than the standard normal distribution.</p>
-<p><em>Remark</em>: The <span class="math inline">\(t\)</span>-distribution can still be used even if the population distribution is not <strong>normal</strong>, as long as</p>
-<ul>
-<li>the sample size <span class="math inline">\(n\)</span> is <strong>large</strong>.</li>
-<li>the population distribution is not <strong>too-skewed</strong>.</li>
-</ul>
-<section id="example-1.-one-mean-hypothesis-test" class="level4">
-<h4 class="anchored" data-anchor-id="example-1.-one-mean-hypothesis-test">Example 1. One mean hypothesis test</h4>
-<p>Data are collected on a neutral substance (pH = 7.0). A sample of the measurements were taken with the data as follows: <span class="math display">\[7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08\]</span> Assume the measurements follow an <em>approximately normal distribution</em>.</p>
-<p><strong>Parameter</strong>: A neutral substance pH value, <span class="math inline">\(\mu\)</span></p>
-<p><strong>Hypotheses</strong>:</p>
-<p>The null hypothesis states that the mean is 7.0. The alternative hypothesis states the mean is different from 7.0.</p>
+<section id="hypothesis-test" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test">Hypothesis Test</h2>
+<section id="inference-for-proportions" class="level3">
+<h3 class="anchored" data-anchor-id="inference-for-proportions">Inference for proportions</h3>
+<p><strong>Example 1</strong> In a random sample of <span class="math inline">\(n=500\)</span> families owning television sets in the city of Hamilton, Canada, it is found that <span class="math inline">\(x=340\)</span> subscribe to HBO. Suppose we make the conjecture, the proportion of families with television sets in this city that subscribe to HBO is 0.7. We have the following hypotheses.</p>
 <p><span class="math display">\[\begin{align*}
+H_0: p &amp; = 0.7, \\
+H_1: p &amp; \ne 0.7.
+\end{align*}\]</span></p>
+<p>In python, we use<code>proportion_ztest</code> in <strong>statsmodels</strong> package. Please note <code>proportion_ztest</code> is different from <code>prop.test</code> in R.</p>
+<div id="cell-5" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.proportion <span class="im">import</span> proportions_ztest</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>z test statistic = -0.959</code></pre>
+</div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>p-value = 0.338</code></pre>
+</div>
+</div>
+<p>We can find p-value is much larger than <span class="math inline">\(\alpha = 0.05\)</span>, we should <strong>not reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+<p>What about <span class="math display">\[\begin{align*}
+H_0: p &amp; = 0.7, \\
+H_1: p &amp; &gt; 0.7.
+\end{align*}\]</span> For one-sided, we can use <code>larger</code> or <code>smaller</code> in python</p>
+<div id="cell-9" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'larger'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">3</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>z test statistic = -0.959
+p-value = 0.831</code></pre>
+</div>
+</div>
+<p><strong>Example 2</strong> A vote is to be taken among the residents of a town and the surrounding county to determine whether a proposed chemical plant should be constructed. The construction site is within the town limits, and for this reason many voters in the county believe that the proposal will pass because of the large proportion of town voters who favor the construction. To determine if there is a significant difference in the proportions of town voters and county voters favoring the proposal, a poll is taken. If 120 of 200 town voters favor the proposal and 240 of 500 county residents favor it, would you agree that the proportion of town voters favoring the proposal is higher than the proportion of county voters? Use an <span class="math inline">\(\alpha = 0.05\)</span> level of significance.</p>
+<p><em>Answer:</em></p>
+<p><span class="math display">\[\begin{align*}
+H_0: p_1 &amp; = p_2, \\
+H_1: p_1 &amp; &gt; p_2.
+\end{align*}\]</span></p>
+<div id="cell-11" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> np.array([<span class="dv">120</span>,<span class="dv">240</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nobs <span class="op">=</span> nobs<span class="op">=</span>np.array([<span class="dv">200</span>,<span class="dv">500</span>])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count,nobs, alternative<span class="op">=</span><span class="st">'larger'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">3</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>z test statistic = 2.87
+p-value = 0.002</code></pre>
+</div>
+</div>
+<p>We also can find p-value is much larger than <span class="math inline">\(\alpha = 0.05\)</span>, we should <strong>not reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="inference-for-means" class="level3">
+<h3 class="anchored" data-anchor-id="inference-for-means">Inference for means</h3>
+<p><strong>Example 3</strong> Data are collected on a neutral substance (pH = 7.0). A sample of the measurements were taken with the data as follows: [7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08] It is, then, of interest to test <span class="math display">\[\begin{align*}
 H_0: \mu = 7.0,\\
 H_1: \mu \ne 7.0.
-\end{align*}\]</span></p>
-<p><strong>Observed data</strong>:</p>
-<p>A sample of measurements <span class="math display">\[7.07, 7.00, 7.10, 6.97, 7.00, 7.03,7.01,7.01,6.98,7.08\]</span></p>
-<p>We can have <span class="math display">\[ \bar{x} = 7.025,\qquad s = 0.044\]</span></p>
-<p><strong>Test statistic</strong></p>
-<p>The standardized <span class="math inline">\(t\)</span> test statistic’s calculation assumes the null hypothesis is true. The standard deviation of the sample mean’s sampling distribution is estimated by <span class="math inline">\(s/\sqrt{n}\)</span>.</p>
-<p><span class="math display">\[ t = \frac{\bar{x}-\mu}{s/\sqrt{n}} = \frac{7.025-7}{0.044/\sqrt{10}} \approx 1.7954\]</span></p>
-<p>This follows a t-distribution with <span class="math inline">\(df = n-1 = 9\)</span> under the null hypothesis.</p>
-<p><strong>Critical Region</strong></p>
-<p>For the two-sided hypothesis <span class="math display">\[\begin{align*}
-H_0: \mu = \mu_0,\\
-H_1: \mu \ne \mu_0.
-\end{align*}\]</span></p>
-<p>We reject <span class="math inline">\(H_0\)</span> at significance level <span class="math inline">\(\alpha\)</span> when the computed <span class="math inline">\(t\)</span>-statistic <span class="math display">\[t = \frac{\bar{x}-\mu_0}{s/\sqrt{n}}\]</span> exceeds <span class="math inline">\(t_{\alpha/2, n-1}\)</span> or is less than <span class="math inline">\(-t_{\alpha/2,n-1}\)</span>. That is <span class="math display">\[t&gt; t_{\alpha/2, n-1} \text{ or } t &lt; -t_{\alpha/2, n-1}\]</span> These regions are called <em>critical regions</em>.</p>
-<p>Let’s consider <span class="math inline">\(\alpha = 0.05,n =10\)</span>. We can see the red <em>critical regions</em>.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="week07_hypothesis_test_on_means_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
-</figure>
+\end{align*}\]</span> In <code>Python</code>, we use <code>stats.ttest_1samp</code> to do 1-sample <span class="math inline">\(t\)</span> test</p>
+<div id="cell-14" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phmeter <span class="op">=</span> np.array([<span class="fl">7.07</span>,<span class="fl">7.00</span>,<span class="fl">7.10</span>,<span class="fl">6.97</span>,<span class="fl">7.00</span>,<span class="fl">7.03</span>,<span class="fl">7.01</span>,<span class="fl">7.01</span>, <span class="fl">6.98</span>,<span class="fl">7.08</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>stats.ttest_1samp(phmeter, <span class="fl">7.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>Ttest_1sampResult(statistic=1.7954096195592315, pvalue=0.10615895425089737)</code></pre>
 </div>
 </div>
-</div>
-<p>We know here the test statistic is <strong>not</strong> in the critical region. We should <em>not</em> reject the null hypothesis.</p>
-<p><strong>p-value</strong></p>
-<p>We can also calculate <em>p-value</em> <span class="math inline">\(P(|t| &gt; t_{\text{statistics}})\)</span> of this statistic.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tstatistic <span class="ot">&lt;-</span> <span class="fl">1.7954</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span>tstatistic,<span class="at">df =</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1061606</code></pre>
-</div>
-</div>
-<p>The p-value is much larger than <span class="math inline">\(0.05\)</span>. We should not reject the hypothesis.</p>
-<p>We can also use <code>t.test</code> here.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Need to specify mu</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>phmeter <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">7.07</span>,<span class="fl">7.00</span>,<span class="fl">7.10</span>,<span class="fl">6.97</span>,<span class="fl">7.00</span>,<span class="fl">7.03</span>,<span class="fl">7.01</span>,<span class="fl">7.01</span>, <span class="fl">6.98</span>,<span class="fl">7.08</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(phmeter, <span class="at">mu =</span> <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    One Sample t-test
-
-data:  phmeter
-t = 1.7954, df = 9, p-value = 0.1062
-alternative hypothesis: true mean is not equal to 7
-95 percent confidence interval:
- 6.993501 7.056499
-sample estimates:
-mean of x 
-    7.025 </code></pre>
-</div>
-</div>
-<p>When p-value is less than or equal to the level of significance <span class="math inline">\(\alpha\)</span>, we <strong>reject</strong> the null hypothesis; otherwise we <strong>do not reject</strong> the null hypothesis.</p>
-<p>Notice that the sample size of 10 is rather small. An increase in sample size (perhaps another experiment) may sort things out.</p>
-<p><strong>Note</strong>: How to choose a good sample size is an advanced topic.</p>
-</section>
-<section id="in-class-exercise-tests-on-a-single-mean-variance-unknown" class="level4">
-<h4 class="anchored" data-anchor-id="in-class-exercise-tests-on-a-single-mean-variance-unknown">In-class Exercise: Tests on a Single Mean (Variance Unknown)</h4>
-<p>Test the hypothesis that the average content of containers of a particular lubricant is 10 liters if the contents of a random sample of 10 containers are 10.2, 9.7, 10.1, 10.3, 10.1, 9.8, 9.9, 10.4, 10.3, and 9.8 liters. Use a 0.01 level of significance and assume that the distribution of contents is normal.</p>
-</section>
-</section>
-<section id="type-i-and-type-ii-errors" class="level3">
-<h3 class="anchored" data-anchor-id="type-i-and-type-ii-errors">Type I and type II errors</h3>
-<p>The decision from a hypothesis test is to <em>either reject the null hypothesis or fail to reject the null hypothesis</em>. The <strong>significance level</strong>, <span class="math inline">\(\alpha\)</span> , of a hypothesis test is how small the p-value must be to conclude the data provide enough statistical evidence to reject the null hypothesis. The decision is to reject the null hypothesis if the p-value is less than or equal to <span class="math inline">\(\alpha\)</span>, and fail to reject the null hypothesis if the p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
-<p>In reality, either the null hypothesis is true or the alternative hypothesis is true. Thus, the conclusion from a hypothesis test is either correct or incorrect. Ex: Suppose <span class="math inline">\(H_0\)</span> states that the population mean commute time is 25 minutes. If we reject <span class="math inline">\(H_0\)</span> when the true population mean is actually 25 minutes, we make a Type I error. If we fail to reject <span class="math inline">\(H_0\)</span> when the true population mean is not 25 minutes, we make a Type II error.</p>
-<ul>
-<li><p>A <strong>type I error</strong> is rejecting the null hypothesis in favor of the alternative when in reality the null hypothesis is true.</p></li>
-<li><p>A <strong>type II error</strong> is failing to reject the null hypothesis when in reality the alternative hypothesis is true.</p></li>
-</ul>
-<p><span class="math display">\[
-\begin{array}{c|cc}
-\text{Decision V.S. In Reality}  &amp; H_0 \text{ is true}     &amp; H_0 \text{ is false} \\
-\hline
-\text{Reject } H_0 &amp;  \text{Type I error} &amp; \text{Correct decision}\\
-\text{Fail to reject } H_0 &amp;  \text{Correct decision} &amp; \text{Type II error}
-\end{array}
-\]</span></p>
-<section id="checkpoint-questions-type-i-and-type-ii-errors" class="level4">
-<h4 class="anchored" data-anchor-id="checkpoint-questions-type-i-and-type-ii-errors">Checkpoint Questions: Type I and Type II Errors</h4>
-<p>A new fitness app estimates users’ daily calorie burn using wearable-device data. Before releasing the app, the development team tests whether the mean absolute error of the calorie estimates is at most 100 calories, so the app is sufficiently accurate.</p>
-<p>They conduct a hypothesis test on the population mean error ().</p>
-<div id="type-errors-match" class="match-terms">
-<p>
-<strong>Match each description with the correct term.</strong>
-</p>
-<p>
-<strong>Terms:</strong> Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence
-</p>
-<div class="match-item" data-answer="hypotheses">
-<p>
-<strong>a)</strong> <span class="math display">\[H_0: \mu = 100, \qquad H_1: \mu &gt; 100\]</span>
-</p>
-<p><select> <option value="">Select a term</option> <option value="hypotheses">Hypotheses</option> <option value="type1">Type I error</option> <option value="type2">Type II error</option> <option value="type1-consequence">Type I error consequence</option> <option value="type2-consequence">Type II error consequence</option> </select></p>
-<p><span class="match-feedback"></span></p>
-</div>
-<div class="match-item" data-answer="type1-consequence">
-<p>
-<strong>b)</strong> Spend additional time and money to improve the app’s accuracy when the app already meets the desired accuracy level.
-</p>
-<p><select> <option value="">Select a term</option> <option value="hypotheses">Hypotheses</option> <option value="type1">Type I error</option> <option value="type2">Type II error</option> <option value="type1-consequence">Type I error consequence</option> <option value="type2-consequence">Type II error consequence</option> </select></p>
-<p><span class="match-feedback"></span></p>
-</div>
-<div class="match-item" data-answer="type2">
-<p>
-<strong>c)</strong> Fail to reject <span class="math inline">\(H_0\)</span> when the true mean error is greater than 100 calories.
-</p>
-<p><select> <option value="">Select a term</option> <option value="hypotheses">Hypotheses</option> <option value="type1">Type I error</option> <option value="type2">Type II error</option> <option value="type1-consequence">Type I error consequence</option> <option value="type2-consequence">Type II error consequence</option> </select></p>
-<p><span class="match-feedback"></span></p>
-</div>
-<div class="match-item" data-answer="type1">
-<p>
-<strong>d)</strong> Reject <span class="math inline">\(H_0\)</span> and conclude that the mean error is greater than 100 calories when the true mean error is 100 calories.
-</p>
-<p><select> <option value="">Select a term</option> <option value="hypotheses">Hypotheses</option> <option value="type1">Type I error</option> <option value="type2">Type II error</option> <option value="type1-consequence">Type I error consequence</option> <option value="type2-consequence">Type II error consequence</option> </select></p>
-<p><span class="match-feedback"></span></p>
-</div>
-<div class="match-item" data-answer="type2-consequence">
-<p>
-<strong>e)</strong> Release the app because the test fails to detect that its mean error is greater than 100 calories, resulting in inaccurate calorie estimates for users.
-</p>
-<p><select> <option value="">Select a term</option> <option value="hypotheses">Hypotheses</option> <option value="type1">Type I error</option> <option value="type2">Type II error</option> <option value="type1-consequence">Type I error consequence</option> <option value="type2-consequence">Type II error consequence</option> </select></p>
-<p><span class="match-feedback"></span></p>
-</div>
-<p><br></p>
-<button type="button" id="check-type-errors">
-Check Answers
-</button>
-<button type="button" id="reset-type-errors">
-Reset
-</button>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const container = document.getElementById("type-errors-match");
-
-  const checkButton = document.getElementById("check-type-errors");
-  const resetButton = document.getElementById("reset-type-errors");
-
-  checkButton.addEventListener("click", function () {
-
-    const items = container.querySelectorAll(".match-item");
-
-    items.forEach(function (item) {
-
-      const correctAnswer = item.dataset.answer;
-      const select = item.querySelector("select");
-      const feedback = item.querySelector(".match-feedback");
-
-      if (select.value === "") {
-
-        feedback.textContent = " Please select an answer.";
-        feedback.style.color = "orange";
-
-      } else if (select.value === correctAnswer) {
-
-        feedback.textContent = " ✓ Correct";
-        feedback.style.color = "green";
-
-      } else {
-
-        feedback.textContent = " ✗ Try again";
-        feedback.style.color = "red";
-
-      }
-
-    });
-
-  });
-
-
-  resetButton.addEventListener("click", function () {
-
-    const items = container.querySelectorAll(".match-item");
-
-    items.forEach(function (item) {
-
-      const select = item.querySelector("select");
-      const feedback = item.querySelector(".match-feedback");
-
-      select.value = "";
-      feedback.textContent = "";
-
-    });
-
-  });
-
-});
-</script>
-</section>
-</section>
-<section id="two-means" class="level3">
-<h3 class="anchored" data-anchor-id="two-means">Two means</h3>
-<p>If we know the population variances, theory-based inference methods for a mean are similar to the methods for two proportions. However, in general, the population variance is unknown. We should consider the population variances are equal or not. The good thing is no matter the variances are equal or not, the <span class="math inline">\(t\)</span>-statistic is the same. The difference is the degrees of freedom.</p>
-<section id="example-2.-comparison-of-two-population-means" class="level4">
-<h4 class="anchored" data-anchor-id="example-2.-comparison-of-two-population-means">Example 2. Comparison of two population means</h4>
-<p>In a study in which minerals are transferred from the fungus to the trees and sugars from the trees to the fungus, 20 northern red oak seedlings exposed to the fungus Pisolithus tinctorus were grown in a greenhouse. All seedlings were planted in the same type of soil and received the same amount of sunshine and water. Half received no nitrogen at planting time, to serve as a control, and the other half received 368 ppm of nitrogen in the form NaNO3. The stem weights, in grams, at the end of 140 days were recorded as follows:</p>
+<p>Should we reject <span class="math inline">\(H_0\)</span> or not reject <span class="math inline">\(H_0\)</span>?</p>
+<p>If we consider <span class="math inline">\(\alpha = 0.05\)</span>, we should not reject <span class="math inline">\(H_0\)</span>. Notice that the sample size of 10 is rather small. An increase in sample size (perhaps another experiment) may sort things out.</p>
+<p><strong>Example 4</strong> In a study conducted at Virginia Tech on the development of ectomycorrhizal, a symbiotic relationship between the roots of trees and a fungus, in which minerals are transferred from the fungus to the trees and sugars from the trees to the fungus, 20 northern red oak seedlings exposed to the fungus Pisolithus tinctorus were grown in a greenhouse. All seedlings were planted in the same type of soil and received the same amount of sunshine and water. Half received no nitrogen at planting time, to serve as a control, and the other half received 368 ppm of nitrogen in the form NaNO3. The stem weights, in grams, at the end of 140 days were recorded as follows:</p>
 <p>No Nitrogen: 0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43</p>
 <p>Nitrogen: 0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46</p>
-<p><strong>Parameter</strong>:</p>
-<p><span class="math inline">\(\mu_{NON} =\)</span> mean stem weight of the seedlings without nitrogen</p>
-<p><span class="math inline">\(\mu_{NIT} =\)</span> mean stem weight of the seedlings with nitrogen</p>
-<p><strong>Hypotheses</strong>:</p>
-<p><span class="math display">\[\begin{align*}
+<p>Hypothesis Test: <span class="math display">\[\begin{align*}
 H_0: \mu_{NIT}  = \mu_{NON} ,\\
 H_1: \mu_{NIT} \ne \mu_{NON}.
 \end{align*}\]</span> where the population means indicate mean weights.</p>
-<p><strong>Observed data</strong>:</p>
-<p><span class="math display">\[ n_{NIT} = 10, \bar{x}_{NIT} = 0.565, s_{NIT} = 0.1867  \qquad n_{NON} = 10, \bar{x}_{NON} = 0.399, s_{NON} = 0.0728.\]</span></p>
-<p><strong>Test statistic</strong></p>
-<p>The <span class="math inline">\(t\)</span> test statistic and the p-value can be obtained using statistical software.</p>
-<p>In <code>R</code>, we can use <code>t.test</code> for two sample t-test. Don’t forget to add the condition <code>var.equal = TURE</code>.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>noNitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Nitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Nitro,noNitro, <span class="at">var.equal =</span> <span class="cn">TRUE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Two Sample t-test
-
-data:  Nitro and noNitro
-t = 2.6191, df = 18, p-value = 0.01739
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- 0.03284212 0.29915788
-sample estimates:
-mean of x mean of y 
-    0.565     0.399 </code></pre>
+<p>Assume the populations to be normally distributed with equal variances.</p>
+<p>How to do a two samples test in <code>Python</code>? We should use <code>stats.ttest_ind</code> for 2-sample test. Here we consider the same variance</p>
+<div id="cell-18" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>noNitro <span class="op">=</span> np.array([<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>nitro <span class="op">=</span> np.array([<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(noNitro, nitro, equal_var<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>Ttest_indResult(statistic=-2.6190944840455472, pvalue=0.017386483684799125)</code></pre>
 </div>
 </div>
-<p>Here we make an assumption that the variances are equal. Does that make sense?</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Nitro,noNitro)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="week07_hypothesis_test_on_means_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
-</figure>
+<p>We can also assume the variances are not equal.</p>
+<div id="cell-20" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>stats.ttest_ind(noNitro, nitro, equal_var<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>Ttest_indResult(statistic=-2.6190944840455472, pvalue=0.022863946155002354)</code></pre>
 </div>
 </div>
-</div>
-<p>Can we do a mean test with <strong>different variances</strong>? Yes!</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Nitro,noNitro, <span class="at">var.equal =</span> <span class="cn">FALSE</span>, <span class="at">conf.level =</span> .<span class="dv">95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  Nitro and noNitro
-t = 2.6191, df = 11.673, p-value = 0.02286
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- 0.02747562 0.30452438
-sample estimates:
-mean of x mean of y 
-    0.565     0.399 </code></pre>
-</div>
-</div>
-<p>In this example, both methods lead to the same conclusion: we reject <span class="math inline">\(H_0\)</span>.</p>
+<p>We get the same result, we should reject <span class="math inline">\(H_0\)</span>.</p>
 </section>
-<section id="in-class-exercise-tests-on-two-means-unequal-variance" class="level4">
-<h4 class="anchored" data-anchor-id="in-class-exercise-tests-on-two-means-unequal-variance">In-class Exercise: Tests on Two Means (Unequal Variance)</h4>
-<p>A study was conducted by the Department of Zoology at Virginia Tech to determine if there is a significant difference in the density of organisms at two different stations located on Cedar Run, a secondary stream in the Roanoke River drainage basin. Sewage from a sewage treatment plant and overflow from the Federal Mogul Corporation settling pond enter the stream near its headwaters. The following data give the density measurements, in number of organisms per square meter, at the two collecting stations:</p>
-<p>Stations 1: <span class="math display">\[5030,13700,10730,11400,860,2200,4250,15040,4980,11910,8130,26850,17660,
-22800,1130,1690\]</span></p>
-<p>Stations 2: <span class="math display">\[2800, 4670,6890,7720,7030,7330,2810,1330,3320,1230,2130,2190\]</span></p>
-<p>Is there sufficient evidence, at the 0.05 significance level, to conclude that the mean densities at the two stations are different? Assume that the observations come from normal populations with different variances.</p>
+<section id="variance-test" class="level3">
+<h3 class="anchored" data-anchor-id="variance-test">Variance Test</h3>
+<p>How should we choose the <code>equal_var</code>, we can conduct an F test. Hypothesis Test: <span class="math display">\[\begin{align*}
+H_0: \sigma^2_{NIT}  = \sigma^2_{NON} ,\\
+H_1: \sigma^2_{NIT} \ne \sigma^2_{NON}.
+\end{align*}\]</span></p>
+<div id="cell-23" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> np.var(noNitro, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> np.var(nitro, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> <span class="bu">len</span>(noNitro) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> <span class="bu">len</span>(nitro) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> <span class="dv">2</span><span class="op">*</span> stats.f.cdf(F, df1, df2)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F statistic:"</span>, F)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"p-value:"</span>, p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>F statistic: 0.15195156922096542
+p-value: 0.009786692293824261</code></pre>
+</div>
+</div>
+<p>Based on the p-value, we should reject the null hypothesis. We should set <code>equal_var = FALSE</code>.</p>
 
 
-</section>
 </section>
 </section>
 

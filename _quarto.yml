@@ -44,9 +44,20 @@ website:
           - text: "Week 6: Estimation on Mean(s)"
             href: source/week06_estimation_on_means.Rmd 
 
+          - text: "─────── Week 7 ───────"
           - text: "Week 7: Hypothesis Testing on Mean(s)"
             href: source/week07_hypothesis_test_on_means.Rmd   
-            
+          
+          - text: "Week 7: Inference on Proportion(s)"
+            href: source/week07_hypothesis_tests_on_proportions.Rmd 
+
+          - text: "─────── Week 8 ───────"
+          - text: "Week 8: Inference on Variances(s)"
+            href: source/week08_statistical_inference_on_variances.Rmd  
+
+          - text: "Week 8: Hypothesis Testing Jupyter Notebook"
+            href: source/week08_hypothesis_testing.ipynb 
+      
       - text: "Homework"
         menu:
           - text: "Homework 1"

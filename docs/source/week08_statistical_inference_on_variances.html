@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 8: Statistical Inference on Variance(s) – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 7 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_test_on_means.html">
+ <span class="dropdown-text">Week 7: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_tests_on_proportions.html">
+ <span class="dropdown-text">Week 7: Inference on Proportion(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 8 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week08_statistical_inference_on_variances.html">
+ <span class="dropdown-text">Week 8: Inference on Variances(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_hypothesis_testing.html">
+ <span class="dropdown-text">Week 8: Hypothesis Testing Jupyter Notebook</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw02_Solution.html">
+ <span class="dropdown-text">Homework 2 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw03.html">
+ <span class="dropdown-text">Homework 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#references" id="toc-references" class="nav-link active" data-scroll-target="#references">References</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives:</a></li>
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions">Probability Distributions</a>
+  <ul class="collapse">
+  <li><a href="#the-chi-squared-distribution" id="toc-the-chi-squared-distribution" class="nav-link" data-scroll-target="#the-chi-squared-distribution">The Chi-squared distribution</a></li>
+  <li><a href="#the-f-distribution" id="toc-the-f-distribution" class="nav-link" data-scroll-target="#the-f-distribution">The <span class="math inline">\(F\)</span> Distribution</a></li>
+  </ul></li>
+  <li><a href="#interval-estimate-of-the-variance" id="toc-interval-estimate-of-the-variance" class="nav-link" data-scroll-target="#interval-estimate-of-the-variance">Interval Estimate of the Variance</a></li>
+  <li><a href="#confidence-interval-for-sigma2" id="toc-confidence-interval-for-sigma2" class="nav-link" data-scroll-target="#confidence-interval-for-sigma2">Confidence Interval for <span class="math inline">\(\sigma^2\)</span></a></li>
+  <li><a href="#estimating-the-ratio-of-two-variances" id="toc-estimating-the-ratio-of-two-variances" class="nav-link" data-scroll-target="#estimating-the-ratio-of-two-variances">Estimating the Ratio of Two Variances</a></li>
+  <li><a href="#confidence-interval-for-sigma_12sigma_22" id="toc-confidence-interval-for-sigma_12sigma_22" class="nav-link" data-scroll-target="#confidence-interval-for-sigma_12sigma_22">Confidence Interval for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span></a></li>
+  <li><a href="#inference-on-variances" id="toc-inference-on-variances" class="nav-link" data-scroll-target="#inference-on-variances">Inference on Variances</a>
+  <ul class="collapse">
+  <li><a href="#one-comprehensive-example" id="toc-one-comprehensive-example" class="nav-link" data-scroll-target="#one-comprehensive-example">One Comprehensive Example</a></li>
+  </ul></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions:</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 8: Statistical Inference on Variance(s)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<ol type="1">
+<li><strong>Probability &amp; Statistics for Engineers &amp; Scientists</strong>, 9th Edition, Ronald E. Walpole, Raymond H. Myers, Sharon L. Myers, Keying Ye, Prentice Hall</li>
+</ol>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives:</h2>
+<ul>
+<li><p>Know the sampling distribution of the sample variance, and the ratio of two sample variances</p></li>
+<li><p>Understand <span class="math inline">\(\chi^2\)</span>, and <span class="math inline">\(F\)</span> distributions and know how to use <code>q-</code> and <code>p-</code> function to find the <strong>critical value</strong> and probability of all these distributions</p></li>
+<li><p>Know how to <strong>use R</strong> to construct a confidence interval on <strong>Variance</strong> and <strong>Ratio of Variances</strong></p></li>
+<li><p>Know how to use <code>var.test</code> to do the test for the ratio of variances and how to interpret the result</p></li>
+</ul>
+</section>
+<section id="probability-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="probability-distributions">Probability Distributions</h2>
+<section id="the-chi-squared-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="the-chi-squared-distribution">The Chi-squared distribution</h3>
+<p>Chi-squared distribution is usually used when we seek some conclusion on variance of a population.</p>
+<p>If <span class="math inline">\(S^2\)</span> is the variance of a random sample of size <span class="math inline">\(n\)</span> taken from a <strong>normal population</strong> having the variance <span class="math inline">\(\sigma^2\)</span>, then the statistic <span class="math display">\[ \chi^2 = \frac{(n-1)S^2}{\sigma^2} = \sum_{i=1}^n \frac{(X_i-\bar{X})^2}{\sigma^2}\]</span> has a <strong>chi-squared distribution</strong> with <span class="math inline">\(v = n − 1\)</span> degrees of freedom. The shape of <strong>chi-squared distribution</strong> is <em>not symmetric</em>.</p>
+<p>The probability that a random sample produces a <span class="math inline">\(\chi^2\)</span> value greater than some specified value is equal to the area under the curve to the right of this value. It is customary to let <span class="math inline">\(\chi^2_\alpha\)</span> represent the <span class="math inline">\(\chi^2\)</span> value above which we find an area of <span class="math inline">\(\alpha\)</span>. This is illustrated by the shaded region in the following figure, with <span class="math inline">\(v= 4,\alpha=0.05\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="find-critical-value-of-chi-squared-distribution-in-r" class="level4">
+<h4 class="anchored" data-anchor-id="find-critical-value-of-chi-squared-distribution-in-r">Find Critical Value of Chi-squared distribution in R</h4>
+<p>Let <span class="math inline">\(\alpha = 0.05\)</span> and <span class="math inline">\(n = 20\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chiCriVal <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span><span class="sc">-</span>alpha,n<span class="dv">-1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>chiCriVal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30.14353</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(chiCriVal,<span class="at">df =</span> n<span class="dv">-1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>chiCriVal <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(alpha,n<span class="dv">-1</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(chiCriVal,<span class="at">df =</span> n<span class="dv">-1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="the-f-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="the-f-distribution">The <span class="math inline">\(F\)</span> Distribution</h3>
+<p>Suppose that we have a random sample of <span class="math inline">\(n_1\)</span> observations from the <strong>normal population</strong> <span class="math inline">\(N(\mu_1,\sigma_1^2)\)</span> and an independent random sample of <span class="math inline">\(n_2\)</span> observations from a second <strong>normal population</strong> <span class="math inline">\(N(\mu_2,\sigma_2^2)\)</span>. Then, <span class="math display">\[F_{n_1-1,n_2-1} = \frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} =  \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2},\]</span> follows an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(v_1 = n_1-1\)</span> and <span class="math inline">\(v_2 = n_2-1\)</span>, where <span class="math inline">\(S_1\)</span>, <span class="math inline">\(S_2\)</span> and <span class="math inline">\(\sigma_1\)</span>, <span class="math inline">\(\sigma_2\)</span> are sample and population standard deviations of sample 1 and sample 2, respectively. This <span class="math inline">\(F\)</span> statistic can be used to compare variances from two independent groups.</p>
+<p>Here are some density curves of <span class="math inline">\(F\)</span> distribution with different degrees of freedom:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[f_{1-\alpha,v_1,v_2}=\frac{1}{f_{\alpha,v_2,v_1}}.\]</span></p>
+<p>The <span class="math inline">\(F-\)</span>distribution finds enormous application in <strong>comparing sample variances</strong>. Applications of the <span class="math inline">\(F-\)</span>distribution are found in problems involving <strong>two or more samples</strong>.</p>
+<section id="find-critical-value-of-f-distribution-in-r" class="level4">
+<h4 class="anchored" data-anchor-id="find-critical-value-of-f-distribution-in-r">Find Critical Value of F distribution in R</h4>
+<p>Let <span class="math inline">\(\alpha = 0.05,n_1 = 20,n_2=20\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fVal <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="dv">1</span><span class="sc">-</span>alpha,n1<span class="dv">-1</span>,n2<span class="dv">-1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fVal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.168252</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check the probability</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(fVal,<span class="at">df1 =</span> n1<span class="dv">-1</span>,<span class="at">df2 =</span> n2<span class="dv">-1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="chi-f-practice" class="practice-quiz">
+<h4 class="anchored">
+Practice: The Chi-Squared and F Distribution
+</h4>
+<div class="quiz-question" data-answer="b">
+<p>
+<strong>1.</strong> Which distribution is commonly used for inference about one population variance?
+</p>
+<label><input type="radio" name="cf-q1" value="a"> a) Normal distribution</label><br> <label><input type="radio" name="cf-q1" value="b"> b) Chi-squared distribution</label><br> <label><input type="radio" name="cf-q1" value="c"> c) F distribution</label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+The chi-squared distribution is used for inference about the variance of one normally distributed population.
+</p>
+</div>
+<div class="quiz-question" data-answer="c">
+<p>
+<strong>2.</strong> Which distribution is commonly used for inference about the ratio of two population variances?
+</p>
+<label><input type="radio" name="cf-q2" value="a"> a) Normal distribution</label><br> <label><input type="radio" name="cf-q2" value="b"> b) Chi-squared distribution</label><br> <label><input type="radio" name="cf-q2" value="c"> c) F distribution</label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+The F distribution is used for inference about the ratio of two population variances.
+</p>
+</div>
+<div class="quiz-question" data-answer="a">
+<p>
+<strong>3.</strong> We can use a confidence interval to make inference about the variance of a population.
+</p>
+<label><input type="radio" name="cf-q3" value="a"> a) True</label><br> <label><input type="radio" name="cf-q3" value="b"> b) False</label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+A confidence interval based on the chi-squared distribution can be used to estimate a population variance.
+</p>
+</div>
+<div class="quiz-question" data-answer="b">
+<p>
+<strong>4.</strong> The F distribution is symmetric.
+</p>
+<label><input type="radio" name="cf-q4" value="a"> a) True</label><br> <label><input type="radio" name="cf-q4" value="b"> b) False</label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+The F distribution is not symmetric. It is right-skewed, especially for small degrees of freedom.
+</p>
+</div>
+<button type="button" class="check-btn">
+Check Answers
+</button>
+<button type="button" class="reset-btn">
+Reset
+</button>
+</div>
+</section>
+</section>
+</section>
+<section id="interval-estimate-of-the-variance" class="level2">
+<h2 class="anchored" data-anchor-id="interval-estimate-of-the-variance">Interval Estimate of the Variance</h2>
+<p>We already know <span class="math inline">\(S^2\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>. If a sample of size <span class="math inline">\(n\)</span> is drawn from a <strong>normal population</strong> with variance <span class="math inline">\(\sigma^2\)</span>, an interval estimate of <span class="math inline">\(\sigma^2\)</span> can be established by using the statistic <span class="math display">\[\chi^2 = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}.\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confidence-interval-for-sigma2" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-sigma2">Confidence Interval for <span class="math inline">\(\sigma^2\)</span></h2>
+<p>If <span class="math inline">\(s^2\)</span> is the variance of a random sample of size <span class="math inline">\(n\)</span> from a , a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\sigma^2\)</span> is given by <span class="math display">\[\frac{(n-1)S^2}{\chi^2_{\alpha/2,n-1}}   &lt; \sigma^2  &lt; \frac{(n-1)S^2}{\chi^2_{1-\alpha/2,n-1}},\]</span> where <span class="math inline">\(\chi^2_{1-\alpha/2,n-1}\)</span> and <span class="math inline">\(\chi^2_{\alpha/2,n-1}\)</span> are values of the chi-squared distribution with <span class="math inline">\(n-1\)</span> degrees of freedom, leaving areas of <span class="math inline">\(1-\alpha/2\)</span> and <span class="math inline">\(\alpha/2\)</span>, respectively, to the right.</p>
+<section id="example-1" class="level4">
+<h4 class="anchored" data-anchor-id="example-1">Example 1</h4>
+<p>The following are the weights, in decagrams, of 10 packages of grass seed distributed by a certain company: 46.4, 46.1, 45.8, 47.0, 46.1, 45.9, 45.8, 46.9, 45.2, and 46.0. Find a 95% confidence interval for the variance of the weights of all such packages of grass seed distributed by this company, <strong>assuming a normal population</strong>.</p>
+<p><strong>Sample Variance</strong></p>
+<p>First, we need to find <span class="math inline">\(s^2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weight <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">46.4</span>,<span class="fl">46.1</span>, <span class="fl">45.8</span>, <span class="fl">47.0</span>, <span class="fl">46.1</span>, <span class="fl">45.9</span>, <span class="fl">45.8</span>, <span class="fl">46.9</span>, <span class="fl">45.2</span>,<span class="fl">46.0</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span> <span class="fu">length</span>(weight)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ssquare <span class="ot">&lt;-</span> <span class="fu">var</span>(weight)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ssquare</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2862222</code></pre>
+</div>
+</div>
+<p><strong>Critical Value</strong></p>
+<p>Here <span class="math inline">\(\alpha = 0.05\)</span> since we are constructing a 95% confidence interval. The sample size is 10. Thus <span class="math inline">\(df = 10-1=9\)</span>. We need two critical values <span class="math inline">\(\chi^2_{\alpha/2,n-1}\)</span> and <span class="math inline">\(\chi^2_{1-\alpha/2,n-1}\)</span></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># 95% confidence interval</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-squared alpha/2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>chiVal1 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>chiVal1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.02277</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-squared 1-alpha/2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>chiVal2 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>chiVal2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.700389</code></pre>
+</div>
+</div>
+<p><strong>Construct the Confidence Interval</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>loBd <span class="ot">&lt;-</span> (n<span class="dv">-1</span>)<span class="sc">*</span>ssquare<span class="sc">/</span>chiVal1</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>loBd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1354167</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>upBd <span class="ot">&lt;-</span> (n<span class="dv">-1</span>)<span class="sc">*</span>ssquare<span class="sc">/</span>chiVal2</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>upBd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9539365</code></pre>
+</div>
+</div>
+</section>
+<section id="practice-ci-for-one-population-variance" class="level4">
+<h4 class="anchored" data-anchor-id="practice-ci-for-one-population-variance">Practice: CI for One Population Variance</h4>
+Construct a 90% confidence interval for the variance of <code>Sepal.Length</code> of all records in the <code>iris</code> data set, assuming a normal distribution.
+<div id="one-variance-ci" class="practice-quiz">
+<div class="quiz-question" data-answer="c">
+<p>
+<strong>1)</strong> Which distribution should we use to construct a 90% CI here?
+</p>
+<label><input type="radio" name="onevar-q1" value="a"> a) normal distribution</label><br> <label><input type="radio" name="onevar-q1" value="b"> b) t-distribution</label><br> <label><input type="radio" name="onevar-q1" value="c"> c) Chi-squared distribution</label><br> <label><input type="radio" name="onevar-q1" value="d"> d) F distribution</label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>We use the Chi-squared distribution to construct a confidence interval for the variance of one normally distributed population.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="b">
+<p>
+<strong>2)</strong> What is the value of <span class="math inline">\(\alpha\)</span>?
+</p>
+<label><input type="radio" name="onevar-q2" value="a"> a) 0.9</label><br> <label><input type="radio" name="onevar-q2" value="b"> b) 0.1</label><br> <label><input type="radio" name="onevar-q2" value="c"> c) 0.05</label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>For a 90% confidence interval, <span class="math inline">\(\alpha = 1 - 0.90 = 0.10\)</span>.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="d">
+<p>
+<strong>3)</strong> Suppose there are 150 observations. To construct the CI, which critical values do we need?
+</p>
+<label><input type="radio" name="onevar-q3" value="a"> a) <span class="math inline">\(\chi^2_{0.9,150}\)</span> and <span class="math inline">\(\chi^2_{0.1,150}\)</span></label><br> <label><input type="radio" name="onevar-q3" value="b"> b) <span class="math inline">\(\chi^2_{0.95,150}\)</span> and <span class="math inline">\(\chi^2_{0.05,150}\)</span></label><br> <label><input type="radio" name="onevar-q3" value="c"> c) <span class="math inline">\(\chi^2_{0.9,149}\)</span> and <span class="math inline">\(\chi^2_{0.1,149}\)</span></label><br> <label><input type="radio" name="onevar-q3" value="d"> d) <span class="math inline">\(\chi^2_{0.95,149}\)</span> and <span class="math inline">\(\chi^2_{0.05,149}\)</span></label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>Since <span class="math inline">\(\alpha = 0.10\)</span>, we use <span class="math inline">\(\alpha/2 = 0.05\)</span>. With <span class="math inline">\(n=150\)</span>, the degrees of freedom are <span class="math inline">\(n-1=149\)</span>. Therefore, we need <span class="math inline">\(\chi^2_{0.95,149}\)</span> and <span class="math inline">\(\chi^2_{0.05,149}\)</span>.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="a">
+<p>
+<strong>4)</strong> Suppose the sample variance is 0.69. Which of the following is the 90% confidence interval?
+</p>
+<label><input type="radio" name="onevar-q4" value="a"> a) <span class="math inline">\([149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]\)</span></label><br> <label><input type="radio" name="onevar-q4" value="b"> b) <span class="math inline">\([149(0.69)/\chi^2_{0.05,149},\;149(0.69)/\chi^2_{0.95,149}]\)</span></label><br> <label><input type="radio" name="onevar-q4" value="c"> c) <span class="math inline">\([150(0.69)/\chi^2_{0.95,150},\;150(0.69)/\chi^2_{0.05,150}]\)</span></label><br> <label><input type="radio" name="onevar-q4" value="d"> d) <span class="math inline">\([150(0.69)/\chi^2_{0.05,150},\;150(0.69)/\chi^2_{0.95,150}]\)</span></label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>For one population variance, the confidence interval is based on <span class="math inline">\((n-1)s^2\)</span>. Here, <span class="math inline">\(n-1=149\)</span>, <span class="math inline">\(\alpha/2=0.05\)</span>, and <span class="math inline">\(s^2=0.69\)</span>. Using the right-tail Chi-squared notation from this handout, the interval is <span class="math inline">\([149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]\)</span>.</p>
+</div>
+</div>
+<p>
+<button type="button" class="check-btn">
+Check Answers
+</button>
+<button type="button" class="reset-btn">
+Reset
+</button>
+</p>
+</div>
+</section>
+</section>
+<section id="estimating-the-ratio-of-two-variances" class="level2">
+<h2 class="anchored" data-anchor-id="estimating-the-ratio-of-two-variances">Estimating the Ratio of Two Variances</h2>
+<p>A point estimate of the ratio of two population variances <span class="math inline">\(\sigma^2_1/\sigma_2^2\)</span> is given by the ratio <span class="math inline">\(s_1^2/s_2^2\)</span> of the sample variances. Hence, the statistic <span class="math inline">\(S_1^2/S_2^2\)</span> is called an <strong>estimator</strong> of <span class="math inline">\(\sigma^2_1/\sigma_2^2\)</span>. If <span class="math inline">\(\sigma^2_1\)</span> and <span class="math inline">\(\sigma_2^2\)</span> are the variances of <strong>normal populations</strong>, we can use the statistic <span class="math display">\[ F = \frac{\sigma_2^2S_1^2}{\sigma_1^2S_2^2} \sim F_{n_1-1,n_2-1}\]</span> to establish an interval estimate of <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confidence-interval-for-sigma_12sigma_22" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-for-sigma_12sigma_22">Confidence Interval for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span></h2>
+<p>If <span class="math inline">\(s_1^2\)</span> and <span class="math inline">\(s_2^2\)</span> are the variances of a random sample of size <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span>, respectively, from <strong>normal populations</strong>, then a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span> is given by<br>
+<span class="math display">\[\frac{s_1^2}{s_2^2} \frac{1}{f_{\alpha/2,n_1-1,n_2-1}} &lt; \frac{\sigma_1^2}{\sigma_2^2}  &lt; \frac{s_1^2}{s_2^2}f_{\alpha/2,n_2-1,n_1-1}, \]</span> where <span class="math inline">\(f_{\alpha/2,n_1-1,n_2-1}\)</span> is an <span class="math inline">\(f\)</span>-value with <span class="math inline">\(n_1-1\)</span> and <span class="math inline">\(n_2-1\)</span> degrees of freedom, leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right, and <span class="math inline">\(f_{\alpha/2,n_2-1,n_1-1}\)</span> is an <span class="math inline">\(f\)</span>-value with <span class="math inline">\(n_2-1\)</span> and <span class="math inline">\(n_1-1\)</span> degrees of freedom.</p>
+<p><strong>Example 2</strong> Orthophosphorus was measured, in milligrams per liter, at two stations on the James River. Fifteen samples were collected from station 1, and 12 samples were collected from station 2. The 15 samples from station 1 had an average orthophosphorus content of 3.84 milligrams per liter and a standard deviation of 3.07 milligrams per liter, while the 12 samples from station 2 had an average orthophosphorus content of 1.49 milligrams per liter and a standard deviation of 0.80 milligram per liter.</p>
+<p>We would like to determine whether it is reasonable to assume that the population variances at the two stations are unequal. Justify this assumption by constructing 98% confidence intervals for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span> and for <span class="math inline">\(\sigma_1/\sigma_2\)</span> where <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> are the population variances of orthophosphorus content at stations 1 and 2, respectively. Assume that the orthophosphorus contents at both stations are normally distributed.</p>
+<p><strong>Sample Variances</strong></p>
+<p><span class="math inline">\(s_1 = 3.07\)</span> and <span class="math inline">\(s_2=0.80\)</span> are given</p>
+<p><strong>Critical Values</strong></p>
+<p>Here <span class="math inline">\(\alpha = 0.02\)</span> as it is 98% confidence interval. Sample sizes are <span class="math inline">\(n_1=15\)</span> and <span class="math inline">\(n_2=12\)</span>, we need to two critical values <span class="math inline">\(f_{\alpha/2,n_1-1,n_2-1}\)</span> and <span class="math inline">\(f_{1-\alpha/2,n_1-1,n_2-1} = 1/f_{\alpha/2,n_2-1,n_1-1}\)</span></p>
+<p><strong>Construct CI</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fl">3.07</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="fl">0.80</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>loBd <span class="ot">&lt;-</span> s1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>s2<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">qf</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>, n1<span class="dv">-1</span>, n2<span class="dv">-1</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>loBd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.430136</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>upBd <span class="ot">&lt;-</span> s1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>s2<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="fu">qf</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>, n2<span class="dv">-1</span>, n1<span class="dv">-1</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>upBd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 56.90341</code></pre>
+</div>
+</div>
+<p>Taking square roots of the confidence limits, we find that a 98% confidence interval for <span class="math inline">\(\sigma_1/\sigma_2\)</span> is <span class="math display">\[1.851 &lt; \frac{\sigma_1}{\sigma_2}
+&lt; 7.549. \]</span> Since this interval does not allow for the possibility of <span class="math inline">\(\sigma_1/\sigma_2\)</span> being equal to 1, we were correct in assuming that <span class="math inline">\(\sigma_1 \ne \sigma_2\)</span> or <span class="math inline">\(\sigma_1^2 \ne \sigma^2_2\)</span>.</p>
+<section id="practice-ci-for-the-ratio-of-variances" class="level4">
+<h4 class="anchored" data-anchor-id="practice-ci-for-the-ratio-of-variances">Practice: CI for the Ratio of Variances</h4>
+<p>Construct a 96% confidence interval for the ratio of variances of <code>Sepal.Length</code> between <code>virginica</code> and <code>setosa</code> in the <code>iris</code> data set, i.e., <span class="math inline">\(\sigma^2_{virginica}/\sigma^2_{setosa}\)</span>. Assume that <code>Sepal.Length</code> is approximately normally distributed for both species.</p>
+<div id="ratio-variance-ci" class="practice-quiz">
+<div class="quiz-question" data-answer="d">
+<p>
+<strong>1)</strong> Which distribution should we use to construct a 96% CI here?
+</p>
+<label><input type="radio" name="ratio-q1" value="a"> a) normal distribution</label><br> <label><input type="radio" name="ratio-q1" value="b"> b) t-distribution</label><br> <label><input type="radio" name="ratio-q1" value="c"> c) Chi-squared distribution</label><br> <label><input type="radio" name="ratio-q1" value="d"> d) F distribution</label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>We use the F distribution to construct a confidence interval for the ratio of two population variances.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="a">
+<p>
+<strong>2)</strong> What is the value of <span class="math inline">\(\alpha\)</span>?
+</p>
+<label><input type="radio" name="ratio-q2" value="a"> a) 0.04</label><br> <label><input type="radio" name="ratio-q2" value="b"> b) 0.96</label><br> <label><input type="radio" name="ratio-q2" value="c"> c) 0.05</label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>For a 96% confidence interval, <span class="math inline">\(\alpha = 1 - 0.96 = 0.04\)</span>.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="d">
+<p>
+<strong>3)</strong> Suppose there are 50 observations for each species. To construct the CI, which critical value do we need?
+</p>
+<label><input type="radio" name="ratio-q3" value="a"> a) <span class="math inline">\(f_{0.04,50,50}\)</span></label><br> <label><input type="radio" name="ratio-q3" value="b"> b) <span class="math inline">\(f_{0.04,49,49}\)</span></label><br> <label><input type="radio" name="ratio-q3" value="c"> c) <span class="math inline">\(f_{0.02,50,50}\)</span></label><br> <label><input type="radio" name="ratio-q3" value="d"> d) <span class="math inline">\(f_{0.02,49,49}\)</span></label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>Since <span class="math inline">\(\alpha = 0.04\)</span>, we use <span class="math inline">\(\alpha/2 = 0.02\)</span>. With 50 observations in each group, the degrees of freedom are <span class="math inline">\(50-1=49\)</span> and <span class="math inline">\(50-1=49\)</span>. Therefore, the critical value is <span class="math inline">\(f_{0.02,49,49}\)</span>.</p>
+</div>
+</div>
+<div class="quiz-question" data-answer="d">
+<p>
+<strong>4)</strong> Suppose the ratio of sample variances is 0.69. Which of the following is the 96% confidence interval?
+</p>
+<label><input type="radio" name="ratio-q4" value="a"> a) <span class="math inline">\([0.69/f_{0.04,50,50},\; 0.69f_{0.04,50,50}]\)</span></label><br> <label><input type="radio" name="ratio-q4" value="b"> b) <span class="math inline">\([0.69/f_{0.04,49,49},\; 0.69f_{0.04,49,49}]\)</span></label><br> <label><input type="radio" name="ratio-q4" value="c"> c) <span class="math inline">\([0.69/f_{0.02,50,50},\; 0.69f_{0.02,50,50}]\)</span></label><br> <label><input type="radio" name="ratio-q4" value="d"> d) <span class="math inline">\([0.69/f_{0.02,49,49},\; 0.69f_{0.02,49,49}]\)</span></label>
+<p class="feedback">
+</p>
+<div class="explanation" style="display:none;">
+<p>Using the right-tail F critical-value notation from this handout, the 96% confidence interval is <span class="math inline">\([0.69/f_{0.02,49,49},\; 0.69f_{0.02,49,49}]\)</span>.</p>
+</div>
+</div>
+<p>
+<button type="button" class="check-btn">
+Check Answers
+</button>
+<button type="button" class="reset-btn">
+Reset
+</button>
+</p>
+</div>
+</section>
+</section>
+<section id="inference-on-variances" class="level2">
+<h2 class="anchored" data-anchor-id="inference-on-variances">Inference on Variances</h2>
+<p>In this section, we are concerned with testing hypotheses concerning <strong>comparison of population variances or standard deviations</strong>. Attention is focused on comparative experiments between methods or processes, where inherent reproducibility or variability must formally be compared. In addition, to determine if the equal variance assumption is violated, a test comparing two variances is often applied <strong>prior to conducting a t-test</strong> on two means.</p>
+<p><strong>Example 3</strong> Comparison of Two Variances</p>
+<p>Let’s continue with the weights of the no-nitrogen and nitrogen samples.</p>
+<p>No Nitrogen: 0.32 0.53 0.28 0.37 0.47 0.43 0.36 0.42 0.38 0.43 Nitrogen: 0.26 0.43 0.47 0.49 0.52 0.75 0.79 0.86 0.62 0.46 Do these two samples have the same variance? Consider <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p><strong>Parameter:</strong></p>
+<p><span class="math inline">\(\sigma^2_{NON} =\)</span> variances of the weight without nitrogen</p>
+<p><span class="math inline">\(\sigma^2_{NIT} =\)</span> variances of the weight with nitrogen</p>
+<p><strong>Hypotheses:</strong></p>
+<p>A hypothesis test for two independent population variances can be used to determine whether or not the data provide statistical evidence of a difference in the variance of the weight between no nitrogen and nitrogen.</p>
+<p><span class="math display">\[\begin{align*}
+H_0: &amp; \sigma^2_{NON}  = \sigma^2_{NIT}  \qquad \text{or} \qquad \sigma^2_{NON}/\sigma^2_{NIT} = 1, \\
+H_1: &amp; \sigma^2_{NON} \ne \sigma^2_{NIT}  \qquad \text{or} \qquad \sigma^2_{NON}/\sigma^2_{NIT} \ne 1
+\end{align*}\]</span></p>
+<p><strong>Observed data:</strong> <span class="math display">\[n_{NON} = 10, s_{NON} = 0.07279 \qquad n_{NIT} = 10, s_{NIT} = 0.18674\]</span></p>
+<p><strong>Assumptions:</strong></p>
+<p>We assume that both populations are normally distributed.</p>
+<p><strong>Test statistic:</strong></p>
+<p>Here we use the <span class="math inline">\(F\)</span> statistic to test whether <span class="math inline">\(\sigma^2_{NON} = \sigma_{NIT}^2\)</span>. The test statistics is <span class="math display">\[f =\frac{s_{NON}^2}{s_{NIT}^2} = \frac{(0.07279)^2}{(0.18674)^2} =0.15195\]</span></p>
+<p><strong>p value</strong></p>
+<p>The <span class="math inline">\(F\)</span> distribution is not symmetric. We calculate the p-value as follows.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>noNitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.32</span>,<span class="fl">0.53</span> ,<span class="fl">0.28</span>, <span class="fl">0.37</span>, <span class="fl">0.47</span>, <span class="fl">0.43</span>, <span class="fl">0.36</span>, <span class="fl">0.42</span>,<span class="fl">0.38</span>,<span class="fl">0.43</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(noNitro)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Nitro<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.26</span>,<span class="fl">0.43</span>,<span class="fl">0.47</span>,<span class="fl">0.49</span>,<span class="fl">0.52</span>,<span class="fl">0.75</span>,<span class="fl">0.79</span>,<span class="fl">0.86</span>, <span class="fl">0.62</span>,<span class="fl">0.46</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>s2<span class="ot">&lt;-</span> <span class="fu">sd</span>(Nitro)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pf</span>(s1<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>s2<span class="sc">^</span><span class="dv">2</span>,<span class="dv">9</span>,<span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.009786692</code></pre>
+</div>
+</div>
+<p>The p-value is 0.009786692 &lt; <span class="math inline">\(\alpha\)</span>, so we should <strong>reject <span class="math inline">\(H_0\)</span></strong>.</p>
+<p>We can also make a conclusion based on <strong>critical regions</strong>, if we are given significance level <span class="math inline">\(\alpha\)</span>.</p>
+<p><strong>Critical regions:</strong></p>
+<p>We have <span class="math inline">\(\alpha = 0.05\)</span>. For the two-sided alternative <span class="math inline">\(\sigma_{NON}^2 \ne \sigma_{NIT} ^2\)</span> the critical region is <span class="math inline">\(f &lt; f_{1-\alpha/2,n_{NON}-1,n_{NIT}-1} =0.24839\)</span> or <span class="math inline">\(f&gt; f_{\alpha/2,n_{NON}-1,n_{NIT}-1} = 4.025994.\)</span></p>
+<p>Since the observed <span class="math inline">\(F\)</span>-statistic is less than <span class="math inline">\(f_{0.975,9,9}\)</span>, we <strong>reject <span class="math inline">\(H_0\)</span></strong>.</p>
+<p><strong>F-test in R:</strong></p>
+<p>In <code>R</code>, we use <code>var.test</code> to do the F test.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(noNitro,Nitro,<span class="at">alternative =</span> <span class="st">"two.sided"</span>,<span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  noNitro and Nitro
+F = 0.15195, num df = 9, denom df = 9, p-value = 0.009787
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.03774262 0.61175613
+sample estimates:
+ratio of variances 
+         0.1519516 </code></pre>
+</div>
+</div>
+<p>We get the same result.</p>
+<p>In <code>Python</code>, there is no direct equivalent of <code>R</code>’s <code>var.test()</code>. However, we can use <code>stats.f.ppf</code> to find critical values or <code>stats.f.cdf</code> to calculate the p-value.</p>
+<p>Based on the results, we can see F value is in the critical region and the p value is much less than significance level <span class="math inline">\(\alpha\)</span>. Therefore, we reject <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li><span class="math inline">\(F\)</span> test is very <strong>sensitive</strong> to the distributions of the populations.</li>
+<li>The critical regions of size <span class="math inline">\(\alpha\)</span> corresponding to the one-sided alternatives <span class="math inline">\(\sigma_1^2 &lt; \sigma_2^2\)</span> and <span class="math inline">\(\sigma_1^2 &gt; \sigma_2^2\)</span> are, respectively, <span class="math inline">\(f &lt; f_{1-\alpha,v_1,v_2}\)</span> and <span class="math inline">\(f&gt; f_{\alpha,v_1,v_2}\)</span></li>
+</ul>
+<div id="variance-test-practice" class="practice-quiz">
+<h4 class="anchored">
+Practice: Inference for Two Variances
+</h4>
+<p>
+Suppose we want to test whether two population variances are equal. Assume that both populations are normally distributed.
+</p>
+<div class="quiz-question" data-answer="c">
+<p>
+<strong>1.</strong> Which distribution should we use for the hypothesis test?
+</p>
+<label><input type="radio" name="var-q1" value="a"> a) Normal distribution</label><br> <label><input type="radio" name="var-q1" value="b"> b) Chi-squared distribution</label><br> <label><input type="radio" name="var-q1" value="c"> c) F distribution</label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+An F-test is used to compare the variances of two normally distributed populations.
+</p>
+</div>
+<div class="quiz-question" data-answer="a">
+<p>
+<strong>2.</strong> Which hypotheses are appropriate for testing whether the two population variances are equal?
+</p>
+<label><input type="radio" name="var-q2" value="a"> a) <span class="math inline">\(H_0: \sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(H_1: \sigma_1^2\ne\sigma_2^2\)</span></label><br> <label><input type="radio" name="var-q2" value="b"> b) <span class="math inline">\(H_0: \sigma_1^2\ne\sigma_2^2\)</span>, <span class="math inline">\(H_1: \sigma_1^2=\sigma_2^2\)</span></label><br> <label><input type="radio" name="var-q2" value="c"> c) <span class="math inline">\(H_0: \sigma_1^2=0\)</span>, <span class="math inline">\(H_1: \sigma_2^2=0\)</span></label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+Equality of the two variances is the null hypothesis. The two-sided alternative states that the variances are different.
+</p>
+</div>
+<div class="quiz-question" data-answer="c">
+<p>
+<strong>3.</strong> If the p-value is 0.03245, what should we conclude?
+</p>
+<label><input type="radio" name="var-q3" value="a"> a) Reject <span class="math inline">\(H_0\)</span></label><br> <label><input type="radio" name="var-q3" value="b"> b) Fail to reject <span class="math inline">\(H_0\)</span></label><br> <label><input type="radio" name="var-q3" value="c"> c) It depends on the significance level <span class="math inline">\(\alpha\)</span></label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+We must compare the p-value with <span class="math inline">\(\alpha\)</span>. For example, we would reject <span class="math inline">\(H_0\)</span> at <span class="math inline">\(\alpha=0.05\)</span>, but fail to reject <span class="math inline">\(H_0\)</span> at <span class="math inline">\(\alpha=0.01\)</span>.
+</p>
+</div>
+<div class="quiz-question" data-answer="b">
+<p>
+<strong>4.</strong> Suppose <span class="math inline">\(\alpha=0.01\)</span>. Let <span class="math inline">\(f\)</span> denote the F-statistic. What is the critical region for a two-sided test?
+</p>
+<label><input type="radio" name="var-q4" value="a"> a) <span class="math inline">\(f &lt; f_{0.005}\)</span> or <span class="math inline">\(f &gt; f_{0.995}\)</span></label><br> <label><input type="radio" name="var-q4" value="b"> b) <span class="math inline">\(f &lt; f_{0.995}\)</span> or <span class="math inline">\(f &gt; f_{0.005}\)</span></label><br> <label><input type="radio" name="var-q4" value="c"> c) <span class="math inline">\(f &lt; f_{0.01}\)</span> or <span class="math inline">\(f &gt; f_{0.99}\)</span></label>
+<p class="feedback">
+</p>
+<p class="explanation" style="display:none;">
+Using the right-tail critical-value notation from this handout, a two-sided test with <span class="math inline">\(\alpha=0.01\)</span> places <span class="math inline">\(\alpha/2=0.005\)</span> in each tail. Therefore, the critical region is <span class="math inline">\(f &lt; f_{0.995}\)</span> or <span class="math inline">\(f &gt; f_{0.005}\)</span>.
+</p>
+</div>
+<button type="button" class="check-btn">
+Check Answers
+</button>
+<button type="button" class="reset-btn">
+Reset
+</button>
+</div>
+<p><strong>Practice in R</strong>: Let <span class="math inline">\(\alpha = 0.01\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">19.8</span>,<span class="fl">12.7</span>,<span class="fl">13.2</span>,<span class="fl">16.9</span>,<span class="fl">10.6</span>,<span class="fl">18.8</span>,<span class="fl">11.1</span> ,<span class="fl">14.3</span>,<span class="fl">17.0</span>,<span class="fl">12.5</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">24.9</span>,<span class="fl">22.8</span>,<span class="fl">23.6</span>,<span class="fl">22.1</span>,<span class="fl">20.4</span>,<span class="fl">21.6</span>,<span class="fl">21.8</span> ,<span class="fl">22.5</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(sample1,sample2,<span class="at">alternative =</span> <span class="st">"two.sided"</span>,<span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  sample1 and sample2
+F = 5.6574, num df = 9, denom df = 7, p-value = 0.03245
+alternative hypothesis: true ratio of variances is not equal to 1
+99 percent confidence interval:
+  0.6645001 38.9509280
+sample estimates:
+ratio of variances 
+          5.657436 </code></pre>
+</div>
+</div>
+<p>When we let <span class="math inline">\(\alpha = 0.01\)</span>, we should not reject the null hypothesis. However, if <span class="math inline">\(\alpha = 0.05\)</span>, we should reject the null hypothesis.</p>
+<section id="one-comprehensive-example" class="level3">
+<h3 class="anchored" data-anchor-id="one-comprehensive-example">One Comprehensive Example</h3>
+<p>Let’s play with a data set <code>ToothGrowth</code>. We want to investigate whether the mean of <code>len</code> is the same for the two levels of <code>supp</code>. We assume that <code>len</code> follows an approximately normal distribution within each group. However, we do not know whether the two groups have equal variances. Let’s see what we can do.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ToothGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   len supp dose
+1  4.2   VC  0.5
+2 11.5   VC  0.5
+3  7.3   VC  0.5
+4  5.8   VC  0.5
+5  6.4   VC  0.5
+6 10.0   VC  0.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ToothGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      len        supp         dose      
+ Min.   : 4.20   OJ:30   Min.   :0.500  
+ 1st Qu.:13.07   VC:30   1st Qu.:0.500  
+ Median :19.25           Median :1.000  
+ Mean   :18.81           Mean   :1.167  
+ 3rd Qu.:25.27           3rd Qu.:2.000  
+ Max.   :33.90           Max.   :2.000  </code></pre>
+</div>
+</div>
+<p>Before conducting hypothesis testing, let’s do a visualization for the data.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ToothGrowth) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> len, <span class="at">y =</span> dose, <span class="at">colour =</span> supp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on the plot, <code>len</code> appears to increase as <code>dose</code> increases. We cannot see a clear relationship between <code>len</code> and <code>supp</code>, so let’s try a <code>boxplot</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ToothGrowth) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> supp, <span class="at">y =</span> len))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week08_statistical_inference_on_variances_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on the boxplot, we may conjecture that the means and variances of <code>len</code> differ between the two groups. Let’s do an <span class="math inline">\(F\)</span>-test first. Consider <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+H_0: \sigma_{OJ}^2 = \sigma_{VC}^2, \\
+H_1:  \sigma_{OJ}^2 \ne \sigma_{VC}^2
+\end{align*}\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(len <span class="sc">~</span> supp, <span class="at">data =</span> ToothGrowth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  len by supp
+F = 0.6386, num df = 29, denom df = 29, p-value = 0.2331
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.3039488 1.3416857
+sample estimates:
+ratio of variances 
+         0.6385951 </code></pre>
+</div>
+</div>
+<section id="in-class-exercise-t-test-based-on-the-result-of-f-test" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-t-test-based-on-the-result-of-f-test">In-Class Exercise: T-test based on the result of F-test</h4>
+<ol type="1">
+<li><p>Will you reject <span class="math inline">\(H_0\)</span> or not? Why?</p></li>
+<li><p>Based on the result of F test, do a hypothesis testing for the mean of <code>len</code> between two <code>supp</code>. What is your conclusion?</p></li>
+</ol>
+</section>
+<section id="in-class-exercise-hypothesis-test-for-two-means" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-hypothesis-test-for-two-means">In-Class Exercise: Hypothesis Test for two means</h4>
+<p>We want to investigate the sepal lengths of two species of Iris, <code>setosa</code> and <code>virginica</code>. We conjecture that the mean sepal length of <code>virginica</code> is greater than that of <code>setosa</code>. Conduct a hypothesis test at a significance level of <span class="math inline">\(\alpha=0.05\)</span>. Determine whether the data provide sufficient evidence to support this conjecture.</p>
+</section>
+</section>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions:</h2>
+<ol type="1">
+<li><p><span class="math inline">\(\chi^2\)</span> distribution is used for sample variance; <span class="math inline">\(F\)</span> distribution is used for the ratio of two variances.</p></li>
+<li><p>To estimate <span class="math inline">\(\sigma^2\)</span> for normal distributions, we need <span class="math inline">\(\chi^2\)</span> distribution; To estimate <span class="math inline">\(\sigma_1^2/\sigma^2_2\)</span>, we need <span class="math inline">\(F\)</span>-distribution.</p></li>
+<li><p>We can use <code>var.test()</code> to test whether two population variances are equal. Based on the result of the F-test, we can assess whether the equal-variance assumption is reasonable and choose the appropriate setting for <code>var.equal</code> in <code>t.test()</code>.</p></li>
+</ol>
+<script>
+document.querySelectorAll('.practice-quiz').forEach(function(quiz) {
+
+  quiz.querySelector('.check-btn').addEventListener('click', function() {
+    quiz.querySelectorAll('.quiz-question').forEach(function(question) {
+
+      const selected = question.querySelector('input[type="radio"]:checked');
+      const feedback = question.querySelector('.feedback');
+      const explanation = question.querySelector('.explanation');
+      const correctAnswer = question.dataset.answer;
+
+      if (!selected) {
+        feedback.textContent = 'Please select an answer.';
+        feedback.style.color = '#b26a00';
+        explanation.style.display = 'none';
+      } else if (selected.value === correctAnswer) {
+        feedback.textContent = '✓ Correct!';
+        feedback.style.color = 'green';
+        explanation.style.display = 'block';
+      } else {
+        feedback.textContent = '✗ Incorrect. Try again.';
+        feedback.style.color = 'red';
+        explanation.style.display = 'block';
+      }
+    });
+  });
+
+  quiz.querySelector('.reset-btn').addEventListener('click', function() {
+    quiz.querySelectorAll('input[type="radio"]').forEach(function(input) {
+      input.checked = false;
+    });
+
+    quiz.querySelectorAll('.feedback').forEach(function(feedback) {
+      feedback.textContent = '';
+    });
+
+    quiz.querySelectorAll('.explanation').forEach(function(explanation) {
+      explanation.style.display = 'none';
+    });
+  });
+
+});
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
