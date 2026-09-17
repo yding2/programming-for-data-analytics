@@ -139,6 +139,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -205,27 +206,63 @@ window.Quarto = {
     <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
  <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
   </li>  
+        <li class="dropdown-header">─────── Week 6 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
  <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 7 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week07_hypothesis_test_on_means.html">
- <span class="dropdown-text">Week 7: Hypothesis Testing on Mean(s)</span></a>
+ <span class="dropdown-text">Week 6: Hypothesis Testing on Mean(s)</span></a>
   </li>  
+        <li class="dropdown-header">─────── Week 7 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week07_hypothesis_tests_on_proportions.html">
  <span class="dropdown-text">Week 7: Inference on Proportion(s)</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 8 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week08_statistical_inference_on_variances.html">
- <span class="dropdown-text">Week 8: Inference on Variances(s)</span></a>
+ <span class="dropdown-text">Week 7: Inference on Variances(s)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../source/week08_hypothesis_testing.html">
- <span class="dropdown-text">Week 8: Hypothesis Testing Jupyter Notebook</span></a>
+ <span class="dropdown-text">Week 7: Hypothesis Testing Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 9 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9: Association between Variables</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
+ <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
+ <span class="dropdown-text">Week 10: Simple Linear Regression</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week11_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 12 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week12_subset_selection.html">
+ <span class="dropdown-text">Week 12: Subset Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_interaction_terms.html">
+ <span class="dropdown-text">Week 12: Other Considerations in the Regression Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_nonparametric_tests.html">
+ <span class="dropdown-text">Week 12: NonParametric Tests</span></a>
   </li>  
     </ul>
   </li>
@@ -357,7 +394,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># display the results</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>coinToss</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 1 0 0 1 1 0 0 1 1</code></pre>
+<pre><code> [1] 1 0 1 0 1 0 0 0 0 1</code></pre>
 </div>
 </div>
 <p>We can use <code>bar plot</code> to show the frequency of each value in a categorical/discrete variable.</p>
@@ -376,7 +413,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
+<pre><code>[1] 0.4</code></pre>
 </div>
 </div>
 <p><strong>Question:</strong> What happened if we increase the sample size?</p>
@@ -400,7 +437,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.41</code></pre>
+<pre><code>[1] 0.39</code></pre>
 </div>
 </div>
 <p>Let’s try <span class="math inline">\(n = 10,000\)</span>.</p>
@@ -423,7 +460,7 @@ P(X = x) &amp; 1-p &amp; p  \\
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">mean</span>(coinToss)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>phat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5069</code></pre>
+<pre><code>[1] 0.5017</code></pre>
 </div>
 </div>
 <p><strong>Question</strong>: What can we learn from the experiment?</p>

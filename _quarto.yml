@@ -41,22 +41,56 @@ website:
           - text: "Week 5: Sampling Distribution of Sample Mean(s)"
             href: source/week05_sampling_distribution_of_sample_mean(s).Rmd
 
+          - text: "─────── Week 6 ───────"
+
           - text: "Week 6: Estimation on Mean(s)"
-            href: source/week06_estimation_on_means.Rmd 
+            href: source/week06_estimation_on_means.Rmd
 
-          - text: "─────── Week 7 ───────"
-          - text: "Week 7: Hypothesis Testing on Mean(s)"
-            href: source/week07_hypothesis_test_on_means.Rmd   
-          
+          - text: "Week 6: Hypothesis Testing on Mean(s)"
+            href: source/week07_hypothesis_test_on_means.Rmd    
+
+          - text: "─────── Week 7 ───────" 
+
           - text: "Week 7: Inference on Proportion(s)"
-            href: source/week07_hypothesis_tests_on_proportions.Rmd 
+            href: source/week07_hypothesis_tests_on_proportions.Rmd
+        
+          - text: "Week 7: Inference on Variances(s)"
+            href: source/week08_statistical_inference_on_variances.Rmd
 
-          - text: "─────── Week 8 ───────"
-          - text: "Week 8: Inference on Variances(s)"
-            href: source/week08_statistical_inference_on_variances.Rmd  
+          - text: "Week 7: Hypothesis Testing Jupyter Notebook"
+            href: source/week08_hypothesis_testing.ipynb  
 
-          - text: "Week 8: Hypothesis Testing Jupyter Notebook"
-            href: source/week08_hypothesis_testing.ipynb 
+          - text: "─────── Week 9 ───────" 
+
+          - text: "Week 9: Association between Variables"
+            href: source/week09_association.Rmd
+        
+          - text: "─────── Week 10 ───────"  
+
+          - text: "Week 10: Introduction to Statistical Learning"
+            href: source/week10_intro_to_statistical_learning.Rmd
+
+          - text: "Week 10: Simple Linear Regression"
+            href: source/week10_simple_linear_regression.Rmd
+
+          - text: "─────── Week 11 ───────"  
+
+          - text: "Week 11: Multiple Linear Regression"
+            href: source/week11_multiple_linear_regression.Rmd
+
+          - text: "Week 11: Multiple Linear Regression Jupyter Notebook"
+            href: source/week11_linear_regression.ipynb
+
+          - text: "─────── Week 12 ───────"  
+
+          - text: "Week 12: Subset Selection"
+            href: source/week12_subset_selection.Rmd
+
+          - text: "Week 12: Other Considerations in the Regression Model"
+            href: source/week12_interaction_terms.Rmd  
+
+          - text: "Week 12: NonParametric Tests"
+            href: source/week12_nonparametric_tests.Rmd   
       
       - text: "Homework"
         menu:
@@ -78,3 +112,4 @@ format:
   html:
     theme: cosmo
     toc: true
+    css: styles.css

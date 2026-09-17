@@ -109,7 +109,8 @@ the interval $(\bar{X} -\frac{\sigma}{\sqrt{n} }z_{\alpha/2}, \bar{X} +\frac{\si
 Suppose confidence is 95%, we know $\alpha = 1-95\%  = 0.05$, that is $\alpha/2 = 0.025$. How to find $z_{\alpha/2}$?
 
 ```{r}
-z_0.025 <- qnorm(0.975) # why?
+alpha <- 0.05
+z_0.025 <- qnorm(1-alpha/2) # why?
 z_0.025
 p<-pnorm(z_0.025) - pnorm(-z_0.025)
 p

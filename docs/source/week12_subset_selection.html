@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 12: Subsect Selection – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 6 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_test_on_means.html">
+ <span class="dropdown-text">Week 6: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 7 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_tests_on_proportions.html">
+ <span class="dropdown-text">Week 7: Inference on Proportion(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_statistical_inference_on_variances.html">
+ <span class="dropdown-text">Week 7: Inference on Variances(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_hypothesis_testing.html">
+ <span class="dropdown-text">Week 7: Hypothesis Testing Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 9 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9: Association between Variables</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
+ <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
+ <span class="dropdown-text">Week 10: Simple Linear Regression</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week11_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 12 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week12_subset_selection.html">
+ <span class="dropdown-text">Week 12: Subset Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_interaction_terms.html">
+ <span class="dropdown-text">Week 12: Other Considerations in the Regression Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_nonparametric_tests.html">
+ <span class="dropdown-text">Week 12: NonParametric Tests</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw02_Solution.html">
+ <span class="dropdown-text">Homework 2 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw03.html">
+ <span class="dropdown-text">Homework 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#how-to-choose-the-important-variables" id="toc-how-to-choose-the-important-variables" class="nav-link" data-scroll-target="#how-to-choose-the-important-variables">How to choose the important variables?</a>
+  <ul class="collapse">
+  <li><a href="#forward-selection" id="toc-forward-selection" class="nav-link" data-scroll-target="#forward-selection">Forward Selection</a></li>
+  <li><a href="#in-calss-exercise-forward-selection" id="toc-in-calss-exercise-forward-selection" class="nav-link" data-scroll-target="#in-calss-exercise-forward-selection">In-Calss Exercise: Forward Selection</a></li>
+  <li><a href="#in-calss-exercise-backward-selection" id="toc-in-calss-exercise-backward-selection" class="nav-link" data-scroll-target="#in-calss-exercise-backward-selection">In-Calss Exercise: Backward Selection</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 12: Subsect Selection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ol type="1">
+<li><p>Chapter 3 of the textbook Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani, <em>An Introduction to Statistical Learning: with Applications in R</em>.</p></li>
+<li><p>Chapter 11 of the textbook Chantal D. Larose and Daniel T. Larose <em>Data Science Using Python and R</em>.</p></li>
+</ol>
+</section>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
+<ul>
+<li>Know how to use <code>stepAIC</code> to do subset selection (Forward/Backward Selection)</li>
+</ul>
+</section>
+<section id="how-to-choose-the-important-variables" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-choose-the-important-variables">How to choose the important variables?</h2>
+<p>The most direct approach is called <strong>all subsets</strong> or <strong>best subsets</strong> regression: we compute the least squares fit for all possible subsets and then choose between them based on some criterion that balances training error with model size.</p>
+<p>However, we often can’t examine all possible models, since they are <span class="math inline">\(2^p\)</span> of them; for example when <span class="math inline">\(p = 40\)</span> there are over a billion models! Instead we need an automated approach that searches through a subset of them. We discuss two commonly use approaches next.</p>
+<section id="forward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="forward-selection">Forward Selection</h3>
+<ul>
+<li>Begin with the <strong>null model</strong> — a model that contains an intercept but no predictors.</li>
+<li>Fit <span class="math inline">\(p\)</span> simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
+<li>Add to that model the variable that results in the lowest RSS amongst all two-variable models.</li>
+<li>Continue until some stopping rule is satisfied, for example when all remaining variables have a <strong>p-value above some threshold</strong>.</li>
+</ul>
+<p><strong>Revisit <code>Auto</code> data set</strong></p>
+<p>To run stepwise regression, you first need to install and open the MASS package.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Auto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg          cylinders      displacement     horsepower        weight    
+ Min.   : 9.00   Min.   :3.000   Min.   : 68.0   Min.   : 46.0   Min.   :1613  
+ 1st Qu.:17.00   1st Qu.:4.000   1st Qu.:105.0   1st Qu.: 75.0   1st Qu.:2225  
+ Median :22.75   Median :4.000   Median :151.0   Median : 93.5   Median :2804  
+ Mean   :23.45   Mean   :5.472   Mean   :194.4   Mean   :104.5   Mean   :2978  
+ 3rd Qu.:29.00   3rd Qu.:8.000   3rd Qu.:275.8   3rd Qu.:126.0   3rd Qu.:3615  
+ Max.   :46.60   Max.   :8.000   Max.   :455.0   Max.   :230.0   Max.   :5140  
+                                                                               
+  acceleration        year           origin                      name    
+ Min.   : 8.00   Min.   :70.00   Min.   :1.000   amc matador       :  5  
+ 1st Qu.:13.78   1st Qu.:73.00   1st Qu.:1.000   ford pinto        :  5  
+ Median :15.50   Median :76.00   Median :1.000   toyota corolla    :  5  
+ Mean   :15.54   Mean   :75.98   Mean   :1.577   amc gremlin       :  4  
+ 3rd Qu.:17.02   3rd Qu.:79.00   3rd Qu.:2.000   amc hornet        :  4  
+ Max.   :24.80   Max.   :82.00   Max.   :3.000   chevrolet chevette:  4  
+                                                 (Other)           :365  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(Auto), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>AutoTraining <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">1</span>,]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>AutoTest <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">2</span>,]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a null model </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>intercept_only <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a full model</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>all <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># perform forward step-wise regression</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'forward'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=1251.57
+mpg ~ 1
+
+               Df Sum of Sq     RSS     AIC
++ weight        1   12596.2  5751.4  899.75
++ displacement  1   11657.1  6690.5  945.88
++ horsepower    1   11264.9  7082.7  963.26
++ cylinders     1   10660.2  7687.4  988.24
++ year          1    5866.9 12480.7 1136.05
++ origin        1    5778.4 12569.2 1138.20
++ acceleration  1    3568.7 14778.9 1187.60
+&lt;none&gt;                      18347.6 1251.57
+
+Step:  AIC=899.75
+mpg ~ weight
+
+               Df Sum of Sq    RSS    AIC
++ year          1   2253.71 3497.7 750.06
++ horsepower    1    352.97 5398.4 882.43
++ acceleration  1    256.28 5495.1 887.85
++ origin        1    151.55 5599.8 893.61
++ displacement  1    116.35 5635.0 895.52
++ cylinders     1     38.83 5712.6 899.68
+&lt;none&gt;                      5751.4 899.75
+
+Step:  AIC=750.06
+mpg ~ weight + year
+
+               Df Sum of Sq    RSS    AIC
++ origin        1   115.825 3381.9 741.79
++ acceleration  1    44.589 3453.1 748.15
+&lt;none&gt;                      3497.7 750.06
++ horsepower    1    14.785 3482.9 750.77
++ cylinders     1     0.575 3497.1 752.01
++ displacement  1     0.018 3497.7 752.06
+
+Step:  AIC=741.79
+mpg ~ weight + year + origin
+
+               Df Sum of Sq    RSS    AIC
++ acceleration  1    49.537 3332.3 739.29
++ horsepower    1    27.506 3354.4 741.30
+&lt;none&gt;                      3381.9 741.79
++ displacement  1     7.686 3374.2 743.10
++ cylinders     1     0.531 3381.3 743.74
+
+Step:  AIC=739.29
+mpg ~ weight + year + origin + acceleration
+
+               Df Sum of Sq    RSS    AIC
++ displacement  1    50.967 3281.4 736.59
+&lt;none&gt;                      3332.3 739.29
++ cylinders     1    12.428 3319.9 740.15
++ horsepower    1     0.094 3332.2 741.28
+
+Step:  AIC=736.59
+mpg ~ weight + year + origin + acceleration + displacement
+
+             Df Sum of Sq    RSS    AIC
+&lt;none&gt;                    3281.4 736.59
++ horsepower  1    7.8088 3273.6 737.86
++ cylinders   1    2.7383 3278.6 738.33</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view results of forward stepwise regression</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>forward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Stepwise Model Path 
+Analysis of Deviance Table
+
+Initial Model:
+mpg ~ 1
+
+Final Model:
+mpg ~ weight + year + origin + acceleration + displacement
+
+            Step Df    Deviance Resid. Df Resid. Dev       AIC
+1                                     304  18347.571 1251.5669
+2       + weight  1 12596.17727       303   5751.394  899.7502
+3         + year  1  2253.70535       302   3497.689  750.0615
+4       + origin  1   115.82493       301   3381.864  741.7905
+5 + acceleration  1    49.53697       300   3332.327  739.2899
+6 + displacement  1    50.96732       299   3281.360  736.5889</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view final model</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(forward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ weight + year + origin + acceleration + displacement, 
+    data = AutoTraining[, 1:8])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.7538 -2.1102 -0.0592  1.9001 11.1860 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -2.147e+01  4.567e+00  -4.701 3.97e-06 ***
+weight       -7.157e-03  6.267e-04 -11.420  &lt; 2e-16 ***
+year          7.628e-01  5.579e-02  13.672  &lt; 2e-16 ***
+origin        1.162e+00  3.039e-01   3.824  0.00016 ***
+acceleration  2.488e-01  8.557e-02   2.908  0.00391 ** 
+displacement  1.274e-02  5.913e-03   2.155  0.03196 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.313 on 299 degrees of freedom
+Multiple R-squared:  0.8212,    Adjusted R-squared:  0.8182 
+F-statistic: 274.6 on 5 and 299 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Check the <code>MAE</code> and <code>MSE</code></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MLmetrics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    Recall</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ypred_forward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> forward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.652987</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.92359</code></pre>
+</div>
+</div>
+</section>
+<section id="in-calss-exercise-forward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="in-calss-exercise-forward-selection">In-Calss Exercise: Forward Selection</h3>
+<ul>
+<li>Please construct a forward selection to predict <code>salary</code> in the <code>Salaries</code> data set and interpret the model.</li>
+</ul>
+<section id="backward-selection" class="level4">
+<h4 class="anchored" data-anchor-id="backward-selection">Backward Selection</h4>
+<ul>
+<li>Start with <strong>all variables</strong> in the model.</li>
+<li>Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.</li>
+<li>The new <span class="math inline">\((p-1)\)</span>-variable model is fit, and the variable with the largest p-value is removed.</li>
+<li>Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.</li>
+</ul>
+<p>Similarly, we use the same function <code>stepAIC</code> from <code>MASS</code> package</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>backward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (all, <span class="at">direction=</span><span class="st">'backward'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=739.5
+mpg ~ cylinders + displacement + horsepower + weight + acceleration + 
+    year + origin
+
+               Df Sum of Sq    RSS    AIC
+- cylinders     1      3.89 3273.6 737.86
+- horsepower    1      8.96 3278.6 738.33
+&lt;none&gt;                      3269.7 739.50
+- acceleration  1     32.89 3302.5 740.55
+- displacement  1     49.59 3319.2 742.09
+- origin        1    171.55 3441.2 753.10
+- weight        1   1008.72 4278.4 819.51
+- year          1   1887.26 5156.9 876.47
+
+Step:  AIC=737.86
+mpg ~ displacement + horsepower + weight + acceleration + year + 
+    origin
+
+               Df Sum of Sq    RSS    AIC
+- horsepower    1      7.81 3281.4 736.59
+&lt;none&gt;                      3273.6 737.86
+- acceleration  1     34.98 3308.5 739.10
+- displacement  1     58.68 3332.2 741.28
+- origin        1    168.13 3441.7 751.14
+- weight        1   1054.85 4328.4 821.06
+- year          1   1883.37 5156.9 874.47
+
+Step:  AIC=736.59
+mpg ~ displacement + weight + acceleration + year + origin
+
+               Df Sum of Sq    RSS    AIC
+&lt;none&gt;                      3281.4 736.59
+- displacement  1     50.97 3332.3 739.29
+- acceleration  1     92.82 3374.2 743.10
+- origin        1    160.52 3441.9 749.16
+- weight        1   1431.15 4712.5 844.99
+- year          1   2051.29 5332.7 882.69</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>backward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Stepwise Model Path 
+Analysis of Deviance Table
+
+Initial Model:
+mpg ~ cylinders + displacement + horsepower + weight + acceleration + 
+    year + origin
+
+Final Model:
+mpg ~ displacement + weight + acceleration + year + origin
+
+          Step Df Deviance Resid. Df Resid. Dev      AIC
+1                                297   3269.657 739.4992
+2  - cylinders  1 3.894152       298   3273.551 737.8622
+3 - horsepower  1 7.808833       299   3281.360 736.5889</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(backward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ displacement + weight + acceleration + year + 
+    origin, data = AutoTraining[, 1:8])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.7538 -2.1102 -0.0592  1.9001 11.1860 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -2.147e+01  4.567e+00  -4.701 3.97e-06 ***
+displacement  1.274e-02  5.913e-03   2.155  0.03196 *  
+weight       -7.157e-03  6.267e-04 -11.420  &lt; 2e-16 ***
+acceleration  2.488e-01  8.557e-02   2.908  0.00391 ** 
+year          7.628e-01  5.579e-02  13.672  &lt; 2e-16 ***
+origin        1.162e+00  3.039e-01   3.824  0.00016 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.313 on 299 degrees of freedom
+Multiple R-squared:  0.8212,    Adjusted R-squared:  0.8182 
+F-statistic: 274.6 on 5 and 299 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ypred_backward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> backward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.652987</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.92359</code></pre>
+</div>
+</div>
+<p>We can also do <strong>both-direction</strong> step wise selection</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'both'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all),<span class="at">trace =</span> <span class="dv">0</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>both<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Stepwise Model Path 
+Analysis of Deviance Table
+
+Initial Model:
+mpg ~ 1
+
+Final Model:
+mpg ~ weight + year + origin + acceleration + displacement
+
+            Step Df    Deviance Resid. Df Resid. Dev       AIC
+1                                     304  18347.571 1251.5669
+2       + weight  1 12596.17727       303   5751.394  899.7502
+3         + year  1  2253.70535       302   3497.689  750.0615
+4       + origin  1   115.82493       301   3381.864  741.7905
+5 + acceleration  1    49.53697       300   3332.327  739.2899
+6 + displacement  1    50.96732       299   3281.360  736.5889</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ weight + year + origin + acceleration + displacement, 
+    data = AutoTraining[, 1:8])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.7538 -2.1102 -0.0592  1.9001 11.1860 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -2.147e+01  4.567e+00  -4.701 3.97e-06 ***
+weight       -7.157e-03  6.267e-04 -11.420  &lt; 2e-16 ***
+year          7.628e-01  5.579e-02  13.672  &lt; 2e-16 ***
+origin        1.162e+00  3.039e-01   3.824  0.00016 ***
+acceleration  2.488e-01  8.557e-02   2.908  0.00391 ** 
+displacement  1.274e-02  5.913e-03   2.155  0.03196 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.313 on 299 degrees of freedom
+Multiple R-squared:  0.8212,    Adjusted R-squared:  0.8182 
+F-statistic: 274.6 on 5 and 299 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ypred_both <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> both, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.652987</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.92359</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="in-calss-exercise-backward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="in-calss-exercise-backward-selection">In-Calss Exercise: Backward Selection</h3>
+<ul>
+<li><p>Please construct a backward selection to predict <code>salary</code> in the <code>Salaries</code> data set and interpret the model.</p></li>
+<li><p>Compare these two models. Is there any difference?</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

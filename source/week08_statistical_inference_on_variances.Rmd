@@ -1,5 +1,5 @@
 ---
-title: "Week 8: Statistical Inference on Variance(s)"
+title: "Week 7: Statistical Inference on Variance(s)"
 output: html_document
 ---
 

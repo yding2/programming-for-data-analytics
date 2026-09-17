@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 12: Other Considerations in the Regression Model – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 6 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_test_on_means.html">
+ <span class="dropdown-text">Week 6: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 7 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_tests_on_proportions.html">
+ <span class="dropdown-text">Week 7: Inference on Proportion(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_statistical_inference_on_variances.html">
+ <span class="dropdown-text">Week 7: Inference on Variances(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_hypothesis_testing.html">
+ <span class="dropdown-text">Week 7: Hypothesis Testing Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 9 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9: Association between Variables</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
+ <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
+ <span class="dropdown-text">Week 10: Simple Linear Regression</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week11_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 12 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week12_subset_selection.html">
+ <span class="dropdown-text">Week 12: Subset Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_interaction_terms.html">
+ <span class="dropdown-text">Week 12: Other Considerations in the Regression Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_nonparametric_tests.html">
+ <span class="dropdown-text">Week 12: NonParametric Tests</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw02_Solution.html">
+ <span class="dropdown-text">Homework 2 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw03.html">
+ <span class="dropdown-text">Homework 3</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#package" id="toc-package" class="nav-link" data-scroll-target="#package">Package</a></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#extensions-of-the-linear-model" id="toc-extensions-of-the-linear-model" class="nav-link" data-scroll-target="#extensions-of-the-linear-model">Extensions of the linear model</a>
+  <ul class="collapse">
+  <li><a href="#assumption-1-additivity" id="toc-assumption-1-additivity" class="nav-link" data-scroll-target="#assumption-1-additivity">Assumption 1: additivity</a></li>
+  <li><a href="#assumption-2-linearity" id="toc-assumption-2-linearity" class="nav-link" data-scroll-target="#assumption-2-linearity">Assumption 2: linearity</a></li>
+  <li><a href="#removing-the-additive-assumption" id="toc-removing-the-additive-assumption" class="nav-link" data-scroll-target="#removing-the-additive-assumption">Removing the additive assumption</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation:</a></li>
+  <li><a href="#hierarchy-principle" id="toc-hierarchy-principle" class="nav-link" data-scroll-target="#hierarchy-principle">Hierarchy Principle</a></li>
+  <li><a href="#interaction-in-r" id="toc-interaction-in-r" class="nav-link" data-scroll-target="#interaction-in-r">Interaction in R</a></li>
+  </ul></li>
+  <li><a href="#potential-problems" id="toc-potential-problems" class="nav-link" data-scroll-target="#potential-problems">Potential problems</a>
+  <ul class="collapse">
+  <li><a href="#common-issues-and-problems" id="toc-common-issues-and-problems" class="nav-link" data-scroll-target="#common-issues-and-problems">Common issues and problems</a></li>
+  </ul></li>
+  <li><a href="#confidence-vs.-prediction-intervals" id="toc-confidence-vs.-prediction-intervals" class="nav-link" data-scroll-target="#confidence-vs.-prediction-intervals">Confidence vs.&nbsp;prediction intervals</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 12: Other Considerations in the Regression Model</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<ol type="1">
+<li><p>Chapter 3 of the textbook Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani, <em>An Introduction to Statistical Learning: with Applications in R</em>.</p></li>
+<li><p>Part of this lecture notes are extracted from Prof.&nbsp;Sonja Petrovic ITMD/ITMS 514 lecture notes.</p></li>
+</ol>
+</section>
+<section id="package" class="level2">
+<h2 class="anchored" data-anchor-id="package">Package</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ISLR) <span class="co">#Import ISLR</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ISLR</code></pre>
+</div>
+</div>
+</section>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
+<ul>
+<li>Extension of the Linear Models</li>
+<li>Confidence Interval V.S. Prediction Interval</li>
+</ul>
+</section>
+<section id="extensions-of-the-linear-model" class="level2">
+<h2 class="anchored" data-anchor-id="extensions-of-the-linear-model">Extensions of the linear model</h2>
+<blockquote class="blockquote">
+<p>What is wrong with the linear model? It works quite well!</p>
+</blockquote>
+<p>Yes – but sometimes the (restrictive) assumptions are violated in practice.</p>
+<section id="assumption-1-additivity" class="level3">
+<h3 class="anchored" data-anchor-id="assumption-1-additivity">Assumption 1: additivity</h3>
+<p>The relationship between the predictors and response is additive.</p>
+<ul>
+<li>effect of changes in a predictor <span class="math inline">\(X_j\)</span> on the response <span class="math inline">\(Y\)</span> is independent of the values of the other predictors.</li>
+</ul>
+</section>
+<section id="assumption-2-linearity" class="level3">
+<h3 class="anchored" data-anchor-id="assumption-2-linearity">Assumption 2: linearity</h3>
+<p>The relationship between the predictors and response is linear.</p>
+<ul>
+<li>the change in the response <span class="math inline">\(Y\)</span> due to a one-unit change in <span class="math inline">\(X_j\)</span> is constant, regardless of the value of <span class="math inline">\(X_j\)</span>.</li>
+</ul>
+</section>
+<section id="removing-the-additive-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="removing-the-additive-assumption">Removing the additive assumption</h3>
+<p>Previous analysis of <code>Advertising</code> data: both <code>TV</code> and <code>radio</code> seem associated with sales.</p>
+<ul>
+<li>The linear models that formed the basis for this conclusion: <span class="math display">\[sales=\beta_0+ \beta_1 TV + \beta_2 radio + \beta_3 newspaper +\epsilon\]</span></li>
+</ul>
+<p>The above model states that the average effect on sales of a one-unit increase in TV is always <span class="math inline">\(\beta_1,\)</span> regardless of the amount spent on radio. But suppose that spending money on radio advertising actually increases the effectiveness of TV advertising, so that the slope term for TV should increase as radio increases. In this situation, given a fixed budget of $100,000, spending half on radio and half on TV may increase sales more than allocating the entire amount to either TV or to radio.</p>
+<p>In marketing, this is known as a synergy effect, and in statistics it is referred to as an <strong>interaction effect</strong>.</p>
+<ul>
+<li>We will now explain how to augment this model by allowing interaction between <code>radio</code> and <code>TV</code> in predicting <code>sales</code>:</li>
+</ul>
+<p><span class="math display">\[\begin{align*}
+sales &amp; =\beta_0+\beta_1\times TV+\beta_2\times radio +\beta_3 \times (radio\times TV)+\epsilon\\
+&amp; = \beta_0+ (\beta_1+\beta_3\times radio)\times TV + \beta_2\times radio + \epsilon.
+\end{align*}\]</span></p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation:</h3>
+<ul>
+<li><span class="math inline">\(\beta_3\)</span> = increase in the effectiveness of TV advertising for a one unit increase in radio advertising (or vice-versa).</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/tableInteraction.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Interpretation</strong></p>
+<ul>
+<li>The results in this table suggests that interactions are important.</li>
+<li>The p-value for the interaction term TV <span class="math inline">\(\times\)</span> radio is extremely low, indicating that there is strong evidence for <span class="math inline">\(H_A : \beta_3\ne 0.\)</span></li>
+<li>The <span class="math inline">\(R^2\)</span> for the interaction model is 96.8%, compared to only 89.7% for the model that predicts sales using TV and radio without an interaction term.</li>
+</ul>
+</section>
+<section id="hierarchy-principle" class="level3">
+<h3 class="anchored" data-anchor-id="hierarchy-principle">Hierarchy Principle</h3>
+<p>Sometimes it is the case that an interaction term has a very small p-value, but the associated main effects (in this case, TV and radio) do not. <strong>If we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant.</strong></p>
+<p>The rationale for this principle is that interactions are hard to interpret in a model without main effects— their meaning is changed. Specifically, the interaction terms also contain main effects, if the model has no main effect terms.</p>
+<p>We can also have the interactions between qualitative and quantitative variables.</p>
+<p>Consider the <code>Credit</code> data set, and suppose that we wish to predict balance using <code>income</code> (quantitative) and <code>student</code> (qualitative).</p>
+<p>Without an interaction term, the model takes the form</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/woInterModel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With interactions, it takes the form</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/wInterModel.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the Credit data, the least squares lines are shown for prediction of balance from income for students and non-students. Left: The model was fit. There is no interaction between income and student. Right: The model was fit. There is an interaction term between income and student.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/interfig.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interaction-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="interaction-in-r">Interaction in R</h3>
+<p>Let’s revisit the <code>auto</code> data set. Here we want to build a model as follows.</p>
+<p><span class="math display">\[mpg = \beta_0 + \beta_1 \times horsepower + \beta_2 \times horsepower^2 + \epsilon\]</span></p>
+<p>How to do it in R?</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>horsepowerSquare <span class="ot">&lt;-</span> Auto<span class="sc">$</span>horsepower <span class="sc">*</span> Auto<span class="sc">$</span>horsepower</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>interModel1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span> horsepower <span class="sc">+</span> horsepowerSquare, Auto)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(interModel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ horsepower + horsepowerSquare, data = Auto)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-14.7135  -2.5943  -0.0859   2.2868  15.8961 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      56.9000997  1.8004268   31.60   &lt;2e-16 ***
+horsepower       -0.4661896  0.0311246  -14.98   &lt;2e-16 ***
+horsepowerSquare  0.0012305  0.0001221   10.08   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.374 on 389 degrees of freedom
+Multiple R-squared:  0.6876,    Adjusted R-squared:  0.686 
+F-statistic:   428 on 2 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Actually, if it is the interaction with two different features, we just need to use <code>*</code>. For example, we want to check the interactions between <code>horsepower</code> and <code>weight</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>interModel2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span> horsepower <span class="sc">*</span> weight, Auto)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(interModel2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ horsepower * weight, data = Auto)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-10.7725  -2.2074  -0.2708   1.9973  14.7314 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        6.356e+01  2.343e+00  27.127  &lt; 2e-16 ***
+horsepower        -2.508e-01  2.728e-02  -9.195  &lt; 2e-16 ***
+weight            -1.077e-02  7.738e-04 -13.921  &lt; 2e-16 ***
+horsepower:weight  5.355e-05  6.649e-06   8.054 9.93e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.93 on 388 degrees of freedom
+Multiple R-squared:  0.7484,    Adjusted R-squared:  0.7465 
+F-statistic: 384.8 on 3 and 388 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>Question</strong>: Why I don’t need to <code>+ horsepower + weight</code>?</p>
+<p>We can use the same way to construct interaction regression model with one numeric attribute and one categorical attribute.</p>
+<p><strong>Note</strong>: Only when these two features have interactions, our interactions model can lead to a better performance.</p>
+<section id="in-calss-exercise-interaction" class="level4">
+<h4 class="anchored" data-anchor-id="in-calss-exercise-interaction">In-Calss Exercise: Interaction</h4>
+<ul>
+<li><p>Split <code>Boston</code> data set into 80:20 as training and test. <strong>Please note you need <code>MASS</code> package</strong>.</p></li>
+<li><p>Please construct an interaction regression model of response <code>medv</code> with <code>crim</code> and <code>rm</code> for the <code>BostonTraining</code> data set.</p></li>
+<li><p>Predict <code>medv</code> in the <code>BostonTest</code> and calculate MAE and MSE.</p></li>
+<li><p>Please construct an interaction regression model of response <code>medv</code> with <code>lstat</code> and <code>rm</code> for the <code>BostonTraining</code> data set.</p></li>
+<li><p>Predict <code>medv</code> in the <code>BostonTest</code> and calculate MAE and MSE.</p></li>
+<li><p>Compare these two models.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="potential-problems" class="level2">
+<h2 class="anchored" data-anchor-id="potential-problems">Potential problems</h2>
+<section id="common-issues-and-problems" class="level3">
+<h3 class="anchored" data-anchor-id="common-issues-and-problems">Common issues and problems</h3>
+<ol type="1">
+<li>Non-linearity of the response-predictor relationships.</li>
+<li>Correlation of error terms.</li>
+<li>Non-constant variance of error terms.</li>
+<li>Outliers.</li>
+<li>High-leverage points. Reference: https://online.stat.psu.edu/stat462/node/170/</li>
+<li>Collinearity</li>
+</ol>
+<p>(You will learn to deal with these in another course that focuses more on using regression in your application domain.)</p>
+</section>
+</section>
+<section id="confidence-vs.-prediction-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-vs.-prediction-intervals">Confidence vs.&nbsp;prediction intervals</h2>
+<p><strong>Revisit <code>Auto</code> Example</strong></p>
+<ul>
+<li><code>Auto</code> data set, regression on <code>Y=mpg</code> vs.&nbsp;<code>X=horsepower</code>.</li>
+</ul>
+<pre><code>fitLm &lt;- lm(mpg ~ horsepower, data=Auto)</code></pre>
+<ul>
+<li>What is the predicted <code>mpg</code> associated with a <code>horsepower</code> of <span class="math inline">\(98\)</span>? What are the associated 95% confidence and prediction intervals?</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">horsepower =</span> <span class="dv">98</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitLm, new) <span class="co"># predicted mpg</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+24.46708 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitLm, new, <span class="at">interval=</span><span class="st">"confidence"</span>) <span class="co"># conf interval</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 24.46708 23.97308 24.96108</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fitLm, new, <span class="at">interval=</span><span class="st">"prediction"</span>) <span class="co"># pred interval</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit     lwr      upr
+1 24.46708 14.8094 34.12476</code></pre>
+</div>
+</div>
+<p>Three sorts of uncertainty associated with the prediction of <span class="math inline">\(Y\)</span> based on <span class="math inline">\(X_1,\dots,X_p\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\hat\beta_i\approx\beta_i\)</span>: least squares plane is <strong>an estimate</strong> for the true regression plane.
+<ul>
+<li>reducible error</li>
+</ul></li>
+<li>assuming a linear model for <span class="math inline">\(f(X)\)</span> is usually an approximation of reality
+<ul>
+<li>model bias [potential reducible error?]</li>
+<li>to operate here, we ignore this discrepancy</li>
+</ul></li>
+<li>even if we knew true <span class="math inline">\(\beta_i\)</span>, still no perfect knowledge of <span class="math inline">\(Y\)</span> because of random error <span class="math inline">\(\epsilon\)</span>
+<ul>
+<li>irreducible error</li>
+<li>how much will <span class="math inline">\(Y\)</span> vary from <span class="math inline">\(\hat Y\)</span>?</li>
+<li>we use <em>prediction intervals</em>. Always wider than confidence intervals.</li>
+</ul></li>
+</ul>
+<p><strong><code>Advertising</code> confidence</strong></p>
+<p><strong>Confidence interval</strong> Quantify the uncertainty surrounding the average sales over a large number of cities.</p>
+<p>For example:</p>
+<ul>
+<li>given that $100,000 is spent on TV advertising and</li>
+<li>$20,000 is spent on radio advertising in each city,</li>
+<li>the 95 % confidence interval is [10,985, 11,528].</li>
+<li>We interpret this to mean that 95 % of intervals of this form will contain the true value of <span class="math inline">\(f(X)\)</span>.</li>
+</ul>
+<p><strong><code>Advertising</code> prediction</strong></p>
+<p><strong>Prediction interval</strong> Can be used to quantify the uncertainty surrounding sales for a particular city.</p>
+<ul>
+<li>Given that $100,000 is spent on TV advertising and</li>
+<li>$20,000 is spent on radio advertising in that city</li>
+<li>the 95 % prediction interval is [7,930, 14,580].</li>
+<li>We interpret this to mean that 95 % of intervals of this form will contain the true value of Y for this city.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Note that both intervals are centered at 11,256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about sales for a given city in comparison to the average sales over many locations.</p>
+</blockquote>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

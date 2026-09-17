@@ -1,0 +1,125 @@
+---
+title: "Week 12: Subsect Selection"
+
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,comment = '', fig.align = 'center'  , out.width="80%"
+)
+knitr::include_graphics
+```
+
+
+## Reference
+1. Chapter 3 of the textbook Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani, 
+*An Introduction to Statistical Learning: with Applications in R*. 
+
+2. Chapter 11 of the textbook Chantal D. Larose
+and Daniel T. Larose
+*Data Science Using Python and R*. 
+
+## Objective
+
+- Know how to use `stepAIC` to do subset selection (Forward/Backward Selection)
+
+## How to choose the important variables?
+
+The most direct approach is called **all subsets** or **best subsets** regression: we compute the least squares fit for all possible subsets and then choose between them based on
+some criterion that balances training error with model size.
+
+However, we often can't examine all possible models, since
+they are $2^p$ of them; for example when $p = 40$ there are
+over a billion models! Instead we need an automated approach that searches through a subset of them. We discuss two commonly use approaches next.
+
+### Forward Selection
+
+* Begin with the **null model** --- a model that contains an
+intercept but no predictors.
+* Fit $p$ simple linear regressions and add to the null model the variable that results in the lowest RSS.
+* Add to that model the variable that results in the lowest RSS amongst all two-variable models.
+* Continue until some stopping rule is satisfied, for example when all remaining variables have a **p-value above some threshold**.
+
+**Revisit `Auto` data set**
+
+To run stepwise regression, you first need to install and open the MASS package.
+
+```{r}
+library(MASS)
+library(ISLR)
+data(Auto)
+summary(Auto)
+i <- sample(2, nrow(Auto), replace=TRUE, prob=c(0.8, 0.2))
+AutoTraining <- Auto[i==1,]
+AutoTest <- Auto[i==2,]
+# Create a null model 
+intercept_only <- lm(mpg ~ 1, data=AutoTraining[,1:8])
+# Create a full model
+all <- lm(mpg~., data=AutoTraining[,1:8])
+# perform forward step-wise regression
+forward <- stepAIC (intercept_only, direction='forward',scope = formula(all))
+# view results of forward stepwise regression
+forward$anova
+# view final model
+summary(forward)
+```
+
+Check the `MAE` and `MSE`
+
+```{r}
+library(MLmetrics)
+ypred_forward <-predict(object = forward, newdata = AutoTest[,1:8])
+MAE(y_pred = ypred_forward, y_true = AutoTest$mpg)
+MSE(y_pred = ypred_forward, y_true = AutoTest$mpg)
+```
+
+### In-Calss Exercise: Forward Selection
+
+* Please construct a forward selection to predict `salary` in the `Salaries` data set and interpret the model.
+
+
+
+#### Backward Selection
+* Start with **all variables** in the model.
+* Remove the variable with the largest p-value --- that is, the variable that is the least statistically significant.
+* The new $(p-1)$-variable model is fit, and the variable with the largest p-value is removed.
+* Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant
+p-value defined by some significance threshold.
+
+Similarly, we use the same function `stepAIC` from `MASS` package
+
+```{r}
+backward <- stepAIC (all, direction='backward')
+backward$anova
+summary(backward)
+#Get MAE and MSE
+ypred_backward <-predict(object = backward, newdata = AutoTest[,1:8])
+MAE(y_pred = ypred_backward, y_true = AutoTest$mpg)
+MSE(y_pred = ypred_backward, y_true = AutoTest$mpg)
+```
+
+
+
+We can also do **both-direction** step wise selection
+
+```{r}
+both <- stepAIC (intercept_only, direction='both',scope = formula(all),trace = 0)
+both$anova
+summary(both)
+#Get MAE and MSE
+ypred_both <-predict(object = both, newdata = AutoTest[,1:8])
+MAE(y_pred = ypred_both, y_true = AutoTest$mpg)
+MSE(y_pred = ypred_both, y_true = AutoTest$mpg)
+```
+
+
+### In-Calss Exercise: Backward Selection
+
+* Please construct a backward selection to predict `salary` in the `Salaries` data set and interpret the model.
+
+* Compare these two models. Is there any difference?
+
+
+
+
