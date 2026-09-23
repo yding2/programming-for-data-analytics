@@ -53,7 +53,7 @@ A **hypothesis test** is a method for evaluating a claim, or hypothesis, about a
 
 ### One mean
 
-For a numerical characteristic of a population, typically the **population mean** is of interest. If we know the population variance, theory-based inference methods for a mean are similar to the methods for a proportion, i.e., using the *standard normal distribution*. However, in general, the population variance is unknown. Therefore, the statistics tend to follow the **t-distribution** rather than the standard normal distribution.
+For a numerical characteristic of a population, we are often interested in the **population mean**. If the population variance is known, we can use the *standard normal distribution* for inference about the mean. In practice, the population variance is usually unknown and must be estimated from the sample. In that case, the standardized sample mean follows a **t-distribution** when the population is normally distributed.
 
 *Remark*:
 	The $t$-distribution can still be used even if the population distribution is not **normal**, as long as
@@ -214,7 +214,7 @@ data. Before releasing the app, the development team tests whether the mean
 absolute error of the calorie estimates is at most 100 calories, so the app
 is sufficiently accurate.
 
-They conduct a hypothesis test on the population mean error \(\mu\).
+They conduct a hypothesis test on the population mean error $\mu$.
 
 <div class="match-terms" id="type-errors-match">
 
@@ -401,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 ### Two means
 
-If we know the population variances, theory-based inference methods for a mean are similar to the methods for two proportions. However, in general, the population variance is unknown. We should consider the population variances are equal or not. The good thing is no matter the variances are equal or not, the $t$-statistic is the same. The difference is the degrees of freedom. 
+For inference about the difference between two population means, the population variances are generally unknown. We need to consider whether the population variances are equal. The good thing is that the $t$-statistic has the same form in either case; the difference lies in the degrees of freedom.
 
 #### Example 2. Comparison of two population means
 
@@ -467,6 +467,24 @@ t.test(Nitro,noNitro, var.equal = FALSE, conf.level = .95)
 ```
 
 In this example, both methods lead to the same conclusion: we reject $H_0$.
+
+If we want to check if the stem weight with nitrogen is higher, we should conduct the following hypothesis test.
+
+**Hypotheses**:
+
+\begin{align*}
+H_0: \mu_{NIT}  = \mu_{NON} ,\\
+H_1: \mu_{NIT} > \mu_{NON}.
+\end{align*}
+where the population means indicate mean weights.
+
+```{r}
+noNitro<- c(0.32,0.53 ,0.28, 0.37, 0.47, 0.43, 0.36, 0.42,0.38,0.43)
+Nitro<- c(0.26,0.43,0.47,0.49,0.52,0.75,0.79,0.86, 0.62,0.46)
+t.test(Nitro,noNitro, var.equal = FALSE, conf.level = .95,alternative = 'greater')
+```
+
+Here, p-value is less than $\alpha = 0.05$, we should reject the null hypothesis and the result supports the stem weight with nitrogen is higher.
 
 #### In-class Exercise: Tests on Two Means (Unequal Variance) 
 

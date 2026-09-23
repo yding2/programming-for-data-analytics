@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -400,11 +400,14 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="one-sample-signtest-in-r">One-Sample SignTest in R</h4>
 <p>We need <code>DescTools</code> package.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools) <span class="co">#import needed package</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">2.2</span>, <span class="fl">0.9</span>, <span class="fl">1.3</span>, <span class="fl">2.0</span>, <span class="fl">1.6</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">1.2</span>, <span class="fl">1.7</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mutilde0 <span class="ot">&lt;-</span> <span class="fl">1.8</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(x, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> mutilde0, <span class="at">conf.level =</span> <span class="dv">1</span><span class="sc">-</span>alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools) <span class="co">#import needed package</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'DescTools' was built under R version 4.5.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">2.2</span>, <span class="fl">0.9</span>, <span class="fl">1.3</span>, <span class="fl">2.0</span>, <span class="fl">1.6</span>, <span class="fl">1.8</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">1.2</span>, <span class="fl">1.7</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mutilde0 <span class="ot">&lt;-</span> <span class="fl">1.8</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(x, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> mutilde0, <span class="at">conf.level =</span> <span class="dv">1</span><span class="sc">-</span>alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-sample Sign-Test
@@ -421,8 +424,8 @@ median of the differences
 </div>
 <p><strong>Example 2</strong> A taxi company is trying to decide whether the use of radial tires instead of regular belted tires improves fuel economy. Sixteen cars are equipped with radial tires and driven over a prescribed test course. Without changing drivers, the same cars are then equipped with the regular belted tires and driven once again over the test course. The gasoline consumption, in kilometers per liter, is given in below. Can we conclude at the 0.05 level of significance that cars equipped with radial tires obtain better fuel economy than those equipped with regular belted tires?</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>RadialTires<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.2</span>,<span class="fl">4.7</span>,<span class="fl">6.6</span>,<span class="fl">7.0</span>,<span class="fl">6.7</span>,<span class="fl">4.5</span>, <span class="fl">5.7</span>, <span class="fl">6.0</span>,<span class="fl">7.4</span>,<span class="fl">4.9</span>,<span class="fl">6.1</span>,<span class="fl">5.2</span>,<span class="fl">5.7</span>,<span class="fl">6.9</span>,<span class="fl">6.8</span>,<span class="fl">4.9</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>BeltedTires<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.9</span>,<span class="fl">6.2</span>,<span class="fl">6.9</span>,<span class="fl">6.8</span>,<span class="fl">4.4</span>,<span class="fl">5.7</span>,<span class="fl">5.8</span>, <span class="fl">6.9</span>, <span class="fl">4.9</span>,<span class="fl">6.0</span>,<span class="fl">4.9</span>,<span class="fl">5.3</span>,<span class="fl">6.5</span>,<span class="fl">7.1</span>,<span class="fl">4.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>RadialTires<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.2</span>,<span class="fl">4.7</span>,<span class="fl">6.6</span>,<span class="fl">7.0</span>,<span class="fl">6.7</span>,<span class="fl">4.5</span>, <span class="fl">5.7</span>, <span class="fl">6.0</span>,<span class="fl">7.4</span>,<span class="fl">4.9</span>,<span class="fl">6.1</span>,<span class="fl">5.2</span>,<span class="fl">5.7</span>,<span class="fl">6.9</span>,<span class="fl">6.8</span>,<span class="fl">4.9</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>BeltedTires<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">4.9</span>,<span class="fl">6.2</span>,<span class="fl">6.9</span>,<span class="fl">6.8</span>,<span class="fl">4.4</span>,<span class="fl">5.7</span>,<span class="fl">5.8</span>, <span class="fl">6.9</span>, <span class="fl">4.9</span>,<span class="fl">6.0</span>,<span class="fl">4.9</span>,<span class="fl">5.3</span>,<span class="fl">6.5</span>,<span class="fl">7.1</span>,<span class="fl">4.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Hypotheses</strong>： <span class="math display">\[ H_0: \tilde{\mu}_1 - \tilde{\mu}_2 =0, \qquad H_1: \tilde{\mu}_1 - \tilde{\mu}_2 &gt;0.\]</span></p>
 <p><strong>Confidence Level</strong>: <span class="math inline">\(\alpha = 0.05\)</span></p>
@@ -431,10 +434,10 @@ median of the differences
 \qquad - \qquad +\]</span></p>
 <p>Here <span class="math inline">\(n = 14, x = 11\)</span> and <span class="math inline">\(n/2 = 7\)</span>. To calculate the p value</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="dv">11</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">14</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span> <span class="fu">pbinom</span>(X<span class="dv">-1</span>,n,p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="dv">11</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">14</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span> <span class="fu">pbinom</span>(X<span class="dv">-1</span>,n,p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02868652</code></pre>
 </div>
@@ -443,8 +446,8 @@ median of the differences
 <section id="two-sample-signtest-in-r" class="level4">
 <h4 class="anchored" data-anchor-id="two-sample-signtest-in-r">Two-Sample SignTest in R</h4>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(RadialTires,BeltedTires, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">conf.level =</span> <span class="dv">1</span><span class="sc">-</span>alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">SignTest</span>(RadialTires,BeltedTires, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">conf.level =</span> <span class="dv">1</span><span class="sc">-</span>alpha)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Dependent-samples Sign-Test
@@ -464,8 +467,8 @@ median of the differences
 <h4 class="anchored" data-anchor-id="in-class-practice-sign-test">In-Class Practice: Sign Test</h4>
 <p>A paint supplier claims that a new additive will reduce the drying time of its acrylic paint. To test this claim, 12 panels of wood were painted, one-half of each panel with paint containing the regular additive and the other half with paint containing the new additive. The drying times, in hours, were recorded as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>NewAdditive<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">6.4</span>,<span class="fl">5.8</span>,<span class="fl">7.4</span>,<span class="fl">5.5</span>,<span class="fl">6.3</span>,<span class="fl">7.8</span>,<span class="fl">8.6</span>,<span class="fl">8.2</span>,<span class="fl">7.0</span>,<span class="fl">4.9</span>,<span class="fl">5.9</span>,<span class="fl">6.5</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>RegularAdditive<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">6.6</span>,<span class="fl">5.8</span>,<span class="fl">7.8</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>,<span class="fl">8.4</span>,<span class="fl">8.8</span>,<span class="fl">8.4</span>,<span class="fl">7.3</span>,<span class="fl">5.8</span>,<span class="fl">5.8</span>,<span class="fl">6.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>NewAdditive<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">6.4</span>,<span class="fl">5.8</span>,<span class="fl">7.4</span>,<span class="fl">5.5</span>,<span class="fl">6.3</span>,<span class="fl">7.8</span>,<span class="fl">8.6</span>,<span class="fl">8.2</span>,<span class="fl">7.0</span>,<span class="fl">4.9</span>,<span class="fl">5.9</span>,<span class="fl">6.5</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>RegularAdditive<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">6.6</span>,<span class="fl">5.8</span>,<span class="fl">7.8</span>,<span class="fl">5.7</span>,<span class="fl">6.0</span>,<span class="fl">8.4</span>,<span class="fl">8.8</span>,<span class="fl">8.4</span>,<span class="fl">7.3</span>,<span class="fl">5.8</span>,<span class="fl">5.8</span>,<span class="fl">6.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Using <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <ul>
@@ -494,8 +497,8 @@ median of the differences
 \end{cases} \]</span></p>
 <p><strong>Example 3</strong> The nicotine content of two brands of cigarettes, measured in milligrams, was found to be as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>BrandA<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">2.1</span>,<span class="fl">4.0</span>,<span class="fl">6.3</span>,<span class="fl">5.4</span>,<span class="fl">4.8</span>,<span class="fl">3.7</span>,<span class="fl">6.1</span>,<span class="fl">3.3</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>BrandB<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">0.6</span>,<span class="fl">3.1</span>,<span class="fl">2.5</span>,<span class="fl">4.0</span>,<span class="fl">6.2</span>,<span class="fl">1.6</span>,<span class="fl">2.2</span>,<span class="fl">1.9</span>,<span class="fl">5.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>BrandA<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">2.1</span>,<span class="fl">4.0</span>,<span class="fl">6.3</span>,<span class="fl">5.4</span>,<span class="fl">4.8</span>,<span class="fl">3.7</span>,<span class="fl">6.1</span>,<span class="fl">3.3</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>BrandB<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">4.1</span>,<span class="fl">0.6</span>,<span class="fl">3.1</span>,<span class="fl">2.5</span>,<span class="fl">4.0</span>,<span class="fl">6.2</span>,<span class="fl">1.6</span>,<span class="fl">2.2</span>,<span class="fl">1.9</span>,<span class="fl">5.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Test the hypothesis, at the 0.05 level of significance, that the median nicotine contents of the two brands are equal against the alternative that they are unequal.</p>
 <p><strong>Hypotheses</strong>： <span class="math display">\[ H_0: \tilde{\mu}_1-\tilde{\mu}_2 = 0, \qquad H_1: \tilde{\mu}_1-\tilde{\mu}_2 \ne 0.\]</span></p>
@@ -515,7 +518,7 @@ median of the differences
 <p>We should not reject the null hypothesis, as <span class="math inline">\(u&gt; 17\)</span>.</p>
 <p>We can also use <code>wilcox.test</code> in R to calculate.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(BrandA,BrandB, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(BrandA,BrandB, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wilcox.test.default(BrandA, BrandB, alternative = "two.sided"):
 cannot compute exact p-value with ties</code></pre>
@@ -528,7 +531,7 @@ data:  BrandA and BrandB
 W = 57, p-value = 0.1422
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(BrandA,BrandB, <span class="at">alternative =</span> <span class="st">"two.sided"</span>,<span class="at">exact =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(BrandA,BrandB, <span class="at">alternative =</span> <span class="st">"two.sided"</span>,<span class="at">exact =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -544,8 +547,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <h4 class="anchored" data-anchor-id="in-class-exercise-wilcos-rank-sum-test">In-Class Exercise: Wilcos Rank-Sum Test</h4>
 <p>The following data represent the number of hours that two different types of scientific pocket calculators operate before a recharge is required.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">5.5</span>,<span class="fl">5.6</span>,<span class="fl">6.3</span>,<span class="fl">4.6</span>,<span class="fl">5.3</span>,<span class="fl">5.0</span>,<span class="fl">6.2</span>,<span class="fl">5.8</span>,<span class="fl">5.1</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">3.8</span>,<span class="fl">4.8</span>,<span class="fl">4.3</span>,<span class="fl">4.2</span>,<span class="fl">4.0</span>,<span class="fl">4.9</span>,<span class="fl">4.5</span>,<span class="fl">5.2</span>,<span class="fl">4.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>A<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">5.5</span>,<span class="fl">5.6</span>,<span class="fl">6.3</span>,<span class="fl">4.6</span>,<span class="fl">5.3</span>,<span class="fl">5.0</span>,<span class="fl">6.2</span>,<span class="fl">5.8</span>,<span class="fl">5.1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>B<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">3.8</span>,<span class="fl">4.8</span>,<span class="fl">4.3</span>,<span class="fl">4.2</span>,<span class="fl">4.0</span>,<span class="fl">4.9</span>,<span class="fl">4.5</span>,<span class="fl">5.2</span>,<span class="fl">4.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Use the rank-sum test with <span class="math inline">\(\alpha = 0.01\)</span> to determine if calculator A operates longer than calculator B on a full battery charge.</p>
 <p><strong>Hint: Critical value is 14</strong></p>
@@ -597,9 +600,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p><strong>Confidence Level</strong>: <span class="math inline">\(\alpha = 0.05\)</span></p>
 <p><strong>Critical Region</strong>: <span class="math inline">\(v = k-1 = 2\)</span></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span><span class="sc">-</span>alpha,v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="dv">1</span><span class="sc">-</span>alpha,v)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.991465</code></pre>
 </div>
@@ -620,7 +623,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Therefore, we should not reject the null hypothesis.</p>
 <p>We can also use <code>kruskal_test</code> in R to calculate.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(burningRate<span class="sc">~</span>type,<span class="at">data =</span> missleSystem)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(burningRate<span class="sc">~</span>type,<span class="at">data =</span> missleSystem)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
