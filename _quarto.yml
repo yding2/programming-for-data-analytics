@@ -105,7 +105,7 @@ website:
           - text: "Homework 3"
             href: homework/hw03.Rmd
           - text: "Homework 3 Solution"
-            href: homework/hw03_Solution.Rmd  
+            href: solutions/hw03_Solution.Rmd  
           - text: "Homework 4"
             href: homework/hw04.Rmd
 
