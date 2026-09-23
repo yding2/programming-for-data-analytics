@@ -602,15 +602,15 @@ deviations are 6 and 8 for engines $A$ and $B,$ respectively.
 ```{r}
 alpha <- 0.04
 n1 <- 50
-x1 <- 36
+x1bar <- 36
 n2 <- 75
-x2 <- 42
+x2bar <- 42
 sigma1 <- 6
 sigma2 <- 8
 standerror <- sqrt(sigma1^2 /n1 + sigma2^2/n2)
-lowerBound <- x2-x1 - qnorm(1-alpha/2)*standerror
+lowerBound <- x2bar-x1bar - qnorm(1-alpha/2)*standerror
 lowerBound
-upperBound <- x2-x1 + qnorm(1-alpha/2)*standerror
+upperBound <- x2bar-x1bar + qnorm(1-alpha/2)*standerror
 upperBound
 ```
 

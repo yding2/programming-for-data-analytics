@@ -8,7 +8,7 @@
 
 <meta name="author" content="Your Name">
 
-<title>Homework 1 – Programming for Data Analytics/Cyber Security</title>
+<title>Homework 4 – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -322,9 +322,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-i.-changing-the-author-field-and-file-name.-5-points" id="toc-part-i.-changing-the-author-field-and-file-name.-5-points" class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.-5-points">Part I. Changing the author field and file name. (5 points)</a></li>
-  <li><a href="#part-ii.-course-related-questions-30-points" id="toc-part-ii.-course-related-questions-30-points" class="nav-link" data-scroll-target="#part-ii.-course-related-questions-30-points">Part II. Course Related Questions (30 points)</a></li>
-  <li><a href="#part-iii.-basic-r-syntax-65-points" id="toc-part-iii.-basic-r-syntax-65-points" class="nav-link" data-scroll-target="#part-iii.-basic-r-syntax-65-points">Part III. Basic R Syntax (65 points)</a></li>
+  <li><a href="#part-i.-changing-the-author-field-and-file-name." id="toc-part-i.-changing-the-author-field-and-file-name." class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</a></li>
+  <li><a href="#part-ii.-confidence-interval-hypothesis-testing-50-points" id="toc-part-ii.-confidence-interval-hypothesis-testing-50-points" class="nav-link" data-scroll-target="#part-ii.-confidence-interval-hypothesis-testing-50-points">Part II. Confidence Interval &amp; Hypothesis Testing (50 points)</a>
+  <ul class="collapse">
+  <li><a href="#question-1.-10-points-confidence-interval-for-one-population-mean" id="toc-question-1.-10-points-confidence-interval-for-one-population-mean" class="nav-link" data-scroll-target="#question-1.-10-points-confidence-interval-for-one-population-mean">Question 1. (10 points) Confidence Interval for One Population Mean</a></li>
+  <li><a href="#question-2.-10-points-hypothesis-test-for-one-population-mean" id="toc-question-2.-10-points-hypothesis-test-for-one-population-mean" class="nav-link" data-scroll-target="#question-2.-10-points-hypothesis-test-for-one-population-mean">Question 2. (10 points) Hypothesis Test for One Population Mean</a></li>
+  <li><a href="#question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" id="toc-question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" class="nav-link" data-scroll-target="#question-3.-confidence-interval-and-hypothesis-test-for-two-population-means">Question 3. Confidence Interval and Hypothesis Test for Two Population Means</a></li>
+  </ul></li>
+  <li><a href="#part-iii.-matching-the-terms-20-points" id="toc-part-iii.-matching-the-terms-20-points" class="nav-link" data-scroll-target="#part-iii.-matching-the-terms-20-points">Part III. Matching the Terms (20 points)</a>
+  <ul class="collapse">
+  <li><a href="#question-1.-air-quality-study-in-urban-schools-10-points" id="toc-question-1.-air-quality-study-in-urban-schools-10-points" class="nav-link" data-scroll-target="#question-1.-air-quality-study-in-urban-schools-10-points">Question 1. Air Quality Study in Urban Schools (10 points)</a></li>
+  <li><a href="#question-2.-type-i-and-type-ii-errors-10-points" id="toc-question-2.-type-i-and-type-ii-errors-10-points" class="nav-link" data-scroll-target="#question-2.-type-i-and-type-ii-errors-10-points">Question 2. Type I and type II errors (10 points)</a></li>
+  </ul></li>
+  <li><a href="#part-iv.-multiple-choices-30-points" id="toc-part-iv.-multiple-choices-30-points" class="nav-link" data-scroll-target="#part-iv.-multiple-choices-30-points">Part IV. Multiple Choices (30 points)</a></li>
   </ul>
 </nav>
     </div>
@@ -333,7 +343,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework 1</h1>
+<h1 class="title">Homework 4</h1>
 </div>
 
 
@@ -356,158 +366,271 @@ window.Quarto = {
 </header>
 
 
-<section id="part-i.-changing-the-author-field-and-file-name.-5-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-i.-changing-the-author-field-and-file-name.-5-points">Part I. Changing the author field and file name. (5 points)</h3>
-<section id="a-change-the-author-field-on-the-rmd-document" class="level4">
-<h4 class="anchored" data-anchor-id="a-change-the-author-field-on-the-rmd-document">(a) Change the <code>author:</code> field on the Rmd document</h4>
-</section>
-<section id="b-rename-this-file-to-hw1_yourfirstinitialyourlastname.rmd-e.g.-hw1_yding.rmd." class="level4">
-<h4 class="anchored" data-anchor-id="b-rename-this-file-to-hw1_yourfirstinitialyourlastname.rmd-e.g.-hw1_yding.rmd.">(b) Rename this file to “HW1_YourFirstInitialYourLastName.Rmd”, (e.g.&nbsp;HW1_YDing.Rmd).</h4>
-<p><br></p>
-</section>
-</section>
-<section id="part-ii.-course-related-questions-30-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-ii.-course-related-questions-30-points">Part II. Course Related Questions (30 points)</h3>
-<section id="question-1.-what-is-the-instructors-name-please-write-about-her-office-and-office-hours-this-semester." class="level4">
-<h4 class="anchored" data-anchor-id="question-1.-what-is-the-instructors-name-please-write-about-her-office-and-office-hours-this-semester.">Question 1. What is the instructor’s name? Please write about her office and office hours this semester.</h4>
-<blockquote class="blockquote">
-<p>Your Answer:</p>
-</blockquote>
-</section>
-<section id="question-2.-please-list-the-acts-of-academic-dishonesty-in-the-syllabus." class="level4">
-<h4 class="anchored" data-anchor-id="question-2.-please-list-the-acts-of-academic-dishonesty-in-the-syllabus.">Question 2. Please list the acts of academic dishonesty in the syllabus.</h4>
-<blockquote class="blockquote">
-<p>Your Answer:</p>
-</blockquote>
-</section>
-<section id="question-3.-whats-the-policy-for-late-homework-submission-when-can-you-request-an-extension-how-many-exams-will-we-have" class="level4">
-<h4 class="anchored" data-anchor-id="question-3.-whats-the-policy-for-late-homework-submission-when-can-you-request-an-extension-how-many-exams-will-we-have">Question 3. What’s the policy for late homework submission? When can you request an extension? How many exams will we have?</h4>
-<blockquote class="blockquote">
-<p>Your Answer:</p>
-</blockquote>
-</section>
-<section id="question-4.-will-we-have-a-final-exam-what-is-the-evaluation-of-the-final-project-what-is-the-assessment-of-this-class-what-is-the-grade-range-of-a" class="level4">
-<h4 class="anchored" data-anchor-id="question-4.-will-we-have-a-final-exam-what-is-the-evaluation-of-the-final-project-what-is-the-assessment-of-this-class-what-is-the-grade-range-of-a">Question 4. Will we have a final exam? What is the evaluation of the final project? What is the assessment of this class? What is the grade range of A?</h4>
-<blockquote class="blockquote">
-<p>Your Answer:</p>
-</blockquote>
-</section>
-<section id="question-5.-is-there-a-second-chance-to-resubmit-your-assignment-or-exam-after-grading-are-there-any-extra-assignments-or-work-to-improve-your-grade" class="level4">
-<h4 class="anchored" data-anchor-id="question-5.-is-there-a-second-chance-to-resubmit-your-assignment-or-exam-after-grading-are-there-any-extra-assignments-or-work-to-improve-your-grade">Question 5. Is there a second chance to resubmit your assignment or exam after grading? Are there any extra assignments or work to improve your grade?</h4>
-<blockquote class="blockquote">
-<p>Your Answer:</p>
-</blockquote>
-</section>
-<section id="i-fully-understand-the-rules-in-the-syllabus-and-will-follow-them." class="level4">
-<h4 class="anchored" data-anchor-id="i-fully-understand-the-rules-in-the-syllabus-and-will-follow-them.">I fully understand the rules in the syllabus and will follow them.</h4>
-<blockquote class="blockquote">
-<p>Your Name Here As Signature:</p>
-</blockquote>
-<p><br></p>
-</section>
-</section>
-<section id="part-iii.-basic-r-syntax-65-points" class="level3">
-<h3 class="anchored" data-anchor-id="part-iii.-basic-r-syntax-65-points">Part III. Basic R Syntax (65 points)</h3>
-<section id="question-1.-hello-world-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-1.-hello-world-10-points">Question 1. Hello World! (10 points)</h4>
-<p>Here’s an R code chunk that prints the text ‘Hello world!’.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello world!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Hello world!"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import needed packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
+<section id="part-i.-changing-the-author-field-and-file-name." class="level2">
+<h2 class="anchored" data-anchor-id="part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</h2>
+<ol type="1">
+<li>Change the <code>author</code> field to your name.</li>
+<li>Rename this file as <code>HW4_YourFirstInitialYourLastName.Rmd</code> (for example, <code>HW4_YDing.Rmd</code>).</li>
+<li>Complete all questions in the designated code and response spaces.</li>
+<li>Knit the completed file to HTML.</li>
+<li>Submit both the completed <code>.Rmd</code> file and the knitted <code>.html</code> file. Make sure both files open correctly before submitting.</li>
+</ol>
 </section>
-<section id="modify-the-code-chunk-below-to-print-your-name-and-your-hobbies" class="level4">
-<h4 class="anchored" data-anchor-id="modify-the-code-chunk-below-to-print-your-name-and-your-hobbies">Modify the code chunk below to print your name and your hobbies</h4>
+<section id="part-ii.-confidence-interval-hypothesis-testing-50-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii.-confidence-interval-hypothesis-testing-50-points">Part II. Confidence Interval &amp; Hypothesis Testing (50 points)</h2>
+<section id="question-1.-10-points-confidence-interval-for-one-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-10-points-confidence-interval-for-one-population-mean">Question 1. (10 points) Confidence Interval for One Population Mean</h3>
+<p>The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><br></p>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
 </section>
-<section id="question-2.-online-store-sales-20-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-2.-online-store-sales-20-points">Question 2. Online Store Sales (20 points)</h4>
-<p>An online store recorded the number of units sold and the price of five products.</p>
+<section id="question-2.-10-points-hypothesis-test-for-one-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-10-points-hypothesis-test-for-one-population-mean">Question 2. (10 points) Hypothesis Test for One Population Mean</h3>
+<p>A coffee shop claims that the average waiting time for an order is 5 minutes. The waiting times, in minutes, for a random sample of customers are given below.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Keyboard"</span>, <span class="st">"Mouse"</span>, <span class="st">"Webcam"</span>, <span class="st">"Headphones"</span>, <span class="st">"USB Drive"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>units_sold <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">30</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>unit_price <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">20</span>, <span class="dv">65</span>, <span class="dv">35</span>, <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>waiting_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.2</span>, <span class="fl">6.1</span>, <span class="fl">4.8</span>, <span class="fl">5.9</span>, <span class="fl">6.4</span>, <span class="fl">5.5</span>, <span class="fl">4.9</span>, <span class="fl">6.2</span>, <span class="fl">5.7</span>, <span class="fl">5.3</span>, <span class="fl">6.0</span>, <span class="fl">4.7</span>, <span class="fl">5.8</span>, <span class="fl">6.3</span>, <span class="fl">5.4</span>, <span class="fl">5.6</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="a-product-revenue-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="a-product-revenue-5-points">a) Product Revenue (5 points)</h4>
-<p>Calculate the revenue generated by each product. Store the results in a vector named <code>revenue</code> and display it.</p>
+<p>At the <span class="math inline">\(\alpha=0.05\)</span> significance level, test whether the true mean waiting time is greater than 5 minutes. Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
 </section>
-<section id="b-total-and-average-revenue-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="b-total-and-average-revenue-5-points">b) Total and Average Revenue (5 points)</h4>
-<p>Calculate the total revenue and the average revenue per product.</p>
+<section id="question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" class="level3">
+<h3 class="anchored" data-anchor-id="question-3.-confidence-interval-and-hypothesis-test-for-two-population-means">Question 3. Confidence Interval and Hypothesis Test for Two Population Means</h3>
+<p>A researcher wants to compare exam scores between students using a traditional study method and students using a new study method. The exam scores for two independent groups of students are given below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traditional <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">68</span>, <span class="dv">81</span>, <span class="dv">75</span>, <span class="dv">70</span>, <span class="dv">77</span>, <span class="dv">65</span>, <span class="dv">83</span>, <span class="dv">74</span>, <span class="dv">69</span>, <span class="dv">78</span>, <span class="dv">71</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">80</span>, <span class="dv">72</span>, <span class="dv">66</span>, <span class="dv">79</span>, <span class="dv">75</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>new_method <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">82</span>, <span class="dv">75</span>, <span class="dv">84</span>, <span class="dv">77</span>, <span class="dv">80</span>, <span class="dv">73</span>, <span class="dv">85</span>, <span class="dv">79</span>, <span class="dv">76</span>, <span class="dv">81</span>, <span class="dv">74</span>, <span class="dv">83</span>, <span class="dv">78</span>, <span class="dv">86</span>, <span class="dv">77</span>, <span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">75</span>, <span class="dv">84</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>At the <span class="math inline">\(\alpha=0.05\)</span> significance level, test whether the population mean exam scores for the two study methods are different.</p>
+<ol type="a">
+<li>(15 points) Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.</li>
+</ol>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="c-high-revenue-products-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="c-high-revenue-products-5-points">c) High-Revenue Products (5 points)</h4>
-<p>Display the names of the products that generated more than $500 in revenue.</p>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="2" type="a">
+<li>(15 points) Also construct a 95% confidence interval for the difference in population means and explain whether the confidence interval is consistent with the conclusion from the hypothesis test.</li>
+</ol>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
 </section>
-<section id="d-popular-and-affordable-products-5-points" class="level4">
-<h4 class="anchored" data-anchor-id="d-popular-and-affordable-products-5-points">d) Popular and Affordable Products (5 points)</h4>
-<p>Display the names of the products for which more than 15 units were sold and the unit price was less than $25.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
-<section id="question-3.-working-with-a-data-frame-35-points" class="level4">
-<h4 class="anchored" data-anchor-id="question-3.-working-with-a-data-frame-35-points">Question 3. Working with a Data Frame (35 points)</h4>
-<p>The following data frame contains health information for three individuals. Height is measured in centimeters, and weight is measured in kilograms.</p>
+<section id="part-iii.-matching-the-terms-20-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii.-matching-the-terms-20-points">Part III. Matching the Terms (20 points)</h2>
+<section id="question-1.-air-quality-study-in-urban-schools-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-air-quality-study-in-urban-schools-10-points">Question 1. Air Quality Study in Urban Schools (10 points)</h3>
+<p>A public health study examined the indoor air quality in elementary schools in Chicago, USA. One important measure of air quality is the concentration of fine particulate matter (PM2.5), measured in micrograms per cubic meter (<span class="math inline">\(\mu g/m^3\)</span>).</p>
+<section id="terms-inferential-statistic-descriptive-statistic-population-parameter-sample" class="level4">
+<h4 class="anchored" data-anchor-id="terms-inferential-statistic-descriptive-statistic-population-parameter-sample">Terms: Inferential statistic, Descriptive statistic, Population, Parameter, Sample</h4>
+</section>
+<section id="descriptions" class="level4">
+<h4 class="anchored" data-anchor-id="descriptions">Descriptions:</h4>
+<ol type="a">
+<li>The true mean PM2.5 concentration for all elementary schools in Chicago, <span class="math inline">\(\mu\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="2" type="a">
+<li>All elementary schools in Chicago, USA</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="3" type="a">
+<li>The 95% confidence interval for the population mean PM2.5 concentration, (11.3,13.5) <span class="math inline">\(\mu g/m^3\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="4" type="a">
+<li>The 52 randomly selected elementary schools included in the study</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="5" type="a">
+<li>The sample mean PM2.5 concentration, <span class="math inline">\(\bar{x} = 12.4 \ \mu g/m^3\)</span>.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+</section>
+</section>
+<section id="question-2.-type-i-and-type-ii-errors-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-type-i-and-type-ii-errors-10-points">Question 2. Type I and type II errors (10 points)</h3>
+<p>A university is testing a new AI-based tutoring system to see whether it improves students’ final exam scores. The school will adopt the system only if it increases the average score by at least 5 points.</p>
+<p>They conduct a hypothesis test on the population mean improvement in scores, denoted by <span class="math inline">\(\mu\)</span>.</p>
+<section id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence" class="level4">
+<h4 class="anchored" data-anchor-id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence">Terms: Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence</h4>
+</section>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description:</h4>
+<ol type="a">
+<li>Spend more effort on investigating and testing the AI-based tutoring system, even though it truly improves scores by at least 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="2" type="a">
+<li><span class="math inline">\(H_0: \mu = 5, \qquad H_1: \mu &lt;5\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="3" type="a">
+<li>Decide based on the hypothesis test that the average improvement is at least 5 points, but in reality the improvement is less than 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="4" type="a">
+<li>Adopt the tutoring system campus-wide claiming it significantly improves performance, but students see little to no improvement.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+<ol start="5" type="a">
+<li>Decide based on the hypothesis test that the improvement is less than 5 points, but in reality the improvement is at least 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p>Your Answer</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="part-iv.-multiple-choices-30-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv.-multiple-choices-30-points">Part IV. Multiple Choices (30 points)</h2>
+<ol type="1">
+<li>(3 points) To find a confidence interval for a population mean when the population variance is known, which of the following should we use?</li>
+</ol>
+<p>Suppose <span class="math inline">\(X_1,\ldots,X_{100}\)</span> is a random sample of size 100 from an unknown distribution.</p>
+<p>A. The normal distribution (with the Z statistic)</p>
+<p>B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<p>C. The t-distribution (with the T statistic)</p>
+<p>D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span></p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="2" type="1">
+<li>(3 points) To find a confidence interval for a population mean when the population variance is unknown, which of the following should we use?</li>
+</ol>
+<p>Suppose <span class="math inline">\(X_1,\ldots,X_{20}\)</span> is a random sample of size 20 from an unknown distribution.</p>
+<p>A. The normal distribution (with the Z statistic)</p>
+<p>B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<p>C. The t-distribution (with the T statistic)</p>
+<p>D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="3" type="1">
+<li>(12 points) The following is an output of <code>t.test</code> on the difference of two samples, please answer the following questions.</li>
+</ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>BMI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">152</span>, <span class="fl">171.5</span>, <span class="dv">165</span>),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">81</span>, <span class="dv">93</span>, <span class="dv">78</span>),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">42</span>, <span class="dv">38</span>, <span class="dv">26</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(BMI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  gender height weight Age
-1   Male  152.0     81  42
-2   Male  171.5     93  38
-3 Female  165.0     78  26</code></pre>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  sampleA and sampleB
+t = -2.8568, df = 9.8681, p-value = 0.01727
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.33054137 -0.04056974
+sample estimates:
+mean of x mean of y 
+0.3877778 0.5733333 </code></pre>
 </div>
 </div>
-</section>
-<section id="a-calculate-bmi-15-points" class="level4">
-<h4 class="anchored" data-anchor-id="a-calculate-bmi-15-points">a) Calculate BMI (15 points)</h4>
-<p>Calculate the BMI of each individual, add the results as a new column named <code>BMI</code>, and display the updated data frame.</p>
-<p><span class="math display">\[
-\text{BMI}=\frac{\text{weight (kg)}}{[\text{height (m)}]^2}
-\]</span></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="b-filter-by-bmi-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="b-filter-by-bmi-10-points">b) Filter by BMI (10 points)</h4>
-<p>Display the <code>gender</code> and <code>Age</code> of individuals whose BMI is greater than 30.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="c-filter-using-two-conditions-10-points" class="level4">
-<h4 class="anchored" data-anchor-id="c-filter-using-two-conditions-10-points">c) Filter Using Two Conditions (10 points)</h4>
-<p>Display the <code>gender</code> of individuals whose BMI is greater than 25 and whose <code>Age</code> is less than 30.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit me</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<ol type="i">
+<li>What is the value of p-value?</li>
+</ol>
+<p>&nbsp;&nbsp; A. -2.8568 &nbsp;&nbsp;&nbsp;&nbsp; B. 9.8681 &nbsp;&nbsp;&nbsp;&nbsp; C. 0.01727 &nbsp;&nbsp;&nbsp;&nbsp; D. 0</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="2" type="i">
+<li>Based on the t-test result, should we reject or not reject the null hypothesis?</li>
+</ol>
+<p>A. Reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>B. Fail to reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>C. Reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<p>D. Fail to reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="3" type="i">
+<li>Does it match the result of the confidence interval?</li>
+</ol>
+<p>A. Yes, as p-value is not in the confidence interval.</p>
+<p>B. Yes, as 0 is not in the confidence interval.</p>
+<p>C. No, as t statistic is outside of the interval.</p>
+<p>D. No, as p-value is outside of the interval.</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="4" type="i">
+<li>If <span class="math inline">\(\alpha = 0.01\)</span>,should we reject or not reject the null hypothesis?</li>
+</ol>
+<p>A. Reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>B. Fail to reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>C. Reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<p>D. Fail to reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="4" type="1">
+<li>(3 points) A study examined the quality of compost produced by home compost bins in Galicia, Spain. One measure of compost quality is moisture content, or the percentage of water in the compost. In a sample of 87 randomly selected home compost bins in Galicia, it is found that sample mean moisture content is <span class="math inline">\(\bar{x}=68.1.\)</span> The 95% confidence interval is (66.1, 70.1) and can be interpreted as the researchers are 95% confident that the population mean moisture of _____ is between 66.1 and 70.1.</li>
+</ol>
+<p>A. all home compost bins in Spain</p>
+<p>B. sampled home compost bins in Spain</p>
+<p>C. all home compost bins in Galicia, Spain</p>
+<p>D. sampled home compost bins in Galicia, Spain</p>
+<ol start="5" type="1">
+<li>(3 points) Suppose base on the sample in Question 2, we make the conjecture, population mean moisture in Galiciais less than 70. What are the hypotheses?</li>
+</ol>
+<p>A. <span class="math inline">\(H_0: \mu = 70, H_1: \mu &lt; 70\)</span></p>
+<p>B. <span class="math inline">\(H_0: \mu = 70, H_1: \mu &gt; 70\)</span></p>
+<p>C. <span class="math inline">\(H_0: \mu &lt; 70, H_1: \mu \ge 70\)</span></p>
+<p>D. <span class="math inline">\(H_0: \mu &lt; 70, H_1: \mu  = 70\)</span></p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="6" type="1">
+<li>(3 points) If the p-value is very small (close to 0), the decision from the hypothesis test is to _____.</li>
+</ol>
+<p>A. reject the null hypothesis</p>
+<p>B. fail to reject the null hypothesis</p>
+<p>C. no conclusion</p>
+<blockquote class="blockquote">
+<p>Your answer:</p>
+</blockquote>
+<ol start="7" type="1">
+<li>(3 points) Let <span class="math inline">\(\mu_{2025} =\)</span> mean miles per gallon for all users who drive 20225Honda CRV AWD vehicles and <span class="math inline">\(\mu_{2026} =\)</span> mean miles per gallon for all users who drive 2026 Honda CRV AWD vehicles. A hypothesis test for two independent population means can be used to determine whether or not the data provide statistical evidence of a difference in the mean miles per gallon between 2025 and 2026 CRVs. [H_0: <em>{2025} - </em>{2026} =0, H_1: <em>{2025}- </em>{2026} ] A 95% confidence interval for difference in means, <span class="math inline">\(\mu_{2025}-\mu_{2026}\)</span>, is (0.05, 8.75). Which of the following is correct?</li>
+</ol>
+<p>A. reject the null hypothesis</p>
+<p>B. fail to reject the null hypothesis</p>
+<p>C. no conclusion</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

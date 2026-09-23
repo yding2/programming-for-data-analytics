@@ -103,8 +103,12 @@ website:
           - text: "Homework 2 Solution"
             href: solutions/hw02_Solution.Rmd
           - text: "Homework 3"
-            href: homework/hw03.Rmd 
-            
+            href: homework/hw03.Rmd
+          - text: "Homework 3 Solution"
+            href: homework/hw03_Solution.Rmd  
+          - text: "Homework 4"
+            href: homework/hw04.Rmd
+
       - href: project.qmd
         text: Final Project
 

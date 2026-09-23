@@ -1,0 +1,290 @@
+---
+title: "Homework 4"
+author: "Your Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE}
+# Import needed packages
+library(ggplot2)
+```
+
+
+## Part I. Changing the author field and file name.
+
+
+1. Change the `author` field to your name.
+2. Rename this file as `HW4_YourFirstInitialYourLastName.Rmd` (for example, `HW4_YDing.Rmd`).
+3. Complete all questions in the designated code and response spaces.
+4. Knit the completed file to HTML.
+5. Submit both the completed `.Rmd` file and the knitted `.html` file. Make sure both files open correctly before submitting.
+
+
+
+## Part II. Confidence Interval & Hypothesis Testing (50 points)
+
+### Question 1. (10 points) Confidence Interval for One Population Mean
+
+The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.
+
+```{r}
+# Edit me
+```
+
+> Your Answer
+
+### Question 2. (10 points) Hypothesis Test for One Population Mean
+
+A coffee shop claims that the average waiting time for an order is 5 minutes. The waiting times, in minutes, for a random sample of customers are given below. 
+
+```{r}
+waiting_time <- c(5.2, 6.1, 4.8, 5.9, 6.4, 5.5, 4.9, 6.2, 5.7, 5.3, 6.0, 4.7, 5.8, 6.3, 5.4, 5.6) 
+```
+
+At the $\alpha=0.05$ significance level, test whether the true mean waiting time is greater than 5 minutes. Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.
+
+```{r}
+# Edit me
+```
+
+> Your Answer
+
+
+### Question 3. Confidence Interval and Hypothesis Test for Two Population Means
+
+A researcher wants to compare exam scores between students using a traditional study method and students using a new study method. The exam scores for two independent groups of students are given below. 
+
+```{r}
+traditional <- c(72, 68, 81, 75, 70, 77, 65, 83, 74, 69, 78, 71, 76, 73, 67, 80, 72, 66, 79, 75)
+new_method <- c(78, 82, 75, 84, 77, 80, 73, 85, 79, 76, 81, 74, 83, 78, 86, 77, 80, 82, 75, 84)
+```
+
+At the $\alpha=0.05$ significance level, test whether the population mean exam scores for the two study methods are different. 
+
+
+a. (15 points) Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem. 
+
+
+```{r}
+# Edit me
+```
+
+> Your Answer
+
+b. (15 points) Also construct a 95% confidence interval for the difference in population means and explain whether the confidence interval is consistent with the conclusion from the hypothesis test. 
+
+```{r}
+# Edit me
+```
+
+> Your Answer
+
+
+## Part III. Matching the Terms (20 points)
+
+### Question 1. Air Quality Study in Urban Schools (10 points)
+
+A public health study examined the indoor air quality in elementary schools in Chicago, USA. One important measure of air quality is the concentration of fine particulate matter (PM2.5), measured in micrograms per cubic meter ($\mu g/m^3$).
+
+#### Terms: Inferential statistic, Descriptive statistic,  Population, Parameter,  Sample
+
+#### Descriptions:
+
+a. The true mean PM2.5 concentration for all elementary schools in Chicago, $\mu$
+
+> Your Answer 
+
+b. All elementary schools in Chicago, USA
+
+> Your Answer
+
+c. The 95% confidence interval for the population mean PM2.5 concentration,
+(11.3,13.5) $\mu g/m^3$
+
+> Your Answer
+
+d. The 52 randomly selected elementary schools included in the study
+
+> Your Answer
+
+e. The sample mean PM2.5 concentration, $\bar{x} = 12.4 \ \mu g/m^3$.
+
+> Your Answer
+
+### Question 2. Type I and type II errors (10 points)
+
+A university is testing a new AI-based tutoring system to see whether it improves students’ final exam scores. The school will adopt the system only if it increases the average score by at least 5 points.
+
+They conduct a hypothesis test on the population mean improvement in scores, denoted by $\mu$.
+
+#### Terms: Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence
+
+#### Description:
+
+a) Spend more effort on investigating and testing the AI-based tutoring system, even though it truly improves scores by at least 5 points.
+
+> Your Answer
+
+b) $H_0: \mu = 5, \qquad H_1: \mu <5$
+
+> Your Answer
+
+c) Decide based on the hypothesis test that the average improvement is at least 5 points, but in reality the improvement is less than 5 points.
+
+> Your Answer
+
+d) Adopt the tutoring system campus-wide claiming it significantly improves performance, but students see little to no improvement.
+
+> Your Answer
+
+e) Decide based on the hypothesis test that the improvement is less than 5 points, but in reality the improvement is at least 5 points.
+
+> Your Answer
+
+## Part IV. Multiple Choices (30 points)
+
+1.  (3 points) To find a confidence interval for a population mean when the
+population variance is known, which of the following should we use?
+
+Suppose $X_1,\ldots,X_{100}$ is a random sample of size 100 from an
+unknown distribution.
+
+
+A. The normal distribution (with the Z statistic)
+
+B. The normal distribution (with the Z statistic), but only if $X$
+comes from a normal distribution
+
+C. The t-distribution (with the T statistic)
+
+D. The t-distribution (with the T statistic), but only if $X$
+
+> Your answer:
+
+2.  (3 points) To find a confidence interval for a population mean when the
+population variance is unknown, which of the following should we use?
+
+Suppose $X_1,\ldots,X_{20}$ is a random sample of size 20 from an
+unknown distribution.
+
+A. The normal distribution (with the Z statistic)
+
+B. The normal distribution (with the Z statistic), but only if $X$
+comes from a normal distribution
+
+C. The t-distribution (with the T statistic)
+
+D. The t-distribution (with the T statistic), but only if $X$
+comes from a normal distribution
+
+> Your answer:
+
+3. (12 points) The following is an output of `t.test` on the difference of two samples, please answer the following questions. 
+
+```{r,echo = FALSE}
+sampleA<- c(0.32,0.28, 0.37, 0.47, 0.46, 0.36, 0.42,0.38,0.43)
+sampleB<- c(0.26,0.47,0.49,0.52,0.75,0.73,0.86, 0.62,0.46)
+t.test(sampleA,sampleB, var.equal = FALSE, conf.level = .95)
+```
+
+(i) What is the value of p-value? 
+
+   &nbsp;&nbsp;
+A. -2.8568  &nbsp;&nbsp;&nbsp;&nbsp;
+B. 9.8681  &nbsp;&nbsp;&nbsp;&nbsp;
+C. 0.01727 &nbsp;&nbsp;&nbsp;&nbsp;
+D. 0
+
+  
+> Your answer:
+
+(ii) Based on the t-test result, should we reject or not reject the null hypothesis? 
+
+ 
+A. Reject, as p-value is greater than $\alpha$.  
+
+B. Fail to reject, as p-value is greater than $\alpha$.  
+
+C. Reject, as p-value is less than $\alpha$.
+
+D. Fail to reject, as p-value is less than $\alpha$.
+
+  
+> Your answer:
+
+
+(iii) Does it match the result of the confidence interval?
+
+   
+A. Yes, as p-value is not in the confidence interval.
+
+B. Yes, as 0 is not in the confidence interval.
+
+C. No, as t statistic is outside of the interval.
+
+D. No, as p-value is outside of the interval.
+
+  
+> Your answer:
+
+(iv) If $\alpha = 0.01$,should we reject or not reject the null hypothesis? 
+
+A. Reject, as p-value is greater than $\alpha$.  
+
+B. Fail to reject, as p-value is greater than $\alpha$.  
+
+C. Reject, as p-value is less than $\alpha$.
+
+D. Fail to reject, as p-value is less than $\alpha$.
+
+> Your answer:
+
+4.  (3 points) A study examined the quality of compost produced by home compost bins in Galicia, Spain. One measure of compost quality is moisture content, or the percentage of water in the compost. In a sample of 87 randomly selected home compost bins in Galicia, it is found that sample mean moisture content is $\bar{x}=68.1.$ The 95% confidence interval is (66.1, 70.1) and can be interpreted as the researchers are 95% confident that the population mean moisture of _____  is between 66.1 and 70.1.
+ 
+  A. all home compost bins in Spain
+  
+  B. sampled home compost bins in Spain
+  
+  C. all home compost bins in Galicia, Spain
+  
+  D. sampled home compost bins in Galicia, Spain
+
+5.  (3 points) Suppose base on the sample in Question 2, we make the conjecture, population mean moisture in Galiciais less than 70. What are the hypotheses? 
+ 
+  A. $H_0: \mu = 70, H_1: \mu < 70$
+  
+  B. $H_0: \mu = 70, H_1: \mu > 70$
+  
+  C. $H_0: \mu < 70, H_1: \mu \ge 70$
+  
+  D. $H_0: \mu < 70, H_1: \mu  = 70$
+
+> Your answer:
+
+ 
+6.  (3 points) If the p-value is very small (close to 0), the decision from the hypothesis test is to _____.
+
+  A. reject the null hypothesis
+  
+  B. fail to reject the null hypothesis
+  
+  C. no conclusion
+  
+> Your answer:
+
+7.  (3 points) Let $\mu_{2025} =$ mean miles per gallon for all users who drive 20225Honda CRV AWD vehicles
+ and $\mu_{2026} =$ mean miles per gallon for all users who drive 2026 Honda CRV AWD vehicles.
+A hypothesis test for two independent population means can be used to determine whether or not the data provide statistical evidence of a difference in the mean miles per gallon between 2025 and 2026 CRVs.
+\[H_0: \mu_{2025} - \mu_{2026} =0, \qquad H_1: \mu_{2025}- \mu_{2026}  \ne 0 \]
+A 95% confidence interval for difference in means, $\mu_{2025}-\mu_{2026}$, is (0.05, 8.75). Which of the following is correct?
+
+A. reject the null hypothesis
+
+B. fail to reject the null hypothesis
+  
+C. no conclusion
