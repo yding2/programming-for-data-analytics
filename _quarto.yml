@@ -58,7 +58,10 @@ website:
             href: source/week08_statistical_inference_on_variances.Rmd
 
           - text: "Week 7: Hypothesis Testing Jupyter Notebook"
-            href: source/week08_hypothesis_testing.ipynb  
+            href: source/week08_hypothesis_testing.ipynb 
+
+          - text: "Week 8: Midterm Review"
+            href: source/week08_midterm_review.Rmd 
 
           - text: "─────── Week 9 ───────" 
 

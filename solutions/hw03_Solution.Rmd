@@ -70,7 +70,7 @@ missing.summary <- data.frame(
 missing.summary
 ```
 
-> `Web.Description` has the largest percentage of missing values: 942 of the 1,151 observations, or approximately 81.84%. The other variables do not contain missing values.
+> `Web.Description` has the largest percentage of missing values: 892 of the 1,151 observations, or approximately 77.5%. The other variables do not contain missing values.
   
 #### (c) Use the `table` function to display the frequencies of the values in `Type.of.Breach`. How many observations are recorded exactly as `"Hacking/IT Incident"`? (5 points)
 
