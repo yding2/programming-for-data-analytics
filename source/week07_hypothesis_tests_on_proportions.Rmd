@@ -39,8 +39,8 @@ statistic  $\hat{p}  =x/n,$ where $x$ represents the number of successes in $n$ 
 establish a confidence interval for p by considering the sampling distribution of
 $\hat{p}.$ 
 The sample proportion $\hat{p} = x/n$ is the sample mean of these $n$ values.
-Hence , by the Central Limit Theorem, for $n$ is sufficiently large, $\hat{P}$ is approximately normally distributed with **mean**
-$\mu_{\hat{P}} = p$
+Hence , by the Central Limit Theorem, for $n$ is sufficiently large, $\hat{p}$ is approximately normally distributed with **mean**
+$\mu_{\hat{p}} = p$
 and **variance**
 $\sigma^2_{\hat{p}} = \frac{p(1-p)}{n}.$
 Therefore 
@@ -220,6 +220,7 @@ Suppose we make the conjecture, the proportion of families with television sets 
 **Parameter**:
 
 The population parameter of interest is the **proportion**, $p$, of  families with television sets in Hamilton, Canada that subscribe to HBO
+
 **Hypotheses**:
 
 \begin{align*}
@@ -236,7 +237,7 @@ The observed sample proportion is $\hat{p} = 340/500 \approx 0.68$.
 
 A standardized test statistic is typically used. Assuming $n = 500$ is large enough to apply the Central Limit Theorem, the sampling distribution of $\hat{p}$  will be approximately normal. That is
 
-$\hat{p} \sim \mathcal{N}(0.68, 0.7\times(1-0.7)/500) = \mathcal{N}(0.68, 0.02049^2)$
+$\hat{p} \sim \mathcal{N}(0.7, 0.7\times(1-0.7)/500) = \mathcal{N}(0.7, 0.02049^2)$
 
 $$ z = \frac{\hat{p}-\mu}{\sigma_{\hat{p}}} = \frac{0.68-0.7}{0.02049} \approx -0.9759$$
 

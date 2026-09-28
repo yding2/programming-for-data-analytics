@@ -280,7 +280,7 @@ D. Fail to reject, as p-value is less than $\alpha$.
 7.  (3 points) Let $\mu_{2025} =$ mean miles per gallon for all users who drive 20225Honda CRV AWD vehicles
  and $\mu_{2026} =$ mean miles per gallon for all users who drive 2026 Honda CRV AWD vehicles.
 A hypothesis test for two independent population means can be used to determine whether or not the data provide statistical evidence of a difference in the mean miles per gallon between 2025 and 2026 CRVs.
-\[H_0: \mu_{2025} - \mu_{2026} =0, \qquad H_1: \mu_{2025}- \mu_{2026}  \ne 0 \]
+$$H_0: \mu_{2025} - \mu_{2026} =0, \qquad H_1: \mu_{2025}- \mu_{2026}  \ne 0$$
 A 95% confidence interval for difference in means, $\mu_{2025}-\mu_{2026}$, is (0.05, 8.75). Which of the following is correct?
 
 A. reject the null hypothesis

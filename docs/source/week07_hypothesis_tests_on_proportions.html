@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -381,7 +381,7 @@ window.Quarto = {
 </section>
 <section id="interval-estimate-of-a-proportiondifference-between-proportions" class="level2">
 <h2 class="anchored" data-anchor-id="interval-estimate-of-a-proportiondifference-between-proportions">Interval Estimate of a Proportion/Difference between Proportions</h2>
-<p>A point estimator of the proportion <span class="math inline">\(p\)</span> in a binomial experiment is given by the statistic <span class="math inline">\(\hat{p}  =x/n,\)</span> where <span class="math inline">\(x\)</span> represents the number of successes in <span class="math inline">\(n\)</span> trials. If the unknown proportion <span class="math inline">\(p\)</span> is not expected to be too close to 0 or 1, we can establish a confidence interval for p by considering the sampling distribution of <span class="math inline">\(\hat{p}.\)</span> The sample proportion <span class="math inline">\(\hat{p} = x/n\)</span> is the sample mean of these <span class="math inline">\(n\)</span> values. Hence , by the Central Limit Theorem, for <span class="math inline">\(n\)</span> is sufficiently large, <span class="math inline">\(\hat{P}\)</span> is approximately normally distributed with <strong>mean</strong> <span class="math inline">\(\mu_{\hat{P}} = p\)</span> and <strong>variance</strong> <span class="math inline">\(\sigma^2_{\hat{p}} = \frac{p(1-p)}{n}.\)</span> Therefore <span class="math display">\[ Z = \frac{\hat{p}-p}{\sqrt{p(1-p)/n}} \sim \mathcal{N}(0,1)\]</span> where <span class="math inline">\(z_{\alpha/2}\)</span> is the <span class="math inline">\(z\)</span>-value leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right.</p>
+<p>A point estimator of the proportion <span class="math inline">\(p\)</span> in a binomial experiment is given by the statistic <span class="math inline">\(\hat{p}  =x/n,\)</span> where <span class="math inline">\(x\)</span> represents the number of successes in <span class="math inline">\(n\)</span> trials. If the unknown proportion <span class="math inline">\(p\)</span> is not expected to be too close to 0 or 1, we can establish a confidence interval for p by considering the sampling distribution of <span class="math inline">\(\hat{p}.\)</span> The sample proportion <span class="math inline">\(\hat{p} = x/n\)</span> is the sample mean of these <span class="math inline">\(n\)</span> values. Hence , by the Central Limit Theorem, for <span class="math inline">\(n\)</span> is sufficiently large, <span class="math inline">\(\hat{p}\)</span> is approximately normally distributed with <strong>mean</strong> <span class="math inline">\(\mu_{\hat{p}} = p\)</span> and <strong>variance</strong> <span class="math inline">\(\sigma^2_{\hat{p}} = \frac{p(1-p)}{n}.\)</span> Therefore <span class="math display">\[ Z = \frac{\hat{p}-p}{\sqrt{p(1-p)/n}} \sim \mathcal{N}(0,1)\]</span> where <span class="math inline">\(z_{\alpha/2}\)</span> is the <span class="math inline">\(z\)</span>-value leaving an area of <span class="math inline">\(\alpha/2\)</span> to the right.</p>
 <p><em>Note:</em> If we don’t have the exact <span class="math inline">\(p\)</span>, we will use <span class="math inline">\(\hat{p}\)</span> to approximate <span class="math inline">\(p\)</span> under the radical sign.</p>
 <section id="large-sample-confidence-interval-on-p" class="level3">
 <h3 class="anchored" data-anchor-id="large-sample-confidence-interval-on-p">Large-Sample Confidence Interval on <span class="math inline">\(p\)</span></h3>
@@ -521,7 +521,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <p><strong>Revisit Example 1</strong>.In a random sample of <span class="math inline">\(n=500\)</span> families owning television sets in the city of Hamilton, Canada, it is found that <span class="math inline">\(x=340\)</span> subscribe to HBO.</p>
 <p>Suppose we make the conjecture, the proportion of families with television sets in this city that subscribe to HBO is 0.7.</p>
 <p><strong>Parameter</strong>:</p>
-<p>The population parameter of interest is the <strong>proportion</strong>, <span class="math inline">\(p\)</span>, of families with television sets in Hamilton, Canada that subscribe to HBO <strong>Hypotheses</strong>:</p>
+<p>The population parameter of interest is the <strong>proportion</strong>, <span class="math inline">\(p\)</span>, of families with television sets in Hamilton, Canada that subscribe to HBO</p>
+<p><strong>Hypotheses</strong>:</p>
 <p><span class="math display">\[\begin{align*}
 H_0: p &amp; = 0.7, \\
 H_1: p &amp; \ne 0.7.
@@ -530,7 +531,7 @@ H_1: p &amp; \ne 0.7.
 <p>In a random sample of <span class="math inline">\(n=500\)</span> families owning television sets in the city of Hamilton, Canada, it is found that <span class="math inline">\(x=340\)</span> subscribe to HBO. The observed sample proportion is <span class="math inline">\(\hat{p} = 340/500 \approx 0.68\)</span>.</p>
 <p><strong>Test statistic</strong></p>
 <p>A standardized test statistic is typically used. Assuming <span class="math inline">\(n = 500\)</span> is large enough to apply the Central Limit Theorem, the sampling distribution of <span class="math inline">\(\hat{p}\)</span> will be approximately normal. That is</p>
-<p><span class="math inline">\(\hat{p} \sim \mathcal{N}(0.68, 0.7\times(1-0.7)/500) = \mathcal{N}(0.68, 0.02049^2)\)</span></p>
+<p><span class="math inline">\(\hat{p} \sim \mathcal{N}(0.7, 0.7\times(1-0.7)/500) = \mathcal{N}(0.7, 0.02049^2)\)</span></p>
 <p><span class="math display">\[ z = \frac{\hat{p}-\mu}{\sigma_{\hat{p}}} = \frac{0.68-0.7}{0.02049} \approx -0.9759\]</span></p>
 <p><strong>p-value</strong></p>
 <p><span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution is used to find the p-value, or probability, of obtaining the observed statistic, <span class="math inline">\(z \approx -0.9759\)</span> , or one more extreme in the direction of the alternative hypothesis.</p>
