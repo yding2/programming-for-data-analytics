@@ -422,7 +422,7 @@ window.Quarto = {
 </section>
 <section id="the-f-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="the-f-distribution">The <span class="math inline">\(F\)</span> Distribution</h3>
-<p>Suppose that we have a random sample of <span class="math inline">\(n_1\)</span> observations from the <strong>normal population</strong> <span class="math inline">\(N(\mu_1,\sigma_1^2)\)</span> and an independent random sample of <span class="math inline">\(n_2\)</span> observations from a second <strong>normal population</strong> <span class="math inline">\(N(\mu_2,\sigma_2^2)\)</span>. Then, <span class="math display">\[F_{n_1-1,n_2-1} = \frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} =  \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2},\]</span> follows an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(v_1 = n_1-1\)</span> and <span class="math inline">\(v_2 = n_2-1\)</span>, where <span class="math inline">\(S_1\)</span>, <span class="math inline">\(S_2\)</span> and <span class="math inline">\(\sigma_1\)</span>, <span class="math inline">\(\sigma_2\)</span> are sample and population standard deviations of sample 1 and sample 2, respectively. This <span class="math inline">\(F\)</span> statistic can be used to compare variances from two independent groups.</p>
+<p>Suppose that we have a random sample of <span class="math inline">\(n_1\)</span> observations from the <strong>normal population</strong> <span class="math inline">\(\mathcal{N}(\mu_1,\sigma_1^2)\)</span> and an independent random sample of <span class="math inline">\(n_2\)</span> observations from a second <strong>normal population</strong> <span class="math inline">\(\mathcal{N}(\mu_2,\sigma_2^2)\)</span>. Then, <span class="math display">\[F_{n_1-1,n_2-1} = \frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} =  \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2},\]</span> follows an <span class="math inline">\(F\)</span> distribution with <span class="math inline">\(v_1 = n_1-1\)</span> and <span class="math inline">\(v_2 = n_2-1\)</span>, where <span class="math inline">\(S_1\)</span>, <span class="math inline">\(S_2\)</span> and <span class="math inline">\(\sigma_1\)</span>, <span class="math inline">\(\sigma_2\)</span> are sample and population standard deviations of sample 1 and sample 2, respectively. This <span class="math inline">\(F\)</span> statistic can be used to compare variances from two independent groups.</p>
 <p>Here are some density curves of <span class="math inline">\(F\)</span> distribution with different degrees of freedom:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -618,7 +618,7 @@ Construct a 90% confidence interval for the variance of <code>Sepal.Length</code
 <p>Since <span class="math inline">\(\alpha = 0.10\)</span>, we use <span class="math inline">\(\alpha/2 = 0.05\)</span>. With <span class="math inline">\(n=150\)</span>, the degrees of freedom are <span class="math inline">\(n-1=149\)</span>. Therefore, we need <span class="math inline">\(\chi^2_{0.95,149}\)</span> and <span class="math inline">\(\chi^2_{0.05,149}\)</span>.</p>
 </div>
 </div>
-<div class="quiz-question" data-answer="a">
+<div class="quiz-question" data-answer="b">
 <p>
 <strong>4)</strong> Suppose the sample variance is 0.69. Which of the following is the 90% confidence interval?
 </p>
@@ -626,7 +626,7 @@ Construct a 90% confidence interval for the variance of <code>Sepal.Length</code
 <p class="feedback">
 </p>
 <div class="explanation" style="display:none;">
-<p>For one population variance, the confidence interval is based on <span class="math inline">\((n-1)s^2\)</span>. Here, <span class="math inline">\(n-1=149\)</span>, <span class="math inline">\(\alpha/2=0.05\)</span>, and <span class="math inline">\(s^2=0.69\)</span>. Using the right-tail Chi-squared notation from this handout, the interval is <span class="math inline">\([149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]\)</span>.</p>
+<p>For one population variance, the confidence interval is based on <span class="math inline">\((n-1)s^2\)</span>. Here, <span class="math inline">\(n-1=149\)</span>, <span class="math inline">\(\alpha/2=0.05\)</span>, and <span class="math inline">\(s^2=0.69\)</span>. Using the right-tail Chi-squared notation from this handout, the interval is <span class="math inline">\([149(0.69)/\chi^2_{0.05,149},\;149(0.69)/\chi^2_{0.95,149}]\)</span>.</p>
 </div>
 </div>
 <p>

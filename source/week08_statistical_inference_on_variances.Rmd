@@ -92,7 +92,7 @@ pchisq(chiCriVal,df = n-1)
 
 ### The $F$ Distribution
 
-Suppose that we have a random sample of $n_1$ observations from the **normal population** $N(\mu_1,\sigma_1^2)$ and an independent random sample of $n_2$ observations from a second **normal population** $N(\mu_2,\sigma_2^2)$. Then,
+Suppose that we have a random sample of $n_1$ observations from the **normal population** $\mathcal{N}(\mu_1,\sigma_1^2)$ and an independent random sample of $n_2$ observations from a second **normal population** $\mathcal{N}(\mu_2,\sigma_2^2)$. Then,
 	$$F_{n_1-1,n_2-1} = \frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} =  \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2},$$
 	follows an $F$ distribution with $v_1 = n_1-1$ and $v_2 = n_2-1$, where $S_1$, $S_2$  and $\sigma_1$, $\sigma_2$ are sample and population standard deviations of sample 1 and sample 2, respectively. This $F$ statistic can be used to compare variances from two independent groups.
 	
@@ -366,7 +366,7 @@ Since $\alpha = 0.10$, we use $\alpha/2 = 0.05$. With $n=150$, the degrees of fr
 </div>
 </div>
 
-<div class="quiz-question" data-answer="a">
+<div class="quiz-question" data-answer="b">
 <p><strong>4)</strong> Suppose the sample variance is 0.69. Which of the following is the 90% confidence interval?</p>
 <label><input type="radio" name="onevar-q4" value="a"> a) $[149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]$</label><br>
 <label><input type="radio" name="onevar-q4" value="b"> b) $[149(0.69)/\chi^2_{0.05,149},\;149(0.69)/\chi^2_{0.95,149}]$</label><br>
@@ -374,7 +374,7 @@ Since $\alpha = 0.10$, we use $\alpha/2 = 0.05$. With $n=150$, the degrees of fr
 <label><input type="radio" name="onevar-q4" value="d"> d) $[150(0.69)/\chi^2_{0.05,150},\;150(0.69)/\chi^2_{0.95,150}]$</label>
 <p class="feedback"></p>
 <div class="explanation" style="display:none;">
-For one population variance, the confidence interval is based on $(n-1)s^2$. Here, $n-1=149$, $\alpha/2=0.05$, and $s^2=0.69$. Using the right-tail Chi-squared notation from this handout, the interval is $[149(0.69)/\chi^2_{0.95,149},\;149(0.69)/\chi^2_{0.05,149}]$.
+For one population variance, the confidence interval is based on $(n-1)s^2$. Here, $n-1=149$, $\alpha/2=0.05$, and $s^2=0.69$. Using the right-tail Chi-squared notation from this handout, the interval is $[149(0.69)/\chi^2_{0.05,149},\;149(0.69)/\chi^2_{0.95,149}]$.
 </div>
 </div>
 
