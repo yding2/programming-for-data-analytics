@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linear Regression – Programming for Data Analytics/Cyber Security</title>
+<title>Homework 4 Solution – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -108,10 +108,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -303,7 +329,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link active" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression</a></li>
+  <li><a href="#part-i.-changing-the-author-field-and-file-name." id="toc-part-i.-changing-the-author-field-and-file-name." class="nav-link active" data-scroll-target="#part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</a></li>
+  <li><a href="#part-ii.-confidence-interval-hypothesis-testing-50-points" id="toc-part-ii.-confidence-interval-hypothesis-testing-50-points" class="nav-link" data-scroll-target="#part-ii.-confidence-interval-hypothesis-testing-50-points">Part II. Confidence Interval &amp; Hypothesis Testing (50 points)</a>
+  <ul class="collapse">
+  <li><a href="#question-1.-10-points-confidence-interval-for-one-population-mean" id="toc-question-1.-10-points-confidence-interval-for-one-population-mean" class="nav-link" data-scroll-target="#question-1.-10-points-confidence-interval-for-one-population-mean">Question 1. (10 points) Confidence Interval for One Population Mean</a></li>
+  <li><a href="#question-2.-10-points-hypothesis-test-for-one-population-mean" id="toc-question-2.-10-points-hypothesis-test-for-one-population-mean" class="nav-link" data-scroll-target="#question-2.-10-points-hypothesis-test-for-one-population-mean">Question 2. (10 points) Hypothesis Test for One Population Mean</a></li>
+  <li><a href="#question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" id="toc-question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" class="nav-link" data-scroll-target="#question-3.-confidence-interval-and-hypothesis-test-for-two-population-means">Question 3. Confidence Interval and Hypothesis Test for Two Population Means</a></li>
+  </ul></li>
+  <li><a href="#part-iii.-matching-the-terms-20-points" id="toc-part-iii.-matching-the-terms-20-points" class="nav-link" data-scroll-target="#part-iii.-matching-the-terms-20-points">Part III. Matching the Terms (20 points)</a>
+  <ul class="collapse">
+  <li><a href="#question-1.-air-quality-study-in-urban-schools-10-points" id="toc-question-1.-air-quality-study-in-urban-schools-10-points" class="nav-link" data-scroll-target="#question-1.-air-quality-study-in-urban-schools-10-points">Question 1. Air Quality Study in Urban Schools (10 points)</a></li>
+  <li><a href="#question-2.-type-i-and-type-ii-errors-10-points" id="toc-question-2.-type-i-and-type-ii-errors-10-points" class="nav-link" data-scroll-target="#question-2.-type-i-and-type-ii-errors-10-points">Question 2. Type I and type II errors (10 points)</a></li>
+  </ul></li>
+  <li><a href="#part-iv.-multiple-choices-30-points" id="toc-part-iv.-multiple-choices-30-points" class="nav-link" data-scroll-target="#part-iv.-multiple-choices-30-points">Part IV. Multiple Choices (30 points)</a></li>
   </ul>
 </nav>
     </div>
@@ -312,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Linear Regression</h1>
+<h1 class="title">Homework 4 Solution</h1>
 </div>
 
 
@@ -329,228 +367,324 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="multiple-linear-regression" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h3>
-<p>Let’s read the dataset first.</p>
-<div id="cell-4" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the data set from the website of our textbook</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>auto <span class="op">=</span> pd.read_csv(<span class="st">'https://www.statlearning.com/s/Auto.csv'</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Here I dropped the records with horsepower = ?</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>auto <span class="op">=</span> auto.drop(labels<span class="op">=</span>[<span class="dv">32</span>,<span class="dv">126</span>,<span class="dv">330</span>,<span class="dv">336</span>,<span class="dv">354</span>], axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import needed packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Let’s split the data set into two parts <em>auto_training</em> and <em>auto_test</em>.</p>
-<div id="cell-6" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>auto_training <span class="op">=</span> auto.sample(frac <span class="op">=</span> <span class="fl">0.8</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>auto_test <span class="op">=</span> auto.drop(auto_training.index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="part-i.-changing-the-author-field-and-file-name." class="level2">
+<h2 class="anchored" data-anchor-id="part-i.-changing-the-author-field-and-file-name.">Part I. Changing the author field and file name.</h2>
+<ol type="1">
+<li>Change the <code>author</code> field to your name.</li>
+<li>Rename this file as <code>HW4_YourFirstInitialYourLastName.Rmd</code> (for example, <code>HW4_YDing.Rmd</code>).</li>
+<li>Complete all questions in the designated code and response spaces.</li>
+<li>Knit the completed file to HTML.</li>
+<li>Submit both the completed <code>.Rmd</code> file and the knitted <code>.html</code> file. Make sure both files open correctly before submitting.</li>
+</ol>
+</section>
+<section id="part-ii.-confidence-interval-hypothesis-testing-50-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii.-confidence-interval-hypothesis-testing-50-points">Part II. Confidence Interval &amp; Hypothesis Testing (50 points)</h2>
+<section id="question-1.-10-points-confidence-interval-for-one-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-10-points-confidence-interval-for-one-population-mean">Question 1. (10 points) Confidence Interval for One Population Mean</h3>
+<p>The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">64</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="dv">206</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>loBound <span class="ot">&lt;-</span> xbar <span class="sc">-</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n<span class="dv">-1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>upBound <span class="ot">&lt;-</span> xbar <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n<span class="dv">-1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># choose the predictor</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.DataFrame(auto_training[[<span class="st">'cylinders'</span>,<span class="st">'displacement'</span>,<span class="st">'horsepower'</span>,<span class="st">'weight'</span>,<span class="st">'acceleration'</span>,<span class="st">'year'</span>,<span class="st">'origin'</span>]])</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># choose the response</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> auto_training[[<span class="st">'mpg'</span>]]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add a constant to the predictor</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> sm.add_constant(X)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># OLS stands for “Ordinary Least Squares”</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># `horsepower` consider as a object, so I use astype to convert it to numeric</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>model01 <span class="op">=</span> sm.OLS(y, X.astype(<span class="bu">float</span>)).fit()</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># To obtain the results of the regression model, run the `summary()` command on the model</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>model01.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<table class="simpletable caption-top table table-sm table-striped small">
-<caption>OLS Regression Results</caption>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Dep. Variable:</th>
-<td>mpg</td>
-<th data-quarto-table-cell-role="th">R-squared:</th>
-<td>0.818</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Model:</th>
-<td>OLS</td>
-<th data-quarto-table-cell-role="th">Adj. R-squared:</th>
-<td>0.814</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Method:</th>
-<td>Least Squares</td>
-<th data-quarto-table-cell-role="th">F-statistic:</th>
-<td>196.1</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Date:</th>
-<td>Tue, 31 Mar 2026</td>
-<th data-quarto-table-cell-role="th">Prob (F-statistic):</th>
-<td>4.33e-109</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Time:</th>
-<td>21:21:07</td>
-<th data-quarto-table-cell-role="th">Log-Likelihood:</th>
-<td>-821.26</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">No. Observations:</th>
-<td>314</td>
-<th data-quarto-table-cell-role="th">AIC:</th>
-<td>1659.</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Df Residuals:</th>
-<td>306</td>
-<th data-quarto-table-cell-role="th">BIC:</th>
-<td>1689.</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Df Model:</th>
-<td>7</td>
-<th data-quarto-table-cell-role="th"></th>
-<td></td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Covariance Type:</th>
-<td>nonrobust</td>
-<th data-quarto-table-cell-role="th"></th>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top table table-sm table-striped small">
-<tbody>
-<tr class="odd">
-<td></td>
-<th data-quarto-table-cell-role="th">coef</th>
-<th data-quarto-table-cell-role="th">std err</th>
-<th data-quarto-table-cell-role="th">t</th>
-<th data-quarto-table-cell-role="th">P&gt;|t|</th>
-<th data-quarto-table-cell-role="th">[0.025</th>
-<th data-quarto-table-cell-role="th">0.975]</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">const</th>
-<td>-18.1994</td>
-<td>5.260</td>
-<td>-3.460</td>
-<td>0.001</td>
-<td>-28.550</td>
-<td>-7.849</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">cylinders</th>
-<td>-0.3952</td>
-<td>0.354</td>
-<td>-1.116</td>
-<td>0.265</td>
-<td>-1.092</td>
-<td>0.302</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">displacement</th>
-<td>0.0158</td>
-<td>0.008</td>
-<td>1.899</td>
-<td>0.059</td>
-<td>-0.001</td>
-<td>0.032</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">horsepower</th>
-<td>-0.0094</td>
-<td>0.015</td>
-<td>-0.610</td>
-<td>0.543</td>
-<td>-0.040</td>
-<td>0.021</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">weight</th>
-<td>-0.0062</td>
-<td>0.001</td>
-<td>-8.697</td>
-<td>0.000</td>
-<td>-0.008</td>
-<td>-0.005</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">acceleration</th>
-<td>0.1817</td>
-<td>0.114</td>
-<td>1.599</td>
-<td>0.111</td>
-<td>-0.042</td>
-<td>0.405</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">year</th>
-<td>0.7213</td>
-<td>0.058</td>
-<td>12.509</td>
-<td>0.000</td>
-<td>0.608</td>
-<td>0.835</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">origin</th>
-<td>1.5501</td>
-<td>0.321</td>
-<td>4.823</td>
-<td>0.000</td>
-<td>0.918</td>
-<td>2.182</td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="simpletable caption-top table table-sm table-striped small">
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Omnibus:</th>
-<td>27.498</td>
-<th data-quarto-table-cell-role="th">Durbin-Watson:</th>
-<td>2.096</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Prob(Omnibus):</th>
-<td>0.000</td>
-<th data-quarto-table-cell-role="th">Jarque-Bera (JB):</th>
-<td>46.367</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Skew:</th>
-<td>0.538</td>
-<th data-quarto-table-cell-role="th">Prob(JB):</th>
-<td>8.54e-11</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">Kurtosis:</th>
-<td>4.544</td>
-<th data-quarto-table-cell-role="th">Cond. No.</th>
-<td>8.72e+04</td>
-</tr>
-</tbody>
-</table>
-<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 8.72e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+<blockquote class="blockquote">
+<p>The 95% confidence interval is (202.9787931, 209.0212069).</p>
+</blockquote>
+</section>
+<section id="question-2.-10-points-hypothesis-test-for-one-population-mean" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-10-points-hypothesis-test-for-one-population-mean">Question 2. (10 points) Hypothesis Test for One Population Mean</h3>
+<p>A coffee shop claims that the average waiting time for an order is 5 minutes. The waiting times, in minutes, for a random sample of customers are given below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>waiting_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.2</span>, <span class="fl">6.1</span>, <span class="fl">4.8</span>, <span class="fl">5.9</span>, <span class="fl">6.4</span>, <span class="fl">5.5</span>, <span class="fl">4.9</span>, <span class="fl">6.2</span>, <span class="fl">5.7</span>, <span class="fl">5.3</span>, <span class="fl">6.0</span>, <span class="fl">4.7</span>, <span class="fl">5.8</span>, <span class="fl">6.3</span>, <span class="fl">5.4</span>, <span class="fl">5.6</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> pd.DataFrame(auto_test[[<span class="st">'cylinders'</span>,<span class="st">'displacement'</span>,<span class="st">'horsepower'</span>,<span class="st">'weight'</span>,<span class="st">'acceleration'</span>,<span class="st">'year'</span>,<span class="st">'origin'</span>]])</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> sm.add_constant(X_test.astype(<span class="bu">float</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> model01.predict(X_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>We can use <em>sklearn</em> package to calculate the assessment measures directly.</p>
-<div id="cell-10" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate MAE, MSE, RMSE</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(metrics.mean_absolute_error(y_true <span class="op">=</span> auto_test[[<span class="st">'mpg'</span>]], y_pred <span class="op">=</span> ypred))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(metrics.mean_squared_error(y_true <span class="op">=</span> auto_test[[<span class="st">'mpg'</span>]], y_pred <span class="op">=</span> ypred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>At the <span class="math inline">\(\alpha=0.05\)</span> significance level, test whether the true mean waiting time is greater than 5 minutes. Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.</p>
+<p><strong>Hypotheses</strong></p>
+<p><span class="math display">\[\begin{align*}
+H_0: &amp; \mu =5\\
+H_1: &amp; \mu &gt; 5
+\end{align*}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(waiting_time,<span class="at">mu =</span> <span class="dv">5</span>,<span class="at">alternative =</span> <span class="st">"greater"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>6.357588388270444
-60.94616016277276</code></pre>
+<pre><code>
+    One Sample t-test
+
+data:  waiting_time
+t = 4.5879, df = 15, p-value = 0.0001777
+alternative hypothesis: true mean is greater than 5
+95 percent confidence interval:
+ 5.378463      Inf
+sample estimates:
+mean of x 
+   5.6125 </code></pre>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>As p-value is less than 0, we should reject the null hypothesis. The evidence supports true mean waiting time is greater than 5 minutes.</p>
+</blockquote>
+</section>
+<section id="question-3.-confidence-interval-and-hypothesis-test-for-two-population-means" class="level3">
+<h3 class="anchored" data-anchor-id="question-3.-confidence-interval-and-hypothesis-test-for-two-population-means">Question 3. Confidence Interval and Hypothesis Test for Two Population Means</h3>
+<p>A researcher wants to compare exam scores between students using a traditional study method and students using a new study method. The exam scores for two independent groups of students are given below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>traditional <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>, <span class="dv">68</span>, <span class="dv">81</span>, <span class="dv">75</span>, <span class="dv">70</span>, <span class="dv">77</span>, <span class="dv">65</span>, <span class="dv">83</span>, <span class="dv">74</span>, <span class="dv">69</span>, <span class="dv">78</span>, <span class="dv">71</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">67</span>, <span class="dv">80</span>, <span class="dv">72</span>, <span class="dv">66</span>, <span class="dv">79</span>, <span class="dv">75</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>new_method <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">82</span>, <span class="dv">75</span>, <span class="dv">84</span>, <span class="dv">77</span>, <span class="dv">80</span>, <span class="dv">73</span>, <span class="dv">85</span>, <span class="dv">79</span>, <span class="dv">76</span>, <span class="dv">81</span>, <span class="dv">74</span>, <span class="dv">83</span>, <span class="dv">78</span>, <span class="dv">86</span>, <span class="dv">77</span>, <span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">75</span>, <span class="dv">84</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>At the <span class="math inline">\(\alpha=0.05\)</span> significance level, test whether the population mean exam scores for the two study methods are different.</p>
+<ol type="a">
+<li>(15 points) Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.</li>
+</ol>
+<p><strong>Hypotheses</strong></p>
+<p><span class="math display">\[\begin{align*}
+H_0: &amp; \mu_{\text{tra}} = \mu_{\text{new}}\\
+H_1: &amp; \mu_{\text{tra}} \ne \mu_{\text{new}}
+\end{align*}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(traditional,new_method)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  traditional and new_method
+t = -4.0922, df = 35.172, p-value = 0.0002373
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -8.826427 -2.973573
+sample estimates:
+mean of x mean of y 
+    73.55     79.45 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Test statistic is <span class="math inline">\(-4.0922\)</span> and the p value is <span class="math inline">\(0.0002373\)</span>. We should reject the null hypothesis and the two methods have difference.</p>
+</blockquote>
+<ol start="2" type="a">
+<li>(15 points) Also construct a 95% confidence interval for the difference in population means and explain whether the confidence interval is consistent with the conclusion from the hypothesis test.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reslut <span class="ot">&lt;-</span> <span class="fu">t.test</span>(traditional,new_method)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>reslut<span class="sc">$</span>conf.int[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -8.826427</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reslut<span class="sc">$</span>conf.int[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.973573</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The 95% confidence interval is (-8.8264267, -2.9735733). We can see the whole interval is less than 0, which means we should reject the null hypothesis, which indicate the two methods are different.</p>
+</blockquote>
+</section>
+</section>
+<section id="part-iii.-matching-the-terms-20-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii.-matching-the-terms-20-points">Part III. Matching the Terms (20 points)</h2>
+<section id="question-1.-air-quality-study-in-urban-schools-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-1.-air-quality-study-in-urban-schools-10-points">Question 1. Air Quality Study in Urban Schools (10 points)</h3>
+<p>A public health study examined the indoor air quality in elementary schools in Chicago, USA. One important measure of air quality is the concentration of fine particulate matter (PM2.5), measured in micrograms per cubic meter (<span class="math inline">\(\mu g/m^3\)</span>).</p>
+<section id="terms-inferential-statistic-descriptive-statistic-population-parameter-sample" class="level4">
+<h4 class="anchored" data-anchor-id="terms-inferential-statistic-descriptive-statistic-population-parameter-sample">Terms: Inferential statistic, Descriptive statistic, Population, Parameter, Sample</h4>
+</section>
+<section id="descriptions" class="level4">
+<h4 class="anchored" data-anchor-id="descriptions">Descriptions:</h4>
+<ol type="a">
+<li>The true mean PM2.5 concentration for all elementary schools in Chicago, <span class="math inline">\(\mu\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Parameter </span></p>
+</blockquote>
+<ol start="2" type="a">
+<li>All elementary schools in Chicago, USA</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Population </span></p>
+</blockquote>
+<ol start="3" type="a">
+<li>The 95% confidence interval for the population mean PM2.5 concentration, (11.3,13.5) <span class="math inline">\(\mu g/m^3\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Inferential statistic </span></p>
+</blockquote>
+<ol start="4" type="a">
+<li>The 52 randomly selected elementary schools included in the study</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Sample </span></p>
+</blockquote>
+<ol start="5" type="a">
+<li>The sample mean PM2.5 concentration, <span class="math inline">\(\bar{x} = 12.4 \ \mu g/m^3\)</span>.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Descriptive statistic </span></p>
+</blockquote>
+</section>
+</section>
+<section id="question-2.-type-i-and-type-ii-errors-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="question-2.-type-i-and-type-ii-errors-10-points">Question 2. Type I and type II errors (10 points)</h3>
+<p>A university is testing a new AI-based tutoring system to see whether it improves students’ final exam scores. The school will adopt the system only if it increases the average score by at least 5 points.</p>
+<p>They conduct a hypothesis test on the population mean improvement in scores, denoted by <span class="math inline">\(\mu\)</span>.</p>
+<section id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence" class="level4">
+<h4 class="anchored" data-anchor-id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence">Terms: Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence</h4>
+</section>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description:</h4>
+<ol type="a">
+<li>Spend more effort on investigating and testing the AI-based tutoring system, even though it truly improves scores by at least 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Type I error consequence </span></p>
+</blockquote>
+<ol start="2" type="a">
+<li><span class="math inline">\(H_0: \mu = 5, \qquad H_1: \mu &lt;5\)</span></li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Hypothese </span></p>
+</blockquote>
+<ol start="3" type="a">
+<li>Decide based on the hypothesis test that the average improvement is at least 5 points, but in reality the improvement is less than 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Type II error </span></p>
+</blockquote>
+<ol start="4" type="a">
+<li>Adopt the tutoring system campus-wide claiming it significantly improves performance, but students see little to no improvement.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Type II error consequence </span></p>
+</blockquote>
+<ol start="5" type="a">
+<li>Decide based on the hypothesis test that the improvement is less than 5 points, but in reality the improvement is at least 5 points.</li>
+</ol>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> Type I error </span></p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="part-iv.-multiple-choices-30-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv.-multiple-choices-30-points">Part IV. Multiple Choices (30 points)</h2>
+<ol type="1">
+<li>(3 points) To find a confidence interval for a population mean when the population variance is known, which of the following should we use?</li>
+</ol>
+<p>Suppose <span class="math inline">\(X_1,\ldots,X_{100}\)</span> is a random sample of size 100 from an unknown distribution.</p>
+<p>A. The normal distribution (with the Z statistic)</p>
+<p>B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<p>C. The t-distribution (with the T statistic)</p>
+<p>D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span></p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> A </span></p>
+</blockquote>
+<ol start="2" type="1">
+<li>(3 points) To find a confidence interval for a population mean when the population variance is unknown, which of the following should we use?</li>
+</ol>
+<p>Suppose <span class="math inline">\(X_1,\ldots,X_{20}\)</span> is a random sample of size 20 from an unknown distribution.</p>
+<p>A. The normal distribution (with the Z statistic)</p>
+<p>B. The normal distribution (with the Z statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<p>C. The t-distribution (with the T statistic)</p>
+<p>D. The t-distribution (with the T statistic), but only if <span class="math inline">\(X\)</span> comes from a normal distribution</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> D </span></p>
+</blockquote>
+<ol start="3" type="1">
+<li>(12 points) The following is an output of <code>t.test</code> on the difference of two samples, please answer the following questions.</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  sampleA and sampleB
+t = -2.8568, df = 9.8681, p-value = 0.01727
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.33054137 -0.04056974
+sample estimates:
+mean of x mean of y 
+0.3877778 0.5733333 </code></pre>
+</div>
+</div>
+<ol type="i">
+<li>What is the value of p-value?</li>
+</ol>
+<p>&nbsp;&nbsp; A. -2.8568 &nbsp;&nbsp;&nbsp;&nbsp; B. 9.8681 &nbsp;&nbsp;&nbsp;&nbsp; C. 0.01727 &nbsp;&nbsp;&nbsp;&nbsp; D. 0</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> C </span></p>
+</blockquote>
+<ol start="2" type="i">
+<li>Based on the t-test result, should we reject or not reject the null hypothesis?</li>
+</ol>
+<p>A. Reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>B. Fail to reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>C. Reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<p>D. Fail to reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> B </span></p>
+</blockquote>
+<ol start="3" type="i">
+<li>Does it match the result of the confidence interval?</li>
+</ol>
+<p>A. Yes, as p-value is not in the confidence interval.</p>
+<p>B. Yes, as 0 is not in the confidence interval.</p>
+<p>C. No, as t statistic is outside of the interval.</p>
+<p>D. No, as p-value is outside of the interval.</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> B </span></p>
+</blockquote>
+<ol start="4" type="i">
+<li>If <span class="math inline">\(\alpha = 0.01\)</span>,should we reject or not reject the null hypothesis?</li>
+</ol>
+<p>A. Reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>B. Fail to reject, as p-value is greater than <span class="math inline">\(\alpha\)</span>.</p>
+<p>C. Reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<p>D. Fail to reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> B </span></p>
+</blockquote>
+<ol start="4" type="1">
+<li>(3 points) A study examined the quality of compost produced by home compost bins in Galicia, Spain. One measure of compost quality is moisture content, or the percentage of water in the compost. In a sample of 87 randomly selected home compost bins in Galicia, it is found that sample mean moisture content is <span class="math inline">\(\bar{x}=68.1.\)</span> The 95% confidence interval is (66.1, 70.1) and can be interpreted as the researchers are 95% confident that the population mean moisture of _____ is between 66.1 and 70.1.</li>
+</ol>
+<p>A. all home compost bins in Spain</p>
+<p>B. sampled home compost bins in Spain</p>
+<p>C. all home compost bins in Galicia, Spain</p>
+<p>D. sampled home compost bins in Galicia, Spain</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> C </span></p>
+</blockquote>
+<ol start="5" type="1">
+<li>(3 points) Suppose base on the sample in Question 4, we make the conjecture, population mean moisture in Galicia less than 70. What are the hypotheses?</li>
+</ol>
+<p>A. <span class="math inline">\(H_0: \mu = 70, H_1: \mu &lt; 70\)</span></p>
+<p>B. <span class="math inline">\(H_0: \mu = 70, H_1: \mu &gt; 70\)</span></p>
+<p>C. <span class="math inline">\(H_0: \mu &lt; 70, H_1: \mu \ge 70\)</span></p>
+<p>D. <span class="math inline">\(H_0: \mu &lt; 70, H_1: \mu  = 70\)</span></p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> A </span></p>
+</blockquote>
+<ol start="6" type="1">
+<li>(3 points) If the p-value is very small (close to 0), the decision from the hypothesis test is to _____.</li>
+</ol>
+<p>A. reject the null hypothesis</p>
+<p>B. fail to reject the null hypothesis</p>
+<p>C. no conclusion</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> A </span></p>
+</blockquote>
+<ol start="7" type="1">
+<li>(3 points) Let <span class="math inline">\(\mu_{2025} =\)</span> mean miles per gallon for all users who drive 20225Honda CRV AWD vehicles and <span class="math inline">\(\mu_{2026} =\)</span> mean miles per gallon for all users who drive 2026 Honda CRV AWD vehicles. A hypothesis test for two independent population means can be used to determine whether or not the data provide statistical evidence of a difference in the mean miles per gallon between 2025 and 2026 CRVs. <span class="math display">\[H_0: \mu_{2025} - \mu_{2026} =0, \qquad H_1: \mu_{2025}- \mu_{2026}  \ne 0\]</span> A 95% confidence interval for difference in means, <span class="math inline">\(\mu_{2025}-\mu_{2026}\)</span>, is (0.05, 8.75). Which of the following is correct?</li>
+</ol>
+<p>A. reject the null hypothesis</p>
+<p>B. fail to reject the null hypothesis</p>
+<p>C. no conclusion</p>
+<blockquote class="blockquote">
+<p><span style="color: magenta;"> B </span></p>
+</blockquote>
 
 
 </section>

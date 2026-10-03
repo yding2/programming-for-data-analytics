@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -303,6 +303,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../homework/hw04.html">
  <span class="dropdown-text">Homework 4</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw04_Solution.html">
+ <span class="dropdown-text">Homework 4 Solution</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -445,12 +449,9 @@ window.Quarto = {
 <li>Include the package and data; Let’s split the data set into two parts <code>AutoTraining</code> and <code>AutoTest</code></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ISLR' was built under R version 4.5.3</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Auto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Auto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      mpg          cylinders      displacement     horsepower        weight    
  Min.   : 9.00   Min.   :3.000   Min.   : 68.0   Min.   : 46.0   Min.   :1613  
@@ -469,15 +470,15 @@ window.Quarto = {
  Max.   :24.80   Max.   :82.00   Max.   :3.000   chevrolet chevette:  4  
                                                  (Other)           :365  </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(Auto), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>AutoTraining <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">1</span>,]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>AutoTest <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(Auto), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>AutoTraining <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">1</span>,]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>AutoTest <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Produce a scatter plot matrix which includes all of the variables in the data set.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>],<span class="at">lower.panel =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>],<span class="at">lower.panel =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -491,34 +492,34 @@ window.Quarto = {
 <li>Compute the matrix of <em>correlations</em> between the variables using the function <code>cor()</code>. You will need to exclude the <code>name</code> variable, which is <em>qualitative</em>.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">subset</span>(AutoTraining, <span class="at">select=</span><span class="sc">-</span>name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">subset</span>(AutoTraining, <span class="at">select=</span><span class="sc">-</span>name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    mpg  cylinders displacement horsepower     weight
-mpg           1.0000000 -0.7874826   -0.8151152 -0.7797571 -0.8384764
-cylinders    -0.7874826  1.0000000    0.9530855  0.8450107  0.8888890
-displacement -0.8151152  0.9530855    1.0000000  0.8925927  0.9268047
-horsepower   -0.7797571  0.8450107    0.8925927  1.0000000  0.8582007
-weight       -0.8384764  0.8888890    0.9268047  0.8582007  1.0000000
-acceleration  0.4213537 -0.5137389   -0.5459191 -0.6863091 -0.4065760
-year          0.5706075 -0.3722463   -0.3736082 -0.4074705 -0.3048977
-origin        0.5628321 -0.5677820   -0.6101385 -0.4462770 -0.5789682
+mpg           1.0000000 -0.7677036   -0.8021802 -0.7811514 -0.8283164
+cylinders    -0.7677036  1.0000000    0.9503248  0.8472685  0.8945638
+displacement -0.8021802  0.9503248    1.0000000  0.8891161  0.9360192
+horsepower   -0.7811514  0.8472685    0.8891161  1.0000000  0.8697816
+weight       -0.8283164  0.8945638    0.9360192  0.8697816  1.0000000
+acceleration  0.3913272 -0.4822359   -0.5114874 -0.6592325 -0.3780588
+year          0.5898034 -0.3384095   -0.3610290 -0.4056175 -0.3082160
+origin        0.5518204 -0.5374863   -0.5972263 -0.4376468 -0.5678250
              acceleration       year     origin
-mpg             0.4213537  0.5706075  0.5628321
-cylinders      -0.5137389 -0.3722463 -0.5677820
-displacement   -0.5459191 -0.3736082 -0.6101385
-horsepower     -0.6863091 -0.4074705 -0.4462770
-weight         -0.4065760 -0.3048977 -0.5789682
-acceleration    1.0000000  0.2813449  0.2081350
-year            0.2813449  1.0000000  0.1649916
-origin          0.2081350  0.1649916  1.0000000</code></pre>
+mpg             0.3913272  0.5898034  0.5518204
+cylinders      -0.4822359 -0.3384095 -0.5374863
+displacement   -0.5114874 -0.3610290 -0.5972263
+horsepower     -0.6592325 -0.4056175 -0.4376468
+weight         -0.3780588 -0.3082160 -0.5678250
+acceleration    1.0000000  0.2752923  0.1864461
+year            0.2752923  1.0000000  0.1656041
+origin          0.1864461  0.1656041  1.0000000</code></pre>
 </div>
 </div>
 <ul>
 <li>Use the <code>lm()</code> function to perform a multiple linear regression with <code>mpg</code> as the response and <em>all</em> other variables except <code>name</code> as the predictors. Why exclude <code>name</code>? <strong>There are too many levels in this categorical feature.</strong></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fitlm <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitlm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fitlm <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fitlm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -526,24 +527,24 @@ lm(formula = mpg ~ ., data = AutoTraining[, 1:8])
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.6457 -2.0327  0.0684  1.9252 11.9090 
+-9.6501 -2.1052 -0.1442  1.7328 12.6773 
 
 Coefficients:
                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -1.571e+01  5.179e+00  -3.033  0.00263 ** 
-cylinders    -1.886e-01  3.641e-01  -0.518  0.60476    
-displacement  1.113e-02  8.410e-03   1.324  0.18661    
-horsepower   -1.373e-02  1.505e-02  -0.912  0.36234    
-weight       -6.377e-03  7.161e-04  -8.905  &lt; 2e-16 ***
-acceleration  8.726e-02  1.072e-01   0.814  0.41610    
-year          7.214e-01  5.646e-02  12.778  &lt; 2e-16 ***
-origin        1.360e+00  3.054e-01   4.453 1.19e-05 ***
+(Intercept)  -1.924e+01  5.207e+00  -3.695 0.000261 ***
+cylinders    -3.908e-01  3.671e-01  -1.065 0.287964    
+displacement  1.881e-02  8.744e-03   2.151 0.032271 *  
+horsepower   -2.219e-02  1.626e-02  -1.365 0.173335    
+weight       -6.428e-03  8.122e-04  -7.914 4.98e-14 ***
+acceleration  5.520e-02  1.128e-01   0.490 0.624829    
+year          7.821e-01  5.764e-02  13.570  &lt; 2e-16 ***
+origin        1.519e+00  3.117e-01   4.873 1.79e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.274 on 303 degrees of freedom
-Multiple R-squared:  0.8247,    Adjusted R-squared:  0.8207 
-F-statistic: 203.7 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.334 on 297 degrees of freedom
+Multiple R-squared:  0.8246,    Adjusted R-squared:  0.8204 
+F-statistic: 199.4 on 7 and 297 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Let’s refer to the output in this last code chunk:</p>
@@ -558,13 +559,13 @@ F-statistic: 203.7 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul></li>
 <li><p>What does the coefficient for the <code>year</code> variable suggest?</p>
 <ul>
-<li>0.7214288 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
+<li>0.7821375 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
 </ul></li>
 <li><p>Use the `plot() function to produce diagnostic plots of the linear regression fit.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitlm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitlm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -581,20 +582,17 @@ F-statistic: 203.7 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul>
 <p>First you have to make a new data frame object which will contain the new point:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> fitlm, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ypred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> fitlm, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ypred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  5.684  17.445  23.355  22.775  29.022  35.825 </code></pre>
+  7.009  16.776  24.275  22.815  28.676  35.431 </code></pre>
 </div>
 </div>
 <p>To evaluate the mean absolute error (MAE) and mean squared error (MSE), we can install <code>MLmetric</code> package. <span class="math display">\[ MAE = \frac{1}{n}\sum_{i=1}^n |y_i-\hat{y}_i|,
 \qquad MSE = \frac{1}{n}\sum_{i=1}^n (y_i-\hat{y}_i)^2.\]</span></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'MLmetrics' was built under R version 4.5.3</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'MLmetrics'</code></pre>
@@ -604,13 +602,13 @@ Attaching package: 'MLmetrics'</code></pre>
 
     Recall</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.624903</code></pre>
+<pre><code>[1] 2.59679</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.80872</code></pre>
+<pre><code>[1] 11.13544</code></pre>
 </div>
 </div>
 </section>
@@ -672,9 +670,9 @@ Attaching package: 'MLmetrics'</code></pre>
 <h3 class="anchored" data-anchor-id="qualitative-predictors-in-r">Qualitative predictors in R</h3>
 <p>How to create dummy variable in <code>R</code>? We use a date set <code>Salaries</code> from package <code>carData</code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Salaries"</span>, <span class="at">package =</span> <span class="st">"carData"</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Salaries)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"Salaries"</span>, <span class="at">package =</span> <span class="st">"carData"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Salaries)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        rank     discipline yrs.since.phd    yrs.service        sex     
  AsstProf : 67   A:181      Min.   : 1.00   Min.   : 0.00   Female: 39  
@@ -697,8 +695,8 @@ Attaching package: 'MLmetrics'</code></pre>
 <h3 class="anchored" data-anchor-id="qualitative-predictors-with-two-levels">Qualitative predictors with two levels</h3>
 <p>If we use <code>sex</code> as an argument in <code>lm</code>, R will correctly treat <code>sex</code> as single dummy variable with two categories.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>md1<span class="ot">&lt;-</span><span class="fu">lm</span>(salary<span class="sc">~</span>sex,<span class="at">data =</span> Salaries)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(md1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>md1<span class="ot">&lt;-</span><span class="fu">lm</span>(salary<span class="sc">~</span>sex,<span class="at">data =</span> Salaries)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(md1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -726,8 +724,8 @@ F-statistic: 7.738 on 1 and 395 DF,  p-value: 0.005667</code></pre>
 <p>What about the categorical data with more than two levels?</p>
 <p>As <code>rank</code> is a <code>factor</code> with three levels, <code>R</code> automatically create two dummy variables.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>md2<span class="ot">&lt;-</span><span class="fu">lm</span>(salary<span class="sc">~</span>rank,<span class="at">data =</span> Salaries)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(md2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>md2<span class="ot">&lt;-</span><span class="fu">lm</span>(salary<span class="sc">~</span>rank,<span class="at">data =</span> Salaries)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(md2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:

@@ -1,6 +1,5 @@
 ---
-title: "Homework 4"
-author: "Your Name"
+title: "Homework 4 Solution"
 output: html_document
 ---
 
@@ -33,10 +32,15 @@ library(ggplot2)
 The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.
 
 ```{r}
-# Edit me
+alpha <- 0.05
+n <- 64
+xbar <- 206
+s <- 12
+loBound <- xbar - qt(1-alpha/2,n-1)*s/sqrt(n-1)
+upBound <- xbar + qt(1-alpha/2,n-1)*s/sqrt(n-1)
 ```
 
-> Your Answer
+> The 95% confidence interval is (`r loBound`, `r upBound`).
 
 ### Question 2. (10 points) Hypothesis Test for One Population Mean
 
@@ -48,12 +52,19 @@ waiting_time <- c(5.2, 6.1, 4.8, 5.9, 6.4, 5.5, 4.9, 6.2, 5.7, 5.3, 6.0, 4.7, 5.
 
 At the $\alpha=0.05$ significance level, test whether the true mean waiting time is greater than 5 minutes. Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem.
 
+**Hypotheses**
+
+\begin{align*}
+H_0: & \mu =5\\
+H_1: & \mu > 5
+\end{align*}
+
 ```{r}
-# Edit me
+t.test(waiting_time,mu = 5,alternative = "greater")
 ```
 
-> Your Answer
-
+> As p-value is less than 0, we should reject the null hypothesis. The evidence supports
+ true mean waiting time is greater than 5 minutes.
 
 ### Question 3. Confidence Interval and Hypothesis Test for Two Population Means
 
@@ -69,20 +80,30 @@ At the $\alpha=0.05$ significance level, test whether the population mean exam s
 
 a. (15 points) Clearly state the null and alternative hypotheses. Report the test statistic and p-value, and state your conclusion in the context of the problem. 
 
+**Hypotheses**
+
+\begin{align*}
+H_0: & \mu_{\text{tra}} = \mu_{\text{new}}\\
+H_1: & \mu_{\text{tra}} \ne \mu_{\text{new}}
+\end{align*}
 
 ```{r}
-# Edit me
+t.test(traditional,new_method)
 ```
 
-> Your Answer
+> Test statistic is $-4.0922$ and the p value is $0.0002373$. We should reject the null hypothesis and the two methods have difference.
 
 b. (15 points) Also construct a 95% confidence interval for the difference in population means and explain whether the confidence interval is consistent with the conclusion from the hypothesis test. 
 
 ```{r}
-# Edit me
+reslut <- t.test(traditional,new_method)
+reslut$conf.int[1]
+reslut$conf.int[2]
 ```
 
-> Your Answer
+> The 95% confidence interval is (`r reslut$conf.int[1]`, `r reslut$conf.int[2]`). 
+We can see the whole interval is less than 0, which means we should reject the
+null hypothesis, which indicate the two methods are different. 
 
 
 ## Part III. Matching the Terms (20 points)
@@ -97,24 +118,30 @@ A public health study examined the indoor air quality in elementary schools in C
 
 a. The true mean PM2.5 concentration for all elementary schools in Chicago, $\mu$
 
-> Your Answer 
+>  <span style="color: magenta;"> Parameter 
+</span>
+
 
 b. All elementary schools in Chicago, USA
 
-> Your Answer
+> <span style="color: magenta;"> Population
+</span>
 
 c. The 95% confidence interval for the population mean PM2.5 concentration,
 (11.3,13.5) $\mu g/m^3$
 
-> Your Answer
+> <span style="color: magenta;"> Inferential statistic 
+</span>
 
 d. The 52 randomly selected elementary schools included in the study
 
-> Your Answer
+> <span style="color: magenta;"> Sample
+</span>
 
 e. The sample mean PM2.5 concentration, $\bar{x} = 12.4 \ \mu g/m^3$.
 
-> Your Answer
+> <span style="color: magenta;"> Descriptive statistic
+</span>
 
 ### Question 2. Type I and type II errors (10 points)
 
@@ -128,23 +155,28 @@ They conduct a hypothesis test on the population mean improvement in scores, den
 
 a) Spend more effort on investigating and testing the AI-based tutoring system, even though it truly improves scores by at least 5 points.
 
-> Your Answer
+> <span style="color: magenta;"> Type I error consequence
+</span>
 
 b) $H_0: \mu = 5, \qquad H_1: \mu <5$
 
-> Your Answer
+> <span style="color: magenta;"> Hypothese
+</span>
 
 c) Decide based on the hypothesis test that the average improvement is at least 5 points, but in reality the improvement is less than 5 points.
 
-> Your Answer
+>  <span style="color: magenta;"> Type II error 
+</span>
 
 d) Adopt the tutoring system campus-wide claiming it significantly improves performance, but students see little to no improvement.
 
-> Your Answer
+>  <span style="color: magenta;"> Type II error consequence
+</span>
 
 e) Decide based on the hypothesis test that the improvement is less than 5 points, but in reality the improvement is at least 5 points.
 
-> Your Answer
+>  <span style="color: magenta;"> Type I error 
+</span>
 
 ## Part IV. Multiple Choices (30 points)
 
@@ -164,7 +196,8 @@ C. The t-distribution (with the T statistic)
 
 D. The t-distribution (with the T statistic), but only if $X$
 
-> Your answer:
+> <span style="color: magenta;"> A
+</span>
 
 2.  (3 points) To find a confidence interval for a population mean when the
 population variance is unknown, which of the following should we use?
@@ -182,7 +215,8 @@ C. The t-distribution (with the T statistic)
 D. The t-distribution (with the T statistic), but only if $X$
 comes from a normal distribution
 
-> Your answer:
+> <span style="color: magenta;"> D
+</span>
 
 3. (12 points) The following is an output of `t.test` on the difference of two samples, please answer the following questions. 
 
@@ -201,7 +235,8 @@ C. 0.01727 &nbsp;&nbsp;&nbsp;&nbsp;
 D. 0
 
   
-> Your answer:
+> <span style="color: magenta;"> C
+</span>
 
 (ii) Based on the t-test result, should we reject or not reject the null hypothesis? 
 
@@ -215,7 +250,8 @@ C. Reject, as p-value is less than $\alpha$.
 D. Fail to reject, as p-value is less than $\alpha$.
 
   
-> Your answer:
+> <span style="color: magenta;"> B
+</span>
 
 
 (iii) Does it match the result of the confidence interval?
@@ -230,7 +266,8 @@ C. No, as t statistic is outside of the interval.
 D. No, as p-value is outside of the interval.
 
   
-> Your answer:
+> <span style="color: magenta;"> B
+</span>
 
 (iv) If $\alpha = 0.01$,should we reject or not reject the null hypothesis? 
 
@@ -242,7 +279,8 @@ C. Reject, as p-value is less than $\alpha$.
 
 D. Fail to reject, as p-value is less than $\alpha$.
 
-> Your answer:
+> <span style="color: magenta;"> B
+</span>
 
 4.  (3 points) A study examined the quality of compost produced by home compost bins in Galicia, Spain. One measure of compost quality is moisture content, or the percentage of water in the compost. In a sample of 87 randomly selected home compost bins in Galicia, it is found that sample mean moisture content is $\bar{x}=68.1.$ The 95% confidence interval is (66.1, 70.1) and can be interpreted as the researchers are 95% confident that the population mean moisture of _____  is between 66.1 and 70.1.
  
@@ -254,19 +292,21 @@ D. Fail to reject, as p-value is less than $\alpha$.
   
   D. sampled home compost bins in Galicia, Spain
 
-> Your answer:
+>   <span style="color: magenta;"> C
+</span>
 
 5.  (3 points) Suppose base on the sample in Question 4, we make the conjecture, population mean moisture in Galicia less than 70. What are the hypotheses? 
  
   A. $H_0: \mu = 70, H_1: \mu < 70$
   
   B. $H_0: \mu = 70, H_1: \mu > 70$
-  s
+  
   C. $H_0: \mu < 70, H_1: \mu \ge 70$
   
   D. $H_0: \mu < 70, H_1: \mu  = 70$
 
-> Your answer:
+>  <span style="color: magenta;"> A
+</span>
 
  
 6.  (3 points) If the p-value is very small (close to 0), the decision from the hypothesis test is to _____.
@@ -277,7 +317,8 @@ D. Fail to reject, as p-value is less than $\alpha$.
   
   C. no conclusion
   
-> Your answer:
+>  <span style="color: magenta;"> A
+</span>
 
 7.  (3 points) Let $\mu_{2025} =$ mean miles per gallon for all users who drive 20225Honda CRV AWD vehicles
  and $\mu_{2026} =$ mean miles per gallon for all users who drive 2026 Honda CRV AWD vehicles.
@@ -291,4 +332,5 @@ B. fail to reject the null hypothesis
   
 C. no conclusion
 
-> Your answer:
+> <span style="color: magenta;"> B
+</span>

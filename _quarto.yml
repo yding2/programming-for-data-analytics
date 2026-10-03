@@ -111,6 +111,8 @@ website:
             href: solutions/hw03_Solution.Rmd  
           - text: "Homework 4"
             href: homework/hw04.Rmd
+          - text: "Homework 4 Solution"
+            href: solutions/hw04_Solution.Rmd  
 
       - href: project.qmd
         text: Final Project
