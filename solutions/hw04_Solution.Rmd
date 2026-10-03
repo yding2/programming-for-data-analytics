@@ -31,13 +31,16 @@ library(ggplot2)
 
 The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.
 
+> We know the population variance, therfore wo should use the standard normal
+distribution.
+
 ```{r}
 alpha <- 0.05
 n <- 64
 xbar <- 206
-s <- 12
-loBound <- xbar - qt(1-alpha/2,n-1)*s/sqrt(n-1)
-upBound <- xbar + qt(1-alpha/2,n-1)*s/sqrt(n-1)
+sigma <- 12
+loBound <- xbar - qnorm(1-alpha/2)*sigma/sqrt(n)
+upBound <- xbar + qnorm(1-alpha/2)*sigma/sqrt(n)
 ```
 
 > The 95% confidence interval is (`r loBound`, `r upBound`).
@@ -250,7 +253,7 @@ C. Reject, as p-value is less than $\alpha$.
 D. Fail to reject, as p-value is less than $\alpha$.
 
   
-> <span style="color: magenta;"> B
+> <span style="color: magenta;"> C
 </span>
 
 
@@ -332,5 +335,5 @@ B. fail to reject the null hypothesis
   
 C. no conclusion
 
-> <span style="color: magenta;"> B
+> <span style="color: magenta;"> A
 </span>

@@ -386,16 +386,19 @@ window.Quarto = {
 <section id="question-1.-10-points-confidence-interval-for-one-population-mean" class="level3">
 <h3 class="anchored" data-anchor-id="question-1.-10-points-confidence-interval-for-one-population-mean">Question 1. (10 points) Confidence Interval for One Population Mean</h3>
 <p>The lifetime of a certain type of rechargeable battery is known to have a population standard deviation of 12 hours. A random sample of 64 batteries has a mean lifetime of 206 hours. Construct a 95% confidence interval for the population mean battery lifetime. Interpret the confidence interval in the context of the problem.</p>
+<blockquote class="blockquote">
+<p>We know the population variance, therfore wo should use the standard normal distribution.</p>
+</blockquote>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">64</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="dv">206</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">12</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>loBound <span class="ot">&lt;-</span> xbar <span class="sc">-</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n<span class="dv">-1</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>upBound <span class="ot">&lt;-</span> xbar <span class="sc">+</span> <span class="fu">qt</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>,n<span class="dv">-1</span>)<span class="sc">*</span>s<span class="sc">/</span><span class="fu">sqrt</span>(n<span class="dv">-1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>loBound <span class="ot">&lt;-</span> xbar <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>upBound <span class="ot">&lt;-</span> xbar <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha<span class="sc">/</span><span class="dv">2</span>)<span class="sc">*</span>sigma<span class="sc">/</span><span class="fu">sqrt</span>(n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <blockquote class="blockquote">
-<p>The 95% confidence interval is (202.9787931, 209.0212069).</p>
+<p>The 95% confidence interval is (203.060054, 208.939946).</p>
 </blockquote>
 </section>
 <section id="question-2.-10-points-hypothesis-test-for-one-population-mean" class="level3">
@@ -625,7 +628,7 @@ mean of x mean of y
 <p>C. Reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
 <p>D. Fail to reject, as p-value is less than <span class="math inline">\(\alpha\)</span>.</p>
 <blockquote class="blockquote">
-<p><span style="color: magenta;"> B </span></p>
+<p><span style="color: magenta;"> C </span></p>
 </blockquote>
 <ol start="3" type="i">
 <li>Does it match the result of the confidence interval?</li>
@@ -683,7 +686,7 @@ mean of x mean of y
 <p>B. fail to reject the null hypothesis</p>
 <p>C. no conclusion</p>
 <blockquote class="blockquote">
-<p><span style="color: magenta;"> B </span></p>
+<p><span style="color: magenta;"> A </span></p>
 </blockquote>
 
 
