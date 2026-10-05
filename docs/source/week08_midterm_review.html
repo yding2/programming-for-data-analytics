@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -530,7 +530,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h3>
 <p>The <strong>normal distribution</strong> (also be called <em>Gaussian distribution</em>) is a symmetric distribution that is centered around a mean and spreads out in both directions.</p>
 <ul>
-<li>Notation: <span class="math inline">\(X\sim N(\mu, \sigma^2)\)</span>
+<li>Notation: <span class="math inline">\(X\sim \mathcal{N}(\mu, \sigma^2)\)</span>
 <ul>
 <li><span class="math inline">\(\mu\)</span> is the mean of the distribution</li>
 <li><span class="math inline">\(\sigma^2\)</span> is the variance of the distribution</li>
@@ -546,7 +546,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Generally, we use <span class="math inline">\(Z\)</span> denote the <strong>standard</strong> normal random variable, i.e., <span class="math inline">\(Z \sim N(0, 1).\)</span></p>
+<p>Generally, we use <span class="math inline">\(Z\)</span> denote the <strong>standard</strong> normal random variable, i.e., <span class="math inline">\(Z \sim \mathcal{N}(0, 1).\)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -570,7 +570,7 @@ window.Quarto = {
 </section>
 <section id="the-t-distribution" class="level3">
 <h3 class="anchored" data-anchor-id="the-t-distribution">The <span class="math inline">\(t\)</span> Distribution</h3>
-<p>Let <span class="math inline">\(X_1, X_2,...,X_n\)</span> is a random sample from a distribution <span class="math inline">\(N(\mu, \sigma^2)\)</span> and <span class="math display">\[ \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i, \qquad  S^2  = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2.\]</span> Then the random variable <span class="math display">\[T = \frac{\bar{X}-\mu}{S/\sqrt{n}}\]</span> has the <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(v = n-1\)</span> degrees of freedom, denoted as <span class="math inline">\(t_{n-1}\)</span>.</p>
+<p>Let <span class="math inline">\(X_1, X_2,...,X_n\)</span> is a random sample from a distribution <span class="math inline">\(\mathcal{N}(\mu, \sigma^2)\)</span> and <span class="math display">\[ \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i, \qquad  S^2  = \frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2.\]</span> Then the random variable <span class="math display">\[T = \frac{\bar{X}-\mu}{S/\sqrt{n}}\]</span> has the <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(v = n-1\)</span> degrees of freedom, denoted as <span class="math inline">\(t_{n-1}\)</span>.</p>
 <p><em>Remark</em>: The <span class="math inline">\(t\)</span>-distribution can still be used even if the population distribution is not <strong>normal</strong>, as long as</p>
 <ul>
 <li>the sample size <span class="math inline">\(n\)</span> is <strong>large</strong>.</li>
@@ -625,7 +625,7 @@ window.Quarto = {
 <p>The <strong>Central Limit Theorem (CLT)</strong> states that if random samples of size <span class="math inline">\(n\)</span> are drawn from a large population and <span class="math inline">\(n\)</span> is <em>large enough</em>, then the sampling distribution of the sample mean will follow <strong>approximately a normal distribution</strong>. The CLT also applies to proportions since a proportion can be expressed as the mean of zeros and ones.</p>
 <section id="number-of-heads-experiements" class="level4">
 <h4 class="anchored" data-anchor-id="number-of-heads-experiements">Number of Heads Experiements</h4>
-<p>We want to investigate a random variable <span class="math inline">\(X\)</span>, the number of heads in 1000 coin flips, follows the Binomial distributions with <span class="math inline">\(n=1000\)</span> and <span class="math inline">\(p =0.5\)</span>. We know <span class="math inline">\(E(X) = 500\)</span>. Let’s investigate the sampling distribution of sample means with sample size <span class="math inline">\(10, 50,\)</span> and <span class="math inline">\(100\)</span>.</p>
+<p>We want to investigate a random variable <span class="math inline">\(X\)</span>, the number of heads in 1000 coin flips, follows the Binomial distributions with <span class="math inline">\(n=1000\)</span> and <span class="math inline">\(p =0.5\)</span>. We know <span class="math inline">\(E(X) = 500\)</span>. Let’s investigate the sampling distribution of sample means with sample size <span class="math inline">\(50\)</span> for <span class="math inline">\(10, 1000,\)</span> and <span class="math inline">\(10000\)</span> times.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
@@ -633,9 +633,9 @@ window.Quarto = {
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>meanSize50InRepeatedSampling100Reps<span class="ot">&lt;-</span><span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">mean</span>(<span class="fu">rbinom</span>(<span class="dv">50</span>,n , p)))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>meanSize100InRepeatedSampling100Reps<span class="ot">&lt;-</span><span class="fu">replicate</span>(<span class="dv">100</span>, <span class="fu">mean</span>(<span class="fu">rbinom</span>(<span class="dv">100</span>, n, p)))</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize10InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads-Sample Size 10"</span>))</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize50InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads-Sample Size 50"</span>))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize100InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads-Sample Size 100"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize10InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads- Size 10"</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize50InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads-Size 50"</span>))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(meanSize100InRepeatedSampling100Reps,<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Number of heads-Size 100"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -676,7 +676,7 @@ window.Quarto = {
 <ul>
 <li>A random sample of 12 shearing pins is taken in a study of the Rockwell hardness of the pin head. Measurements on the Rockwell hardness are made for each of the 12, yielding an average value of 48.50 with a sample standard deviation of 1.5. Assuming the measurements to be <strong>normally distributed</strong>, construct a 90% confidence interval for the mean Rockwell hardness.</li>
 </ul>
-<p><strong>Note</strong>: Here we don’t have population standard deviation. This means we should use <span class="math inline">\(t\)</span> value to construct the confidence interval. Here we want to construct a 90% confidence interval. That is <span class="math inline">\(\alpha = 1-0.9 = 0.1\)</span>. We need <span class="math inline">\(t_{v,\alpha/2} =t_{11,0.05}\)</span>.</p>
+<p><strong>Note</strong>: Here we don’t have population standard deviation. This means we should use <span class="math inline">\(t\)</span> value to construct the confidence interval. Here we want to construct a 90% confidence interval. That is <span class="math inline">\(\alpha = 1-0.9 = 0.1\)</span>. We need <span class="math inline">\(t_{\alpha/2,v} =t_{0.05,11}\)</span>.</p>
 <ul>
 <li>Match the description with the appropriate terms</li>
 </ul>
@@ -691,8 +691,8 @@ window.Quarto = {
 <ul>
 <li><p>All amateur marathon runners worldwide</p></li>
 <li><p>The 150 runners randomly selected from the Chicago Marathon</p></li>
-<li><p>The mean finish time of the 150 runners, ${x} = 4.1 $ hours</p></li>
-<li><p>The true mean finish time for all amateur marathon runners worldwide, $$</p></li>
+<li><p>The mean finish time of the 150 runners, <span class="math inline">\(\bar{x} = 4.1\)</span> hours</p></li>
+<li><p>The true mean finish time for all amateur marathon runners worldwide, <span class="math inline">\(\mu\)</span></p></li>
 <li><p>A 95% confidence interval for the mean finish time, (3.9, 4.3) hours</p></li>
 </ul>
 </section>
@@ -747,6 +747,26 @@ H_1: \mu_2 \ne \mu_2.
 \hline
 \end{array}
 \]</span></p>
+<section id="practice-match-the-terms" class="level4">
+<h4 class="anchored" data-anchor-id="practice-match-the-terms">Practice: Match the Terms</h4>
+<p>An electronics manufacturer wants to ensure its new battery lasts at least 12 hours on average under standard usage. They conduct a test on sample devices to verify the claim.</p>
+</section>
+<section id="match-each-description-with-the-appropriate-term." class="level4">
+<h4 class="anchored" data-anchor-id="match-each-description-with-the-appropriate-term.">Match each description with the appropriate term.</h4>
+</section>
+<section id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence" class="level4">
+<h4 class="anchored" data-anchor-id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence">Terms: Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence</h4>
+</section>
+<section id="description" class="level4">
+<h4 class="anchored" data-anchor-id="description">Description:</h4>
+<ol type="a">
+<li><p><span class="math inline">\(H_0: \mu = 12, H_1: \mu &lt; 12\)</span></p></li>
+<li><p>Concluding that the batteries last less than 12 hours when they actually meet the 12-hour standard.</p></li>
+<li><p>Delaying product release and spending more on design changes when the product already meets the goal.</p></li>
+<li><p>Concluding that the batteries meet the 12-hour standard when they actually last less than 12 hours.</p></li>
+<li><p>Launching the product and facing customer complaints about short battery life.</p></li>
+</ol>
+</section>
 <section id="practice-6" class="level4">
 <h4 class="anchored" data-anchor-id="practice-6">Practice</h4>
 <p>What can you tell from the outputs below?</p>
@@ -780,26 +800,6 @@ mean of x mean of y
     0.399     0.565 </code></pre>
 </div>
 </div>
-</section>
-<section id="practice-match-the-terms" class="level4">
-<h4 class="anchored" data-anchor-id="practice-match-the-terms">Practice: Match the Terms</h4>
-<p>An electronics manufacturer wants to ensure its new battery lasts at least 12 hours on average under standard usage. They conduct a test on sample devices to verify the claim.</p>
-</section>
-<section id="match-each-description-with-the-appropriate-term." class="level4">
-<h4 class="anchored" data-anchor-id="match-each-description-with-the-appropriate-term.">Match each description with the appropriate term.</h4>
-</section>
-<section id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence" class="level4">
-<h4 class="anchored" data-anchor-id="terms-hypotheses-type-i-error-type-ii-error-type-i-error-consequence-type-ii-error-consequence">Terms: Hypotheses; Type I error; Type II error; Type I error consequence; Type II error consequence</h4>
-</section>
-<section id="description" class="level4">
-<h4 class="anchored" data-anchor-id="description">Description:</h4>
-<ol type="a">
-<li><p><span class="math inline">\(H_0: \mu = 12, H_1: \mu &lt; 12\)</span></p></li>
-<li><p>Concluding that the batteries last less than 12 hours when they actually meet the 12-hour standard.</p></li>
-<li><p>Delaying product release and spending more on design changes when the product already meets the goal.</p></li>
-<li><p>Concluding that the batteries meet the 12-hour standard when they actually last less than 12 hours.</p></li>
-<li><p>Launching the product and facing customer complaints about short battery life.</p></li>
-</ol>
 
 
 </section>
