@@ -109,7 +109,7 @@ summary(aov2)
 ```
 
 Based on the anova test, as the p-value is very low (p < 0.001), so it appears that the type of `cut` used has a real impact on the
-`price`, even though we cannot tell it from the visulization. 
+`price`, even though we cannot tell it from the visualization. 
 
 #### In-Calss Exercise: ANOVA Test
 

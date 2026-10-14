@@ -365,9 +365,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ul>
 <li>Know how to conduct a hypothesis test on proportions and means</li>
-<li>Know how to build a multiple linear regression model</li>
 </ul>
-<div id="cell-2" class="cell" data-execution_count="27">
+<div id="cell-2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import the necessary packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -385,18 +384,18 @@ H_0: p &amp; = 0.7, \\
 H_1: p &amp; \ne 0.7.
 \end{align*}\]</span></p>
 <p>In python, we use<code>proportion_ztest</code> in <strong>statsmodels</strong> package. Please note <code>proportion_ztest</code> is different from <code>prop.test</code> in R.</p>
-<div id="cell-5" class="cell" data-execution_count="13">
+<div id="cell-5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.proportion <span class="im">import</span> proportions_ztest</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>, prop_var<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>z test statistic = -0.959</code></pre>
+<pre><code>z test statistic = -0.9759</code></pre>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="14">
+<div id="cell-6" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>p-value = 0.338</code></pre>
+<pre><code>p-value = 0.329</code></pre>
 </div>
 </div>
 <p>We can find p-value is much larger than <span class="math inline">\(\alpha = 0.05\)</span>, we should <strong>not reject</strong> <span class="math inline">\(H_0\)</span>.</p>
@@ -404,13 +403,13 @@ H_1: p &amp; \ne 0.7.
 H_0: p &amp; = 0.7, \\
 H_1: p &amp; &gt; 0.7.
 \end{align*}\]</span> For one-sided, we can use <code>larger</code> or <code>smaller</code> in python</p>
-<div id="cell-9" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'larger'</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">3</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-9" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>testStat, pvalue <span class="op">=</span> proportions_ztest(count<span class="op">=</span><span class="dv">340</span>, nobs<span class="op">=</span><span class="dv">500</span>, value<span class="op">=</span><span class="fl">0.7</span>,prop_var<span class="op">=</span><span class="fl">0.7</span>, alternative<span class="op">=</span><span class="st">'larger'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'z test statistic ='</span>, <span class="bu">round</span>(testStat,<span class="dv">4</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'p-value ='</span>, <span class="bu">round</span>(pvalue,<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>z test statistic = -0.959
-p-value = 0.831</code></pre>
+<pre><code>z test statistic = -0.9759
+p-value = 0.8354</code></pre>
 </div>
 </div>
 <p><strong>Example 2</strong> A vote is to be taken among the residents of a town and the surrounding county to determine whether a proposed chemical plant should be constructed. The construction site is within the town limits, and for this reason many voters in the county believe that the proposal will pass because of the large proportion of town voters who favor the construction. To determine if there is a significant difference in the proportions of town voters and county voters favoring the proposal, a poll is taken. If 120 of 200 town voters favor the proposal and 240 of 500 county residents favor it, would you agree that the proportion of town voters favoring the proposal is higher than the proportion of county voters? Use an <span class="math inline">\(\alpha = 0.05\)</span> level of significance.</p>
@@ -430,7 +429,7 @@ H_1: p_1 &amp; &gt; p_2.
 p-value = 0.002</code></pre>
 </div>
 </div>
-<p>We also can find p-value is much larger than <span class="math inline">\(\alpha = 0.05\)</span>, we should <strong>not reject</strong> <span class="math inline">\(H_0\)</span>.</p>
+<p>We also can find p-value is smaller than <span class="math inline">\(\alpha = 0.05\)</span>, we should <strong>reject</strong> <span class="math inline">\(H_0\)</span>.</p>
 </section>
 <section id="inference-for-means" class="level3">
 <h3 class="anchored" data-anchor-id="inference-for-means">Inference for means</h3>
