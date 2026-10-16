@@ -307,6 +307,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../solutions/hw04_Solution.html">
  <span class="dropdown-text">Homework 4 Solution</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw05.html">
+ <span class="dropdown-text">Homework 5</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -500,7 +504,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>F value:</strong> Between-group Mean Sq divided by residual Mean Sq.</li>
 <li><strong>Pr(&gt;F):</strong> The p-value for the F-test under the null hypothesis.</li>
 </ul>
-<p>Here the p-value is less than 0.001. At the 5% significance level, we reject <span class="math inline">\(H_0\)</span> and conclude that there is statistically significant evidence that mean <code>medv</code> differs between the two <code>chas</code> groups. This is an <strong>association</strong>, not proof that proximity to the river causes the difference.</p>
+<p><strong>Interpretation:</strong> The ANOVA table reports <span class="math inline">\(F = 15.97\)</span> and <span class="math inline">\(p &lt; 0.001\)</span>. At the 5% significance level, we reject <span class="math inline">\(H_0\)</span>. There is statistically significant evidence that the population mean <code>medv</code> differs between tracts that border the Charles River and those that do not. This result establishes an <strong>association</strong>, not that proximity to the river causes the difference in home values.</p>
 <p>Since there are only two groups, this example connects to the two-sample t-test. The next example illustrates ANOVA with <strong>more than two groups</strong>.</p>
 <p><strong>Example 2: Revisit the EDA Dataset <code>diamonds</code></strong></p>
 <p>Recall that the <code>diamonds</code> data set contains variables including:</p>
@@ -535,7 +539,9 @@ Residuals   53935 8.474e+11 1.571e+07
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>The p-value is less than 0.001, so we reject the null hypothesis that all five population mean prices are equal. <strong>At least one mean differs</strong>, but this ANOVA result alone does not identify which pairs differ. Also, variables such as <code>carat</code> may be related to both <code>cut</code> and <code>price</code>; this analysis does not establish causation.</p>
+<p><strong>Interpretation:</strong> The ANOVA test reports <span class="math inline">\(F = 175.7\)</span> and <span class="math inline">\(p &lt; 0.001\)</span>. At the 5% significance level, we reject <span class="math inline">\(H_0\)</span> that the five population mean diamond prices are equal. There is statistically significant evidence that <strong>at least one cut category has a different population mean price</strong>. The ANOVA test alone does not tell us which categories differ.</p>
+<p>However, the boxplots show substantial overlap among the price distributions. Thus, a very small p-value does <strong>not</strong> necessarily mean that the differences are large or practically important. The sample size is very large, which can make relatively small differences statistically detectable. Moreover, <code>carat</code> and other diamond characteristics may be associated with both <code>cut</code> and <code>price</code>. This one-way ANOVA does <strong>not</strong> show that cut quality causes changes in price.</p>
+<p><strong>Key takeaway:</strong> Statistical significance is not the same as practical significance.</p>
 <p>We can inspect the residuals and consider an unequal-variance alternative:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aov2, <span class="at">which =</span> <span class="dv">2</span>)  <span class="co"># Normal Q-Q plot of residuals</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

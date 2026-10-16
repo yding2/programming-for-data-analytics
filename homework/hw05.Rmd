@@ -1,0 +1,203 @@
+---
+title: "Homework 5: Statistical Hypothesis Testing and Association"
+author: "Your Name"
+output: html_document
+---
+
+
+## Changing the author field and file name.
+
+
+1. Change the `author` field to your name.
+2. Rename this file as `HW5_YourFirstInitialYourLastName.Rmd` (for example, `HW5_YDing.Rmd`).
+3. Complete all questions in the designated code and response spaces.
+4. Knit the completed file to HTML.
+5. Submit both the completed `.Rmd` file and the knitted `.html` file. Make sure both files open correctly before submitting.
+
+
+## Overview
+
+In this homework, you will use one dataset to investigate questions about cybersecurity incidents. You will practice hypothesis testing for means and proportions, one-way ANOVA, the chi-square test of independence, and Cramér's V.
+
+**Dataset:** [Cybersecurity Incidents (Simulated)](https://github.com/yding2/programming-for-data-analytics/blob/main/datasets/cybersecurity_incidents_simulated.csv), hosted in the course GitHub repository. The starter code below reads it directly from GitHub.
+
+> **Important:** This is a **synthetic dataset created for teaching purposes**. The 300 records do not represent actual cybersecurity incidents, organizations, or individuals. Any patterns or statistical associations found in this dataset are simulated and must not be interpreted as evidence about real-world cybersecurity trends.
+
+### Dataset description
+
+| Variable | Description |
+|:--|:--|
+| `IncidentID` | Unique incident identifier |
+| `Year` | Year of the simulated incident (2008–2018) |
+| `BreachType` | `Theft`, `Hacking`, or `Unauthorized Access` |
+| `IndividualsAffected` | Simulated number of individuals affected |
+| `DataLocation` | `Laptop`, `Network`, or `Paper` |
+
+### Instructions
+
+- Use **R** to complete all questions. Include the relevant R code, output, and written interpretations.
+- Unless otherwise specified, use a significance level of **$\alpha = 0.05$**.
+- For each hypothesis test, state the null and alternative hypotheses, identify the method, report the test statistic and p-value, make a decision, and interpret the result **in context**.
+- When a question asks about differences or associations, do not interpret statistical significance as proof of causation.
+- Submit your completed R Markdown file and the knitted HTML (or PDF, if requested by the instructor).
+
+### Load the data
+
+Run the code below to load the dataset directly from GitHub. No local CSV download is needed. An internet connection is required when running or knitting the document.
+
+```{r setup, message=FALSE, warning=FALSE}
+data_url <- "https://raw.githubusercontent.com/yding2/programming-for-data-analytics/main/datasets/cybersecurity_incidents_simulated.csv"
+cyberData <- read.csv(data_url)
+
+str(cyberData)
+head(cyberData)
+```
+
+## Question 1. Data Exploration (10 points)
+
+**(a) (4 pts)** Report the number of observations and the number of variables. Check whether the dataset contains missing values.
+
+```{r q1a}
+# Your code here
+```
+
+**(b) (3 pts)** Create a frequency table for `BreachType` and report the number of incidents in each category.
+
+```{r q1b}
+# Your code here
+```
+
+**(c) (3 pts)** Summarize `IndividualsAffected` by `BreachType`. Report the sample size, mean, and standard deviation for each category. Briefly describe what you observe.
+
+```{r q1c}
+# Your code here
+```
+
+**Your interpretation:**
+
+## Question 2. One-Sample t-Test (10 points)
+
+A researcher wants to investigate whether the **population mean number of individuals affected by Hacking incidents exceeds 1,200**.
+
+**(a) (3 pts)** State the null and alternative hypotheses using the population mean $\mu_H$.
+
+**(b) (4 pts)** Use an appropriate one-sample t-test in R. Report the test statistic, degrees of freedom, and p-value.
+
+```{r q2}
+# Your code here
+```
+
+**(c) (3 pts)** State your conclusion at the 5% significance level and interpret it in the context of the **simulated** incidents.
+
+**Your answer:**
+
+## Question 3. Two-Sample t-Test (15 points)
+
+Consider **Theft incidents only**. We want to know whether the population mean number of individuals affected differs between incidents **before 2013** (`Year < 2013`) and incidents **in 2013 or later** (`Year >= 2013`).
+
+**(a) (3 pts)** Define the two populations and state the null and alternative hypotheses.
+
+**(b) (4 pts)** Report the sample size, mean, and standard deviation of `IndividualsAffected` for each period.
+
+**(c) (5 pts)** Perform a **two-sided Welch two-sample t-test** in R. Report the test statistic, degrees of freedom, and p-value. Welch's test does not assume equal population variances.
+
+```{r q3}
+# Your code here
+```
+
+**(d) (3 pts)** Interpret your conclusion at the 5% significance level. Explain why failing to reject a null hypothesis, if that is your result, does not prove that the two population means are exactly equal.
+
+**Your answer:**
+
+## Question 4. Two-Sample Proportion Test (15 points)
+
+We want to determine whether the **proportion of incidents classified as Hacking** differs between the two periods:
+
+- **Before 2013:** `Year < 2013`
+- **2013 or later:** `Year >= 2013`
+
+For this question, the denominator in each period is **all incidents in that period**, not just Hacking incidents.
+
+**(a) (3 pts)** Let $p_{\mathrm{before}}$ and $p_{\mathrm{after}}$ denote the population proportions of Hacking incidents in the two periods. State the null and alternative hypotheses.
+
+**(b) (4 pts)** Calculate the number of Hacking incidents, the total number of incidents, and the sample proportion for each period.
+
+**(c) (5 pts)** Perform a **two-sided two-sample proportion test** using `prop.test()` with `correct = FALSE`. Report the test statistic and p-value.
+
+```{r q4}
+# Your code here
+```
+
+**(d) (3 pts)** Interpret the result at the 5% significance level. If the difference is significant, indicate which period has the higher sample proportion.
+
+**Your answer:**
+
+## Question 5. One-Way ANOVA (20 points)
+
+We want to investigate whether the **population mean number of individuals affected** is the same across the three categories of `BreachType`.
+
+**(a) (4 pts)** State the null and alternative hypotheses for a one-way ANOVA. Explain in words what the alternative hypothesis means.
+
+**(b) (4 pts)** Create side-by-side boxplots of `IndividualsAffected` grouped by `BreachType`. Describe any visible differences in centers and spreads.
+
+```{r q5b}
+# Your code here
+```
+
+**(c) (6 pts)** Fit a one-way ANOVA model using `aov()` and display its ANOVA table. Report the F-statistic, numerator and denominator degrees of freedom, and p-value.
+
+```{r q5c}
+# Your code here
+```
+
+**(d) (4 pts)** Interpret the ANOVA result at the 5% significance level. Does a significant ANOVA result establish that **every pair** of group means differs? Explain.
+
+**(e) (2 pts)** Name **two important assumptions** of the classical one-way ANOVA F-test and briefly explain why they matter.
+
+**Your answer:**
+
+## Question 6. Chi-Square Test of Independence (20 points)
+
+We want to investigate whether `BreachType` and `DataLocation` are associated.
+
+**(a) (4 pts)** Create a contingency table showing the counts for each combination of `BreachType` and `DataLocation`.
+
+**(b) (4 pts)** State the null and alternative hypotheses for the chi-square test of independence.
+
+**(c) (6 pts)** Use `chisq.test()` to perform the test. Report the chi-square statistic, degrees of freedom, and p-value.
+
+**(d) (3 pts)** Examine the expected counts. Are all expected counts at least 5?
+
+```{r q6}
+# Your code here
+```
+
+**(e) (3 pts)** Interpret your conclusion at the 5% significance level. Be careful not to claim a causal relationship.
+
+**Your answer:**
+
+## Question 7. Cramér's V (10 points)
+
+Use the **same contingency table** from Question 6.
+
+**(a) (5 pts)** Calculate Cramér's V using
+
+$$
+V = \sqrt{\frac{\chi^2}{n \min(r-1,c-1)}},
+$$
+
+where $\chi^2$ is the chi-square statistic from Question 6, $n$ is the total number of observations, and $r$ and $c$ are the numbers of rows and columns in the contingency table.
+
+```{r q7}
+# Your code here
+```
+
+**(b) (5 pts)** Interpret the value of Cramér's V as a measure of the **strength of association** between `BreachType` and `DataLocation`. Explain how this differs from the conclusion of the chi-square hypothesis test.
+
+**Your answer:**
+
+---
+
+### Before submitting
+
+Make sure your R Markdown file knits successfully and that every question includes the requested code, output, and written explanation. Remember that conclusions apply only to the **simulated dataset**.

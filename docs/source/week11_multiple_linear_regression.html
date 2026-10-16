@@ -307,6 +307,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../solutions/hw04_Solution.html">
  <span class="dropdown-text">Homework 4 Solution</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw05.html">
+ <span class="dropdown-text">Homework 5</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -495,23 +499,23 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">subset</span>(AutoTraining, <span class="at">select=</span><span class="sc">-</span>name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    mpg  cylinders displacement horsepower     weight
-mpg           1.0000000 -0.7603911   -0.7937897 -0.7735856 -0.8213022
-cylinders    -0.7603911  1.0000000    0.9494007  0.8396201  0.8919954
-displacement -0.7937897  0.9494007    1.0000000  0.8924113  0.9337760
-horsepower   -0.7735856  0.8396201    0.8924113  1.0000000  0.8618610
-weight       -0.8213022  0.8919954    0.9337760  0.8618610  1.0000000
-acceleration  0.4461866 -0.5234125   -0.5555630 -0.7020546 -0.4391072
-year          0.5874736 -0.3428902   -0.3708139 -0.4098213 -0.3089729
-origin        0.5551075 -0.5510060   -0.5997025 -0.4353983 -0.5766039
+mpg           1.0000000 -0.7778603   -0.8067808 -0.7772384 -0.8318901
+cylinders    -0.7778603  1.0000000    0.9529912  0.8410454  0.9093137
+displacement -0.8067808  0.9529912    1.0000000  0.8997441  0.9451034
+horsepower   -0.7772384  0.8410454    0.8997441  1.0000000  0.8819487
+weight       -0.8318901  0.9093137    0.9451034  0.8819487  1.0000000
+acceleration  0.4314343 -0.5001646   -0.5532629 -0.7005274 -0.4499822
+year          0.5669786 -0.3283903   -0.3565349 -0.4112711 -0.2994372
+origin        0.5911761 -0.5975742   -0.6331844 -0.4759577 -0.6119146
              acceleration       year     origin
-mpg             0.4461866  0.5874736  0.5551075
-cylinders      -0.5234125 -0.3428902 -0.5510060
-displacement   -0.5555630 -0.3708139 -0.5997025
-horsepower     -0.7020546 -0.4098213 -0.4353983
-weight         -0.4391072 -0.3089729 -0.5766039
-acceleration    1.0000000  0.2899278  0.1997416
-year            0.2899278  1.0000000  0.1741704
-origin          0.1997416  0.1741704  1.0000000</code></pre>
+mpg             0.4314343  0.5669786  0.5911761
+cylinders      -0.5001646 -0.3283903 -0.5975742
+displacement   -0.5532629 -0.3565349 -0.6331844
+horsepower     -0.7005274 -0.4112711 -0.4759577
+weight         -0.4499822 -0.2994372 -0.6119146
+acceleration    1.0000000  0.3110121  0.2255410
+year            0.3110121  1.0000000  0.1638125
+origin          0.2255410  0.1638125  1.0000000</code></pre>
 </div>
 </div>
 <ul>
@@ -527,24 +531,24 @@ lm(formula = mpg ~ ., data = AutoTraining[, 1:8])
 
 Residuals:
    Min     1Q Median     3Q    Max 
--9.439 -2.200 -0.222  1.953 12.550 
+-9.787 -2.000 -0.165  1.811 12.969 
 
 Coefficients:
                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -1.966e+01  5.323e+00  -3.693 0.000262 ***
-cylinders    -4.980e-01  3.731e-01  -1.335 0.182894    
-displacement  2.498e-02  8.662e-03   2.884 0.004205 ** 
-horsepower   -2.590e-02  1.556e-02  -1.664 0.097090 .  
-weight       -6.675e-03  7.544e-04  -8.848  &lt; 2e-16 ***
-acceleration  1.150e-01  1.163e-01   0.989 0.323522    
-year          7.804e-01  5.824e-02  13.399  &lt; 2e-16 ***
-origin        1.611e+00  3.182e-01   5.064  7.1e-07 ***
+(Intercept)  -18.993312   5.431051  -3.497 0.000544 ***
+cylinders     -0.435816   0.378664  -1.151 0.250709    
+displacement   0.020065   0.008931   2.247 0.025419 *  
+horsepower    -0.009342   0.016618  -0.562 0.574452    
+weight        -0.006722   0.000834  -8.061 2.00e-14 ***
+acceleration   0.051750   0.117861   0.439 0.660930    
+year           0.771826   0.060285  12.803  &lt; 2e-16 ***
+origin         1.587006   0.323987   4.898 1.61e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.465 on 307 degrees of freedom
-Multiple R-squared:  0.8154,    Adjusted R-squared:  0.8112 
-F-statistic: 193.7 on 7 and 307 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.359 on 290 degrees of freedom
+Multiple R-squared:  0.819, Adjusted R-squared:  0.8146 
+F-statistic: 187.4 on 7 and 290 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Let’s refer to the output in this last code chunk:</p>
@@ -559,7 +563,7 @@ F-statistic: 193.7 on 7 and 307 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul></li>
 <li><p>What does the coefficient for the <code>year</code> variable suggest?</p>
 <ul>
-<li>0.7803518 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
+<li>0.7718256 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
 </ul></li>
 <li><p>Use the `plot() function to produce diagnostic plots of the linear regression fit.</p></li>
 </ul>
@@ -586,7 +590,7 @@ F-statistic: 193.7 on 7 and 307 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ypred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   7.40   16.18   24.12   22.51   28.75   36.26 </code></pre>
+  8.795  19.611  24.392  24.194  29.103  36.172 </code></pre>
 </div>
 </div>
 <p>To evaluate the mean absolute error (MAE) and mean squared error (MSE), we can install <code>MLmetric</code> package. <span class="math display">\[ MAE = \frac{1}{n}\sum_{i=1}^n |y_i-\hat{y}_i|,
@@ -604,11 +608,11 @@ Attaching package: 'MLmetrics'</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.132961</code></pre>
+<pre><code>[1] 2.509408</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.776024</code></pre>
+<pre><code>[1] 10.72044</code></pre>
 </div>
 </div>
 </section>
