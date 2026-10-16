@@ -1,5 +1,5 @@
 ---
-title: "Week 9: Association between Variables"
+title: "Week 9/10: Association between Variables"
 output: html_document
 ---
 
@@ -31,92 +31,159 @@ library(MASS)
 
 
 
-## Asscociation
+## Association
 
 
 ### Association between One Numerical Variable and One Categorical Variable
 
-We can use **ANOVA test** to check the association between one numerical variable and one categorical variable with `aov` function.
-ANOVA(AOV) is short for ANalysis Of VAriance.
 
-Let's play with `Boston` data set from `MASS` package. 
+### One-Way Analysis of Variance (ANOVA)
 
-- medv: median value of owner-occupied homes in $1000s.
+**One-way ANOVA** is used to compare the population means of a numerical response variable across two or more groups defined by one categorical explanatory variable. Although ANOVA stands for *Analysis of Variance*, its main purpose here is to test whether the **group means** are equal.
 
-- chas: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).
+For $k$ groups, we test
+
+$$
+H_0: \mu_1=\mu_2=\cdots=\mu_k
+$$
+
+$$
+H_a: \text{At least one population mean is different.}
+$$
+
+A significant ANOVA result does **not** tell us which particular groups differ. It also does not, by itself, establish a causal relationship.
+
+#### How does ANOVA work?
+
+ANOVA compares two sources of variation:
+
+- **Between-group variation:** How far are the group sample means from the overall (*grand*) mean?
+- **Within-group variation:** How far are individual observations from their own group sample mean?
+
+Let $x_{ij}$ denote observation $j$ in group $i$, $n_i$ the sample size of group $i$, $\bar{x}_i$ its sample mean, and $\bar{x}$ the grand mean. There are $k$ groups and $N=\sum_{i=1}^k n_i$ observations in total.
+
+$$
+SS_{\mathrm{between}}=\sum_{i=1}^{k} n_i(\bar{x}_i-\bar{x})^2
+$$
+
+$$
+SS_{\mathrm{within}}=\sum_{i=1}^{k}\sum_{j=1}^{n_i}(x_{ij}-\bar{x}_i)^2
+$$
+
+Dividing each sum of squares by its degrees of freedom gives the **mean squares**:
+
+$$
+MS_{\mathrm{between}}=\frac{SS_{\mathrm{between}}}{k-1},\qquad
+MS_{\mathrm{within}}=\frac{SS_{\mathrm{within}}}{N-k}.
+$$
+
+The ANOVA test statistic is
+
+$$
+\boxed{F=\frac{MS_{\mathrm{between}}}{MS_{\mathrm{within}}}.}
+$$
+
+Under $H_0$ and the usual ANOVA assumptions, both mean squares estimate the same population variance. Thus, an unusually large $F$ provides evidence against $H_0$.
+
+**Small numerical example.** Suppose the observations in three groups are A: $(2,4,6)$, B: $(5,7,9)$, and C: $(8,10,12)$. Their means are $4$, $7$, and $10$; the grand mean is $7$.
+
+$$
+SS_{\mathrm{between}}=3(4-7)^2+3(7-7)^2+3(10-7)^2=54
+$$
+
+$$
+SS_{\mathrm{within}}=8+8+8=24
+$$
+
+Therefore, $MS_{\mathrm{between}}=54/2=27$, $MS_{\mathrm{within}}=24/6=4$, and $F=27/4=6.75$.
 
 ```{r}
-ggplot(data = Boston, aes(x = as.factor(chas), y = medv )) + geom_boxplot()
+group <- factor(rep(c("A", "B", "C"), each = 3))
+value <- c(2, 4, 6, 5, 7, 9, 8, 10, 12)
+summary(aov(value ~ group))
 ```
 
+#### Assumptions of One-Way ANOVA
 
+1. **Independence:** Observations are independent within and across groups.
+2. **Normality:** The errors (or equivalently, the response within each group) are approximately normally distributed. This does **not** mean that all observations pooled together must follow one normal distribution.
+3. **Equal variances:** The population variances are equal across groups.
+
+ANOVA can be reasonably robust to moderate departures from normality, especially with sufficiently large group sizes. However, strong outliers, substantial skewness, or unequal variances combined with unbalanced group sizes may affect the reliability of the p-value. **Welch's ANOVA** relaxes the equal-variance assumption and can be performed in R using `oneway.test()`; it does not automatically resolve problems caused by extreme outliers or severe non-normality.
+
+**Example 1: `Boston` Data**
+
+Let's use the `Boston` data set from the `MASS` package.
+
+- `medv`: Median value of owner-occupied homes in $1000s.
+- `chas`: Charles River dummy variable (1 if the tract bounds the river; 0 otherwise).
+
+We want to compare the mean `medv` for the two groups defined by `chas`.
 
 ```{r}
-aov1 <- aov(medv ~ chas, data = Boston)
+ggplot(data = Boston, aes(x = factor(chas), y = medv)) +
+  geom_boxplot() +
+  labs(x = "Bounds Charles River (chas)", y = "Median home value ($1000s)")
+```
+
+```{r}
+aov1 <- aov(medv ~ factor(chas), data = Boston)
 summary(aov1)
 ```
 
-**Interpretation**:
+**Reading the ANOVA table:**
 
-* The Df column displays the degrees of freedom for the independent variable (the number of levels in the variable minus 1), and the degrees of freedom for the residuals (the total number of observations minus one and minus the number of levels in the independent variables).
+- **Df:** Degrees of freedom, $k-1$ for the groups and $N-k$ for residuals.
+- **Sum Sq:** Between-group and within-group sums of squares.
+- **Mean Sq:** Sum Sq divided by the corresponding Df.
+- **F value:** Between-group Mean Sq divided by residual Mean Sq.
+- **Pr(>F):** The p-value for the F-test under the null hypothesis.
 
-* The Sum Sq column displays the sum of squares (a.k.a. the total variation between the group means and the overall mean).
+**Interpretation:** The ANOVA table reports $F = 15.97$ and $p < 0.001$. At the 5% significance level, we reject $H_0$. There is statistically significant evidence that the population mean `medv` differs between tracts that border the Charles River and those that do not. This result establishes an **association**, not that proximity to the river causes the difference in home values.
 
-* The Mean Sq column is the mean of the sum of squares, calculated by dividing the sum of squares by the degrees of freedom for each parameter.
+Since there are only two groups, this example connects to the two-sample t-test. The next example illustrates ANOVA with **more than two groups**.
 
-* The F-value column is the test statistic from the F test. This is the mean square of each independent variable divided by the mean square of the residuals. The larger the F value, the more likely it is that the variation caused by the independent variable is real and not due to chance.
+**Example 2: Revisit the EDA Dataset `diamonds`**
 
-* The Pr(>F) column is the p-value of the F-statistic. This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.
+Recall that the `diamonds` data set contains variables including:
 
-Here, the p-value of the `chas` variable is very low (p < 0.001), so it appears that the type of `chas` used has a real impact on the
-`medv`.
+- `price`: Price in US dollars.
+- `carat`: Weight of the diamond.
+- `cut`: Quality of the cut (Fair, Good, Very Good, Premium, Ideal).
+- `color`: Diamond color, from D (best) to J (worst).
+- `clarity`: A measure of clarity.
 
+We want to investigate whether the **mean price** differs across the five `cut` categories.
 
-#### Revisit the EDA dataset `diamonds`
-
-- price: price in US dollars ($\$326–\$18,823$)
-
-- carat: weight of the diamond (0.2–5.01)
-
-- cut: quality of the cut (Fair, Good, Very Good, Premium, Ideal)
-
-- color: diamond color, from D (best) to J (worst)
-
-- clarity: a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
-
-- x:length in mm (0–10.74)
-
-- y: width in mm (0–58.9)
-
-- z: depth in mm (0–31.8)
-
-- depth: total depth percentage $=  2 * z / (x + y) (43–79)$
-
-- table: width of top of diamond relative to widest point (43–95)
-
-Here we want to investigate the relationship between `cut` and `price`.
-
-```{r boxplot, out.width = "50%",out.height = "50%"}
-ggplot(data = diamonds, mapping = aes(x = cut, y = price)) +
+```{r boxplot, out.width = "50%", out.height = "50%"}
+ggplot(data = diamonds, aes(x = cut, y = price)) +
   geom_boxplot()
 ```
 
-What can you tell from the boxplot?
+What can you tell from the boxplot? Are the distributions similar in spread?
 
 ```{r}
 aov2 <- aov(price ~ cut, data = diamonds)
 summary(aov2)
 ```
 
-Based on the anova test, as the p-value is very low (p < 0.001), so it appears that the type of `cut` used has a real impact on the
-`price`, even though we cannot tell it from the visualization. 
+**Interpretation:** The ANOVA test reports $F = 175.7$ and $p < 0.001$. At the 5% significance level, we reject $H_0$ that the five population mean diamond prices are equal. There is statistically significant evidence that **at least one cut category has a different population mean price**. The ANOVA test alone does not tell us which categories differ.
 
-#### In-Calss Exercise: ANOVA Test
+However, the boxplots show substantial overlap among the price distributions. Thus, a very small p-value does **not** necessarily mean that the differences are large or practically important. The sample size is very large, which can make relatively small differences statistically detectable. Moreover, `carat` and other diamond characteristics may be associated with both `cut` and `price`. This one-way ANOVA does **not** show that cut quality causes changes in price.
 
-* Please construct an ANOVA test for `Species` and `Petal.Length`. What is your conclusion?
+**Key takeaway:** Statistical significance is not the same as practical significance.
 
-* Please construct an ANOVA test for `salary` and `sex` in the `Salaries` data set. What is your conclusion? What about `salary` and `rank`? Note: `Salaries` is in the `carData` package.
+We can inspect the residuals and consider an unequal-variance alternative:
 
+```{r}
+plot(aov2, which = 2)  # Normal Q-Q plot of residuals
+oneway.test(price ~ cut, data = diamonds, var.equal = FALSE) # Welch ANOVA
+```
+
+#### In-Class Exercise: ANOVA Test
+
+- Perform a one-way ANOVA for `Petal.Length` across `Species` in the `iris` data set. State $H_0$ and $H_a$ and interpret the p-value.
+- Perform a one-way ANOVA for `salary` across `sex` in the `Salaries` data set. Repeat using `rank` as the categorical variable. What do you conclude? (`Salaries` is in the `carData` package.)
 
 
 ### Associations between Categorical Variables

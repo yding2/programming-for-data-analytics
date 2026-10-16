@@ -1,0 +1,301 @@
+IncidentID,Year,BreachType,IndividualsAffected,DataLocation
+INC001,2015,Hacking,1442,Network
+INC002,2011,Unauthorized Access,1738,Paper
+INC003,2012,Unauthorized Access,1611,Paper
+INC004,2014,Unauthorized Access,1520,Network
+INC005,2018,Theft,1115,Paper
+INC006,2014,Unauthorized Access,1586,Laptop
+INC007,2016,Hacking,1537,Network
+INC008,2013,Hacking,1803,Paper
+INC009,2009,Unauthorized Access,833,Laptop
+INC010,2015,Theft,671,Paper
+INC011,2018,Theft,1379,Laptop
+INC012,2010,Unauthorized Access,1101,Network
+INC013,2014,Unauthorized Access,1383,Network
+INC014,2010,Unauthorized Access,1349,Paper
+INC015,2008,Unauthorized Access,1568,Paper
+INC016,2014,Hacking,1129,Paper
+INC017,2009,Hacking,1221,Network
+INC018,2015,Theft,1396,Laptop
+INC019,2011,Hacking,1552,Paper
+INC020,2017,Hacking,1382,Network
+INC021,2008,Unauthorized Access,2028,Network
+INC022,2009,Theft,759,Network
+INC023,2017,Theft,587,Laptop
+INC024,2016,Theft,646,Laptop
+INC025,2015,Hacking,1189,Paper
+INC026,2008,Hacking,1124,Network
+INC027,2016,Theft,967,Network
+INC028,2009,Theft,526,Laptop
+INC029,2008,Unauthorized Access,657,Network
+INC030,2013,Hacking,1852,Network
+INC031,2010,Theft,1074,Laptop
+INC032,2018,Hacking,1904,Network
+INC033,2013,Hacking,1375,Network
+INC034,2018,Unauthorized Access,1442,Paper
+INC035,2012,Unauthorized Access,1688,Paper
+INC036,2012,Unauthorized Access,1143,Paper
+INC037,2011,Unauthorized Access,949,Network
+INC038,2012,Unauthorized Access,403,Laptop
+INC039,2009,Hacking,1992,Network
+INC040,2013,Theft,1453,Laptop
+INC041,2014,Unauthorized Access,521,Network
+INC042,2010,Unauthorized Access,1782,Laptop
+INC043,2009,Hacking,1536,Network
+INC044,2015,Theft,1688,Paper
+INC045,2012,Hacking,823,Network
+INC046,2016,Hacking,1591,Network
+INC047,2012,Theft,1040,Paper
+INC048,2008,Hacking,1148,Network
+INC049,2011,Theft,1146,Laptop
+INC050,2015,Unauthorized Access,1730,Network
+INC051,2014,Unauthorized Access,1540,Network
+INC052,2013,Unauthorized Access,1845,Paper
+INC053,2018,Hacking,1102,Network
+INC054,2013,Hacking,1366,Network
+INC055,2012,Theft,672,Paper
+INC056,2014,Hacking,1939,Network
+INC057,2009,Unauthorized Access,1408,Laptop
+INC058,2009,Theft,1335,Laptop
+INC059,2012,Unauthorized Access,720,Network
+INC060,2015,Hacking,903,Paper
+INC061,2018,Unauthorized Access,847,Network
+INC062,2016,Theft,1098,Paper
+INC063,2018,Unauthorized Access,1312,Laptop
+INC064,2017,Theft,1558,Paper
+INC065,2011,Unauthorized Access,982,Network
+INC066,2012,Theft,1609,Laptop
+INC067,2012,Unauthorized Access,723,Laptop
+INC068,2008,Unauthorized Access,1312,Laptop
+INC069,2011,Unauthorized Access,1543,Network
+INC070,2017,Unauthorized Access,1500,Paper
+INC071,2018,Hacking,1487,Paper
+INC072,2013,Hacking,1131,Network
+INC073,2017,Hacking,2047,Laptop
+INC074,2012,Theft,1324,Laptop
+INC075,2018,Hacking,1661,Network
+INC076,2013,Hacking,835,Network
+INC077,2011,Theft,1068,Network
+INC078,2016,Theft,1270,Laptop
+INC079,2018,Theft,909,Network
+INC080,2017,Theft,624,Network
+INC081,2008,Theft,1815,Laptop
+INC082,2008,Unauthorized Access,1563,Network
+INC083,2014,Unauthorized Access,1531,Network
+INC084,2008,Unauthorized Access,1314,Laptop
+INC085,2014,Theft,935,Laptop
+INC086,2018,Hacking,1305,Laptop
+INC087,2013,Hacking,595,Network
+INC088,2012,Theft,1691,Network
+INC089,2013,Hacking,1799,Network
+INC090,2017,Hacking,1667,Network
+INC091,2010,Theft,915,Paper
+INC092,2009,Hacking,57,Network
+INC093,2012,Unauthorized Access,649,Network
+INC094,2009,Hacking,1860,Network
+INC095,2016,Unauthorized Access,1513,Paper
+INC096,2010,Unauthorized Access,1396,Paper
+INC097,2017,Hacking,1311,Network
+INC098,2017,Hacking,1135,Network
+INC099,2016,Unauthorized Access,1502,Network
+INC100,2016,Unauthorized Access,957,Network
+INC101,2018,Hacking,1266,Paper
+INC102,2011,Theft,991,Laptop
+INC103,2013,Hacking,1651,Network
+INC104,2008,Unauthorized Access,1245,Network
+INC105,2018,Hacking,1406,Paper
+INC106,2011,Hacking,1725,Paper
+INC107,2015,Hacking,1631,Paper
+INC108,2008,Unauthorized Access,1148,Paper
+INC109,2017,Theft,741,Laptop
+INC110,2008,Unauthorized Access,1419,Laptop
+INC111,2017,Unauthorized Access,632,Laptop
+INC112,2009,Unauthorized Access,1549,Network
+INC113,2008,Unauthorized Access,966,Laptop
+INC114,2013,Theft,1784,Laptop
+INC115,2017,Unauthorized Access,1560,Paper
+INC116,2009,Hacking,1464,Network
+INC117,2008,Theft,1179,Network
+INC118,2016,Hacking,1605,Network
+INC119,2013,Theft,1117,Laptop
+INC120,2018,Hacking,1299,Paper
+INC121,2008,Hacking,809,Laptop
+INC122,2017,Hacking,1141,Paper
+INC123,2013,Theft,490,Laptop
+INC124,2012,Unauthorized Access,1126,Network
+INC125,2014,Hacking,1522,Network
+INC126,2011,Hacking,1356,Network
+INC127,2011,Theft,1870,Laptop
+INC128,2012,Theft,797,Paper
+INC129,2016,Unauthorized Access,815,Network
+INC130,2016,Unauthorized Access,1726,Paper
+INC131,2016,Hacking,1130,Network
+INC132,2016,Hacking,735,Paper
+INC133,2017,Hacking,2217,Network
+INC134,2013,Hacking,1269,Paper
+INC135,2018,Unauthorized Access,1155,Paper
+INC136,2014,Theft,1206,Laptop
+INC137,2015,Unauthorized Access,1075,Laptop
+INC138,2011,Theft,1091,Paper
+INC139,2015,Unauthorized Access,2204,Laptop
+INC140,2015,Unauthorized Access,2053,Laptop
+INC141,2016,Unauthorized Access,1565,Paper
+INC142,2009,Theft,1340,Laptop
+INC143,2014,Hacking,1943,Network
+INC144,2008,Theft,1759,Laptop
+INC145,2018,Hacking,1599,Network
+INC146,2012,Theft,1444,Paper
+INC147,2010,Theft,183,Paper
+INC148,2010,Theft,834,Laptop
+INC149,2015,Theft,986,Laptop
+INC150,2008,Theft,1560,Laptop
+INC151,2009,Hacking,2385,Laptop
+INC152,2011,Unauthorized Access,1224,Network
+INC153,2009,Theft,1399,Network
+INC154,2014,Hacking,1712,Network
+INC155,2008,Theft,937,Paper
+INC156,2012,Hacking,2006,Network
+INC157,2008,Hacking,1397,Network
+INC158,2012,Hacking,945,Network
+INC159,2016,Unauthorized Access,733,Laptop
+INC160,2011,Theft,1391,Paper
+INC161,2018,Hacking,1018,Network
+INC162,2013,Unauthorized Access,1728,Laptop
+INC163,2015,Hacking,899,Network
+INC164,2016,Hacking,1257,Network
+INC165,2010,Hacking,1690,Network
+INC166,2013,Hacking,1875,Paper
+INC167,2012,Theft,545,Paper
+INC168,2011,Theft,1159,Network
+INC169,2016,Unauthorized Access,897,Network
+INC170,2015,Theft,1603,Paper
+INC171,2009,Theft,827,Laptop
+INC172,2018,Unauthorized Access,1265,Network
+INC173,2012,Unauthorized Access,1578,Network
+INC174,2016,Unauthorized Access,1237,Network
+INC175,2012,Theft,1405,Paper
+INC176,2009,Hacking,1847,Network
+INC177,2015,Hacking,1561,Network
+INC178,2012,Theft,748,Network
+INC179,2008,Hacking,1391,Network
+INC180,2011,Theft,964,Laptop
+INC181,2017,Unauthorized Access,1501,Laptop
+INC182,2018,Unauthorized Access,866,Network
+INC183,2009,Theft,1481,Laptop
+INC184,2013,Unauthorized Access,1188,Network
+INC185,2017,Theft,1570,Laptop
+INC186,2014,Unauthorized Access,1108,Paper
+INC187,2016,Theft,1063,Laptop
+INC188,2013,Hacking,1666,Network
+INC189,2018,Hacking,849,Network
+INC190,2012,Hacking,1350,Network
+INC191,2014,Unauthorized Access,877,Network
+INC192,2013,Hacking,1247,Network
+INC193,2008,Theft,1366,Paper
+INC194,2009,Unauthorized Access,1423,Network
+INC195,2017,Theft,1758,Laptop
+INC196,2016,Unauthorized Access,1241,Laptop
+INC197,2012,Hacking,441,Network
+INC198,2015,Hacking,2463,Network
+INC199,2009,Unauthorized Access,1205,Network
+INC200,2008,Theft,1621,Paper
+INC201,2014,Hacking,1377,Network
+INC202,2015,Theft,1365,Paper
+INC203,2014,Theft,1031,Laptop
+INC204,2008,Theft,1017,Laptop
+INC205,2013,Hacking,1040,Laptop
+INC206,2009,Unauthorized Access,1251,Network
+INC207,2016,Hacking,1491,Network
+INC208,2010,Theft,316,Paper
+INC209,2017,Unauthorized Access,1429,Network
+INC210,2009,Unauthorized Access,1274,Laptop
+INC211,2014,Unauthorized Access,825,Paper
+INC212,2009,Theft,1040,Laptop
+INC213,2012,Theft,795,Laptop
+INC214,2013,Unauthorized Access,1553,Network
+INC215,2017,Hacking,1296,Network
+INC216,2013,Unauthorized Access,1433,Laptop
+INC217,2013,Hacking,1255,Network
+INC218,2008,Theft,1133,Paper
+INC219,2009,Hacking,1210,Laptop
+INC220,2009,Hacking,1157,Network
+INC221,2016,Hacking,1112,Network
+INC222,2017,Unauthorized Access,691,Network
+INC223,2008,Unauthorized Access,1117,Paper
+INC224,2015,Theft,579,Paper
+INC225,2011,Unauthorized Access,937,Paper
+INC226,2016,Theft,1261,Laptop
+INC227,2015,Theft,1586,Paper
+INC228,2011,Theft,909,Laptop
+INC229,2013,Unauthorized Access,1496,Paper
+INC230,2015,Unauthorized Access,1437,Network
+INC231,2016,Hacking,1640,Network
+INC232,2018,Theft,1126,Laptop
+INC233,2009,Theft,1130,Laptop
+INC234,2017,Theft,628,Network
+INC235,2013,Hacking,1912,Network
+INC236,2018,Theft,307,Laptop
+INC237,2014,Hacking,1271,Network
+INC238,2014,Theft,1548,Paper
+INC239,2015,Hacking,1129,Network
+INC240,2016,Unauthorized Access,1325,Network
+INC241,2014,Unauthorized Access,1794,Laptop
+INC242,2009,Unauthorized Access,1219,Laptop
+INC243,2014,Theft,1307,Laptop
+INC244,2015,Unauthorized Access,1355,Laptop
+INC245,2011,Unauthorized Access,1278,Paper
+INC246,2011,Unauthorized Access,1496,Laptop
+INC247,2018,Theft,777,Laptop
+INC248,2015,Theft,908,Laptop
+INC249,2015,Hacking,1441,Network
+INC250,2013,Unauthorized Access,1444,Laptop
+INC251,2008,Hacking,1338,Network
+INC252,2016,Unauthorized Access,904,Network
+INC253,2014,Unauthorized Access,1217,Laptop
+INC254,2018,Unauthorized Access,1805,Network
+INC255,2008,Unauthorized Access,1353,Network
+INC256,2010,Theft,1151,Paper
+INC257,2010,Theft,1035,Network
+INC258,2011,Theft,867,Paper
+INC259,2014,Unauthorized Access,1390,Laptop
+INC260,2013,Unauthorized Access,1038,Paper
+INC261,2012,Unauthorized Access,1080,Network
+INC262,2008,Unauthorized Access,880,Paper
+INC263,2012,Theft,494,Paper
+INC264,2013,Hacking,1380,Network
+INC265,2008,Unauthorized Access,1886,Paper
+INC266,2014,Theft,625,Paper
+INC267,2008,Unauthorized Access,1104,Paper
+INC268,2016,Theft,1582,Laptop
+INC269,2017,Hacking,963,Laptop
+INC270,2017,Theft,1187,Laptop
+INC271,2013,Theft,1571,Laptop
+INC272,2012,Hacking,2011,Network
+INC273,2009,Unauthorized Access,1426,Laptop
+INC274,2008,Theft,1134,Laptop
+INC275,2008,Theft,545,Laptop
+INC276,2012,Unauthorized Access,783,Paper
+INC277,2008,Unauthorized Access,1474,Paper
+INC278,2015,Theft,1437,Network
+INC279,2008,Unauthorized Access,1299,Laptop
+INC280,2010,Theft,901,Laptop
+INC281,2015,Theft,1079,Laptop
+INC282,2018,Theft,1517,Network
+INC283,2010,Theft,931,Laptop
+INC284,2008,Theft,1314,Laptop
+INC285,2017,Theft,160,Laptop
+INC286,2011,Unauthorized Access,807,Laptop
+INC287,2011,Unauthorized Access,1106,Paper
+INC288,2010,Theft,1348,Laptop
+INC289,2010,Unauthorized Access,948,Paper
+INC290,2016,Unauthorized Access,587,Network
+INC291,2018,Unauthorized Access,1647,Laptop
+INC292,2018,Theft,948,Paper
+INC293,2011,Unauthorized Access,1282,Laptop
+INC294,2018,Theft,1063,Network
+INC295,2009,Unauthorized Access,587,Network
+INC296,2008,Theft,1187,Network
+INC297,2016,Hacking,1874,Network
+INC298,2009,Unauthorized Access,1237,Laptop
+INC299,2017,Hacking,1011,Network
+INC300,2014,Hacking,1584,Paper

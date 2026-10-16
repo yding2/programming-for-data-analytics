@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 9: Association between Variables – Programming for Data Analytics/Cyber Security</title>
+<title>Week 9/10: Association between Variables – Programming for Data Analytics/Cyber Security</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -331,9 +331,10 @@ window.Quarto = {
   <ul>
   <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference">Reference</a></li>
   <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#asscociation" id="toc-asscociation" class="nav-link" data-scroll-target="#asscociation">Asscociation</a>
+  <li><a href="#association" id="toc-association" class="nav-link" data-scroll-target="#association">Association</a>
   <ul class="collapse">
   <li><a href="#association-between-one-numerical-variable-and-one-categorical-variable" id="toc-association-between-one-numerical-variable-and-one-categorical-variable" class="nav-link" data-scroll-target="#association-between-one-numerical-variable-and-one-categorical-variable">Association between One Numerical Variable and One Categorical Variable</a></li>
+  <li><a href="#one-way-analysis-of-variance-anova" id="toc-one-way-analysis-of-variance-anova" class="nav-link" data-scroll-target="#one-way-analysis-of-variance-anova">One-Way Analysis of Variance (ANOVA)</a></li>
   <li><a href="#associations-between-categorical-variables" id="toc-associations-between-categorical-variables" class="nav-link" data-scroll-target="#associations-between-categorical-variables">Associations between Categorical Variables</a></li>
   <li><a href="#chi-squared-test" id="toc-chi-squared-test" class="nav-link" data-scroll-target="#chi-squared-test">Chi-squared Test</a></li>
   <li><a href="#cramers-v-phi-coefficient" id="toc-cramers-v-phi-coefficient" class="nav-link" data-scroll-target="#cramers-v-phi-coefficient">Cramer’s V (phi) Coefficient</a></li>
@@ -346,7 +347,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 9: Association between Variables</h1>
+<h1 class="title">Week 9/10: Association between Variables</h1>
 </div>
 
 
@@ -392,64 +393,128 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="asscociation" class="level2">
-<h2 class="anchored" data-anchor-id="asscociation">Asscociation</h2>
+<section id="association" class="level2">
+<h2 class="anchored" data-anchor-id="association">Association</h2>
 <section id="association-between-one-numerical-variable-and-one-categorical-variable" class="level3">
 <h3 class="anchored" data-anchor-id="association-between-one-numerical-variable-and-one-categorical-variable">Association between One Numerical Variable and One Categorical Variable</h3>
-<p>We can use <strong>ANOVA test</strong> to check the association between one numerical variable and one categorical variable with <code>aov</code> function. ANOVA(AOV) is short for ANalysis Of VAriance.</p>
-<p>Let’s play with <code>Boston</code> data set from <code>MASS</code> package.</p>
+</section>
+<section id="one-way-analysis-of-variance-anova" class="level3">
+<h3 class="anchored" data-anchor-id="one-way-analysis-of-variance-anova">One-Way Analysis of Variance (ANOVA)</h3>
+<p><strong>One-way ANOVA</strong> is used to compare the population means of a numerical response variable across two or more groups defined by one categorical explanatory variable. Although ANOVA stands for <em>Analysis of Variance</em>, its main purpose here is to test whether the <strong>group means</strong> are equal.</p>
+<p>For <span class="math inline">\(k\)</span> groups, we test</p>
+<p><span class="math display">\[
+H_0: \mu_1=\mu_2=\cdots=\mu_k
+\]</span></p>
+<p><span class="math display">\[
+H_a: \text{At least one population mean is different.}
+\]</span></p>
+<p>A significant ANOVA result does <strong>not</strong> tell us which particular groups differ. It also does not, by itself, establish a causal relationship.</p>
+<section id="how-does-anova-work" class="level4">
+<h4 class="anchored" data-anchor-id="how-does-anova-work">How does ANOVA work?</h4>
+<p>ANOVA compares two sources of variation:</p>
 <ul>
-<li><p>medv: median value of owner-occupied homes in $1000s.</p></li>
-<li><p>chas: Charles River dummy variable (= 1 if tract bounds river; 0 otherwise).</p></li>
+<li><strong>Between-group variation:</strong> How far are the group sample means from the overall (<em>grand</em>) mean?</li>
+<li><strong>Within-group variation:</strong> How far are individual observations from their own group sample mean?</li>
 </ul>
+<p>Let <span class="math inline">\(x_{ij}\)</span> denote observation <span class="math inline">\(j\)</span> in group <span class="math inline">\(i\)</span>, <span class="math inline">\(n_i\)</span> the sample size of group <span class="math inline">\(i\)</span>, <span class="math inline">\(\bar{x}_i\)</span> its sample mean, and <span class="math inline">\(\bar{x}\)</span> the grand mean. There are <span class="math inline">\(k\)</span> groups and <span class="math inline">\(N=\sum_{i=1}^k n_i\)</span> observations in total.</p>
+<p><span class="math display">\[
+SS_{\mathrm{between}}=\sum_{i=1}^{k} n_i(\bar{x}_i-\bar{x})^2
+\]</span></p>
+<p><span class="math display">\[
+SS_{\mathrm{within}}=\sum_{i=1}^{k}\sum_{j=1}^{n_i}(x_{ij}-\bar{x}_i)^2
+\]</span></p>
+<p>Dividing each sum of squares by its degrees of freedom gives the <strong>mean squares</strong>:</p>
+<p><span class="math display">\[
+MS_{\mathrm{between}}=\frac{SS_{\mathrm{between}}}{k-1},\qquad
+MS_{\mathrm{within}}=\frac{SS_{\mathrm{within}}}{N-k}.
+\]</span></p>
+<p>The ANOVA test statistic is</p>
+<p><span class="math display">\[
+\boxed{F=\frac{MS_{\mathrm{between}}}{MS_{\mathrm{within}}}.}
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span> and the usual ANOVA assumptions, both mean squares estimate the same population variance. Thus, an unusually large <span class="math inline">\(F\)</span> provides evidence against <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Small numerical example.</strong> Suppose the observations in three groups are A: <span class="math inline">\((2,4,6)\)</span>, B: <span class="math inline">\((5,7,9)\)</span>, and C: <span class="math inline">\((8,10,12)\)</span>. Their means are <span class="math inline">\(4\)</span>, <span class="math inline">\(7\)</span>, and <span class="math inline">\(10\)</span>; the grand mean is <span class="math inline">\(7\)</span>.</p>
+<p><span class="math display">\[
+SS_{\mathrm{between}}=3(4-7)^2+3(7-7)^2+3(10-7)^2=54
+\]</span></p>
+<p><span class="math display">\[
+SS_{\mathrm{within}}=8+8+8=24
+\]</span></p>
+<p>Therefore, <span class="math inline">\(MS_{\mathrm{between}}=54/2=27\)</span>, <span class="math inline">\(MS_{\mathrm{within}}=24/6=4\)</span>, and <span class="math inline">\(F=27/4=6.75\)</span>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Boston, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(chas), <span class="at">y =</span> medv )) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>), <span class="at">each =</span> <span class="dv">3</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(value <span class="sc">~</span> group))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+group        2     54      27    6.75 0.0291 *
+Residuals    6     24       4                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="assumptions-of-one-way-anova" class="level4">
+<h4 class="anchored" data-anchor-id="assumptions-of-one-way-anova">Assumptions of One-Way ANOVA</h4>
+<ol type="1">
+<li><strong>Independence:</strong> Observations are independent within and across groups.</li>
+<li><strong>Normality:</strong> The errors (or equivalently, the response within each group) are approximately normally distributed. This does <strong>not</strong> mean that all observations pooled together must follow one normal distribution.</li>
+<li><strong>Equal variances:</strong> The population variances are equal across groups.</li>
+</ol>
+<p>ANOVA can be reasonably robust to moderate departures from normality, especially with sufficiently large group sizes. However, strong outliers, substantial skewness, or unequal variances combined with unbalanced group sizes may affect the reliability of the p-value. <strong>Welch’s ANOVA</strong> relaxes the equal-variance assumption and can be performed in R using <code>oneway.test()</code>; it does not automatically resolve problems caused by extreme outliers or severe non-normality.</p>
+<p><strong>Example 1: <code>Boston</code> Data</strong></p>
+<p>Let’s use the <code>Boston</code> data set from the <code>MASS</code> package.</p>
+<ul>
+<li><code>medv</code>: Median value of owner-occupied homes in $1000s.</li>
+<li><code>chas</code>: Charles River dummy variable (1 if the tract bounds the river; 0 otherwise).</li>
+</ul>
+<p>We want to compare the mean <code>medv</code> for the two groups defined by <code>chas</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Boston, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(chas), <span class="at">y =</span> medv)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bounds Charles River (chas)"</span>, <span class="at">y =</span> <span class="st">"Median home value ($1000s)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="week09_association_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+<p><img src="week09_association_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(medv <span class="sc">~</span> chas, <span class="at">data =</span> Boston)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(medv <span class="sc">~</span> <span class="fu">factor</span>(chas), <span class="at">data =</span> Boston)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-chas          1   1312  1312.1   15.97 7.39e-05 ***
-Residuals   504  41404    82.2                     
+<pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+factor(chas)   1   1312  1312.1   15.97 7.39e-05 ***
+Residuals    504  41404    82.2                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p><strong>Interpretation</strong>:</p>
+<p><strong>Reading the ANOVA table:</strong></p>
 <ul>
-<li><p>The Df column displays the degrees of freedom for the independent variable (the number of levels in the variable minus 1), and the degrees of freedom for the residuals (the total number of observations minus one and minus the number of levels in the independent variables).</p></li>
-<li><p>The Sum Sq column displays the sum of squares (a.k.a. the total variation between the group means and the overall mean).</p></li>
-<li><p>The Mean Sq column is the mean of the sum of squares, calculated by dividing the sum of squares by the degrees of freedom for each parameter.</p></li>
-<li><p>The F-value column is the test statistic from the F test. This is the mean square of each independent variable divided by the mean square of the residuals. The larger the F value, the more likely it is that the variation caused by the independent variable is real and not due to chance.</p></li>
-<li><p>The Pr(&gt;F) column is the p-value of the F-statistic. This shows how likely it is that the F-value calculated from the test would have occurred if the null hypothesis of no difference among group means were true.</p></li>
+<li><strong>Df:</strong> Degrees of freedom, <span class="math inline">\(k-1\)</span> for the groups and <span class="math inline">\(N-k\)</span> for residuals.</li>
+<li><strong>Sum Sq:</strong> Between-group and within-group sums of squares.</li>
+<li><strong>Mean Sq:</strong> Sum Sq divided by the corresponding Df.</li>
+<li><strong>F value:</strong> Between-group Mean Sq divided by residual Mean Sq.</li>
+<li><strong>Pr(&gt;F):</strong> The p-value for the F-test under the null hypothesis.</li>
 </ul>
-<p>Here, the p-value of the <code>chas</code> variable is very low (p &lt; 0.001), so it appears that the type of <code>chas</code> used has a real impact on the <code>medv</code>.</p>
-<section id="revisit-the-eda-dataset-diamonds" class="level4">
-<h4 class="anchored" data-anchor-id="revisit-the-eda-dataset-diamonds">Revisit the EDA dataset <code>diamonds</code></h4>
+<p>Here the p-value is less than 0.001. At the 5% significance level, we reject <span class="math inline">\(H_0\)</span> and conclude that there is statistically significant evidence that mean <code>medv</code> differs between the two <code>chas</code> groups. This is an <strong>association</strong>, not proof that proximity to the river causes the difference.</p>
+<p>Since there are only two groups, this example connects to the two-sample t-test. The next example illustrates ANOVA with <strong>more than two groups</strong>.</p>
+<p><strong>Example 2: Revisit the EDA Dataset <code>diamonds</code></strong></p>
+<p>Recall that the <code>diamonds</code> data set contains variables including:</p>
 <ul>
-<li><p>price: price in US dollars (<span class="math inline">\(\$326–\$18,823\)</span>)</p></li>
-<li><p>carat: weight of the diamond (0.2–5.01)</p></li>
-<li><p>cut: quality of the cut (Fair, Good, Very Good, Premium, Ideal)</p></li>
-<li><p>color: diamond color, from D (best) to J (worst)</p></li>
-<li><p>clarity: a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))</p></li>
-<li><p>x:length in mm (0–10.74)</p></li>
-<li><p>y: width in mm (0–58.9)</p></li>
-<li><p>z: depth in mm (0–31.8)</p></li>
-<li><p>depth: total depth percentage <span class="math inline">\(=  2 * z / (x + y) (43–79)\)</span></p></li>
-<li><p>table: width of top of diamond relative to widest point (43–95)</p></li>
+<li><code>price</code>: Price in US dollars.</li>
+<li><code>carat</code>: Weight of the diamond.</li>
+<li><code>cut</code>: Quality of the cut (Fair, Good, Very Good, Premium, Ideal).</li>
+<li><code>color</code>: Diamond color, from D (best) to J (worst).</li>
+<li><code>clarity</code>: A measure of clarity.</li>
 </ul>
-<p>Here we want to investigate the relationship between <code>cut</code> and <code>price</code>.</p>
+<p>We want to investigate whether the <strong>mean price</strong> differs across the five <code>cut</code> categories.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> price)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -458,10 +523,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </div>
-<p>What can you tell from the boxplot?</p>
+<p>What can you tell from the boxplot? Are the distributions similar in spread?</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aov2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(price <span class="sc">~</span> cut, <span class="at">data =</span> diamonds)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>aov2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(price <span class="sc">~</span> cut, <span class="at">data =</span> diamonds)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
 cut             4 1.104e+10 2.760e+09   175.7 &lt;2e-16 ***
@@ -470,13 +535,32 @@ Residuals   53935 8.474e+11 1.571e+07
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Based on the anova test, as the p-value is very low (p &lt; 0.001), so it appears that the type of <code>cut</code> used has a real impact on the <code>price</code>, even though we cannot tell it from the visualization.</p>
+<p>The p-value is less than 0.001, so we reject the null hypothesis that all five population mean prices are equal. <strong>At least one mean differs</strong>, but this ANOVA result alone does not identify which pairs differ. Also, variables such as <code>carat</code> may be related to both <code>cut</code> and <code>price</code>; this analysis does not establish causation.</p>
+<p>We can inspect the residuals and consider an unequal-variance alternative:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aov2, <span class="at">which =</span> <span class="dv">2</span>)  <span class="co"># Normal Q-Q plot of residuals</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week09_association_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(price <span class="sc">~</span> cut, <span class="at">data =</span> diamonds, <span class="at">var.equal =</span> <span class="cn">FALSE</span>) <span class="co"># Welch ANOVA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  price and cut
+F = 166.04, num df = 4.0, denom df = 9398.6, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
 </section>
-<section id="in-calss-exercise-anova-test" class="level4">
-<h4 class="anchored" data-anchor-id="in-calss-exercise-anova-test">In-Calss Exercise: ANOVA Test</h4>
+<section id="in-class-exercise-anova-test" class="level4">
+<h4 class="anchored" data-anchor-id="in-class-exercise-anova-test">In-Class Exercise: ANOVA Test</h4>
 <ul>
-<li><p>Please construct an ANOVA test for <code>Species</code> and <code>Petal.Length</code>. What is your conclusion?</p></li>
-<li><p>Please construct an ANOVA test for <code>salary</code> and <code>sex</code> in the <code>Salaries</code> data set. What is your conclusion? What about <code>salary</code> and <code>rank</code>? Note: <code>Salaries</code> is in the <code>carData</code> package.</p></li>
+<li>Perform a one-way ANOVA for <code>Petal.Length</code> across <code>Species</code> in the <code>iris</code> data set. State <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span> and interpret the p-value.</li>
+<li>Perform a one-way ANOVA for <code>salary</code> across <code>sex</code> in the <code>Salaries</code> data set. Repeat using <code>rank</code> as the categorical variable. What do you conclude? (<code>Salaries</code> is in the <code>carData</code> package.)</li>
 </ul>
 </section>
 </section>
@@ -516,22 +600,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Based on the table, we can also calculate the <span class="math inline">\(\chi^2\)</span> value. Here, we omit the process.</p>
 <p>How to use <code>chisq.test</code>?</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually enter the data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>taxreform <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">182</span>,<span class="dv">213</span>,<span class="dv">203</span>), <span class="fu">c</span>(<span class="dv">154</span>,<span class="dv">138</span>,<span class="dv">110</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(taxreform) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">reform =</span> <span class="fu">c</span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">IncomeLevel =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"Medium"</span>, <span class="st">"High"</span>))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display the data</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>taxreform </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually enter the data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>taxreform <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">182</span>,<span class="dv">213</span>,<span class="dv">203</span>), <span class="fu">c</span>(<span class="dv">154</span>,<span class="dv">138</span>,<span class="dv">110</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dimnames</span>(taxreform) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">reform =</span> <span class="fu">c</span>(<span class="st">"For"</span>, <span class="st">"Against"</span>), </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">IncomeLevel =</span> <span class="fu">c</span>(<span class="st">"Low"</span>,<span class="st">"Medium"</span>, <span class="st">"High"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display the data</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>taxreform </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         IncomeLevel
 reform    Low Medium High
   For     182    213  203
   Against 154    138  110</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-square test</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>chitest1 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(taxreform)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>chitest1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># chi-square test</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>chitest1 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(taxreform)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>chitest1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -546,12 +630,12 @@ X-squared = 7.8782, df = 2, p-value = 0.01947</code></pre>
 <h4 class="anchored" data-anchor-id="revisit-the-eda-dataset-diamonds-again">Revisit the EDA dataset <code>diamonds</code> again</h4>
 <p>Here we want to investigate the relationship between <code>cut</code> and <code>clarity</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create contingency table</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cutclarity<span class="ot">&lt;-</span><span class="fu">table</span>(diamonds<span class="sc">$</span>cut,diamonds<span class="sc">$</span>clarity)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct Chi-squared Test</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>chisqtestResult1<span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(cutclarity)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>chisqtestResult1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create contingency table</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cutclarity<span class="ot">&lt;-</span><span class="fu">table</span>(diamonds<span class="sc">$</span>cut,diamonds<span class="sc">$</span>clarity)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct Chi-squared Test</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>chisqtestResult1<span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(cutclarity)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>chisqtestResult1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -563,12 +647,12 @@ X-squared = 4391.4, df = 28, p-value &lt; 2.2e-16</code></pre>
 <p>Since we get a p-value less than the significance level of 0.05, we should reject the null hypothesis and conclude that the two variables are dependent.</p>
 <p>Let’s also check the relationship between <code>cut</code> and <code>color</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create contingency table</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cutcolor<span class="ot">&lt;-</span><span class="fu">table</span>(diamonds<span class="sc">$</span>cut,diamonds<span class="sc">$</span>color)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct Chi-squared Test</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>chisqtestResult2<span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(cutcolor)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>chisqtestResult2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create contingency table</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cutcolor<span class="ot">&lt;-</span><span class="fu">table</span>(diamonds<span class="sc">$</span>cut,diamonds<span class="sc">$</span>color)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct Chi-squared Test</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>chisqtestResult2<span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(cutcolor)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>chisqtestResult2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -587,12 +671,12 @@ X-squared = 310.32, df = 24, p-value &lt; 2.2e-16</code></pre>
 <section id="revisit-example-1" class="level4">
 <h4 class="anchored" data-anchor-id="revisit-example-1">Revisit Example 1</h4>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co">#Based on the table</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>chistats <span class="ot">&lt;-</span> chitest1<span class="sc">$</span>statistic</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>cramerv <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chistats<span class="sc">/</span>n<span class="sc">/</span><span class="fu">min</span>(r<span class="dv">-1</span>,c<span class="dv">-1</span>))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>cramerv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="co">#Based on the table</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>chistats <span class="ot">&lt;-</span> chitest1<span class="sc">$</span>statistic</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>cramerv <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(chistats<span class="sc">/</span>n<span class="sc">/</span><span class="fu">min</span>(r<span class="dv">-1</span>,c<span class="dv">-1</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>cramerv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> X-squared 
 0.08875929 </code></pre>
@@ -600,13 +684,10 @@ X-squared = 310.32, df = 24, p-value &lt; 2.2e-16</code></pre>
 </div>
 <p>We can also use the function <code>cramerV</code> in package <code>rcompanion</code> to calculate Cramer’s V value.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load rcompanion library</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rcompanion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'rcompanion' was built under R version 4.5.3</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate Cramer's V</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(taxreform )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load rcompanion library</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rcompanion)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate Cramer's V</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(taxreform )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cramer V 
  0.08876 </code></pre>
@@ -614,12 +695,12 @@ X-squared = 310.32, df = 24, p-value &lt; 2.2e-16</code></pre>
 </div>
 <p>The range of Cramer’s V value is from 0 to 1. The value we got here is 0.08876, not that large. Let’s check the Cramer’s V value for <code>cut</code> and <code>clarity</code>, also <code>cut</code> and <code>color</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(cutclarity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(cutclarity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cramer V 
   0.1427 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(cutcolor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cramerV</span>(cutcolor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Cramer V 
  0.03792 </code></pre>
