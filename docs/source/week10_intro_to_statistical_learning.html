@@ -197,21 +197,24 @@ window.Quarto = {
     <a class="dropdown-item" href="../source/week08_midterm_review.html">
  <span class="dropdown-text">Week 8: Midterm Review</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 9 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week09_association.html">
- <span class="dropdown-text">Week 9: Association between Variables</span></a>
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
   </li>  
         <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
  <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
   </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
- <span class="dropdown-text">Week 10: Simple Linear Regression</span></a>
+ <span class="dropdown-text">Week 11: Simple Linear Regression</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 11 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
  <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
@@ -307,6 +310,7 @@ window.Quarto = {
   <li><a href="#statistical-learning-vs-machine-learning" id="toc-statistical-learning-vs-machine-learning" class="nav-link" data-scroll-target="#statistical-learning-vs-machine-learning">Statistical Learning VS Machine Learning</a></li>
   <li><a href="#training-validation-and-test-sets" id="toc-training-validation-and-test-sets" class="nav-link" data-scroll-target="#training-validation-and-test-sets">Training, validation, and test sets</a></li>
   <li><a href="#some-trade-offs" id="toc-some-trade-offs" class="nav-link" data-scroll-target="#some-trade-offs">Some trade-offs</a></li>
+  <li><a href="#bias-variance-tradeoff" id="toc-bias-variance-tradeoff" class="nav-link" data-scroll-target="#bias-variance-tradeoff">Bias-Variance Tradeoff</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -369,7 +373,7 @@ window.Quarto = {
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../figures/RegressionExample.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<p><img src="../figures/RegressionExample.png" class="img-fluid figure-img" style="width:85.0%"></p>
 <figcaption>Income survey data for males from the central Atlantic region of the USA in 2009.</figcaption>
 </figure>
 </div>
@@ -383,7 +387,7 @@ window.Quarto = {
 <li><p>In the classification problem, <span class="math inline">\(Y\)</span> takes values in a finite, unordered set (survived/died, digit 0-9, cancer class of tissue sample).</p></li>
 </ul></li>
 </ul>
-<p><img src="../figures/ClassificationExample.png" class="img-fluid" style="width:65.0%"></p>
+<p><img src="../figures/ClassificationExample.png" class="img-fluid" style="width:60.0%"></p>
 </section>
 <section id="practice-identifying-regressionclassification-problems." class="level4">
 <h4 class="anchored" data-anchor-id="practice-identifying-regressionclassification-problems.">Practice: Identifying regression/classification problems.</h4>
@@ -418,7 +422,7 @@ window.Quarto = {
 </section>
 <section id="practice-knn" class="level4">
 <h4 class="anchored" data-anchor-id="practice-knn">Practice: KNN</h4>
-<p><img src="../figures/KNNExample.png" class="img-fluid" style="width:45.0%"></p>
+<p><img src="../figures/KNNExample.png" class="img-fluid" style="width:50.0%"></p>
 <p>Each point represents a customer with two features:</p>
 <ul>
 <li><span class="math inline">\(x_1\)</span>: Time on website</li>
@@ -479,6 +483,21 @@ window.Quarto = {
 <li><p>Parsimony versus black-box</p></li>
 </ul>
 <p>We often prefer a simpler model involving fewer variables over a black-box predictor involving them all.</p>
+</section>
+<section id="bias-variance-tradeoff" class="level3">
+<h3 class="anchored" data-anchor-id="bias-variance-tradeoff">Bias-Variance Tradeoff</h3>
+<p>When building a predictive model, we need to balance two sources of error:</p>
+<ul>
+<li><strong>Bias</strong>: Error caused by overly simplistic assumptions. A model with high bias may fail to capture important patterns in the data.</li>
+<li><strong>Variance</strong>: Error caused by a model’s sensitivity to the training data. A model with high variance may perform well on training data but poorly on new data.</li>
+</ul>
+<p>This leads to the <strong>bias-variance tradeoff</strong>:</p>
+<ul>
+<li><strong>Underfitting</strong>: A model is too simple, often resulting in high bias and low variance.</li>
+<li><strong>Overfitting</strong>: A model is too complex, often resulting in low bias and high variance.</li>
+</ul>
+<p>The goal is to find a model that balances bias and variance and performs well on unseen data.</p>
+<p><img src="../figures/bias_variance_tradeoff.png" class="img-fluid" style="width:65.0%"></p>
 
 
 </section>

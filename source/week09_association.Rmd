@@ -60,7 +60,7 @@ ANOVA compares two sources of variation:
 - **Between-group variation:** How far are the group sample means from the overall (*grand*) mean?
 - **Within-group variation:** How far are individual observations from their own group sample mean?
 
-Let $x_{ij}$ denote observation $j$ in group $i$, $n_i$ the sample size of group $i$, $\bar{x}_i$ its sample mean, and $\bar{x}$ the grand mean. There are $k$ groups and $N=\sum_{i=1}^k n_i$ observations in total.
+Let $x_{ij}$ denote observation $j$ in group $i$, $n_i$ the sample size of group $i$, $\bar{x}_i$ its sample mean, and $\bar{x}$ the grand mean. There are $k$ groups and $N=\sum\limits_{i=1}^k n_i$ observations in total.
 
 $$
 SS_{\mathrm{between}}=\sum_{i=1}^{k} n_i(\bar{x}_i-\bar{x})^2
@@ -220,7 +220,15 @@ Thus, we have the following table.
 knitr::include_graphics("../figures/table10_7.png")
 ```
 
-Based on the table, we can also calculate the $\chi^2$ value. Here, we omit the process.
+Based on the table, we can also calculate the $\chi^2$ value. 
+The **Chi-squared test statistic** is calculated as
+
+$$\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}
+\frac{(O_{ij}-E_{ij})^2}{E_{ij}},$$
+
+where $O_{ij}$ is the observed frequency and $E_{ij}$ is the expected frequency for cell $(i,j)$.
+
+A larger $\chi^2$ value indicates a greater discrepancy between the observed and expected frequencies.
 
 How to use `chisq.test`?
 

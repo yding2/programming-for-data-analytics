@@ -51,7 +51,7 @@ The purpose of supervised learning is to predict the output value for unlabeled 
   - In the regression problem, $Y$ is quantitative (e.g price, blood pressure).
   
 
-![Income survey data for males from the central Atlantic region of the USA in 2009.](../figures/RegressionExample.png){width=65%}
+![Income survey data for males from the central Atlantic region of the USA in 2009.](../figures/RegressionExample.png){width=85%}
 
 #### Classification
 
@@ -62,7 +62,7 @@ The purpose of supervised learning is to predict the output value for unlabeled 
   - In the classification problem, $Y$ takes values in a finite, unordered set (survived/died,
 digit 0-9, cancer class of tissue sample).
 
-![](../figures/ClassificationExample.png){width=65%}
+![](../figures/ClassificationExample.png){width=60%}
 
 #### Practice: Identifying regression/classification problems.
 
@@ -101,7 +101,7 @@ Two predicted classes are separted by the decision boundary $\{x:x^T\hat{\beta} 
 
 #### Practice: KNN
 
-![](../figures/KNNExample.png){width=45%}
+![](../figures/KNNExample.png){width=50%}
 
 Each point represents a customer with two features:
 
@@ -173,5 +173,25 @@ In our class, we generally split the data set into training and test data set.
 - Parsimony versus black-box
 
 We often prefer a simpler model involving fewer variables over a black-box predictor involving them all.
+
+
+### Bias-Variance Tradeoff
+
+When building a predictive model, we need to balance two sources of error:
+
+- **Bias**: Error caused by overly simplistic assumptions. A model with high bias may fail to capture important patterns in the data.
+- **Variance**: Error caused by a model's sensitivity to the training data. A model with high variance may perform well on training data but poorly on new data.
+
+This leads to the **bias-variance tradeoff**:
+
+- **Underfitting**: A model is too simple, often resulting in high bias and low variance.
+- **Overfitting**: A model is too complex, often resulting in low bias and high variance.
+
+The goal is to find a model that balances bias and variance and performs well on unseen data.
+
+![](../figures/bias_variance_tradeoff.png){width=65%}
+
+
+
 
 

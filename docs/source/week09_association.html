@@ -232,21 +232,24 @@ window.Quarto = {
     <a class="dropdown-item" href="../source/week08_midterm_review.html">
  <span class="dropdown-text">Week 8: Midterm Review</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 9 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week09_association.html">
- <span class="dropdown-text">Week 9: Association between Variables</span></a>
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
   </li>  
         <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
  <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
   </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
- <span class="dropdown-text">Week 10: Simple Linear Regression</span></a>
+ <span class="dropdown-text">Week 11: Simple Linear Regression</span></a>
   </li>  
-        <li class="dropdown-header">─────── Week 11 ───────</li>
         <li>
     <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
  <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
@@ -420,7 +423,7 @@ H_a: \text{At least one population mean is different.}
 <li><strong>Between-group variation:</strong> How far are the group sample means from the overall (<em>grand</em>) mean?</li>
 <li><strong>Within-group variation:</strong> How far are individual observations from their own group sample mean?</li>
 </ul>
-<p>Let <span class="math inline">\(x_{ij}\)</span> denote observation <span class="math inline">\(j\)</span> in group <span class="math inline">\(i\)</span>, <span class="math inline">\(n_i\)</span> the sample size of group <span class="math inline">\(i\)</span>, <span class="math inline">\(\bar{x}_i\)</span> its sample mean, and <span class="math inline">\(\bar{x}\)</span> the grand mean. There are <span class="math inline">\(k\)</span> groups and <span class="math inline">\(N=\sum_{i=1}^k n_i\)</span> observations in total.</p>
+<p>Let <span class="math inline">\(x_{ij}\)</span> denote observation <span class="math inline">\(j\)</span> in group <span class="math inline">\(i\)</span>, <span class="math inline">\(n_i\)</span> the sample size of group <span class="math inline">\(i\)</span>, <span class="math inline">\(\bar{x}_i\)</span> its sample mean, and <span class="math inline">\(\bar{x}\)</span> the grand mean. There are <span class="math inline">\(k\)</span> groups and <span class="math inline">\(N=\sum\limits_{i=1}^k n_i\)</span> observations in total.</p>
 <p><span class="math display">\[
 SS_{\mathrm{between}}=\sum_{i=1}^{k} n_i(\bar{x}_i-\bar{x})^2
 \]</span></p>
@@ -603,7 +606,11 @@ F = 166.04, num df = 4.0, denom df = 9398.6, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<p>Based on the table, we can also calculate the <span class="math inline">\(\chi^2\)</span> value. Here, we omit the process.</p>
+<p>Based on the table, we can also calculate the <span class="math inline">\(\chi^2\)</span> value. The <strong>Chi-squared test statistic</strong> is calculated as</p>
+<p><span class="math display">\[\chi^2 = \sum_{i=1}^{r}\sum_{j=1}^{c}
+\frac{(O_{ij}-E_{ij})^2}{E_{ij}},\]</span></p>
+<p>where <span class="math inline">\(O_{ij}\)</span> is the observed frequency and <span class="math inline">\(E_{ij}\)</span> is the expected frequency for cell <span class="math inline">\((i,j)\)</span>.</p>
+<p>A larger <span class="math inline">\(\chi^2\)</span> value indicates a greater discrepancy between the observed and expected frequencies.</p>
 <p>How to use <code>chisq.test</code>?</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually enter the data</span></span>

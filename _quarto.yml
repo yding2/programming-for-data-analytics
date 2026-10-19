@@ -61,22 +61,24 @@ website:
             href: source/week08_hypothesis_testing.ipynb 
 
           - text: "Week 8: Midterm Review"
-            href: source/week08_midterm_review.Rmd 
+            href: source/week08_midterm_review.Rmd  
 
-          - text: "─────── Week 9 ───────" 
-
-          - text: "Week 9: Association between Variables"
+          - text: "Week 9/10: Association between Variables"
             href: source/week09_association.Rmd
         
           - text: "─────── Week 10 ───────"  
 
+          - text: "Week 9/10: Association between Variables"
+            href: source/week09_association.Rmd
+
           - text: "Week 10: Introduction to Statistical Learning"
             href: source/week10_intro_to_statistical_learning.Rmd
 
-          - text: "Week 10: Simple Linear Regression"
-            href: source/week10_simple_linear_regression.Rmd
-
+          
           - text: "─────── Week 11 ───────"  
+
+          - text: "Week 11: Simple Linear Regression"
+            href: source/week10_simple_linear_regression.Rmd
 
           - text: "Week 11: Multiple Linear Regression"
             href: source/week11_multiple_linear_regression.Rmd
