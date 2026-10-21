@@ -95,8 +95,19 @@ website:
             href: source/week12_interaction_terms.Rmd  
 
           - text: "Week 12: NonParametric Tests"
-            href: source/week12_nonparametric_tests.Rmd   
-      
+            href: source/week12_nonparametric_tests.Rmd  
+
+          - text: "─────── Week 13 ───────"  
+
+          - text: "Week 13: Introduction to Classification and Logistic Regression"
+            href: source/week13_intro_to_classification.Rmd  
+
+          - text: "Week 13: Support Vector Machine, Neural Network, and Decision Tree"
+            href: source/week13_other_classifiers.Rmd 
+          
+          - text: "Week 14: Ensemble Methods"
+            href: source/week14_ensemble_methods.Rmd  
+
       - text: "Homework"
         menu:
           - text: "Homework 1"

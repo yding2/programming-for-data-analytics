@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 13: Intro to Classification &amp; Logistic Regression – Programming for Data Analytics/Cyber Security</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Programming for Data Analytics/Cyber Security</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lecture Notes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="../source/week01_intro_to_r.html">
+ <span class="dropdown-text">Week 1: Introduction to R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week02_intro_to_stats.html">
+ <span class="dropdown-text">Week 2: Introduction to Statistics</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 3 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week03_random_variables.html">
+ <span class="dropdown-text">Week 3: Random Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_discrete_distributions.html">
+ <span class="dropdown-text">Week 3: Discrete Distributions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week03_normal_distribution.html">
+ <span class="dropdown-text">Week 3: Normal Distribution</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 4 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA.html">
+ <span class="dropdown-text">Week 4: EDA Notes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week04_EDA_python.html">
+ <span class="dropdown-text">Week 4: EDA Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week05_sampling_distribution_of_sample_mean(s).html">
+ <span class="dropdown-text">Week 5: Sampling Distribution of Sample Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 6 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week06_estimation_on_means.html">
+ <span class="dropdown-text">Week 6: Estimation on Mean(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_test_on_means.html">
+ <span class="dropdown-text">Week 6: Hypothesis Testing on Mean(s)</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 7 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week07_hypothesis_tests_on_proportions.html">
+ <span class="dropdown-text">Week 7: Inference on Proportion(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_statistical_inference_on_variances.html">
+ <span class="dropdown-text">Week 7: Inference on Variances(s)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_hypothesis_testing.html">
+ <span class="dropdown-text">Week 7: Hypothesis Testing Jupyter Notebook</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week08_midterm_review.html">
+ <span class="dropdown-text">Week 8: Midterm Review</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 10 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week09_association.html">
+ <span class="dropdown-text">Week 9/10: Association between Variables</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week10_intro_to_statistical_learning.html">
+ <span class="dropdown-text">Week 10: Introduction to Statistical Learning</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 11 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week10_simple_linear_regression.html">
+ <span class="dropdown-text">Week 11: Simple Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week11_multiple_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week11_linear_regression.html">
+ <span class="dropdown-text">Week 11: Multiple Linear Regression Jupyter Notebook</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 12 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week12_subset_selection.html">
+ <span class="dropdown-text">Week 12: Subset Selection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_interaction_terms.html">
+ <span class="dropdown-text">Week 12: Other Considerations in the Regression Model</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week12_nonparametric_tests.html">
+ <span class="dropdown-text">Week 12: NonParametric Tests</span></a>
+  </li>  
+        <li class="dropdown-header">─────── Week 13 ───────</li>
+        <li>
+    <a class="dropdown-item" href="../source/week13_intro_to_classification.html">
+ <span class="dropdown-text">Week 13: Introduction to Classification and Logistic Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week13_other_classifiers.html">
+ <span class="dropdown-text">Week 13: Support Vector Machine, Neural Network, and Decision Tree</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../source/week14_ensemble_methods.html">
+ <span class="dropdown-text">Week 14: Ensemble Methods</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-homework" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Homework</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-homework">    
+        <li>
+    <a class="dropdown-item" href="../homework/hw01.html">
+ <span class="dropdown-text">Homework 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw01_Solution.html">
+ <span class="dropdown-text">Homework 1 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw02.html">
+ <span class="dropdown-text">Homework 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw02_Solution.html">
+ <span class="dropdown-text">Homework 2 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw03.html">
+ <span class="dropdown-text">Homework 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw03_Solution.html">
+ <span class="dropdown-text">Homework 3 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw04.html">
+ <span class="dropdown-text">Homework 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../solutions/hw04_Solution.html">
+ <span class="dropdown-text">Homework 4 Solution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../homework/hw05.html">
+ <span class="dropdown-text">Homework 5</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Final Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#reference" id="toc-reference" class="nav-link active" data-scroll-target="#reference">Reference</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a>
+  <ul class="collapse">
+  <li><a href="#process-of-the-classification" id="toc-process-of-the-classification" class="nav-link" data-scroll-target="#process-of-the-classification">Process of the Classification</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model Evaluation</a></li>
+  </ul></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a>
+  <ul class="collapse">
+  <li><a href="#general-idea-of-logistic-regression" id="toc-general-idea-of-logistic-regression" class="nav-link" data-scroll-target="#general-idea-of-logistic-regression">General Idea of Logistic Regression</a></li>
+  <li><a href="#south-african-heart-disease-in-r" id="toc-south-african-heart-disease-in-r" class="nav-link" data-scroll-target="#south-african-heart-disease-in-r">South African Heart Disease in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Week 13: Intro to Classification &amp; Logistic Regression</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference">Reference</h2>
+<p>Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani, <em>An Introduction to Statistical Learning: with Applications in R</em>.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>Students will</p>
+<ul>
+<li><p>Understand what is classification</p></li>
+<li><p>Know the difference between linear regression and logistic regression</p></li>
+<li><p>Know how to construct confusion matrix and calculate the assessment metrics</p></li>
+<li><p>Know how to derive the coefficients for the logistic regression</p></li>
+<li><p>Know how to use R to conduct logistic regression, predict the label, and assess the model</p></li>
+</ul>
+</section>
+<section id="classification" class="level2">
+<h2 class="anchored" data-anchor-id="classification">Classification</h2>
+<ul>
+<li><p>Qualitative variables take values in an unordered set <span class="math inline">\(C\)</span>, such as:</p>
+<ul>
+<li><p>eye color <span class="math inline">\(\in \{\text{brown, blue, green}\}\)</span></p></li>
+<li><p>email <span class="math inline">\(\in \{\text{spam, ham}\}\)</span></p></li>
+</ul></li>
+<li><p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(C\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span> ; i.e.&nbsp;<span class="math inline">\(C(X) \in C\)</span>.</p></li>
+<li><p>Often we are more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(C\)</span>.</p></li>
+</ul>
+<section id="process-of-the-classification" class="level3">
+<h3 class="anchored" data-anchor-id="process-of-the-classification">Process of the Classification</h3>
+<ul>
+<li><p>Given a collection of records (<em>training set</em>): each record contains a set of <strong>attributes</strong>, one of the attributes is the <strong>class</strong>.</p></li>
+<li><p>Find a <em>model</em> for class attribute as a function of the values of other attributes.</p></li>
+<li><p>Goal: <strong>previously unseen</strong> records should be assigned a class as accurately as possible.</p></li>
+<li><p>A <em>test set</em> is used to determine the accuracy of the model. Usually, the given data set is divided into training and test sets, with training set used to build the model and test set used to validate it.</p></li>
+</ul>
+<section id="example-credit-card-default" class="level4">
+<h4 class="anchored" data-anchor-id="example-credit-card-default">Example: Credit Card Default</h4>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/CreditCardExample.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question</strong>: Can we use Linear Regression?</p>
+<p>Suppose for the <code>Default</code> classification task that we code <span class="math display">\[ Y = \begin{cases}
+0 &amp; \text{if No} \\
+1 &amp; \text{if Yes}
+\end{cases}\]</span></p>
+<p>Can we simply perform a linear regression of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span> and classify as Yes if <span class="math inline">\(\hat{Y} &gt; 0.5\)</span>?</p>
+<ul>
+<li><p>In this case of a binary outcome, linear regression does a good job as a classifier, and is equivalent to <strong>linear discriminant analysis</strong> which we discuss later.</p></li>
+<li><p>Since in the population <span class="math inline">\(E(Y|X = x) = \text{P}(Y = 1|X = x)\)</span>, we might think that regression is perfect for this task.</p></li>
+<li><p>However,linear regression might produce probabilities less than zero or bigger than one. <strong>Logistic regression</strong> is more appropriate.</p></li>
+</ul>
+</section>
+<section id="linear-versus-logistic-regression" class="level4">
+<h4 class="anchored" data-anchor-id="linear-versus-logistic-regression">Linear versus Logistic Regression</h4>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/LinearVSLogistic.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The orange marks indicate the response <span class="math inline">\(Y\)</span>,either 0 or 1. Linear regression does not estimate <span class="math inline">\(\text{P}(Y=1|X)\)</span> well. <strong>Logistic regression</strong> seems well suited to the task.</p>
+</section>
+</section>
+<section id="model-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="model-evaluation">Model Evaluation</h3>
+<p>In our class, we will focus on binary classification and predictive capability of a model rather than how fast it takes to classify or build models. We will use positive (1) to denote the category we care more. For example, we care more about the spam emails than ham emails.</p>
+<p>Before introducing the evaluation metrics, we first introduce the <em>confusion matrix</em>.</p>
+<section id="confusion-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="confusion-matrix">Confusion Matrix</h4>
+<table>
+<tbody><tr>
+<th rowspan="2" style="background-color:#cce6ff;">
+ACTUAL CLASS
+</th>
+<th colspan="2" style="background-color:#cce6ff;">
+PREDICTED CLASS
+</th>
+</tr>
+<tr>
+<th>
+Class=Yes
+</th>
+<th>
+Class=No
+</th>
+</tr>
+<tr>
+<td>
+<b>Class=Yes</b>
+</td>
+<td>
+TP (True Positive)
+</td>
+<td>
+FN (False Negative)
+</td>
+</tr>
+<tr>
+<td>
+<b>Class=No</b>
+</td>
+<td>
+FP (False Positive)
+</td>
+<td>
+TN (True Negative)
+</td>
+</tr>
+</tbody></table>
+</section>
+<section id="evaluation-metric" class="level4">
+<h4 class="anchored" data-anchor-id="evaluation-metric">Evaluation Metric</h4>
+<ul>
+<li>Most widely-used metric:<em>Accuracy</em></li>
+</ul>
+<p><span class="math display">\[ Accuracy = \frac{TP +TN}{TP+FN+FP+FN}\]</span></p>
+<p><strong>Limitation of Accuracy</strong>:</p>
+<p>Consider a binary-class problem,</p>
+<ul>
+<li>Number of Class 0 examples = 9990</li>
+<li>Number of Class 1 examples = 10</li>
+</ul>
+<p>If model predicts everything to be class 0, accuracy is 99.9%. Accuracy is <strong>misleading</strong> because model does not detect any class 1 example.</p>
+<ul>
+<li><p>Other measures</p>
+<ul>
+<li><p>Precision(p) <span class="math display">\[p = \frac{TP}{TP+FP}\]</span></p></li>
+<li><p>Recall(r) <span class="math display">\[r = \frac{TP}{TP+FN}\]</span></p></li>
+<li><p>F-measure(F) <span class="math display">\[F = \frac{2TP}{2TP+FN+FP}\]</span></p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h2>
+<section id="general-idea-of-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="general-idea-of-logistic-regression">General Idea of Logistic Regression</h3>
+<p>Suppose we only have <em>two</em> classes</p>
+<p><span class="math display">\[\begin{align*}
+g(x) = \log{\frac{p(y=1|X)}{p(y=0|X)}} &amp;= \theta^T X \\
+\Leftrightarrow \log{\frac{p(y=1|X)}{1-p(y=1|X)}} &amp;= \theta^TX \\
+\Leftrightarrow  \frac{p(y=1|X)}{1-p(y=1|X)} &amp;= \exp(\theta^TX)\\
+\Leftrightarrow  p(y=1|X)&amp;=\exp(\theta^TX)[1-p(y=1|X)]\\
+\Leftrightarrow  [1+\exp(\theta^TX)]p(y=1|X)&amp;=\exp(\theta^TX)\\
+\Leftrightarrow p(y=1|X) = \frac{\exp(\theta^TX)}{1+ \exp(\theta^TX)}&amp;
+=\frac{1}{1+\exp(-\theta^TX)}
+\end{align*}\]</span></p>
+<p>Goal: Find <span class="math inline">\(\theta\)</span></p>
+<p><strong>Question</strong>: How to find <span class="math inline">\(\theta\)</span></p>
+<p>Error # 1: Classify 0 as 1 <span class="math display">\[X^* = \{x_i|y_i = 0 \text{ and }\theta^T x_i &gt; 0\}\]</span> Error # 2: Classify 1 as 0 <span class="math display">\[X^{**} = \{x_i|y_i = 1 \text{ and } \theta^T x_i &lt; 0\}\]</span> Consider error function <span class="math display">\[E(\theta) = \# X^* + \# X^{**}\]</span> Find <span class="math display">\[\theta^* =\arg\min_{\theta} E(\theta)\]</span></p>
+<section id="revisit-example-credit-card-default" class="level4">
+<h4 class="anchored" data-anchor-id="revisit-example-credit-card-default">Revisit Example: Credit Card Default</h4>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/CreditCardExample.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Lets write <span class="math inline">\(p(X) = \text{P}(Y = 1|X)\)</span> for short and consider using <code>balance</code> to predict <strong>default</strong>. Logistic regression uses the form <span class="math display">\[ p(X) = \frac{\exp(\beta_0+\beta_1 X )}{1+\exp(\beta_0+\beta_1 X)}.\]</span> It is easy to see that no matter what values <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> or <span class="math inline">\(X\)</span> take, <span class="math inline">\(p(X)\)</span> will have values between 0 and 1.We pick <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> to maximize the likelihood of the observed data or minimize the misclassification error.</p>
+<p>In R we use the <code>glm</code> function and get the following result.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/LogisticExampleResult.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What is our estimated probability of default for someone with a balance of $1000?</p>
+<p><span class="math display">\[\hat{p}(X) = \frac{\exp(\beta_0+\beta_1 X )}{1+\exp(\beta_0+\beta_1 X)} =
+\frac{\exp(-10.6513+ 0.0055\times 1000 )}{1+\exp(-10.6513+ 0.0055\times 1000)} =0.006.\]</span></p>
+<p>We can also extend the logistic regression model to more than one predictor.</p>
+<p><span class="math display">\[p(X) = \frac{\exp(\beta_0+\beta_1 X_1+\cdots + \beta_pX_p )}{1+\exp(\beta_0+\beta_1 X+\cdots + \beta_pX_p)}.\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figures/LogisticExampleMoreVariablesResult.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What can we learn from the output?</p>
+</section>
+</section>
+<section id="south-african-heart-disease-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="south-african-heart-disease-in-r">South African Heart Disease in R</h3>
+<ul>
+<li><p>160 cases of MI (myocardial infarction) and 302 controls (all male in age range 15-64), from Western Cape, South Africa in early 80s.</p></li>
+<li><p>Overall prevalence very high in this region: 51%.</p></li>
+<li><p>Measurements on seven predictors (risk factors).</p></li>
+<li><p>Goal is to identify relative strengths and directions of risk factors.</p></li>
+<li><p>This was part of an intervention study aimed at educating the public on healthier diets</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import ElemStatLearn</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ElemStatLearn)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAheart)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      sbp           tobacco             ldl           adiposity    
+ Min.   :101.0   Min.   : 0.0000   Min.   : 0.980   Min.   : 6.74  
+ 1st Qu.:124.0   1st Qu.: 0.0525   1st Qu.: 3.283   1st Qu.:19.77  
+ Median :134.0   Median : 2.0000   Median : 4.340   Median :26.11  
+ Mean   :138.3   Mean   : 3.6356   Mean   : 4.740   Mean   :25.41  
+ 3rd Qu.:148.0   3rd Qu.: 5.5000   3rd Qu.: 5.790   3rd Qu.:31.23  
+ Max.   :218.0   Max.   :31.2000   Max.   :15.330   Max.   :42.49  
+    famhist        typea         obesity         alcohol            age       
+ Absent :270   Min.   :13.0   Min.   :14.70   Min.   :  0.00   Min.   :15.00  
+ Present:192   1st Qu.:47.0   1st Qu.:22.98   1st Qu.:  0.51   1st Qu.:31.00  
+               Median :53.0   Median :25.80   Median :  7.51   Median :45.00  
+               Mean   :53.1   Mean   :26.04   Mean   : 17.04   Mean   :42.82  
+               3rd Qu.:60.0   3rd Qu.:28.50   3rd Qu.: 23.89   3rd Qu.:55.00  
+               Max.   :78.0   Max.   :46.58   Max.   :147.19   Max.   :64.00  
+      chd        
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.3463  
+ 3rd Qu.:1.0000  
+ Max.   :1.0000  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(SAheart[,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>],<span class="at">col=</span> <span class="fu">ifelse</span>(SAheart<span class="sc">$</span>chd<span class="sc">==</span><span class="dv">1</span>,<span class="st">'red'</span>,<span class="st">'blue'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="week13_intro_to_classification_files/figure-html/summary-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="split-the-data-set-into-training-and-test." class="level4">
+<h4 class="anchored" data-anchor-id="split-the-data-set-into-training-and-test.">Split the data set into training and test.</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(SAheart), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>SAtrainingData <span class="ot">&lt;-</span> SAheart[i<span class="sc">==</span><span class="dv">1</span>,]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>SAtestData <span class="ot">&lt;-</span> SAheart[i<span class="sc">==</span><span class="dv">2</span>,]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtrainingData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      sbp           tobacco            ldl           adiposity    
+ Min.   :101.0   Min.   : 0.000   Min.   : 0.980   Min.   : 6.74  
+ 1st Qu.:124.0   1st Qu.: 0.050   1st Qu.: 3.260   1st Qu.:19.56  
+ Median :134.0   Median : 2.020   Median : 4.310   Median :25.76  
+ Mean   :137.5   Mean   : 3.539   Mean   : 4.752   Mean   :25.25  
+ 3rd Qu.:146.0   3rd Qu.: 5.400   3rd Qu.: 5.860   3rd Qu.:31.40  
+ Max.   :218.0   Max.   :27.400   Max.   :15.330   Max.   :42.49  
+    famhist        typea          obesity         alcohol            age      
+ Absent :207   Min.   :13.00   Min.   :14.70   Min.   :  0.00   Min.   :15.0  
+ Present:150   1st Qu.:47.00   1st Qu.:23.11   1st Qu.:  0.00   1st Qu.:31.0  
+               Median :54.00   Median :25.81   Median :  6.69   Median :45.0  
+               Mean   :53.52   Mean   :26.11   Mean   : 17.04   Mean   :42.3  
+               3rd Qu.:60.00   3rd Qu.:28.50   3rd Qu.: 23.66   3rd Qu.:55.0  
+               Max.   :78.00   Max.   :46.58   Max.   :147.19   Max.   :64.0  
+      chd        
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.3501  
+ 3rd Qu.:1.0000  
+ Max.   :1.0000  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtestData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      sbp           tobacco            ldl           adiposity        famhist  
+ Min.   :103.0   Min.   : 0.000   Min.   : 1.550   Min.   :10.38   Absent :63  
+ 1st Qu.:128.0   1st Qu.: 0.180   1st Qu.: 3.510   1st Qu.:21.03   Present:42  
+ Median :138.0   Median : 1.720   Median : 4.600   Median :26.71               
+ Mean   :141.2   Mean   : 3.964   Mean   : 4.702   Mean   :25.94               
+ 3rd Qu.:150.0   3rd Qu.: 5.600   3rd Qu.: 5.620   3rd Qu.:29.89               
+ Max.   :216.0   Max.   :31.200   Max.   :11.610   Max.   :42.06               
+     typea          obesity         alcohol            age       
+ Min.   :28.00   Min.   :17.81   Min.   :  0.00   Min.   :17.00  
+ 1st Qu.:47.00   1st Qu.:22.75   1st Qu.:  2.06   1st Qu.:37.00  
+ Median :52.00   Median :25.70   Median :  8.33   Median :45.00  
+ Mean   :51.69   Mean   :25.83   Mean   : 17.06   Mean   :44.58  
+ 3rd Qu.:58.00   3rd Qu.:28.34   3rd Qu.: 23.97   3rd Qu.:57.00  
+ Max.   :74.00   Max.   :34.57   Max.   :108.00   Max.   :64.00  
+      chd        
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.3333  
+ 3rd Qu.:1.0000  
+ Max.   :1.0000  </code></pre>
+</div>
+</div>
+</section>
+<section id="fit-the-training-data" class="level4">
+<h4 class="anchored" data-anchor-id="fit-the-training-data">Fit the training data</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>heartfit<span class="ot">&lt;-</span><span class="fu">glm</span>(chd<span class="sc">~</span>.,<span class="at">data=</span>SAtrainingData,<span class="at">family=</span>binomial) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heartfit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = chd ~ ., family = binomial, data = SAtrainingData)
+
+Coefficients:
+                Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    -7.006343   1.510991  -4.637 3.54e-06 ***
+sbp             0.006230   0.006557   0.950 0.342064    
+tobacco         0.082556   0.032749   2.521 0.011707 *  
+ldl             0.181716   0.066802   2.720 0.006524 ** 
+adiposity       0.003918   0.032771   0.120 0.904828    
+famhistPresent  0.966639   0.262358   3.684 0.000229 ***
+typea           0.044264   0.014424   3.069 0.002149 ** 
+obesity        -0.038142   0.047811  -0.798 0.425008    
+alcohol         0.001149   0.005033   0.228 0.819444    
+age             0.052271   0.013931   3.752 0.000175 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 462.34  on 356  degrees of freedom
+Residual deviance: 357.09  on 347  degrees of freedom
+AIC: 377.09
+
+Number of Fisher Scoring iterations: 5</code></pre>
+</div>
+</div>
+</section>
+<section id="predict-the-training-data-and-calculate-the-confusion-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="predict-the-training-data-and-calculate-the-confusion-matrix">Predict the training data and calculate the confusion matrix</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mypred <span class="ot">&lt;-</span> <span class="fu">predict</span>(heartfit,SAtrainingData)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071) <span class="co"># for sigmoid function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'e1071'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    element</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">=</span><span class="fu">sigmoid</span>(mypred)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">as.numeric</span>(p1<span class="sc">&gt;</span><span class="fl">0.5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>confMat <span class="ot">&lt;-</span> <span class="fu">table</span>(SAtrainingData<span class="sc">$</span>chd,y)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   y
+      0   1
+  0 197  35
+  1  52  73</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7563025</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">1</span>,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6759259</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">2</span>,<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.584</code></pre>
+</div>
+</div>
+</section>
+<section id="predict-the-test-data-and-calculate-the-confusion-matrix" class="level4">
+<h4 class="anchored" data-anchor-id="predict-the-test-data-and-calculate-the-confusion-matrix">Predict the test data and calculate the confusion matrix</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mypred <span class="ot">&lt;-</span> <span class="fu">predict</span>(heartfit,SAtestData)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">=</span><span class="fu">sigmoid</span>(mypred)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">as.numeric</span>(p1<span class="sc">&gt;</span><span class="fl">0.5</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>confMat <span class="ot">&lt;-</span> <span class="fu">table</span>(SAtestData<span class="sc">$</span>chd,y)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   y
+     0  1
+  0 54 16
+  1 17 18</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6857143</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">1</span>,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5294118</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">2</span>,<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5142857</code></pre>
+</div>
+</div>
+</section>
+<section id="in-calss-exercise-logistic-regression" class="level4">
+<h4 class="anchored" data-anchor-id="in-calss-exercise-logistic-regression">In-Calss Exercise: Logistic Regression</h4>
+<p><a href="https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original">Obtaining the Breat Cancer Wisconsin data set</a></p>
+<ul>
+<li><p>Split the dataset to training and test datasets</p></li>
+<li><p>Use logistic regression to build a classifier on the training dataset</p></li>
+<li><p>Predict the test dataset and generate a confusion matrix to calculate accuracy, precision, and recall</p></li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
