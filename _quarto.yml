@@ -74,11 +74,10 @@ website:
           - text: "Week 10: Introduction to Statistical Learning"
             href: source/week10_intro_to_statistical_learning.Rmd
 
-          
-          - text: "─────── Week 11 ───────"  
-
-          - text: "Week 11: Simple Linear Regression"
+          - text: "Week 10: Simple Linear Regression"
             href: source/week10_simple_linear_regression.Rmd
+          
+          - text: "─────── Week 11 ───────" 
 
           - text: "Week 11: Multiple Linear Regression"
             href: source/week11_multiple_linear_regression.Rmd

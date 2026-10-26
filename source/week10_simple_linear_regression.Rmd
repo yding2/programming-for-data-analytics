@@ -1,5 +1,5 @@
 ---
-title: "Week 11: Simple Linear Regression"
+title: "Week 10: Simple Linear Regression"
 output:
   html_document: default
 ---
