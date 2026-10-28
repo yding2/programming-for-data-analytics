@@ -74,7 +74,7 @@ MAE(y_pred = ypred_forward, y_true = AutoTest$mpg)
 MSE(y_pred = ypred_forward, y_true = AutoTest$mpg)
 ```
 
-### In-Calss Exercise: Forward Selection
+### In-Class Exercise: Forward Selection
 
 * Please construct a forward selection to predict `salary` in the `Salaries` data set and interpret the model.
 

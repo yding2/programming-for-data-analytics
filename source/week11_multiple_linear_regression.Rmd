@@ -129,6 +129,7 @@ Let's refer to the output in this last code chunk:
 
 
 * Use the `plot() function to produce diagnostic plots of the linear regression fit. 
+
 ```{r}
 par(mfrow=c(2,2))
 plot(fitlm)
@@ -139,6 +140,7 @@ plot(fitlm)
 
 
 First you have to make a new data frame object which will contain the new point: 
+
 ```{r}
 ypred <-predict(object = fitlm, newdata = AutoTest[,1:8])
 summary(ypred)
@@ -155,7 +157,7 @@ MSE(y_pred = ypred, y_true = AutoTest$mpg)
 ```
 
 
-### In-Calss Exercise: Multiple Linear Regression
+### In-Class Exercise: Multiple Linear Regression
 
 * Split the `iris` data set into two parts `IrisTraining` and `IrisTest`
 
@@ -170,16 +172,16 @@ These are also called *categorical predictors* or *factor variables*.
 
 Example: investigate differences in credit card balance between males and females, ignoring the other variables. We create a new *dummy variable* 
 
-$$ x_i = \begin{cases} 1 \mbox{, if $i$th person is female} \\ 0\mbox{, if $i$th person is not female} \end{cases}
-$$
+$$x_i = \begin{cases} 1 & \text{if }i \text{th person is female} \\ 0 & \text{if } i\text{th person is not female} \end{cases}$$
 
 Resulting model:
-$$ y_i=\beta_0+\beta_1x_i +\epsilon = 
+
+$$y_i=\beta_0+\beta_1x_i +\epsilon = 
 \begin{cases} 
-\beta_0+\beta_1+\epsilon_i \mbox{, if $i$th person is female} \\ 
-\beta_0+\epsilon_i \mbox{, if $i$th person is not female} 
-\end{cases}
-$$
+\beta_0+\beta_1+\epsilon_i & \text{if } i \text{th person is female} \\ 
+\beta_0+\epsilon_i & \text{if } i \text{th person is not female} 
+\end{cases}$$
+
 
 Interpretation?
 
@@ -195,14 +197,12 @@ knitr::include_graphics("../figures/tableGender.png")
 
 With more than two levels, we create additional dummy variables. For example, for the ethnicity variable we create two dummy variables. The first could be
 
-$$ x_{i1} = \begin{cases} 1 \mbox{, if $i$th person is Asian} \\ 0\mbox{, if $i$th person is not Asian} \end{cases}
-$$
+$$x_{i1} = \begin{cases} 1 & \text{if } i\text{th person is Asian} \\ 0 & \text{if } i \text{th person is not Asian} \end{cases}$$
 
 
 and the second could be
 
-$$ x_{i2} = \begin{cases} 1 \mbox{, if $i$th person is Caucasian} \\ 0\mbox{, if $i$th person is not Caucasian} \end{cases}
-$$
+$$x_{i2} = \begin{cases} 1 & \text{if } i\text{th person is Caucasian} \\ 0 & \text{if } i \text{th person is not Caucasian} \end{cases}$$
 
 Then both of these variables can be used in the regression equation, in order to obtain the model
 
@@ -243,9 +243,11 @@ As `rank` is a `factor` with three levels, `R` automatically create two dummy va
 md2<-lm(salary~rank,data = Salaries)
 summary(md2)
 ```
+
 **Question**: What is the baseline here?
 
-### In-Calss Exercise: Qualitative Predictors
+
+### In-Class Exercise: Qualitative Predictors
 
 * Please construct a simple linear regression model to predict `Sepal.Length` by `Species` in `IrisTraining`.
 

@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -354,7 +354,7 @@ window.Quarto = {
   <li><a href="#how-to-choose-the-important-variables" id="toc-how-to-choose-the-important-variables" class="nav-link" data-scroll-target="#how-to-choose-the-important-variables">How to choose the important variables?</a>
   <ul class="collapse">
   <li><a href="#forward-selection" id="toc-forward-selection" class="nav-link" data-scroll-target="#forward-selection">Forward Selection</a></li>
-  <li><a href="#in-calss-exercise-forward-selection" id="toc-in-calss-exercise-forward-selection" class="nav-link" data-scroll-target="#in-calss-exercise-forward-selection">In-Calss Exercise: Forward Selection</a></li>
+  <li><a href="#in-class-exercise-forward-selection" id="toc-in-class-exercise-forward-selection" class="nav-link" data-scroll-target="#in-class-exercise-forward-selection">In-Class Exercise: Forward Selection</a></li>
   <li><a href="#in-calss-exercise-backward-selection" id="toc-in-calss-exercise-backward-selection" class="nav-link" data-scroll-target="#in-calss-exercise-backward-selection">In-Calss Exercise: Backward Selection</a></li>
   </ul></li>
   </ul>
@@ -411,9 +411,12 @@ window.Quarto = {
 <p>To run stepwise regression, you first need to install and open the MASS package.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Auto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ISLR' was built under R version 4.5.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Auto)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Auto)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      mpg          cylinders      displacement     horsepower        weight    
  Min.   : 9.00   Min.   :3.000   Min.   : 68.0   Min.   : 46.0   Min.   :1613  
@@ -432,64 +435,64 @@ window.Quarto = {
  Max.   :24.80   Max.   :82.00   Max.   :3.000   chevrolet chevette:  4  
                                                  (Other)           :365  </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(Auto), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>AutoTraining <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">1</span>,]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>AutoTest <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">2</span>,]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a null model </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>intercept_only <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a full model</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>all <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># perform forward step-wise regression</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'forward'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(Auto), <span class="at">replace=</span><span class="cn">TRUE</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>AutoTraining <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">1</span>,]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>AutoTest <span class="ot">&lt;-</span> Auto[i<span class="sc">==</span><span class="dv">2</span>,]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a null model </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>intercept_only <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a full model</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>all <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>., <span class="at">data=</span>AutoTraining[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># perform forward step-wise regression</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'forward'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=1300.4
+<pre><code>Start:  AIC=1372.8
 mpg ~ 1
 
                Df Sum of Sq     RSS     AIC
-+ weight        1   13888.3  5539.6  907.14
-+ displacement  1   12956.0  6472.0  956.14
-+ cylinders     1   12157.2  7270.8  992.80
-+ horsepower    1   11845.5  7582.5 1006.02
-+ year          1    7045.8 12382.2 1160.50
-+ origin        1    5901.0 13527.0 1188.36
-+ acceleration  1    3460.9 15967.0 1240.60
-&lt;none&gt;                      19428.0 1300.40
++ weight        1   13794.2  6073.7  976.59
++ displacement  1   12752.4  7115.5 1029.78
++ cylinders     1   11977.3  7890.6 1064.52
++ horsepower    1   11763.7  8104.2 1073.50
++ year          1    6311.3 13556.6 1246.37
++ origin        1    5902.5 13965.4 1256.35
++ acceleration  1    3086.0 16781.9 1318.08
+&lt;none&gt;                      19867.9 1372.80
 
-Step:  AIC=907.14
+Step:  AIC=976.59
 mpg ~ weight
 
                Df Sum of Sq    RSS    AIC
-+ year          1   2106.11 3433.5 758.46
-+ horsepower    1    209.68 5330.0 896.99
-+ acceleration  1    121.10 5418.5 902.18
-+ displacement  1    114.47 5425.2 902.56
-+ origin        1    105.04 5434.6 903.11
-+ cylinders     1     94.04 5445.6 903.75
-&lt;none&gt;                      5539.6 907.14
++ year          1   2341.32 3732.3 814.98
++ horsepower    1    227.75 5845.9 965.75
++ origin        1    109.71 5963.9 972.46
++ cylinders     1    102.71 5970.9 972.86
++ displacement  1     93.24 5980.4 973.39
++ acceleration  1     84.98 5988.7 973.85
+&lt;none&gt;                      6073.7 976.59
 
-Step:  AIC=758.46
+Step:  AIC=814.98
 mpg ~ weight + year
 
                Df Sum of Sq    RSS    AIC
-+ origin        1   132.921 3300.6 748.03
-&lt;none&gt;                      3433.5 758.46
-+ displacement  1     2.120 3431.4 760.27
-+ horsepower    1     1.328 3432.2 760.34
-+ cylinders     1     0.442 3433.1 760.42
-+ acceleration  1     0.440 3433.1 760.42
++ origin        1   132.589 3599.7 804.83
+&lt;none&gt;                      3732.3 814.98
++ cylinders     1     8.134 3724.2 816.25
++ acceleration  1     4.326 3728.0 816.59
++ displacement  1     0.672 3731.7 816.92
++ horsepower    1     0.558 3731.8 816.93
 
-Step:  AIC=748.03
+Step:  AIC=804.83
 mpg ~ weight + year + origin
 
                Df Sum of Sq    RSS    AIC
-&lt;none&gt;                      3300.6 748.03
-+ displacement  1   18.2308 3282.4 748.28
-+ acceleration  1    0.6483 3300.0 749.96
-+ cylinders     1    0.3967 3300.2 749.99
-+ horsepower    1    0.0245 3300.6 750.02</code></pre>
+&lt;none&gt;                      3599.7 804.83
++ displacement  1   16.0938 3583.7 805.32
++ acceleration  1    6.7722 3593.0 806.19
++ horsepower    1    5.1209 3594.6 806.35
++ cylinders     1    1.5863 3598.2 806.68</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view results of forward stepwise regression</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>forward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view results of forward stepwise regression</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>forward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Stepwise Model Path 
 Analysis of Deviance Table
@@ -501,13 +504,13 @@ Final Model:
 mpg ~ weight + year + origin
 
       Step Df   Deviance Resid. Df Resid. Dev       AIC
-1                              314  19427.957 1300.3972
-2 + weight  1 13888.3170       313   5539.640  907.1403
-3   + year  1  2106.1141       312   3433.526  758.4626
-4 + origin  1   132.9213       311   3300.604  748.0258</code></pre>
+1                              335  19867.900 1372.7958
+2 + weight  1 13794.2450       334   6073.655  976.5872
+3   + year  1  2341.3194       333   3732.335  814.9799
+4 + origin  1   132.5893       332   3599.746  804.8265</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view final model</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(forward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># view final model</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(forward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -516,25 +519,28 @@ lm(formula = mpg ~ weight + year + origin, data = AutoTraining[,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.9259 -2.1451 -0.0733  1.9330 12.5760 
+-9.7607 -2.0257  0.0293  1.9194 13.5459 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -1.606e+01  4.377e+00  -3.668 0.000287 ***
-weight      -6.119e-03  2.778e-04 -22.029  &lt; 2e-16 ***
-year         7.399e-01  5.218e-02  14.180  &lt; 2e-16 ***
-origin       9.898e-01  2.797e-01   3.539 0.000463 ***
+(Intercept) -1.619e+01  4.186e+00  -3.867 0.000133 ***
+weight      -6.224e-03  2.735e-04 -22.758  &lt; 2e-16 ***
+year         7.438e-01  5.037e-02  14.766  &lt; 2e-16 ***
+origin       9.577e-01  2.739e-01   3.497 0.000535 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.258 on 311 degrees of freedom
-Multiple R-squared:  0.8301,    Adjusted R-squared:  0.8285 
-F-statistic: 506.5 on 3 and 311 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.293 on 332 degrees of freedom
+Multiple R-squared:  0.8188,    Adjusted R-squared:  0.8172 
+F-statistic: 500.1 on 3 and 332 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Check the <code>MAE</code> and <code>MSE</code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MLmetrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'MLmetrics' was built under R version 4.5.3</code></pre>
+</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'MLmetrics'</code></pre>
@@ -544,19 +550,19 @@ Attaching package: 'MLmetrics'</code></pre>
 
     Recall</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ypred_forward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> forward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ypred_forward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> forward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.461903</code></pre>
+<pre><code>[1] 2.609914</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_forward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.69304</code></pre>
+<pre><code>[1] 13.69291</code></pre>
 </div>
 </div>
 </section>
-<section id="in-calss-exercise-forward-selection" class="level3">
-<h3 class="anchored" data-anchor-id="in-calss-exercise-forward-selection">In-Calss Exercise: Forward Selection</h3>
+<section id="in-class-exercise-forward-selection" class="level3">
+<h3 class="anchored" data-anchor-id="in-class-exercise-forward-selection">In-Class Exercise: Forward Selection</h3>
 <ul>
 <li>Please construct a forward selection to predict <code>salary</code> in the <code>Salaries</code> data set and interpret the model.</li>
 </ul>
@@ -570,66 +576,36 @@ Attaching package: 'MLmetrics'</code></pre>
 </ul>
 <p>Similarly, we use the same function <code>stepAIC</code> from <code>MASS</code> package</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>backward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (all, <span class="at">direction=</span><span class="st">'backward'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>backward <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (all, <span class="at">direction=</span><span class="st">'backward'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Start:  AIC=751.84
+<pre><code>Start:  AIC=804.83
 mpg ~ cylinders + displacement + horsepower + weight + acceleration + 
     year + origin
 
                Df Sum of Sq    RSS    AIC
-- acceleration  1      2.35 3259.4 750.07
-- horsepower    1      3.07 3260.1 750.14
-- cylinders     1     13.03 3270.1 751.10
-&lt;none&gt;                      3257.0 751.84
-- displacement  1     41.78 3298.8 753.86
-- origin        1    163.78 3420.8 765.29
-- weight        1    988.77 4245.8 833.35
-- year          1   1900.18 5157.2 894.61
+- acceleration  1      4.21 3519.3 803.24
+- horsepower    1      9.68 3524.8 803.76
+&lt;none&gt;                      3515.1 804.83
+- cylinders     1     37.41 3552.5 806.39
+- displacement  1     77.33 3592.5 810.15
+- origin        1    185.59 3700.7 820.12
+- weight        1   1036.91 4552.0 889.69
+- year          1   2114.63 5629.8 961.09
 
-Step:  AIC=750.07
+Step:  AIC=803.24
 mpg ~ cylinders + displacement + horsepower + weight + year + 
     origin
 
                Df Sum of Sq    RSS    AIC
-- horsepower    1     12.04 3271.4 749.23
-- cylinders     1     13.83 3273.2 749.40
-&lt;none&gt;                      3259.4 750.07
-- displacement  1     40.67 3300.1 751.97
-- origin        1    166.32 3425.7 763.75
-- weight        1   1228.59 4488.0 848.82
-- year          1   1898.60 5158.0 892.66
-
-Step:  AIC=749.23
-mpg ~ cylinders + displacement + weight + year + origin
-
-               Df Sum of Sq    RSS    AIC
-- cylinders     1     10.94 3282.4 748.28
-&lt;none&gt;                      3271.4 749.23
-- displacement  1     28.77 3300.2 749.99
-- origin        1    154.33 3425.8 761.75
-- weight        1   1311.28 4582.7 853.40
-- year          1   2075.41 5346.9 901.98
-
-Step:  AIC=748.28
-mpg ~ displacement + weight + year + origin
-
-               Df Sum of Sq    RSS    AIC
-- displacement  1     18.23 3300.6 748.03
-&lt;none&gt;                      3282.4 748.28
-- origin        1    149.03 3431.4 760.27
-- weight        1   1352.13 4634.5 854.94
-- year          1   2077.02 5359.4 900.72
-
-Step:  AIC=748.03
-mpg ~ weight + year + origin
-
-         Df Sum of Sq    RSS     AIC
-&lt;none&gt;                3300.6  748.03
-- origin  1     132.9 3433.5  758.46
-- year    1    2134.0 5434.6  903.11
-- weight  1    5150.1 8450.7 1042.17</code></pre>
+&lt;none&gt;                      3519.3 803.24
+- horsepower    1     31.27 3550.6 804.21
+- cylinders     1     39.13 3558.5 804.95
+- displacement  1     74.92 3594.3 808.31
+- origin        1    186.05 3705.4 818.55
+- weight        1   1244.96 4764.3 903.00
+- year          1   2119.96 5639.3 959.66</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>backward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>backward<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Stepwise Model Path 
 Analysis of Deviance Table
@@ -639,54 +615,55 @@ mpg ~ cylinders + displacement + horsepower + weight + acceleration +
     year + origin
 
 Final Model:
-mpg ~ weight + year + origin
+mpg ~ cylinders + displacement + horsepower + weight + year + 
+    origin
 
-            Step Df  Deviance Resid. Df Resid. Dev      AIC
-1                                   307   3257.042 751.8406
-2 - acceleration  1  2.353513       308   3259.395 750.0682
-3   - horsepower  1 12.042163       309   3271.438 749.2298
-4    - cylinders  1 10.935905       310   3282.373 748.2811
-5 - displacement  1 18.230833       311   3300.604 748.0258</code></pre>
+            Step Df Deviance Resid. Df Resid. Dev      AIC
+1                                  328   3515.132 804.8343
+2 - acceleration  1 4.211401       329   3519.343 803.2366</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(backward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(backward)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = mpg ~ weight + year + origin, data = AutoTraining[, 
-    1:8])
+lm(formula = mpg ~ cylinders + displacement + horsepower + weight + 
+    year + origin, data = AutoTraining[, 1:8])
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.9259 -2.1451 -0.0733  1.9330 12.5760 
+-9.7329 -2.0902 -0.0259  2.0199 13.4244 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -1.606e+01  4.377e+00  -3.668 0.000287 ***
-weight      -6.119e-03  2.778e-04 -22.029  &lt; 2e-16 ***
-year         7.399e-01  5.218e-02  14.180  &lt; 2e-16 ***
-origin       9.898e-01  2.797e-01   3.539 0.000463 ***
+               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -1.387e+01  4.345e+00  -3.192  0.00155 ** 
+cylinders    -6.498e-01  3.397e-01  -1.913  0.05666 .  
+displacement  2.117e-02  7.999e-03   2.646  0.00853 ** 
+horsepower   -1.921e-02  1.123e-02  -1.710  0.08825 .  
+weight       -6.566e-03  6.086e-04 -10.788  &lt; 2e-16 ***
+year          7.402e-01  5.258e-02  14.078  &lt; 2e-16 ***
+origin        1.235e+00  2.962e-01   4.170 3.89e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.258 on 311 degrees of freedom
-Multiple R-squared:  0.8301,    Adjusted R-squared:  0.8285 
-F-statistic: 506.5 on 3 and 311 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.271 on 329 degrees of freedom
+Multiple R-squared:  0.8229,    Adjusted R-squared:  0.8196 
+F-statistic: 254.7 on 6 and 329 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ypred_backward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> backward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ypred_backward <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> backward, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.461903</code></pre>
+<pre><code>[1] 2.635405</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_backward, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.69304</code></pre>
+<pre><code>[1] 13.57273</code></pre>
 </div>
 </div>
 <p>We can also do <strong>both-direction</strong> step wise selection</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'both'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all),<span class="at">trace =</span> <span class="dv">0</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>both<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> <span class="fu">stepAIC</span> (intercept_only, <span class="at">direction=</span><span class="st">'both'</span>,<span class="at">scope =</span> <span class="fu">formula</span>(all),<span class="at">trace =</span> <span class="dv">0</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>both<span class="sc">$</span>anova</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Stepwise Model Path 
 Analysis of Deviance Table
@@ -698,12 +675,12 @@ Final Model:
 mpg ~ weight + year + origin
 
       Step Df   Deviance Resid. Df Resid. Dev       AIC
-1                              314  19427.957 1300.3972
-2 + weight  1 13888.3170       313   5539.640  907.1403
-3   + year  1  2106.1141       312   3433.526  758.4626
-4 + origin  1   132.9213       311   3300.604  748.0258</code></pre>
+1                              335  19867.900 1372.7958
+2 + weight  1 13794.2450       334   6073.655  976.5872
+3   + year  1  2341.3194       333   3732.335  814.9799
+4 + origin  1   132.5893       332   3599.746  804.8265</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(both)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -712,30 +689,30 @@ lm(formula = mpg ~ weight + year + origin, data = AutoTraining[,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--9.9259 -2.1451 -0.0733  1.9330 12.5760 
+-9.7607 -2.0257  0.0293  1.9194 13.5459 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -1.606e+01  4.377e+00  -3.668 0.000287 ***
-weight      -6.119e-03  2.778e-04 -22.029  &lt; 2e-16 ***
-year         7.399e-01  5.218e-02  14.180  &lt; 2e-16 ***
-origin       9.898e-01  2.797e-01   3.539 0.000463 ***
+(Intercept) -1.619e+01  4.186e+00  -3.867 0.000133 ***
+weight      -6.224e-03  2.735e-04 -22.758  &lt; 2e-16 ***
+year         7.438e-01  5.037e-02  14.766  &lt; 2e-16 ***
+origin       9.577e-01  2.739e-01   3.497 0.000535 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.258 on 311 degrees of freedom
-Multiple R-squared:  0.8301,    Adjusted R-squared:  0.8285 
-F-statistic: 506.5 on 3 and 311 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.293 on 332 degrees of freedom
+Multiple R-squared:  0.8188,    Adjusted R-squared:  0.8172 
+F-statistic: 500.1 on 3 and 332 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ypred_both <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> both, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Get MAE and MSE</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ypred_both <span class="ot">&lt;-</span><span class="fu">predict</span>(<span class="at">object =</span> both, <span class="at">newdata =</span> AutoTest[,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.461903</code></pre>
+<pre><code>[1] 2.609914</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred_both, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.69304</code></pre>
+<pre><code>[1] 13.69291</code></pre>
 </div>
 </div>
 </section>
