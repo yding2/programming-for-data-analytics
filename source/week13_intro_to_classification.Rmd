@@ -282,7 +282,7 @@ confMat[2,2]/(confMat[2,2]+confMat[1,2])
 confMat[2,2]/(confMat[2,2]+confMat[2,1])
 ```
 
-#### In-Calss Exercise: Logistic Regression
+#### In-Class Exercise: Logistic Regression
 
 [Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
 

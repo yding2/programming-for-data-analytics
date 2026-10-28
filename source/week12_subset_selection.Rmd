@@ -80,7 +80,7 @@ MSE(y_pred = ypred_forward, y_true = AutoTest$mpg)
 
 
 
-#### Backward Selection
+### Backward Selection
 * Start with **all variables** in the model.
 * Remove the variable with the largest p-value --- that is, the variable that is the least statistically significant.
 * The new $(p-1)$-variable model is fit, and the variable with the largest p-value is removed.

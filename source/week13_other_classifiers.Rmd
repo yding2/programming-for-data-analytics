@@ -169,7 +169,7 @@ confMat[2,2]/sum(confMat[2,])
 ```
 
 
-#### In-Calss Exercise: Support Vector Machine
+#### In-Class Exercise: Support Vector Machine
 
 [Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
 
@@ -302,7 +302,7 @@ if (sum(confMat[2, ]) == 0) {
 ```
 
 
-#### In-Calss Exercise: Neural Network
+#### In-Class Exercise: Neural Network
 
 [Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
 
@@ -553,7 +553,7 @@ confMat[2,2]/sum(confMat[2,])
 ```
 
 
-#### In-Calss Exercise: Decision Tree
+#### In-Class Exercise: Decision Tree
 
 [Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
 

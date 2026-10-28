@@ -135,7 +135,7 @@ confMat[2,2]/sum(confMat[,2])
 confMat[2,2]/sum(confMat[2,])
 ```
 
-#### In-Calss Exercise: Ensemble Methods
+#### In-Class Exercise: Ensemble Methods
 
 [Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
 
