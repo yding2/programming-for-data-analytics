@@ -642,50 +642,50 @@ g(x) = \log{\frac{p(y=1|X)}{p(y=0|X)}} &amp;= \theta^T X \\
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtrainingData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      sbp           tobacco            ldl           adiposity    
- Min.   :102.0   Min.   : 0.000   Min.   : 0.980   Min.   : 6.74  
- 1st Qu.:124.0   1st Qu.: 0.050   1st Qu.: 3.300   1st Qu.:19.98  
- Median :134.0   Median : 2.000   Median : 4.340   Median :25.93  
- Mean   :138.8   Mean   : 3.586   Mean   : 4.766   Mean   :25.37  
- 3rd Qu.:148.0   3rd Qu.: 5.155   3rd Qu.: 5.830   3rd Qu.:30.88  
+ Min.   :101.0   Min.   : 0.000   Min.   : 1.070   Min.   : 6.74  
+ 1st Qu.:124.0   1st Qu.: 0.050   1st Qu.: 3.272   1st Qu.:19.65  
+ Median :134.0   Median : 2.000   Median : 4.415   Median :26.15  
+ Mean   :138.7   Mean   : 3.708   Mean   : 4.755   Mean   :25.40  
+ 3rd Qu.:148.0   3rd Qu.: 5.720   3rd Qu.: 5.790   3rd Qu.:31.29  
  Max.   :218.0   Max.   :31.200   Max.   :15.330   Max.   :42.49  
     famhist        typea          obesity         alcohol            age       
- Absent :214   Min.   :13.00   Min.   :14.70   Min.   :  0.00   Min.   :15.00  
- Present:145   1st Qu.:47.00   1st Qu.:23.13   1st Qu.:  0.51   1st Qu.:31.00  
-               Median :54.00   Median :25.80   Median :  6.72   Median :44.00  
-               Mean   :52.85   Mean   :26.11   Mean   : 17.05   Mean   :42.75  
-               3rd Qu.:60.00   3rd Qu.:28.56   3rd Qu.: 23.87   3rd Qu.:56.00  
+ Absent :203   Min.   :13.00   Min.   :14.70   Min.   :  0.00   Min.   :15.00  
+ Present:159   1st Qu.:47.00   1st Qu.:23.12   1st Qu.:  0.51   1st Qu.:31.00  
+               Median :53.00   Median :25.76   Median :  7.01   Median :45.00  
+               Mean   :53.05   Mean   :26.06   Mean   : 17.44   Mean   :42.91  
+               3rd Qu.:59.75   3rd Qu.:28.51   3rd Qu.: 24.27   3rd Qu.:56.00  
                Max.   :78.00   Max.   :46.58   Max.   :147.19   Max.   :64.00  
       chd        
  Min.   :0.0000  
  1st Qu.:0.0000  
  Median :0.0000  
- Mean   :0.3287  
+ Mean   :0.3481  
  3rd Qu.:1.0000  
  Max.   :1.0000  </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtestData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      sbp           tobacco            ldl           adiposity        famhist  
- Min.   :101.0   Min.   : 0.000   Min.   : 1.550   Min.   : 7.12   Absent :56  
- 1st Qu.:124.0   1st Qu.: 0.090   1st Qu.: 3.190   1st Qu.:19.39   Present:47  
- Median :132.0   Median : 2.000   Median : 4.370   Median :26.57               
- Mean   :136.8   Mean   : 3.809   Mean   : 4.651   Mean   :25.53               
- 3rd Qu.:145.0   3rd Qu.: 5.875   3rd Qu.: 5.590   3rd Qu.:32.15               
- Max.   :206.0   Max.   :25.010   Max.   :11.610   Max.   :39.68               
-     typea          obesity         alcohol            age       
- Min.   :28.00   Min.   :17.81   Min.   :  0.00   Min.   :15.00  
- 1st Qu.:48.00   1st Qu.:22.70   1st Qu.:  0.00   1st Qu.:32.00  
- Median :52.00   Median :25.89   Median :  7.71   Median :45.00  
- Mean   :53.99   Mean   :25.81   Mean   : 17.03   Mean   :43.05  
- 3rd Qu.:60.00   3rd Qu.:27.96   3rd Qu.: 23.82   3rd Qu.:55.00  
- Max.   :75.00   Max.   :38.80   Max.   :120.03   Max.   :64.00  
-      chd        
- Min.   :0.0000  
- 1st Qu.:0.0000  
- Median :0.0000  
- Mean   :0.4078  
- 3rd Qu.:1.0000  
- Max.   :1.0000  </code></pre>
+<pre><code>      sbp           tobacco             ldl           adiposity    
+ Min.   :106.0   Min.   : 0.0000   Min.   : 0.980   Min.   : 7.12  
+ 1st Qu.:123.5   1st Qu.: 0.4375   1st Qu.: 3.308   1st Qu.:20.09  
+ Median :134.0   Median : 2.1000   Median : 4.145   Median :25.90  
+ Mean   :137.1   Mean   : 3.3720   Mean   : 4.687   Mean   :25.42  
+ 3rd Qu.:146.5   3rd Qu.: 4.2000   3rd Qu.: 5.747   3rd Qu.:30.57  
+ Max.   :206.0   Max.   :20.0000   Max.   :11.320   Max.   :42.06  
+    famhist       typea          obesity         alcohol           age       
+ Absent :67   Min.   :29.00   Min.   :17.81   Min.   : 0.00   Min.   :15.00  
+ Present:33   1st Qu.:47.00   1st Qu.:22.68   1st Qu.: 0.51   1st Qu.:31.75  
+              Median :53.50   Median :25.89   Median : 8.28   Median :45.50  
+              Mean   :53.31   Mean   :25.99   Mean   :15.60   Mean   :42.49  
+              3rd Qu.:60.00   3rd Qu.:28.35   3rd Qu.:22.07   3rd Qu.:53.25  
+              Max.   :73.00   Max.   :38.80   Max.   :97.20   Max.   :64.00  
+      chd      
+ Min.   :0.00  
+ 1st Qu.:0.00  
+ Median :0.00  
+ Mean   :0.34  
+ 3rd Qu.:1.00  
+ Max.   :1.00  </code></pre>
 </div>
 </div>
 </section>
@@ -701,24 +701,24 @@ glm(formula = chd ~ ., family = binomial, data = SAtrainingData)
 
 Coefficients:
                 Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)    -5.674902   1.505667  -3.769 0.000164 ***
-sbp             0.001582   0.006430   0.246 0.805616    
-tobacco         0.067893   0.029497   2.302 0.021351 *  
-ldl             0.200424   0.067681   2.961 0.003064 ** 
-adiposity       0.024357   0.033010   0.738 0.460600    
-famhistPresent  0.708261   0.261466   2.709 0.006752 ** 
-typea           0.032928   0.014099   2.336 0.019513 *  
-obesity        -0.062179   0.049922  -1.246 0.212939    
-alcohol         0.002776   0.004951   0.561 0.575053    
-age             0.051288   0.013905   3.689 0.000226 ***
+(Intercept)    -5.928169   1.454138  -4.077 4.57e-05 ***
+sbp             0.007990   0.006437   1.241 0.214516    
+tobacco         0.073490   0.029455   2.495 0.012595 *  
+ldl             0.141605   0.067013   2.113 0.034592 *  
+adiposity       0.016940   0.032595   0.520 0.603269    
+famhistPresent  0.897993   0.257326   3.490 0.000484 ***
+typea           0.029794   0.014031   2.123 0.033713 *  
+obesity        -0.059216   0.047962  -1.235 0.216959    
+alcohol         0.001893   0.004779   0.396 0.692006    
+age             0.048893   0.013574   3.602 0.000316 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 454.67  on 358  degrees of freedom
-Residual deviance: 360.64  on 349  degrees of freedom
-AIC: 380.64
+    Null deviance: 467.88  on 361  degrees of freedom
+Residual deviance: 370.98  on 352  degrees of freedom
+AIC: 390.98
 
 Number of Fisher Scoring iterations: 5</code></pre>
 </div>
@@ -745,23 +745,23 @@ Attaching package: 'e1071'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   y
       0   1
-  0 210  31
-  1  56  62</code></pre>
+  0 197  39
+  1  59  67</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7576602</code></pre>
+<pre><code>[1] 0.7292818</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">1</span>,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6666667</code></pre>
+<pre><code>[1] 0.6320755</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">2</span>,<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5254237</code></pre>
+<pre><code>[1] 0.531746</code></pre>
 </div>
 </div>
 </section>
@@ -776,23 +776,23 @@ Attaching package: 'e1071'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   y
      0  1
-  0 51 10
-  1 21 21</code></pre>
+  0 60  6
+  1 19 15</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6990291</code></pre>
+<pre><code>[1] 0.75</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">1</span>,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6774194</code></pre>
+<pre><code>[1] 0.7142857</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span>(confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>confMat[<span class="dv">2</span>,<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
+<pre><code>[1] 0.4411765</code></pre>
 </div>
 </div>
 </section>
