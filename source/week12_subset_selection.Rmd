@@ -114,7 +114,7 @@ MSE(y_pred = ypred_both, y_true = AutoTest$mpg)
 ```
 
 
-### In-Calss Exercise: Backward Selection
+### In-Class Exercise: Backward Selection
 
 * Please construct a backward selection to predict `salary` in the `Salaries` data set and interpret the model.
 
