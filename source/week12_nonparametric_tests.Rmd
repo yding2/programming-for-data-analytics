@@ -118,7 +118,7 @@ $$ H_0: \tilde{\mu}_1 - \tilde{\mu}_2 =0, \qquad H_1: \tilde{\mu}_1 - \tilde{\mu
 **Test Statistic**: Binomial variable $X$ with $p =\frac{1}{2}$
 
 **Computations**: $+$ denotes the positive difference
- and $-$ for the negative difference vand disregarding two zero differences. Thus we have the following sequences.
+ and $-$ for the negative difference and disregarding two zero differences. Thus we have the following sequences.
 $$ + \qquad - \qquad + \qquad + \qquad - \qquad + \qquad + \qquad + \qquad + \qquad + \qquad + \qquad +
 \qquad - \qquad +$$
 
@@ -230,7 +230,7 @@ As p value is greater than $\alpha=0.05$, we should not reject the null hypothes
 **Note**: The Wilcoxon rank-sum test is always
 **superior** to the t-test for decidedly *nonnormal* populations.
 
-#### In-Class Exercise: Wilcos Rank-Sum Test
+#### In-Class Exercise: Wilcoxon Rank-Sum Test
 
 The following data represent the number of
 hours that two different types of scientific pocket calculators
