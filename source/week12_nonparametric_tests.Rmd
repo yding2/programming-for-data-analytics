@@ -96,6 +96,8 @@ alpha <- 0.05
 SignTest(x, alternative = "two.sided", mu = mutilde0, conf.level = 1-alpha)
 ```
 
+As p-value is greater than $\alpha = 0.05$, we should not reject the null hypothesis.
+
 **Example 2** A taxi company is trying to decide whether the use of radial tires instead of regular
 belted tires improves fuel economy. Sixteen cars are equipped with radial tires and
 driven over a prescribed test course. Without changing drivers, the same cars are
@@ -111,7 +113,7 @@ BeltedTires<-c(4.1,4.9,6.2,6.9,6.8,4.4,5.7,5.8, 6.9, 4.9,6.0,4.9,5.3,6.5,7.1,4.8
 
 
 **Hypotheses**：
-$$ H_0: \tilde{\mu}_1 - \tilde{\mu}_2 =0, \qquad H_1: \tilde{\mu}_1 - \tilde{\mu}_2 >0.$$
+$$ H_0: \tilde{\mu}_1 - \tilde{\mu}_2 =0, \qquad H_1: \tilde{\mu}_1 - \tilde{\mu}_2 < 0.$$
 
 **Confidence Level**: $\alpha = 0.05$
 
@@ -128,15 +130,17 @@ Here $n = 14, x = 11$ and $n/2 = 7$. To calculate the p value
 X <- 11
 n <- 14
 p <- 1/2
-1- pbinom(X-1,n,p)
+pbinom(X,n,p)
 ```
 
 #### Two-Sample SignTest in R
 
 ```{r}
 alpha <- 0.05
-SignTest(RadialTires,BeltedTires, alternative = "greater", mu = 0, conf.level = 1-alpha)
+SignTest(RadialTires,BeltedTires, alternative = "less", mu = 0, conf.level = 1-alpha)
 ```
+
+Here p-value is greater than $\alpha = 0.05$, we fail to reject the null hypothesis. The evidence is not sufficient to support cars equipped with radial tires obtain better fuel economy than those equipped with regular belted tires.
 
 #### In-Class Practice: Sign Test
 
