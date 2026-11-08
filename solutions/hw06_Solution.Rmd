@@ -25,7 +25,8 @@ Import `abalone.data` and name the data frame `abalone`. Assign the column names
 columns <- c("Sex", "Length", "Diameter", "Height", "Whole_weight",
              "Shucked_weight", "Viscera_weight", "Shell_weight", "Rings")
 # Place abalone.data inside the datasets subfolder.
-abalone <- read.csv("datasets/abalone.data", header = FALSE, col.names = columns)
+data_url <- "https://raw.githubusercontent.com/yding2/programming-for-data-analytics/main/datasets/abalone.data"
+abalone <- read.csv(data_url, header = FALSE, col.names = columns)
 abalone$Sex <- factor(abalone$Sex, levels = c("F", "M", "I"))
 head(abalone)
 str(abalone)
@@ -48,6 +49,8 @@ c(training = nrow(abaloneTraining), test = nrow(abaloneTest))
 **(a) (10 points)** Using `abaloneTraining`, fit a multiple linear regression model predicting `Rings` from all eight original predictors. Name it `fullModel` and display its summary.
 
 ```{r full-model}
+table(abaloneTraining$Sex, useNA = "ifany")
+str(abaloneTraining$Sex)
 fullModel <- lm(Rings ~ ., data = abaloneTraining)
 summary(fullModel)
 ```
