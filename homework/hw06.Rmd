@@ -1,0 +1,127 @@
+---
+title: "Homework 6: Regression, Interaction Effects, and Nonparametric Tests"
+author: "Your Name"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = 'center', out.width = '80%')
+```
+
+## Changing the author field and file name.
+
+
+1. Change the `author` field to your name.
+2. Rename this file as `HW6_YourFirstInitialYourLastName.Rmd` (for example, `HW6_YDing.Rmd`).
+3. Complete all questions in the designated code and response spaces.
+4. Knit the completed file to HTML.
+5. Submit both the completed `.Rmd` file and the knitted `.html` file. Make sure both files open correctly before submitting.
+
+## Instructions
+
+Submit both your completed R Markdown file and its knitted HTML output. Include your code, relevant output, and written interpretations. **Total: 100 points.**
+
+Use a significance level of $\alpha=0.05$ for all hypothesis tests. Use the same training/test split for all regression models. Fit and select models using only the training data; use the test data only for the final prediction assessment in Question 5.
+
+## Dataset
+
+Use the [UCI Abalone dataset](https://archive.ics.uci.edu/dataset/1/abalone). Download `abalone.data` and read `abalone.names` for the variable descriptions. The data file has no header row. Use these column names, in order:
+
+`Sex`, `Length`, `Diameter`, `Height`, `Whole_weight`, `Shucked_weight`, `Viscera_weight`, `Shell_weight`, `Rings`.
+
+The variable `Sex` has three categories: F (female), M (male), and I (infant). We refer to these as three **groups**. Our regression response is `Rings`.
+
+### 1. Import and Prepare the Data (5 points)
+
+Import `abalone.data` and name the data frame `abalone`. Assign the column names listed above. Convert `Sex` to a factor with F as the reference category. Display the first six rows and the structure of the data.
+
+```{r import-data}
+# Your code here
+```
+
+### 2. Training/Test Split (10 points)
+
+Use `set.seed(514)` and randomly split the observations into 80% training data and 20% test data (use `floor(0.8 * nrow(abalone))` for the training size). Name these data frames `abaloneTraining` and `abaloneTest`. Report the number of observations in each.
+
+```{r split-data}
+# Your code here
+```
+
+### 3. Full Multiple Regression Model (20 points)
+
+**(a) (10 points)** Using `abaloneTraining`, fit a multiple linear regression model predicting `Rings` from all eight original predictors. Name it `fullModel` and display its summary.
+
+```{r full-model}
+# Your code here
+```
+
+**(b) (5 points)** Report the residual standard error (RSE), $R^2$, and adjusted $R^2$. Identify the individual coefficients that are statistically significant at the 0.05 level. For the categorical predictor, distinguish the individual indicator coefficients from an overall test of the factor.
+
+> Your answer here
+
+**(c) (5 points)** Interpret the coefficient of `Length`, holding the other predictors constant. Interpret the coefficient of `SexM` relative to the reference group.
+
+> Your answer here
+
+### 4. Forward and Backward Stepwise Selection (30 points)
+
+Use **AIC** as the selection criterion. Restrict the candidate models to the original main effects; do not include interactions in this question.
+
+**(a) (15 points)** Perform forward stepwise selection, starting with the intercept-only model and using `fullModel` as the upper scope. Name the selected model `forwardModel`. Report its final formula, selected predictors, AIC, and adjusted $R^2$.
+
+```{r forward-selection}
+# Your code here
+```
+
+> Your answer here
+
+**(b) (15 points)** Perform backward stepwise selection, starting with `fullModel`. Name the selected model `backwardModel`. Report its final formula, selected predictors, AIC, and adjusted $R^2$. Do the two procedures select the same model?
+
+```{r backward-selection}
+# Your code here
+```
+
+> Your answer here
+
+
+### 5. Prediction Assessment (15 points)
+
+Predict `Rings` in `abaloneTest` using `fullModel`, `forwardModel` and `backwardModel`. Construct one table reporting test MAE and test MSE for all four models:
+
+$$
+\mathrm{MAE}=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}|y_i-\widehat y_i|,
+\qquad
+\mathrm{MSE}=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}(y_i-\widehat y_i)^2.
+$$
+
+Which model has the smallest test MSE? Does adding the interaction improve test prediction compared with the full main-effects model? Briefly explain whether the interaction model predicts better on the test data. Do not revise the models after inspecting the test results.
+
+```{r model-assessment}
+# Your code here
+```
+
+> Your answer here
+
+### 6. Nonparametric Group Comparisons (20 points)
+
+Use the **complete `abalone` dataset** for this question. Treat observations as independent for these analyses. These are unadjusted comparisons of `Rings` across groups, rather than comparisons that control for the regression predictors.
+
+**(a) (10 points)** Restrict the data to F and M and perform a **two-sided Wilcoxon rank-sum test** comparing their `Rings` distributions. State the null and alternative hypotheses. Report the test statistic and p-value, and give a conclusion in context.
+
+*Hint:* There are tied values of `Rings`; use `exact = FALSE` to obtain the normal approximation with a tie correction. Use the independent-samples test, not the paired test.
+
+```{r wilcoxon-test}
+# Your code here
+```
+
+> Your answer here
+
+**(b) (10 points)** Perform a **Kruskal-Wallis test** comparing `Rings` across all three groups. State the null and alternative hypotheses. Report the test statistic, degrees of freedom, p-value, and conclusion. If the result is significant, does it establish that every pair of groups differs? Explain; no post-hoc tests are required.
+
+```{r kruskal-wallis-test}
+# Your code here
+```
+
+> Your answer here
+
+For both tests, avoid interpreting the result as a test of means. An interpretation specifically in terms of median differences requires comparable distribution shapes across groups. Statistical significance alone does not indicate the size or practical importance of a difference.

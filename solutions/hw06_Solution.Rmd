@@ -1,0 +1,148 @@
+---
+title: "Homework 6: Regression, Interaction Effects, and Nonparametric Tests"
+author: "Solution"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = 'center', out.width = '80%')
+```
+
+
+## Dataset
+
+Use the [UCI Abalone dataset](https://archive.ics.uci.edu/dataset/1/abalone). Download `abalone.data` and read `abalone.names` for the variable descriptions. The data file has no header row. Use these column names, in order:
+
+`Sex`, `Length`, `Diameter`, `Height`, `Whole_weight`, `Shucked_weight`, `Viscera_weight`, `Shell_weight`, `Rings`.
+
+The variable `Sex` has three categories: F (female), M (male), and I (infant). We refer to these as three **groups**. Our regression response is `Rings`.
+
+### 1. Import and Prepare the Data (5 points)
+
+Import `abalone.data` and name the data frame `abalone`. Assign the column names listed above. Convert `Sex` to a factor with F as the reference category. Display the first six rows and the structure of the data.
+
+```{r import-data}
+columns <- c("Sex", "Length", "Diameter", "Height", "Whole_weight",
+             "Shucked_weight", "Viscera_weight", "Shell_weight", "Rings")
+# Place abalone.data inside the datasets subfolder.
+abalone <- read.csv("datasets/abalone.data", header = FALSE, col.names = columns)
+abalone$Sex <- factor(abalone$Sex, levels = c("F", "M", "I"))
+head(abalone)
+str(abalone)
+```
+
+### 2. Training/Test Split (10 points)
+
+Use `set.seed(514)` and randomly split the observations into 80% training data and 20% test data (use `floor(0.8 * nrow(abalone))` for the training size). Name these data frames `abaloneTraining` and `abaloneTest`. Report the number of observations in each.
+
+```{r split-data}
+set.seed(514)
+trainIndex <- sample(seq_len(nrow(abalone)), size = floor(0.8 * nrow(abalone)))
+abaloneTraining <- abalone[trainIndex, ]
+abaloneTest <- abalone[-trainIndex, ]
+c(training = nrow(abaloneTraining), test = nrow(abaloneTest))
+```
+
+### 3. Full Multiple Regression Model (20 points)
+
+**(a) (10 points)** Using `abaloneTraining`, fit a multiple linear regression model predicting `Rings` from all eight original predictors. Name it `fullModel` and display its summary.
+
+```{r full-model}
+fullModel <- lm(Rings ~ ., data = abaloneTraining)
+summary(fullModel)
+```
+
+**(b) (5 points)** Report the residual standard error (RSE), $R^2$, and adjusted $R^2$. Identify the individual coefficients that are statistically significant at the 0.05 level. For the categorical predictor, distinguish the individual indicator coefficients from an overall test of the factor.
+
+> <span style="color:magenta;">The RSE is `r round(summary(fullModel)$sigma, 4)`, $R^2$ is `r round(summary(fullModel)$r.squared, 4)`, and adjusted $R^2$ is `r round(summary(fullModel)$adj.r.squared, 4)`. Significant individual coefficients (excluding the intercept) are: `r paste(rownames(summary(fullModel)$coefficients)[-1][summary(fullModel)$coefficients[-1,4] < 0.05], collapse = ", ")`. The `SexM` and `SexI` p-values are individual contrasts with F, **not** an overall factor-level test. These p-values compare each group with the reference group F.</span>
+
+**(c) (5 points)** Interpret the coefficient of `Length`, holding the other predictors constant. Interpret the coefficient of `SexM` relative to the reference group.
+
+> <span style="color:magenta;">Holding other predictors fixed, a one-unit increase in `Length` changes the predicted number of rings by `r round(coef(fullModel)["Length"], 4)` on average. Since `Length` is measured on a small scale, a 0.1-unit increase corresponds to `r round(0.1 * coef(fullModel)["Length"], 4)` rings. `SexM` is `r round(coef(fullModel)["SexM"], 4)`: at the same values of the quantitative predictors, M is predicted to have this many more (or fewer if negative) rings than F.</span>
+
+### 4. Forward and Backward Stepwise Selection (30 points)
+
+Use **AIC** as the selection criterion. Restrict the candidate models to the original main effects; do not include interactions in this question.
+
+**(a) (15 points)** Perform forward stepwise selection, starting with the intercept-only model and using `fullModel` as the upper scope. Name the selected model `forwardModel`. Report its final formula, selected predictors, AIC, and adjusted $R^2$.
+
+```{r forward-selection}
+nullModel <- lm(Rings ~ 1, data = abaloneTraining)
+forwardModel <- step(nullModel,
+                     scope = list(lower = ~ 1, upper = formula(fullModel)),
+                     direction = "forward", trace = 0)
+formula(forwardModel)
+AIC(forwardModel)
+summary(forwardModel)$adj.r.squared
+```
+
+> <span style="color:magenta;">Final formula: `r paste(deparse(formula(forwardModel)), collapse = " ")`. Selected predictors: `r paste(attr(terms(forwardModel), "term.labels"), collapse = ", ")`. AIC = `r round(AIC(forwardModel), 3)`; adjusted $R^2$ = `r round(summary(forwardModel)$adj.r.squared, 4)`.</span>
+
+**(b) (15 points)** Perform backward stepwise selection, starting with `fullModel`. Name the selected model `backwardModel`. Report its final formula, selected predictors, AIC, and adjusted $R^2$. Do the two procedures select the same model?
+
+```{r backward-selection}
+backwardModel <- step(fullModel, direction = "backward", trace = 0)
+formula(backwardModel)
+AIC(backwardModel)
+summary(backwardModel)$adj.r.squared
+identical(attr(terms(forwardModel), "term.labels"),
+          attr(terms(backwardModel), "term.labels"))
+```
+
+> <span style="color:magenta;">Final formula: `r paste(deparse(formula(backwardModel)), collapse = " ")`. Selected predictors: `r paste(attr(terms(backwardModel), "term.labels"), collapse = ", ")`. AIC = `r round(AIC(backwardModel), 3)`; adjusted $R^2$ = `r round(summary(backwardModel)$adj.r.squared, 4)`. The two methods `r if (setequal(attr(terms(forwardModel), "term.labels"), attr(terms(backwardModel), "term.labels"))) "select the same set of terms" else "select different sets of terms"`. AIC-based stepwise selection is path-dependent, so agreement is not guaranteed.</span>
+
+### 5. Prediction Assessment (15 points)
+
+Predict `Rings` in `abaloneTest` using `fullModel`, `forwardModel`, and `backwardModel`. Construct one table reporting test MAE and test MSE for all four models:
+
+$$
+\mathrm{MAE}=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}|y_i-\widehat y_i|,
+\qquad
+\mathrm{MSE}=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}(y_i-\widehat y_i)^2.
+$$
+
+Which model has the smallest test MSE? Does adding the interaction improve test prediction compared with the full main-effects model? Briefly explain whether the interaction model predicts better on the test data. Do not revise the models after inspecting the test results.
+
+```{r model-assessment}
+models <- list(Full = fullModel, Forward = forwardModel,
+               Backward = backwardModel)
+assessment <- do.call(rbind, lapply(names(models), function(modelName) {
+  prediction <- predict(models[[modelName]], newdata = abaloneTest)
+  error <- abaloneTest$Rings - prediction
+  data.frame(Model = modelName, MAE = mean(abs(error)), MSE = mean(error^2))
+}))
+rownames(assessment) <- NULL
+knitr::kable(assessment, digits = 4)
+assessment[which.min(assessment$MSE), ]
+```
+
+> <span style="color:magenta;">The model with the smallest test MSE is **`r assessment$Model[which.min(assessment$MSE)]`**, with an MSE of `r round(min(assessment$MSE), 4)`.</span>
+
+### 6. Nonparametric Group Comparisons (20 points)
+
+Use the **complete `abalone` dataset** for this question. Treat observations as independent for these analyses. These are unadjusted comparisons of `Rings` across groups, rather than comparisons that control for the regression predictors.
+
+**(a) (10 points)** Restrict the data to F and M and perform a **two-sided Wilcoxon rank-sum test** comparing their `Rings` distributions. State the null and alternative hypotheses. Report the test statistic and p-value, and give a conclusion in context.
+
+*Hint:* There are tied values of `Rings`; use `exact = FALSE` to obtain the normal approximation with a tie correction. Use the independent-samples test, not the paired test.
+
+```{r wilcoxon-test}
+fmData <- subset(abalone, Sex %in% c("F", "M"))
+fmData$Sex <- droplevels(fmData$Sex)
+wilcoxResult <- wilcox.test(Rings ~ Sex, data = fmData,
+                           alternative = "two.sided", exact = FALSE)
+wilcoxResult
+```
+
+> <span style="color:magenta;">$H_0$: F and M have the same `Rings` distribution; $H_A$: the distributions differ (two-sided). Wilcoxon rank-sum statistic W = `r unname(wilcoxResult$statistic)`; p-value = `r format.pval(wilcoxResult$p.value, digits = 4)`. At $\alpha=0.05$, `r if (wilcoxResult$p.value < 0.05) "reject the null: there is evidence that F and M have different Rings distributions" else "fail to reject the null: there is insufficient evidence of different Rings distributions"`. This does not directly test means, and a median-shift interpretation requires comparable distribution shapes.</span>
+
+**(b) (10 points)** Perform a **Kruskal-Wallis test** comparing `Rings` across all three groups. State the null and alternative hypotheses. Report the test statistic, degrees of freedom, p-value, and conclusion. If the result is significant, does it establish that every pair of groups differs? Explain; no post-hoc tests are required.
+
+```{r kruskal-wallis-test}
+kwResult <- kruskal.test(Rings ~ Sex, data = abalone)
+kwResult
+```
+
+> <span style="color:magenta;">$H_0$: all three groups have the same `Rings` distribution; $H_A$: at least one group differs. Kruskal–Wallis chi-squared statistic = `r round(unname(kwResult$statistic), 4)`, df = `r unname(kwResult$parameter)`, p-value = `r format.pval(kwResult$p.value, digits = 4)`. At $\alpha=0.05$, `r if (kwResult$p.value < 0.05) "reject the null: at least one group's Rings distribution differs" else "fail to reject the null: insufficient evidence of a distributional difference"`. Even if significant, the omnibus test does **not** establish that every pair differs; that requires appropriate post-hoc pairwise comparisons.</span>
+
+For both tests, avoid interpreting the result as a test of means. An interpretation specifically in terms of median differences requires comparable distribution shapes across groups. Statistical significance alone does not indicate the size or practical importance of a difference.
