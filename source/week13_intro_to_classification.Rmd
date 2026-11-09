@@ -123,7 +123,7 @@ Before introducing the evaluation metrics, we first introduce the *confusion mat
 
 - Most widely-used metric:*Accuracy*
 
-$$ Accuracy = \frac{TP +TN}{TP+FN+FP+FN}$$
+$$ Accuracy = \frac{TP +TN}{TP+TN+FP+FN}$$
 
 **Limitation of Accuracy**:
 

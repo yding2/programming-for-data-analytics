@@ -1,5 +1,5 @@
 ---
-title: "Homework 6: Regression, Interaction Effects, and Nonparametric Tests"
+title: "Homework 6: Regression and Nonparametric Tests"
 author: "Your Name"
 output: html_document
 ---
