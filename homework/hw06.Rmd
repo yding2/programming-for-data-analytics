@@ -86,7 +86,7 @@ Use **AIC** as the selection criterion. Restrict the candidate models to the ori
 
 ### 5. Prediction Assessment (15 points)
 
-Predict `Rings` in `abaloneTest` using `fullModel`, `forwardModel` and `backwardModel`. Construct one table reporting test MAE and test MSE for all four models:
+Predict `Rings` in `abaloneTest` using `fullModel`, `forwardModel` and `backwardModel`. Construct one table reporting test MAE and test MSE for all three models:
 
 $$
 \mathrm{MAE}=\frac{1}{n_{\mathrm{test}}}\sum_{i=1}^{n_{\mathrm{test}}}|y_i-\widehat y_i|,

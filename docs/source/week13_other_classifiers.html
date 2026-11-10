@@ -549,51 +549,51 @@ window.Quarto = {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>SAtestData <span class="ot">&lt;-</span> SAheart[i<span class="sc">==</span><span class="dv">2</span>,]</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtrainingData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      sbp           tobacco             ldl           adiposity    
- Min.   :101.0   Min.   : 0.0000   Min.   : 0.980   Min.   : 7.12  
- 1st Qu.:124.5   1st Qu.: 0.0525   1st Qu.: 3.300   1st Qu.:20.02  
- Median :134.0   Median : 2.1550   Median : 4.370   Median :26.48  
- Mean   :139.1   Mean   : 3.7992   Mean   : 4.793   Mean   :25.69  
- 3rd Qu.:149.5   3rd Qu.: 5.7900   3rd Qu.: 5.895   3rd Qu.:31.79  
- Max.   :218.0   Max.   :31.2000   Max.   :15.330   Max.   :42.49  
-    famhist        typea          obesity         alcohol        
- Absent :208   Min.   :13.00   Min.   :14.70   Min.   :  0.0000  
- Present:154   1st Qu.:47.00   1st Qu.:23.12   1st Qu.:  0.2875  
-               Median :53.00   Median :25.78   Median :  7.5100  
-               Mean   :52.98   Mean   :26.05   Mean   : 17.1367  
-               3rd Qu.:59.75   3rd Qu.:28.44   3rd Qu.: 23.6150  
-               Max.   :78.00   Max.   :46.58   Max.   :145.2900  
+<pre><code>      sbp           tobacco            ldl           adiposity    
+ Min.   :101.0   Min.   : 0.000   Min.   : 1.070   Min.   : 6.74  
+ 1st Qu.:124.0   1st Qu.: 0.050   1st Qu.: 3.300   1st Qu.:19.53  
+ Median :134.0   Median : 2.000   Median : 4.410   Median :26.10  
+ Mean   :137.5   Mean   : 3.605   Mean   : 4.822   Mean   :25.16  
+ 3rd Qu.:146.0   3rd Qu.: 5.500   3rd Qu.: 5.970   3rd Qu.:30.90  
+ Max.   :218.0   Max.   :27.400   Max.   :15.330   Max.   :42.06  
+    famhist        typea          obesity         alcohol       
+ Absent :210   Min.   :26.00   Min.   :14.70   Min.   :  0.000  
+ Present:137   1st Qu.:47.00   1st Qu.:22.73   1st Qu.:  0.095  
+               Median :54.00   Median :25.63   Median :  6.690  
+               Mean   :52.95   Mean   :25.89   Mean   : 16.670  
+               3rd Qu.:59.00   3rd Qu.:28.41   3rd Qu.: 22.835  
+               Max.   :77.00   Max.   :46.58   Max.   :147.190  
       age             chd        
  Min.   :15.00   Min.   :0.0000  
- 1st Qu.:32.00   1st Qu.:0.0000  
- Median :45.00   Median :0.0000  
- Mean   :43.31   Mean   :0.3674  
- 3rd Qu.:56.00   3rd Qu.:1.0000  
+ 1st Qu.:30.00   1st Qu.:0.0000  
+ Median :44.00   Median :0.0000  
+ Mean   :42.33   Mean   :0.3401  
+ 3rd Qu.:55.00   3rd Qu.:1.0000  
  Max.   :64.00   Max.   :1.0000  </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(SAtestData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      sbp           tobacco            ldl           adiposity        famhist  
- Min.   :108.0   Min.   : 0.000   Min.   : 1.590   Min.   : 6.74   Absent :62  
- 1st Qu.:124.0   1st Qu.: 0.075   1st Qu.: 3.118   1st Qu.:19.60   Present:38  
- Median :132.0   Median : 1.805   Median : 4.225   Median :25.00               
- Mean   :135.3   Mean   : 3.044   Mean   : 4.548   Mean   :24.38               
- 3rd Qu.:144.5   3rd Qu.: 4.500   3rd Qu.: 5.455   3rd Qu.:29.48               
- Max.   :216.0   Max.   :15.500   Max.   :11.610   Max.   :39.68               
-     typea          obesity         alcohol              age       
- Min.   :33.00   Min.   :18.50   Min.   :  0.0000   Min.   :15.00  
- 1st Qu.:46.00   1st Qu.:22.68   1st Qu.:  0.6875   1st Qu.:30.00  
- Median :52.50   Median :25.91   Median :  7.1650   Median :40.00  
- Mean   :53.55   Mean   :26.03   Mean   : 16.7103   Mean   :41.01  
- 3rd Qu.:61.25   3rd Qu.:28.86   3rd Qu.: 24.4050   3rd Qu.:55.00  
- Max.   :73.00   Max.   :36.46   Max.   :147.1900   Max.   :64.00  
-      chd      
- Min.   :0.00  
- 1st Qu.:0.00  
- Median :0.00  
- Mean   :0.27  
- 3rd Qu.:1.00  
- Max.   :1.00  </code></pre>
+ Min.   :102.0   Min.   : 0.000   Min.   : 0.980   Min.   : 8.66   Absent :60  
+ 1st Qu.:125.0   1st Qu.: 0.280   1st Qu.: 3.170   1st Qu.:20.91   Present:55  
+ Median :136.0   Median : 2.400   Median : 4.160   Median :26.45               
+ Mean   :140.9   Mean   : 3.727   Mean   : 4.495   Mean   :26.16               
+ 3rd Qu.:153.0   3rd Qu.: 5.465   3rd Qu.: 5.320   3rd Qu.:31.43               
+ Max.   :216.0   Max.   :31.200   Max.   :11.890   Max.   :42.49               
+     typea          obesity         alcohol             age       
+ Min.   :13.00   Min.   :18.50   Min.   :  0.000   Min.   :16.00  
+ 1st Qu.:48.50   1st Qu.:23.54   1st Qu.:  1.415   1st Qu.:35.50  
+ Median :53.00   Median :26.56   Median :  7.850   Median :45.00  
+ Mean   :53.57   Mean   :26.51   Mean   : 18.174   Mean   :44.27  
+ 3rd Qu.:61.00   3rd Qu.:28.91   3rd Qu.: 26.765   3rd Qu.:55.00  
+ Max.   :78.00   Max.   :45.72   Max.   :120.030   Max.   :64.00  
+      chd        
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.3652  
+ 3rd Qu.:1.0000  
+ Max.   :1.0000  </code></pre>
 </div>
 </div>
 </section>
@@ -621,23 +621,23 @@ Attaching package: 'e1071'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   predsvm
       0   1
-  0 208  21
-  1  55  78</code></pre>
+  0 209  20
+  1  52  66</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7900552</code></pre>
+<pre><code>[1] 0.7925072</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7878788</code></pre>
+<pre><code>[1] 0.7674419</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[<span class="dv">2</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5864662</code></pre>
+<pre><code>[1] 0.559322</code></pre>
 </div>
 </div>
 </section>
@@ -650,23 +650,23 @@ Attaching package: 'e1071'</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>   predsvm
      0  1
-  0 68  5
-  1 15 12</code></pre>
+  0 66  7
+  1 24 18</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8</code></pre>
+<pre><code>[1] 0.7304348</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7058824</code></pre>
+<pre><code>[1] 0.72</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[<span class="dv">2</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4444444</code></pre>
+<pre><code>[1] 0.4285714</code></pre>
 </div>
 </div>
 </section>
@@ -756,8 +756,10 @@ Y &amp;= I (0.3 X_1+ 0.3 X_2  + 0.3X_3 - 0.4  &gt; 0)\\
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mynnet<span class="ot">&lt;-</span><span class="fu">nnet</span>(<span class="fu">as.factor</span>(chd)<span class="sc">~</span>.,<span class="at">data=</span>SAtrainingData,<span class="at">size=</span><span class="dv">3</span>,<span class="at">maxit=</span> <span class="dv">200</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># weights:  34
-initial  value 242.869544 
-final  value 238.036432 
+initial  value 239.680754 
+iter  10 value 222.381074
+iter  20 value 221.372856
+final  value 221.371280 
 converged</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>prednet<span class="ot">&lt;-</span><span class="fu">predict</span>(mynnet,SAtrainingData,<span class="at">type=</span><span class="st">"class"</span>)</span>
@@ -773,12 +775,12 @@ converged</code></pre>
 <pre><code>   
       0   1
   0 229   0
-  1 133   0</code></pre>
+  1 117   1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat)) <span class="sc">/</span> <span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6325967</code></pre>
+<pre><code>[1] 0.6628242</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Precision</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">sum</span>(confMat[, <span class="dv">2</span>]) <span class="sc">==</span> <span class="dv">0</span>) {</span>
@@ -787,7 +789,7 @@ converged</code></pre>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  confMat[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(confMat[, <span class="dv">2</span>])</span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recall</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">sum</span>(confMat[<span class="dv">2</span>, ]) <span class="sc">==</span> <span class="dv">0</span>) {</span>
@@ -796,7 +798,7 @@ converged</code></pre>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  confMat[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(confMat[<span class="dv">2</span>, ])</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+<pre><code>[1] 0.008474576</code></pre>
 </div>
 </div>
 </section>
@@ -815,12 +817,12 @@ converged</code></pre>
 <pre><code>   
      0  1
   0 73  0
-  1 27  0</code></pre>
+  1 42  0</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat)) <span class="sc">/</span> <span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.73</code></pre>
+<pre><code>[1] 0.6347826</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Precision</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">sum</span>(confMat[, <span class="dv">2</span>]) <span class="sc">==</span> <span class="dv">0</span>) {</span>
@@ -1121,42 +1123,32 @@ converged</code></pre>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>mytree<span class="ot">&lt;-</span> <span class="fu">rpart</span>(myFormula,<span class="at">data=</span>SAtrainingData)</span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>n= 362 
+<pre><code>n= 347 
 
 node), split, n, loss, yval, (yprob)
       * denotes terminal node
 
-  1) root 362 133 0 (0.63259669 0.36740331)  
-    2) age&lt; 29.5 77   6 0 (0.92207792 0.07792208) *
-    3) age&gt;=29.5 285 127 0 (0.55438596 0.44561404)  
-      6) famhist=Absent 149  50 0 (0.66442953 0.33557047)  
-       12) tobacco&lt; 7.635 120  33 0 (0.72500000 0.27500000)  
-         24) typea&lt; 65.5 111  27 0 (0.75675676 0.24324324)  
-           48) ldl&lt; 3.705 39   4 0 (0.89743590 0.10256410) *
-           49) ldl&gt;=3.705 72  23 0 (0.68055556 0.31944444)  
-             98) ldl&gt;=4.715 47   9 0 (0.80851064 0.19148936) *
-             99) ldl&lt; 4.715 25  11 1 (0.44000000 0.56000000)  
-              198) age&gt;=47 15   6 0 (0.60000000 0.40000000) *
-              199) age&lt; 47 10   2 1 (0.20000000 0.80000000) *
-         25) typea&gt;=65.5 9   3 1 (0.33333333 0.66666667) *
-       13) tobacco&gt;=7.635 29  12 1 (0.41379310 0.58620690)  
-         26) typea&lt; 56 20   9 0 (0.55000000 0.45000000)  
-           52) typea&gt;=47.5 12   3 0 (0.75000000 0.25000000) *
-           53) typea&lt; 47.5 8   2 1 (0.25000000 0.75000000) *
-         27) typea&gt;=56 9   1 1 (0.11111111 0.88888889) *
-      7) famhist=Present 136  59 1 (0.43382353 0.56617647)  
-       14) age&lt; 50.5 65  26 0 (0.60000000 0.40000000)  
-         28) typea&lt; 53.5 28   6 0 (0.78571429 0.21428571) *
-         29) typea&gt;=53.5 37  17 1 (0.45945946 0.54054054)  
-           58) sbp&gt;=141 11   3 0 (0.72727273 0.27272727) *
-           59) sbp&lt; 141 26   9 1 (0.34615385 0.65384615) *
-       15) age&gt;=50.5 71  20 1 (0.28169014 0.71830986)  
-         30) tobacco&lt; 4.14 33  14 1 (0.42424242 0.57575758)  
-           60) ldl&lt; 6.82 26  12 0 (0.53846154 0.46153846)  
-            120) adiposity&gt;=28 17   5 0 (0.70588235 0.29411765) *
-            121) adiposity&lt; 28 9   2 1 (0.22222222 0.77777778) *
-           61) ldl&gt;=6.82 7   0 1 (0.00000000 1.00000000) *
-         31) tobacco&gt;=4.14 38   6 1 (0.15789474 0.84210526) *</code></pre>
+ 1) root 347 118 0 (0.65994236 0.34005764)  
+   2) age&lt; 50.5 224  50 0 (0.77678571 0.22321429)  
+     4) tobacco&lt; 0.51 101   8 0 (0.92079208 0.07920792) *
+     5) tobacco&gt;=0.51 123  42 0 (0.65853659 0.34146341)  
+      10) typea&lt; 52.5 51   9 0 (0.82352941 0.17647059) *
+      11) typea&gt;=52.5 72  33 0 (0.54166667 0.45833333)  
+        22) alcohol&lt; 11.945 36  10 0 (0.72222222 0.27777778) *
+        23) alcohol&gt;=11.945 36  13 1 (0.36111111 0.63888889)  
+          46) alcohol&gt;=18.125 27  13 1 (0.48148148 0.51851852)  
+            92) adiposity&gt;=21.965 18   7 0 (0.61111111 0.38888889) *
+            93) adiposity&lt; 21.965 9   2 1 (0.22222222 0.77777778) *
+          47) alcohol&lt; 18.125 9   0 1 (0.00000000 1.00000000) *
+   3) age&gt;=50.5 123  55 1 (0.44715447 0.55284553)  
+     6) ldl&lt; 5.045 55  21 0 (0.61818182 0.38181818)  
+      12) tobacco&lt; 9.775 43  13 0 (0.69767442 0.30232558) *
+      13) tobacco&gt;=9.775 12   4 1 (0.33333333 0.66666667) *
+     7) ldl&gt;=5.045 68  21 1 (0.30882353 0.69117647)  
+      14) famhist=Absent 28  13 0 (0.53571429 0.46428571)  
+        28) typea&lt; 49.5 14   4 0 (0.71428571 0.28571429) *
+        29) typea&gt;=49.5 14   5 1 (0.35714286 0.64285714) *
+      15) famhist=Present 40   6 1 (0.15000000 0.85000000) *</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot a fancy decision tree</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#need package rpart.plot</span></span>
@@ -1183,23 +1175,23 @@ node), split, n, loss, yval, (yprob)
 <div class="cell-output cell-output-stdout">
 <pre><code>   treepred
      0  1
-  0 54 19
-  1 11 16</code></pre>
+  0 61 12
+  1 29 13</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7</code></pre>
+<pre><code>[1] 0.6434783</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4571429</code></pre>
+<pre><code>[1] 0.52</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[<span class="dv">2</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5925926</code></pre>
+<pre><code>[1] 0.3095238</code></pre>
 </div>
 </div>
 </section>
@@ -1210,18 +1202,16 @@ node), split, n, loss, yval, (yprob)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mytree_prune<span class="ot">&lt;-</span> <span class="fu">prune</span>(mytree, <span class="at">cp =</span> <span class="fl">0.04</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mytree_prune)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>n= 362 
+<pre><code>n= 347 
 
 node), split, n, loss, yval, (yprob)
       * denotes terminal node
 
- 1) root 362 133 0 (0.63259669 0.36740331)  
-   2) age&lt; 29.5 77   6 0 (0.92207792 0.07792208) *
-   3) age&gt;=29.5 285 127 0 (0.55438596 0.44561404)  
-     6) famhist=Absent 149  50 0 (0.66442953 0.33557047) *
-     7) famhist=Present 136  59 1 (0.43382353 0.56617647)  
-      14) age&lt; 50.5 65  26 0 (0.60000000 0.40000000) *
-      15) age&gt;=50.5 71  20 1 (0.28169014 0.71830986) *</code></pre>
+1) root 347 118 0 (0.6599424 0.3400576)  
+  2) age&lt; 50.5 224  50 0 (0.7767857 0.2232143) *
+  3) age&gt;=50.5 123  55 1 (0.4471545 0.5528455)  
+    6) ldl&lt; 5.045 55  21 0 (0.6181818 0.3818182) *
+    7) ldl&gt;=5.045 68  21 1 (0.3088235 0.6911765) *</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(mytree_prune,<span class="at">uniform=</span><span class="cn">TRUE</span>, <span class="at">main=</span><span class="st">"Pruned Classification Tree for Heart Disease"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1237,23 +1227,23 @@ node), split, n, loss, yval, (yprob)
 <div class="cell-output cell-output-stdout">
 <pre><code>   treepred
      0  1
-  0 66  7
-  1 15 12</code></pre>
+  0 65  8
+  1 33  9</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#accuracy is</span></span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">diag</span>(confMat))<span class="sc">/</span><span class="fu">sum</span>(confMat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.78</code></pre>
+<pre><code>[1] 0.6434783</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#precision is</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6315789</code></pre>
+<pre><code>[1] 0.5294118</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">#recall is</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>confMat[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">/</span><span class="fu">sum</span>(confMat[<span class="dv">2</span>,])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4444444</code></pre>
+<pre><code>[1] 0.2142857</code></pre>
 </div>
 </div>
 <section id="in-class-exercise-decision-tree" class="level4">
