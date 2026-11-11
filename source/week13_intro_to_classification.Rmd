@@ -284,7 +284,9 @@ confMat[2,2]/(confMat[2,2]+confMat[2,1])
 
 #### In-Class Exercise: Logistic Regression
 
-[Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
+[Obtaining the Breast Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
+
+Access the dataset via this URL "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.data"
 
 - Split the dataset to training and test datasets
 
