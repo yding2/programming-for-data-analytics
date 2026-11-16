@@ -526,23 +526,23 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">subset</span>(AutoTraining, <span class="at">select=</span><span class="sc">-</span>name))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    mpg  cylinders displacement horsepower     weight
-mpg           1.0000000 -0.7719049   -0.7991236 -0.7702030 -0.8286071
-cylinders    -0.7719049  1.0000000    0.9533216  0.8481345  0.8995078
-displacement -0.7991236  0.9533216    1.0000000  0.8993297  0.9388090
-horsepower   -0.7702030  0.8481345    0.8993297  1.0000000  0.8794657
-weight       -0.8286071  0.8995078    0.9388090  0.8794657  1.0000000
-acceleration  0.4219997 -0.5175636   -0.5507118 -0.6929846 -0.4356056
-year          0.5814042 -0.3333241   -0.3525305 -0.3976560 -0.3056374
-origin        0.5620021 -0.5836012   -0.6212386 -0.4583186 -0.5878835
+mpg           1.0000000 -0.7993406   -0.8163509 -0.7899996 -0.8391001
+cylinders    -0.7993406  1.0000000    0.9498794  0.8540396  0.9014963
+displacement -0.8163509  0.9498794    1.0000000  0.9049988  0.9328911
+horsepower   -0.7899996  0.8540396    0.9049988  1.0000000  0.8666153
+weight       -0.8391001  0.9014963    0.9328911  0.8666153  1.0000000
+acceleration  0.4206472 -0.5334325   -0.5658596 -0.6873326 -0.4217192
+year          0.5885575 -0.3748235   -0.3928745 -0.4363769 -0.3195466
+origin        0.5505767 -0.5633357   -0.6103563 -0.4627458 -0.5829140
              acceleration       year     origin
-mpg             0.4219997  0.5814042  0.5620021
-cylinders      -0.5175636 -0.3333241 -0.5836012
-displacement   -0.5507118 -0.3525305 -0.6212386
-horsepower     -0.6929846 -0.3976560 -0.4583186
-weight         -0.4356056 -0.3056374 -0.5878835
-acceleration    1.0000000  0.2647024  0.2325226
-year            0.2647024  1.0000000  0.1834500
-origin          0.2325226  0.1834500  1.0000000</code></pre>
+mpg             0.4206472  0.5885575  0.5505767
+cylinders      -0.5334325 -0.3748235 -0.5633357
+displacement   -0.5658596 -0.3928745 -0.6103563
+horsepower     -0.6873326 -0.4363769 -0.4627458
+weight         -0.4217192 -0.3195466 -0.5829140
+acceleration    1.0000000  0.3029537  0.2336904
+year            0.3029537  1.0000000  0.1572123
+origin          0.2336904  0.1572123  1.0000000</code></pre>
 </div>
 </div>
 <ul>
@@ -557,25 +557,25 @@ Call:
 lm(formula = mpg ~ ., data = AutoTraining[, 1:8])
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--9.504 -2.175 -0.005  1.910 13.079 
+    Min      1Q  Median      3Q     Max 
+-9.8108 -2.1540 -0.0817  1.9876 12.4667 
 
 Coefficients:
                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  -2.044e+01  5.345e+00  -3.825 0.000159 ***
-cylinders    -4.619e-01  3.786e-01  -1.220 0.223332    
-displacement  1.864e-02  8.821e-03   2.114 0.035358 *  
-horsepower    2.179e-04  1.648e-02   0.013 0.989460    
-weight       -7.004e-03  7.960e-04  -8.800  &lt; 2e-16 ***
-acceleration  1.373e-01  1.160e-01   1.184 0.237345    
-year          7.834e-01  5.814e-02  13.475  &lt; 2e-16 ***
-origin        1.281e+00  3.209e-01   3.993 8.21e-05 ***
+(Intercept)  -1.480e+01  5.058e+00  -2.926  0.00368 ** 
+cylinders    -7.407e-01  3.407e-01  -2.174  0.03042 *  
+displacement  2.120e-02  7.806e-03   2.716  0.00696 ** 
+horsepower   -2.377e-02  1.430e-02  -1.662  0.09747 .  
+weight       -6.000e-03  6.988e-04  -8.586 4.00e-16 ***
+acceleration -1.851e-02  1.074e-01  -0.172  0.86335    
+year          7.465e-01  5.486e-02  13.608  &lt; 2e-16 ***
+origin        1.330e+00  2.968e-01   4.480 1.04e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 3.382 on 303 degrees of freedom
-Multiple R-squared:  0.8169,    Adjusted R-squared:  0.8127 
-F-statistic: 193.1 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.244 on 320 degrees of freedom
+Multiple R-squared:  0.8309,    Adjusted R-squared:  0.8272 
+F-statistic: 224.6 on 7 and 320 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Let’s refer to the output in this last code chunk:</p>
@@ -590,7 +590,7 @@ F-statistic: 193.1 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul></li>
 <li><p>What does the coefficient for the <code>year</code> variable suggest?</p>
 <ul>
-<li>0.7833982 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
+<li>0.7464526 coefficient for <code>year</code> suggests that later model year cars have better (higher) <code>mpg</code>.</li>
 </ul></li>
 <li><p>Use the `plot() function to produce diagnostic plots of the linear regression fit.</p></li>
 </ul>
@@ -617,7 +617,7 @@ F-statistic: 193.1 on 7 and 303 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ypred)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  6.816  16.927  23.839  22.804  27.776  35.754 </code></pre>
+  10.50   20.73   24.44   24.18   29.17   34.66 </code></pre>
 </div>
 </div>
 <p>To evaluate the mean absolute error (MAE) and mean squared error (MSE), we can install <code>MLmetric</code> package. <span class="math display">\[ MAE = \frac{1}{n}\sum_{i=1}^n |y_i-\hat{y}_i|,
@@ -638,11 +638,11 @@ Attaching package: 'MLmetrics'</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MAE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.460685</code></pre>
+<pre><code>[1] 2.590257</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MSE</span>(<span class="at">y_pred =</span> ypred, <span class="at">y_true =</span> AutoTest<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.983109</code></pre>
+<pre><code>[1] 14.18394</code></pre>
 </div>
 </div>
 </section>
