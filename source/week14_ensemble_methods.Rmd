@@ -137,7 +137,7 @@ confMat[2,2]/sum(confMat[2,])
 
 #### In-Class Exercise: Ensemble Methods
 
-[Obtaining the Breat Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
+[Obtaining the Breast Cancer Wisconsin data set](https://archive.ics.uci.edu/dataset/15/breast+cancer+wisconsin+original)
 
 - Split the dataset to training and test datasets
 

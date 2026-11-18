@@ -324,7 +324,7 @@ if (sum(confMat[2, ]) == 0) {
 
 - However they typically are not competitive with the best supervised learning approaches in terms of prediction accuracy. 
 
-- We will discuss random forests in Module 8. This method grows multiple trees which are then combined to yield a single consensus prediction. 
+- We will discuss random forests in next lecture. This method grows multiple trees which are then combined to yield a single consensus prediction. 
 
 - Combining a large number of trees can often result in dramatic improvements in prediction accuracy, at the expense of some loss interpretation.
 
